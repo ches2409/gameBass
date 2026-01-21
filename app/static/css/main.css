@@ -1,0 +1,125 @@
+
+/*.orbitron {*/
+/*  font-family: "Orbitron", sans-serif;*/
+/*  font-optical-sizing: auto;*/
+/*  !*font-weight: 100-900;*!*/
+/*  font-style: normal;*/
+/*}*/
+
+body {
+  font-family: "Orbitron", sans-serif;
+  /*background-color: #121926;*/
+  background-color: #020305;
+  color: #d6f5e9;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+.name-section{
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: .7rem;
+  line-height: 5.5rem;
+  color: #aaafab;
+  letter-spacing: 0.4em;
+  /*color: #3f4a4b*/
+}
+
+.name-main{
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  /*font-weight: 200;*/
+  font-size: .9rem;
+  /*color: red;*/
+}
+
+.text_code{
+  font-family: "Fira Code", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 0.5rem;
+  color: #aaafab
+}
+.text_normal{
+  font-family: "Orbitron", sans-serif;
+  color: white;
+}
+
+
+
+.command-center{
+  height: 100vh;
+  display: flex;
+
+}
+.command-center__sidebar{
+  /*background-color: #222638;*/
+  background-color: #0A0C10;
+  /*background-color: firebrick;*/
+  /*border: #1A1E26 solid 1px;*/
+  width: 15vw;
+  height: 100%;
+}
+.command-center__viewport{
+  /*background-color: #222638;*/
+  border: #1A1E26 solid 1px;
+  width: 85vw;
+  height: 10vh;
+
+}
+.command-center__routes{
+  display: flex;
+  gap: .5rem;
+}
+
+.command-suite{
+  /*background-color: palevioletred;*/
+  /*background-color: #121926;*/
+  border: #1A1E26 solid 1px;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+}
+.command-suite__item{
+  display: flex;
+  gap: 1rem;
+}
+.command-suite__title{
+  color: white;
+}
+.command-suite__header{
+  /*background-color: orchid;*/
+  /*background-color: #121926;*/
+  background-color: #020305;
+  height: 10vh;
+  width: 100%;
+  padding: 5%;
+}
+.command-suite__main{
+  /*background-color: #191e2c;*/
+  /*background-color: yellow;*/
+  /*border: #1A1E26 solid 1px;*/
+  height: 70%;
+  width: 100%;
+  padding: 10%;
+}
+.command-suite__footer{
+  /*background-color: #121926;*/
+  background-color: #020305;
+  /*background-color: navajowhite;*/
+  /*height: 10%;*/
+  width: 100%;
+}
+.button-abort{
+  /*background-color: red;*/
+  display: flex;
+  gap: 1rem;
+  padding: 5% 10%;
+}
+
+.command-suite__tag{
+  color: #A3FF00;
+}

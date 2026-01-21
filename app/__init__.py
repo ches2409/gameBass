@@ -23,7 +23,9 @@ def create_app(config_class=DevConfig):
     
     # registro de Blueprints
     from app.routes.roles_routes import rol_bp
+    from app.routes.index_routes import inicio_bp
     app.register_blueprint(rol_bp)
+    app.register_blueprint(inicio_bp)
     
     # Ruta raíz de prueba
     @app.route("/")

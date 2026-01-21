@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from app.services import roles_services
+from app.enums.tipos import RolUsuario
 
 rol_bp = Blueprint('roles', __name__, url_prefix='/roles')
 
@@ -19,8 +20,9 @@ def create():
     
     if request.method == 'POST':
         rol_nombre = request.form['nombre_de_rol']
-        # rol_descripcion = request.form['descripcion']
+        rol_descripcion = request.form['descripcion_de_rol']
         
-        if roles_services.create_rol(rol_nombre):
+        if roles_services.create_rol(rol_nombre, rol_descripcion):
             return redirect(url_for('roles.index'))
-    return render_template("dashboard/create.html")
+    # Pasamos el Enum para que sirva de sugerencia en el datalist
+    return render_template("dashboard/create.html", roles_listado=RolUsuario)
