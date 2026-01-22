@@ -1,0 +1,269 @@
+// ==========================================================================
+// MAIN SCSS FILE - SMACSS Architecture
+// ==========================================================================
+// Este es el archivo principal que importa todos los módulos SCSS
+// siguiendo la metodología SMACSS (Scalable and Modular Architecture for CSS)
+//
+// Orden de importación SMACSS:
+// 1. Base (reset, variables, mixins, functions)
+// 2. Vendors (Bootstrap overrides, third-party libraries)
+// 3. Layout (grid, header, footer, sidebar)
+// 4. Components (buttons, cards, forms)
+// 5. Pages (page-specific styles)
+// 6. Utilities (helpers, overrides)
+
+// ==========================================================================
+// 1. BASE - Variables, mixins, functions, reset
+// ==========================================================================
+// Fundamentos del sistema: variables, funciones, mixins y reset
+// Estos archivos establecen la base para todo el sistema de estilos
+
+@use 'base/variables';
+@use 'base/functions';
+@use 'base/mixins';
+@use 'base/reset';
+
+// ==========================================================================
+// 2. VENDORS - Third-party libraries and overrides
+// ==========================================================================
+// Personalizaciones y sobrescrituras de librerías externas
+// Bootstrap, Font Awesome, etc.
+
+@use 'vendors/bootstrap-overrides';
+
+// ==========================================================================
+// 3. LAYOUT - Estructura principal de la página
+// ==========================================================================
+// Estilos para la estructura macro de la página
+// Header, footer, sidebar, grid principal, etc.
+
+@use 'layout/grid';
+//@use "layout/main";
+//@use "layout/hero";
+//@use "layout/about";
+//@use "layout/cardsfact";
+//@use 'layout/header';
+//@use 'layout/footer';
+
+// ==========================================================================
+// 4. COMPONENTS - Componentes reutilizables
+// ==========================================================================
+// Componentes modulares y reutilizables
+// Cada componente debe ser independiente y reutilizable
+
+//@use 'components/menu';
+@use 'components/buttons';
+//@use 'components/cards';
+//@use 'components/navigation';
+//@use 'components/forms';
+
+// ==========================================================================
+// 5. PAGES - Estilos específicos por página
+// ==========================================================================
+// Estilos específicos para páginas individuales
+// Cada página tiene sus propios estilos organizados
+
+@use "pages/command";
+//@use "pages/header";
+//@use "pages/nosotros";
+//@use "pages/titulo";
+//@use "pages/facciones";
+//@use "pages/promo";
+//@use "pages/crud";
+//@use "pages/footerLogo";
+//@use "pages/acceso";
+//@use 'pages/equipos';
+
+// ==========================================================================
+// 6. UTILITIES - Clases auxiliares y overrides
+// ==========================================================================
+// Clases de utilidad que pueden sobrescribir otros estilos
+// Estas clases suelen usar !important para garantizar precedencia
+
+//@use 'utilities/spacing';
+//@use 'utilities/colors';
+//@use 'utilities/typography';
+//@use 'utilities/layout';
+
+// ==========================================================================
+// ESTILOS ESPECÍFICOS DEL PROYECTO
+// ==========================================================================
+// Estilos específicos que no encajan en las categorías anteriores
+// o que necesitan sobrescribir estilos de frameworks externos
+
+// Sobrescribir estilos de Bootstrap si es necesario
+.container {
+  // Los estilos del container están en navigation.scss
+  // pero aquí podemos sobrescribir si usamos Bootstrap
+}
+
+// Estilos para mensajes flash
+.alert {
+  border-radius: 0.25rem;
+  border: 2px solid;
+  padding: functions.spacing('4');
+  margin-bottom: functions.spacing('4');
+  font-family: variables.$font-body;
+
+  &.alert-success {
+    background: rgba(variables.$accent-green, 0.1);
+    border-color: variables.$accent-green;
+    color: variables.$accent-green;
+  }
+
+  &.alert-warning {
+    background: rgba(variables.$accent-yellow, 0.1);
+    border-color: variables.$accent-yellow;
+    color: variables.$accent-yellow;
+  }
+
+  &.alert-danger {
+    background: rgba(variables.$accent-pink, 0.1);
+    border-color: variables.$accent-pink;
+    color: variables.$accent-pink;
+  }
+
+  &.alert-info {
+    background: rgba(variables.$accent-blue, 0.1);
+    border-color: variables.$accent-blue;
+    color: variables.$accent-blue;
+  }
+}
+
+/*
+
+// Estilos para tablas
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(variables.$primary-bg, 0.8);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: functions.shadow('lg');
+
+  th {
+    background: rgba(variables.$accent-blue, 0.2);
+    color: variables.$accent-blue;
+    font-family: variables.$font-primary;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: functions.spacing('4');
+    border-bottom: 2px solid rgba(variables.$accent-blue, 0.3);
+  }
+
+  td {
+    padding: functions.spacing('4');
+    border-bottom: 1px solid rgba(variables.$text-gray, 0.1);
+    color: variables.$text-main;
+  }
+
+  tr {
+    transition: variables.$transition-base;
+
+    &:hover {
+      background: rgba(variables.$accent-blue, 0.05);
+    }
+
+    &:last-child td {
+      border-bottom: none;
+    }
+  }
+}
+
+// Estilos para el display-3 de Bootstrap
+.display-3 {
+  font-family: variables.$font-primary !important;
+  color: variables.$accent-blue !important;
+  @include mixins.neon-text(variables.$accent-blue, 0.4);
+  text-align: center;
+  margin-bottom: functions.spacing('8') !important;
+
+  @include mixins.respond-to('md') {
+    font-size: functions.font-size('4xl') !important;
+  }
+
+  @include mixins.respond-to('sm') {
+    font-size: functions.font-size('3xl') !important;
+  }
+}
+
+// Animaciones globales
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Aplicar animación de entrada a elementos principales
+.main-content > * {
+  animation: fadeIn 0.6s ease-out;
+}
+
+// Estilos para scrollbar en contenedores específicos
+.nav-tabs {
+  @include mixins.custom-scrollbar(variables.$accent-blue, rgba(variables.$primary-bg, 0.5));
+}
+
+// Responsive adjustments
+@include mixins.respond-to('sm') {
+  // Ajustes específicos para móvil
+  .container {
+    padding-left: functions.spacing('4');
+    padding-right: functions.spacing('4');
+  }
+
+  .main-content {
+    padding-left: functions.spacing('4');
+    padding-right: functions.spacing('4');
+  }
+}
+
+// Print styles
+@media print {
+  .sidebar,
+  .nav-tabs,
+  .btn,
+  .alert {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .main-content {
+    padding: 0 !important;
+  }
+}
+
+// Modo de alto contraste
+@media (prefers-contrast: high) {
+  :root {
+    --primary-bg: #000000;
+    --text-main: #ffffff;
+    --accent-blue: #00ffff;
+    --accent-pink: #ff00ff;
+    --accent-green: #00ff00;
+    --accent-yellow: #ffff00;
+  }
+}
+
+// Respeto por la preferencia de movimiento reducido
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+*/
