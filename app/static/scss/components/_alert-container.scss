@@ -1,0 +1,85 @@
+/* Contenedor del Banner */
+.alert-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background-color: var(--bg-alpha);
+    border: 1px solid rgba(163, 255, 0, 0.2);
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* Caja del Icono */
+.icon-wrapper {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: var(--bg-alpha);
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 15px rgba(163, 255, 0, 0.2);
+}
+
+/* Iconos base */
+.material-symbols-outlined {
+    font-size: 24px;
+    color: var(--primary);
+}
+
+/* --- ANIMACIÓN 1: PING (Onda expansiva) --- */
+.icon-ping {
+    position: absolute;
+    animation: ping-effect 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping-effect {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+        75%, 100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+/* --- ANIMACIÓN 2: BLINK TECH (Parpadeo con brillo) --- */
+.icon-main {
+    z-index: 2;
+    animation: blink-tech 0.8s ease-in-out infinite;
+}
+
+@keyframes blink-tech {
+    0%, 100% {
+        opacity: 1;
+        filter: brightness(1) drop-shadow(0 0 0px var(--primary));
+    }
+    50% {
+        opacity: 0.4;
+        filter: brightness(1.8) drop-shadow(0 0 8px var(--primary));
+    }
+}
+
+/* Estilos de Texto */
+.alert-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.alert-title {
+    color: #FFFFFF;
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: -0.05em;
+    text-shadow: 0 0 10px rgba(163, 255, 0, 0.5);
+}
+
+.alert-subtitle {
+    color: var(--primary);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    opacity: 0.8;
+}

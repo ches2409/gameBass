@@ -13,7 +13,8 @@ def index():
         # Si la tabla no existe, devolvemos una lista vacía o manejamos el error
         print(f"Error al obtener roles: {e}")
         roles = []
-    return render_template("dashboard/index.html", roles=roles)
+
+    return render_template('dashboard/roles.html', roles=roles )
 
 @rol_bp.route('/create', methods=['GET', 'POST'] , strict_slashes=False)
 def create():

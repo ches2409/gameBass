@@ -1,0 +1,107 @@
+/* Variables de color para facilitar el cambio de facción */
+
+.hub-metric-card {
+    position: relative;
+    background-color: var(--bg-surface);
+    padding: 1.5rem;
+    min-width: 240px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    
+    /* El recorte geométrico en la esquina inferior derecha */
+    clip-path: polygon(0 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%);
+    
+    /* Flexbox para organizar el contenido verticalmente */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 140px;
+}
+
+/* Variantes de color por clase */
+.hub-metric-card.primary {
+    border-left: 4px solid var(--primary);
+    .card-trend { color: var(--secondary); }
+    .card-icon { color: var(--primary); }
+}
+.hub-metric-card.secondary {
+    border-left: 4px solid var(--secondary);
+    .card-trend { color: var(--accent-yellow); }
+    .card-icon { color: var(--secondary); }
+}
+.hub-metric-card.accent-blue {
+    border-left: 4px solid var(--accent-blue);
+    .card-trend { color: var(--secondary); }
+    .card-icon { color: var(--accent-blue); }
+}
+.hub-metric-card.accent-yellow {
+    border-left: 4px solid var(--accent-yellow);
+    .card-trend { color: var(--accent-blue); }
+    .card-icon { color: var(--accent-yellow); }
+}
+
+/* Efecto Hover */
+.hub-metric-card:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(163, 255, 0, 0.1);
+}
+
+/* Icono de fondo con opacidad baja */
+.card-bg-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem;
+    font-size: 3rem;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.card-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 9px;
+    font-weight: 900;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    margin: 0;
+}
+
+.card-icon {
+    font-size: 1.25rem;
+    opacity: 0.4;
+    //color: inherit; /* Hereda de la tarjeta */
+}
+
+/* Estilos de la parte inferior */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.card-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.875rem;
+    font-weight: 900;
+    color: white;
+    margin: 0;
+    font-style: italic;
+    letter-spacing: -0.05em;
+    line-height: 1;
+}
+
+.card-trend {
+    font-family: 'Fira Code', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--primary);
+}

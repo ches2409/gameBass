@@ -1,0 +1,14 @@
+<div class="alert-container">
+  <div class="icon-wrapper">
+    <!-- Icono que hace el efecto de onda expansiva (Ping) -->
+    <span class="material-symbols-outlined icon-ping">{{ icon | default('monitoring') }}</span>
+
+    <!-- Icono principal que parpadea con brillo -->
+    <span class="material-symbols-outlined icon-main">{{ icon | default('monitoring') }}</span>
+  </div>
+
+  <div class="alert-text">
+    <span class="alert-title">{{ title | default('Metric_label') }}</span>
+    <span class="alert-subtitle">{{ subtitle | default('subtitulo de prueba') }}</span>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+
+<div class="command-suite__section">
+
+    <div class="command-suite__section-header">
+        <div class="command-suite__label">
+            <h4 class="name-section">{{ name_section }}</h4>
+        </div>
+    </div>
+
+    <div class="command-suite__group fst-italic">
+        
+        {# Recorremos la lista completa de items #}
+        {% for item in menu_data %}
+            {# Solo mostramos el item si pertenece a esta sección #}
+            {% if item.title_section == name_section %}
+                <div class="command-suite__item">
+
+                    <div class="command-suite__item-icon icon-main">
+                        <span class="material-symbols-outlined card-bg-icon">{{ item.icon_main }}</span>
+                    </div>
+
+                    <div class="command-suite__item-label name-main">
+                        <p>{{ item.name_main }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        
+    </div>
+</div>

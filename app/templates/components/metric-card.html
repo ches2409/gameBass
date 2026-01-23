@@ -1,0 +1,14 @@
+<div class="hub-metric-card {{ color_class | default('primary') }}">
+    <!-- Icono de fondo decorativo -->
+    <span class="material-symbols-outlined card-bg-icon">{{ icon | default('monitoring') }}</span>
+
+    <div class="card-header">
+        <p class="card-label">{{ label | default('METRIC_LABEL') }}</p>
+        <span class="material-symbols-outlined card-icon">{{ icon | default('monitoring') }}</span>
+    </div>
+
+    <div class="card-footer">
+        <h3 class="card-value">{{ value | default('N/A') }}</h3>
+        <span class="card-trend">{{ trend | default('+0') }}</span>
+    </div>
+</div>
