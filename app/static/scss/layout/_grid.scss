@@ -1,0 +1,148 @@
+// ==========================================================================
+// Layout - Grid System
+// ==========================================================================
+
+@use 'sass:math';
+
+// Main layout structure
+.site-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+// Container system
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  &--fluid {
+    max-width: 100%;
+  }
+
+  &--narrow {
+    max-width: 800px;
+  }
+
+  &--wide {
+    max-width: 1400px;
+  }
+}
+
+// Grid system
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -0.75rem;
+
+  &--no-gutters {
+    margin: 0;
+
+    .col {
+      padding: 0;
+    }
+  }
+
+  &--center {
+    justify-content: center;
+  }
+
+  &--space-between {
+    justify-content: space-between;
+  }
+}
+
+.col {
+  flex: 1;
+  padding: 0 0.75rem;
+
+  // Column sizes
+  @for $i from 1 through 12 {
+    &--#{$i} {
+      flex: 0 0 math.percentage(math.div($i, 12));
+      max-width: math.percentage(math.div($i, 12));
+    }
+  }
+
+  // Responsive columns
+  @media (max-width: 768px) {
+    &--sm-12 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+
+    @for $i from 1 through 11 {
+      &--sm-#{$i} {
+        flex: 0 0 math.percentage(math.div($i, 12));
+        max-width: math.percentage(math.div($i, 12));
+      }
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    @for $i from 1 through 12 {
+      &--md-#{$i} {
+        flex: 0 0 math.percentage(math.div($i, 12));
+        max-width: math.percentage(math.div($i, 12));
+      }
+    }
+  }
+
+  @media (min-width: 1025px) {
+    @for $i from 1 through 12 {
+      &--lg-#{$i} {
+        flex: 0 0 math.percentage(math.div($i, 12));
+        max-width: math.percentage(math.div($i, 12));
+      }
+    }
+  }
+}
+
+// Sidebar layout
+.sidebar-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 2rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    @media (max-width: 1024px) {
+      order: -1;
+    }
+  }
+}
+
+// Two column layout
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Three column layout
+.three-column {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}

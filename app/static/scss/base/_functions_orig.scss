@@ -1,0 +1,166 @@
+@use "sass:color";
+@use "sass:list";
+@use "sass:map";
+@use "sass:math";
+@use "sass:meta";
+@use "variables";
+
+// ==========================================================================
+// FUNCTIONS - SMACSS Abstracts
+// ==========================================================================
+// Este archivo contiene funciones auxiliares para el proyecto
+// Incluye funciones para colores, espaciados, conversiones, etc.
+
+// Función para obtener colores del mapa
+@function color($color-name) {
+  @if map.has-key(variables.$colors, $color-name) {
+    @return map.get(variables.$colors, $color-name);
+  } @else {
+    @warn "Color '#{$color-name}' no existe en el mapa $colors.";
+    @return null;
+  }
+}
+
+// Función para obtener espaciados del mapa
+@function spacing($size) {
+  @if map.has-key(variables.$spacing, $size) {
+    @return map.get(variables.$spacing, $size);
+  } @else {
+    @warn "Espaciado '#{$size}' no existe en el mapa $spacing.";
+    @return null;
+  }
+}
+
+// Función para obtener tamaños de fuente del mapa
+@function font-size($size) {
+  @if map.has-key(variables.$font-sizes, $size) {
+    @return map.get(variables.$font-sizes, $size);
+  } @else {
+    @warn "Tamaño de fuente '#{$size}' no existe en el mapa $font-sizes.";
+    @return null;
+  }
+}
+
+// Función para obtener border radius del mapa
+@function radius($size) {
+  @if map.has-key(variables.$border-radius, $size) {
+    @return map.get(variables.$border-radius, $size);
+  } @else {
+    @warn "Border radius '#{$size}' no existe en el mapa $border-radius.";
+    @return null;
+  }
+}
+
+// Función para obtener sombras del mapa
+@function shadow($type) {
+  @if map.has-key(variables.$shadows, $type) {
+    @return map.get(variables.$shadows, $type);
+  } @else {
+    @warn "Sombra '#{$type}' no existe en el mapa $shadows.";
+    @return null;
+  }
+}
+
+// Función para obtener z-index del mapa
+@function z($layer) {
+  @if map.has-key(variables.$z-layers, $layer) {
+    @return map.get(variables.$z-layers, $layer);
+  } @else {
+    @warn "Z-index '#{$layer}' no existe en el mapa $z-layers.";
+    @return null;
+  }
+}
+
+// Función para convertir px a rem
+@function rem($pixels, $base-font-size: 16px) {
+  @return math.div($pixels, $base-font-size) * 1rem;
+}
+
+// Función para convertir px a em
+@function em($pixels, $base-font-size: 16px) {
+  @return math.div($pixels, $base-font-size) * 1em;
+}
+
+// Función para calcular contraste de color
+@function contrast-color($color, $light: white, $dark: black, $threshold: 50%) {
+  @if color.lightness($color) > $threshold {
+    @return $dark;
+  } @else {
+    @return $light;
+  }
+}
+
+// Función para crear variaciones de color más claras
+@function tint($color, $percentage) {
+  @return color.mix(white, $color, $percentage);
+}
+
+// Función para crear variaciones de color más oscuras
+@function shade($color, $percentage) {
+  @return color.mix(black, $color, $percentage);
+}
+
+// Función para crear colores con transparencia
+@function alpha($color, $opacity) {
+  @return rgba($color, $opacity);
+}
+
+// Función para validar si un valor está en una lista
+@function contains($list, $value) {
+  @return list.index($list, $value) != null;
+}
+
+// Función para obtener el primer valor válido de una lista
+@function first-valid($values...) {
+  @each $value in $values {
+    @if $value != null and $value != false {
+      @return $value;
+    }
+  }
+  @return null;
+}
+
+// Función para calcular el ancho de columnas en grid
+@function grid-width($columns, $total-columns: 12, $gutter: 2%) {
+  $column-width: (100% - ($gutter * ($total-columns - 1))) / $total-columns;
+  @return ($column-width * $columns) + ($gutter * ($columns - 1));
+}
+
+// Función para generar nombres de clases BEM
+@function bem($block, $element: null, $modifier: null) {
+  $class: $block;
+
+  @if $element {
+    $class: $class + '__' + $element;
+  }
+
+  @if $modifier {
+    $class: $class + '--' + $modifier;
+  }
+
+  @return $class;
+}
+
+// Función para strip units (remover unidades)
+@function strip-unit($number) {
+  @if meta.type-of($number) == 'number' and not math.is-unitless($number) {
+    @return math.div($number, ($number * 0 + 1));
+  }
+  @return $number;
+}
+
+// Función para calcular el ratio de aspecto
+@function aspect-ratio($width, $height) {
+  @return math.div($height, $width) * 100%;
+}
+
+// Función para generar colores aleatorios (útil para prototipado)
+@function random-color() {
+  //@return hsl(math.random(360), 50% + math.random(50%), 50% + math.random(25%));
+  @return hsl(math.random()*360, 50% + math.random()*50%, 50% + math.random()*25%);
+}
+
+// Función para interpolar entre dos valores
+@function lerp($start, $end, $amount) {
+  @return $start + ($end - $start) * $amount;
+}

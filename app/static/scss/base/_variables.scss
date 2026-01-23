@@ -1,0 +1,166 @@
+// ==========================================================================
+// VARIABLES - SMACSS Abstracts
+// ==========================================================================
+// Este archivo contiene todas las variables globales del proyecto
+// Incluye colores, tipografías, espaciados, breakpoints, etc.
+
+// Colores principales
+$primary-bg   : #020305;
+$background-dark: #0C111D;
+$background-soft: #0A0C10;
+$accent-green : #A3FF00;
+$accent-pink  : #D500F9;
+$accent-blue  : #57ADE4;
+$accent-blue-dark  : #13547e;
+$accent-yellow: #DDFF00;
+$text-main    : #d6f5e9;
+$text-gray    : #c3cdd9;
+$side-purple  : #ad6ad6;
+$side-green   : #B9F23D;
+$side-orange  : #ff8a00;
+$side-pink    : #F229E5;
+$side-blue    : #00eaff;
+
+
+// Variables adicionales para Bootstrap
+$primary-blue: $accent-blue;
+$secondary-bg: $primary-bg;
+$light-bg: #f8f9fa;
+$dark-bg: #212529;
+$white: #ffffff;
+$light: #ffffff;
+$black: #000000;
+
+// Paleta de colores extendida
+$colors: (
+        'primary': $primary-bg,
+        'background-dark': $background-dark,
+        'background-soft': $background-soft,
+        'accent-green': $accent-green,
+        'accent-pink': $accent-pink,
+        'accent-blue': $accent-blue,
+        'accent-blue-dark': $accent-blue-dark,
+        'accent-yellow': $accent-yellow,
+        'text-main': $text-main,
+        'text-gray': $text-gray,
+        'side-purple': $side-purple,
+        'side-orange': $side-orange,
+        'side-blue': $side-blue
+);
+
+// Tipografías
+$font-primary: 'Orbitron', 'Arial', monospace;
+$font-secondary: 'Rajdhani', sans-serif;
+$font-body: 'Orbitron', sans-serif;
+$font-display: 'Fira Code', sans-serif;
+
+// Tamaños de fuente
+$font-sizes: (
+  '3xs': 0.5rem,    // 8px
+  '2xs': 0.625rem,  // 10px
+  'xs': 0.75rem,    // 12px
+  'sm': 0.875rem,   // 14px
+  'base': 1rem,     // 16px
+  'lg': 1.125rem,   // 18px
+  'xl': 1.25rem,    // 20px
+  '2xl': 1.5rem,    // 24px
+  '3xl': 1.625rem,  // 26px
+  '4xl': 1.875rem,  // 30px
+  '5xl': 2rem,      // 32px
+  '6xl': 2.25rem,   // 36px
+  '7xl': 2.5rem,    // 40px
+  '8xl': 3rem,      // 48px
+);
+
+// Espaciados
+$spacing: (
+  '0': 0,
+  '1': 0.25rem,   // 4px
+  '2': 0.5rem,    // 8px
+  '3': 0.75rem,   // 12px
+  '4': 1rem,      // 16px
+  '5': 1.25rem,   // 20px
+  '6': 1.5rem,    // 24px
+  '8': 2rem,      // 32px
+  '10': 2.5rem,   // 40px
+  '12': 3rem,     // 48px
+  '16': 4rem,     // 64px
+  '20': 5rem      // 80px
+);
+$breakpoints: (
+  'xxs': 0,
+  'xs' : 360PX,
+  'sm' : 414px,
+  'md' : 600px,
+  'ws' : 760PX,
+  'lg' : 920px,
+  'xl' : 1366px,
+  'ds' : 1440px,
+  'hd' : 1920px,
+  'xxl': 2560px,
+  'ks' : 3840px
+);
+
+
+// Z-index layers
+$z-layers: (
+  'dropdown': 1000,
+  'sticky': 1020,
+  'fixed': 1030,
+  'modal-backdrop': 1040,
+  'modal': 1050,
+  'popover': 1060,
+  'tooltip': 1070
+);
+
+// Transiciones
+$transition-base: all 0.3s ease;
+$transition-fast: all 0.15s ease;
+$transition-slow: all 0.5s ease;
+
+// Border radius
+$border-radius: (
+  'none': 0,
+  'sm': 0.125rem,
+  'base': 0.25rem,
+  'md': 0.375rem,
+  'lg': 0.5rem,
+  'xl': 0.75rem,
+  '2xl': 1rem,
+  'full': 9999px
+);
+
+// Sombras
+$shadows: (
+  'sm': 0 1px 2px 0 rgba(0, 0, 0, 0.05),
+  'base': 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+  'md': 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  'lg': 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  'xl': 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+  '2xl': 0 25px 50px -12px rgba(0, 0, 0, 0.25),
+  'neon-blue': 0 0 20px rgba(126, 219, 252, 0.5),
+  'neon-pink': 0 0 20px rgba(255, 0, 195, 0.5),
+  'neon-green': 0 0 20px rgba(186, 255, 62, 0.5)
+);
+
+// ==========================================================================
+// CSS Custom Properties (Variables Globales)
+// ==========================================================================
+// Se definen aquí para que estén disponibles en todo el proyecto.
+// Usamos las variables SASS ($) para asignar los valores.
+
+//:root {
+  //--primary: #{$accent-green};
+  //--secondary: #{$accent-pink};
+  //--accent-blue: #{$accent-blue};
+  //--accent-yellow: #{$accent-yellow};
+  
+
+  //--bg-surface: #{$background-soft};
+  //--bg-card: #{$background-soft};
+  //--bg-dark: #{$primary-bg};
+  //--bg-alpha: #{rgba($accent-green, 0.1)};
+  //
+  //--text-gray: #{$text-gray};
+  //--text-dim: #{$text-gray};
+//}

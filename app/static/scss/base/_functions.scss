@@ -1,0 +1,43 @@
+@use "sass:map";
+@use "variables";
+
+// ==========================================================================
+// FUNCTIONS - SMACSS Base
+// ==========================================================================
+// Funciones auxiliares para recuperar valores de los mapas de variables
+
+// Función para obtener espaciados del mapa $spacing
+@function spacing($key) {
+  @if not map.has-key(variables.$spacing, $key) {
+    @warn "La clave '#{$key}' no existe en el mapa $spacing.";
+    @return null;
+  }
+  @return map.get(variables.$spacing, $key);
+}
+
+// Función para obtener tamaños de fuente del mapa $font-sizes
+@function font-size($key) {
+  @if not map.has-key(variables.$font-sizes, $key) {
+    @warn "La clave '#{$key}' no existe en el mapa $font-sizes.";
+    @return null;
+  }
+  @return map.get(variables.$font-sizes, $key);
+}
+
+// Función para obtener sombras del mapa $shadows
+@function shadow($key) {
+  @if not map.has-key(variables.$shadows, $key) {
+    @warn "La clave '#{$key}' no existe en el mapa $shadows.";
+    @return null;
+  }
+  @return map.get(variables.$shadows, $key);
+}
+
+// Función para obtener z-index del mapa $z-layers
+@function z($key) {
+  @if not map.has-key(variables.$z-layers, $key) {
+    @warn "La clave '#{$key}' no existe en el mapa $z-layers.";
+    @return null;
+  }
+  @return map.get(variables.$z-layers, $key);
+}

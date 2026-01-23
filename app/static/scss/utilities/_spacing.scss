@@ -1,0 +1,292 @@
+@use "../base/mixins";
+@use "../base/variables";
+
+// ==========================================================================
+// SPACING UTILITIES - SMACSS Utilities
+// ==========================================================================
+// Este archivo contiene utilidades para margin y padding
+// Generadas automáticamente desde el mapa de espaciados
+
+// Generar clases de margin
+@each $key, $value in variables.$spacing {
+  // Margin en todas las direcciones
+  .m-#{$key} {
+    margin: $value !important;
+  }
+  
+  // Margin top
+  .mt-#{$key} {
+    margin-top: $value !important;
+  }
+  
+  // Margin right
+  .mr-#{$key} {
+    margin-right: $value !important;
+  }
+  
+  // Margin bottom
+  .mb-#{$key} {
+    margin-bottom: $value !important;
+  }
+  
+  // Margin left
+  .ml-#{$key} {
+    margin-left: $value !important;
+  }
+  
+  // Margin horizontal (left y right)
+  .mx-#{$key} {
+    margin-left: $value !important;
+    margin-right: $value !important;
+  }
+  
+  // Margin vertical (top y bottom)
+  .my-#{$key} {
+    margin-top: $value !important;
+    margin-bottom: $value !important;
+  }
+}
+
+// Generar clases de padding
+@each $key, $value in variables.$spacing {
+  // Padding en todas las direcciones
+  .p-#{$key} {
+    padding: $value !important;
+  }
+  
+  // Padding top
+  .pt-#{$key} {
+    padding-top: $value !important;
+  }
+  
+  // Padding right
+  .pr-#{$key} {
+    padding-right: $value !important;
+  }
+  
+  // Padding bottom
+  .pb-#{$key} {
+    padding-bottom: $value !important;
+  }
+  
+  // Padding left
+  .pl-#{$key} {
+    padding-left: $value !important;
+  }
+  
+  // Padding horizontal (left y right)
+  .px-#{$key} {
+    padding-left: $value !important;
+    padding-right: $value !important;
+  }
+  
+  // Padding vertical (top y bottom)
+  .py-#{$key} {
+    padding-top: $value !important;
+    padding-bottom: $value !important;
+  }
+}
+
+// Clases especiales de espaciado
+.m-auto {
+  margin: auto !important;
+}
+
+.mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.my-auto {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+
+.mt-auto {
+  margin-top: auto !important;
+}
+
+.mr-auto {
+  margin-right: auto !important;
+}
+
+.mb-auto {
+  margin-bottom: auto !important;
+}
+
+.ml-auto {
+  margin-left: auto !important;
+}
+
+// Espaciado negativo (útil para ajustes finos)
+@each $key, $value in variables.$spacing {
+  @if $key != '0' {
+    .-m-#{$key} {
+      margin: -$value !important;
+    }
+    
+    .-mt-#{$key} {
+      margin-top: -$value !important;
+    }
+    
+    .-mr-#{$key} {
+      margin-right: -$value !important;
+    }
+    
+    .-mb-#{$key} {
+      margin-bottom: -$value !important;
+    }
+    
+    .-ml-#{$key} {
+      margin-left: -$value !important;
+    }
+    
+    .-mx-#{$key} {
+      margin-left: -$value !important;
+      margin-right: -$value !important;
+    }
+    
+    .-my-#{$key} {
+      margin-top: -$value !important;
+      margin-bottom: -$value !important;
+    }
+  }
+}
+
+// Espaciado responsive
+@each $breakpoint-name, $breakpoint-value in variables.$breakpoints {
+  @if $breakpoint-name != 'xs' {
+    @include mixins.respond-to($breakpoint-name) {
+      @each $key, $value in variables.$spacing {
+        // Margin classes
+        .#{$breakpoint-name}\:m-#{$key} {
+          margin: $value !important;
+        }
+        
+        .#{$breakpoint-name}\:mt-#{$key} {
+          margin-top: $value !important;
+        }
+        
+        .#{$breakpoint-name}\:mr-#{$key} {
+          margin-right: $value !important;
+        }
+        
+        .#{$breakpoint-name}\:mb-#{$key} {
+          margin-bottom: $value !important;
+        }
+        
+        .#{$breakpoint-name}\:ml-#{$key} {
+          margin-left: $value !important;
+        }
+        
+        .#{$breakpoint-name}\:mx-#{$key} {
+          margin-left: $value !important;
+          margin-right: $value !important;
+        }
+        
+        .#{$breakpoint-name}\:my-#{$key} {
+          margin-top: $value !important;
+          margin-bottom: $value !important;
+        }
+        
+        // Padding classes
+        .#{$breakpoint-name}\:p-#{$key} {
+          padding: $value !important;
+        }
+        
+        .#{$breakpoint-name}\:pt-#{$key} {
+          padding-top: $value !important;
+        }
+        
+        .#{$breakpoint-name}\:pr-#{$key} {
+          padding-right: $value !important;
+        }
+        
+        .#{$breakpoint-name}\:pb-#{$key} {
+          padding-bottom: $value !important;
+        }
+        
+        .#{$breakpoint-name}\:pl-#{$key} {
+          padding-left: $value !important;
+        }
+        
+        .#{$breakpoint-name}\:px-#{$key} {
+          padding-left: $value !important;
+          padding-right: $value !important;
+        }
+        
+        .#{$breakpoint-name}\:py-#{$key} {
+          padding-top: $value !important;
+          padding-bottom: $value !important;
+        }
+      }
+      
+      // Auto margins responsive
+      .#{$breakpoint-name}\:m-auto {
+        margin: auto !important;
+      }
+      
+      .#{$breakpoint-name}\:mx-auto {
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      
+      .#{$breakpoint-name}\:my-auto {
+        margin-top: auto !important;
+        margin-bottom: auto !important;
+      }
+      
+      .#{$breakpoint-name}\:mt-auto {
+        margin-top: auto !important;
+      }
+      
+      .#{$breakpoint-name}\:mr-auto {
+        margin-right: auto !important;
+      }
+      
+      .#{$breakpoint-name}\:mb-auto {
+        margin-bottom: auto !important;
+      }
+      
+      .#{$breakpoint-name}\:ml-auto {
+        margin-left: auto !important;
+      }
+    }
+  }
+}
+
+// Gap utilities para flexbox y grid
+@each $key, $value in variables.$spacing {
+  .gap-#{$key} {
+    gap: $value !important;
+  }
+  
+  .gap-x-#{$key} {
+    column-gap: $value !important;
+  }
+  
+  .gap-y-#{$key} {
+    row-gap: $value !important;
+  }
+}
+
+// Gap responsive
+@each $breakpoint-name, $breakpoint-value in variables.$breakpoints {
+  @if $breakpoint-name != 'xs' {
+    @include mixins.respond-to($breakpoint-name) {
+      @each $key, $value in variables.$spacing {
+        .#{$breakpoint-name}\:gap-#{$key} {
+          gap: $value !important;
+        }
+        
+        .#{$breakpoint-name}\:gap-x-#{$key} {
+          column-gap: $value !important;
+        }
+        
+        .#{$breakpoint-name}\:gap-y-#{$key} {
+          row-gap: $value !important;
+        }
+      }
+    }
+  }
+}

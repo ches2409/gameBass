@@ -1,0 +1,437 @@
+@use "../base/functions";
+@use "../base/mixins";
+@use "../base/variables";
+
+// ==========================================================================
+// TYPOGRAPHY UTILITIES - SMACSS Utilities
+// ==========================================================================
+// Este archivo contiene utilidades para tipografía
+// Incluye tamaños, pesos, familias, alineación, etc.
+
+// Familias de fuentes
+.font-primary {
+  font-family: variables.$font-primary !important;
+}
+
+.font-secondary {
+  font-family: variables.$font-secondary !important;
+}
+
+.font-body {
+  font-family: variables.$font-body !important;
+}
+
+.font-display {
+  font-family: variables.$font-display !important;
+}
+
+.font-mono {
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+// Tamaños de fuente
+@each $name, $size in variables.$font-sizes {
+  .text-#{$name} {
+    font-size: $size !important;
+  }
+}
+
+// Pesos de fuente
+.font-thin {
+  font-weight: 100 !important;
+}
+
+.font-extralight {
+  font-weight: 200 !important;
+}
+
+.font-light {
+  font-weight: 300 !important;
+}
+
+.font-normal {
+  font-weight: 400 !important;
+}
+
+.font-medium {
+  font-weight: 500 !important;
+}
+
+.font-semibold {
+  font-weight: 600 !important;
+}
+
+.font-bold {
+  font-weight: 700 !important;
+}
+
+.font-extrabold {
+  font-weight: 800 !important;
+}
+
+.font-black {
+  font-weight: 900 !important;
+}
+
+// Estilos de fuente
+.italic {
+  font-style: italic !important;
+}
+
+.not-italic {
+  font-style: normal !important;
+}
+
+// Alineación de texto
+.text-left {
+  text-align: left !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-justify {
+  text-align: justify !important;
+}
+
+// Transformación de texto
+.uppercase {
+  text-transform: uppercase !important;
+}
+
+.lowercase {
+  text-transform: lowercase !important;
+}
+
+.capitalize {
+  text-transform: capitalize !important;
+}
+
+.normal-case {
+  text-transform: none !important;
+}
+
+// Decoración de texto
+.underline {
+  text-decoration: underline !important;
+}
+
+.line-through {
+  text-decoration: line-through !important;
+}
+
+.no-underline {
+  text-decoration: none !important;
+}
+
+// Espaciado de letras
+.sp-tighter {
+  letter-spacing: -0.05em !important;
+}
+
+.tracking-tight {
+  letter-spacing: -0.025em !important;
+}
+
+.tracking-normal {
+  letter-spacing: 0em !important;
+}
+
+.tracking-wide {
+  letter-spacing: 0.025em !important;
+}
+
+.tracking-wider {
+  letter-spacing: 0.05em !important;
+}
+
+.tracking-widest {
+  letter-spacing: 0.1em !important;
+}
+
+// Altura de línea
+.line-none {
+  line-height: .5 !important;
+}
+
+.line-tight {
+  line-height: 1.25 !important;
+}
+
+.line-snug {
+  line-height: 1.375 !important;
+}
+
+.line-normal {
+  line-height: 1.5 !important;
+}
+
+.line-relaxed {
+  line-height: 1.625 !important;
+}
+
+.line-loose {
+  line-height: 2 !important;
+}
+
+// Espaciado de palabras
+.word-spacing-normal {
+  word-spacing: normal !important;
+}
+
+.word-spacing-wide {
+  word-spacing: 0.2em !important;
+}
+
+.word-spacing-wider {
+  word-spacing: 0.4em !important;
+}
+
+// Manejo de texto largo
+.truncate {
+  @include mixins.text-truncate;
+}
+
+.text-ellipsis {
+  text-overflow: ellipsis !important;
+}
+
+.text-clip {
+  text-overflow: clip !important;
+}
+
+// Texto multilínea
+.line-clamp-1 {
+  @include mixins.text-truncate-multiline(1);
+}
+
+.line-clamp-2 {
+  @include mixins.text-truncate-multiline(2);
+}
+
+.line-clamp-3 {
+  @include mixins.text-truncate-multiline(3);
+}
+
+.line-clamp-4 {
+  @include mixins.text-truncate-multiline(4);
+}
+
+.line-clamp-none {
+  display: block !important;
+  -webkit-line-clamp: none !important;
+  -webkit-box-orient: horizontal !important;
+  overflow: visible !important;
+}
+
+// Manejo de espacios en blanco
+.whitespace-normal {
+  white-space: normal !important;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap !important;
+}
+
+.whitespace-pre {
+  white-space: pre !important;
+}
+
+.whitespace-pre-line {
+  white-space: pre-line !important;
+}
+
+.whitespace-pre-wrap {
+  white-space: pre-wrap !important;
+}
+
+// Manejo de saltos de palabra
+.break-normal {
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+.break-words {
+  overflow-wrap: break-word !important;
+}
+
+.break-all {
+  word-break: break-all !important;
+}
+
+// Selección de texto
+.select-none {
+  user-select: none !important;
+}
+
+.select-text {
+  user-select: text !important;
+}
+
+.select-all {
+  user-select: all !important;
+}
+
+.select-auto {
+  user-select: auto !important;
+}
+
+// Estilos gaming específicos
+.text-gaming {
+  font-family: variables.$font-primary !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  font-weight: 700 !important;
+}
+
+.text-neon {
+  @include mixins.neon-text(variables.$accent-blue, 0.5);
+}
+
+.text-glow {
+  text-shadow: 
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor !important;
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(black, 0.5) !important;
+}
+
+.text-shadow-lg {
+  text-shadow: 4px 4px 8px rgba(black, 0.5) !important;
+}
+
+.text-shadow-none {
+  text-shadow: none !important;
+}
+
+// Títulos gaming
+.title-gaming {
+  font-family: variables.$font-primary !important;
+  font-size: functions.font-size('4xl') !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  @include mixins.neon-text(variables.$accent-blue, 0.4);
+  
+  @include mixins.respond-to('md') {
+    font-size: functions.font-size('3xl') !important;
+  }
+  
+  @include mixins.respond-to('sm') {
+    font-size: functions.font-size('2xl') !important;
+  }
+}
+
+.subtitle-gaming {
+  font-family: variables.$font-body !important;
+  font-size: functions.font-size('lg') !important;
+  color: variables.$text-gray !important;
+  opacity: 0.8;
+  
+  @include mixins.respond-to('sm') {
+    font-size: functions.font-size('base') !important;
+  }
+}
+
+// Responsive typography
+@each $breakpoint-name, $breakpoint-value in variables.$breakpoints {
+  @if $breakpoint-name != 'xs' {
+    @include mixins.respond-to($breakpoint-name) {
+      // Tamaños de fuente responsive
+      @each $name, $size in variables.$font-sizes {
+        .#{$breakpoint-name}\:text-#{$name} {
+          font-size: $size !important;
+        }
+      }
+      
+      // Alineación responsive
+      .#{$breakpoint-name}\:text-left {
+        text-align: left !important;
+      }
+      
+      .#{$breakpoint-name}\:text-center {
+        text-align: center !important;
+      }
+      
+      .#{$breakpoint-name}\:text-right {
+        text-align: right !important;
+      }
+      
+      .#{$breakpoint-name}\:text-justify {
+        text-align: justify !important;
+      }
+      
+      // Truncate responsive
+      .#{$breakpoint-name}\:truncate {
+        @include mixins.text-truncate;
+      }
+      
+      .#{$breakpoint-name}\:line-clamp-1 {
+        @include mixins.text-truncate-multiline(1);
+      }
+      
+      .#{$breakpoint-name}\:line-clamp-2 {
+        @include mixins.text-truncate-multiline(2);
+      }
+      
+      .#{$breakpoint-name}\:line-clamp-3 {
+        @include mixins.text-truncate-multiline(3);
+      }
+    }
+  }
+}
+
+// Utilidades de escritura vertical (para logos, etc.)
+.writing-vertical-rl {
+  writing-mode: vertical-rl !important;
+}
+
+.writing-vertical-lr {
+  writing-mode: vertical-lr !important;
+}
+
+.writing-horizontal {
+  writing-mode: horizontal-tb !important;
+}
+
+// Orientación de texto
+.text-orientation-mixed {
+  text-orientation: mixed !important;
+}
+
+.text-orientation-upright {
+  text-orientation: upright !important;
+}
+
+.text-orientation-sideways {
+  text-orientation: sideways !important;
+}
+
+// Utilidades para listas
+.list-none {
+  list-style-type: none !important;
+}
+
+.list-disc {
+  list-style-type: disc !important;
+}
+
+.list-decimal {
+  list-style-type: decimal !important;
+}
+
+.list-inside {
+  list-style-position: inside !important;
+}
+
+.list-outside {
+  list-style-position: outside !important;
+}

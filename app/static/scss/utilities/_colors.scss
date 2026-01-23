@@ -1,0 +1,347 @@
+@use "sass:color";
+@use "../base/mixins";
+@use "../base/variables";
+
+// ==========================================================================
+// COLOR UTILITIES - SMACSS Utilities
+// ==========================================================================
+// Este archivo contiene utilidades para colores de texto y fondo
+// Generadas desde el mapa de colores del proyecto
+
+// Colores de texto
+@each $name, $color in variables.$colors {
+  .text-#{$name} {
+    color: $color !important;
+  }
+}
+
+// Colores de texto adicionales
+.text-white {
+  color: white !important;
+}
+
+.text-black {
+  color: black !important;
+}
+
+.text-transparent {
+  color: transparent !important;
+}
+
+.text-current {
+  color: currentColor !important;
+}
+
+// Colores de fondo
+@each $name, $color in variables.$colors {
+  .bg-#{$name} {
+    background-color: $color !important;
+  }
+}
+
+// Colores de fondo adicionales
+.bg-white {
+  background-color: white !important;
+}
+
+.bg-black {
+  background-color: black !important;
+}
+
+.bg-transparent {
+  background-color: transparent !important;
+}
+
+.bg-current {
+  background-color: currentColor !important;
+}
+
+// Colores de fondo con transparencia
+@each $name, $color in variables.$colors {
+  .bg-#{$name}-10 {
+    background-color: rgba($color, 0.1) !important;
+  }
+  
+  .bg-#{$name}-20 {
+    background-color: rgba($color, 0.2) !important;
+  }
+  
+  .bg-#{$name}-30 {
+    background-color: rgba($color, 0.3) !important;
+  }
+  
+  .bg-#{$name}-50 {
+    background-color: rgba($color, 0.5) !important;
+  }
+  
+  .bg-#{$name}-70 {
+    background-color: rgba($color, 0.7) !important;
+  }
+  
+  .bg-#{$name}-90 {
+    background-color: rgba($color, 0.9) !important;
+  }
+}
+
+// Colores de borde
+@each $name, $color in variables.$colors {
+  .border-#{$name} {
+    border-color: $color !important;
+  }
+}
+
+.border-white {
+  border-color: white !important;
+}
+
+.border-black {
+  border-color: black !important;
+}
+
+.border-transparent {
+  border-color: transparent !important;
+}
+
+.border-current {
+  border-color: currentColor !important;
+}
+
+// Gradientes gaming
+.bg-gradient-primary {
+  background: linear-gradient(135deg, variables.$accent-blue, variables.$accent-pink) !important;
+}
+
+.bg-gradient-secondary {
+  background: linear-gradient(135deg, variables.$accent-green, variables.$accent-yellow) !important;
+}
+
+.bg-gradient-gaming {
+  background: linear-gradient(45deg, variables.$accent-blue, variables.$accent-pink, variables.$accent-green) !important;
+}
+
+.bg-gradient-neon {
+  background: linear-gradient(90deg, variables.$accent-blue, variables.$accent-pink, variables.$accent-yellow, variables.$accent-green) !important;
+}
+
+.bg-gradient-dark {
+  background: linear-gradient(135deg, variables.$primary-bg, color.adjust(variables.$primary-bg, $lightness: 10%)) !important;
+}
+
+// Efectos de texto neón
+.text-neon-blue {
+  @include mixins.neon-text(variables.$accent-blue, 0.5);
+}
+
+.text-neon-pink {
+  @include mixins.neon-text(variables.$accent-pink, 0.5);
+}
+
+.text-neon-green {
+  @include mixins.neon-text(variables.$accent-green, 0.5);
+}
+
+.text-neon-yellow {
+  @include mixins.neon-text(variables.$accent-yellow, 0.5);
+}
+
+// Variaciones de intensidad para efectos neón
+.text-neon-light {
+  @include mixins.neon-text(variables.$accent-blue, 0.3);
+}
+
+.text-neon-strong {
+  @include mixins.neon-text(variables.$accent-blue, 0.8);
+}
+
+// Colores de estado
+.text-success {
+  color: variables.$accent-green !important;
+}
+
+.text-warning {
+  color: variables.$accent-yellow !important;
+}
+
+.text-danger {
+  color: variables.$accent-pink !important;
+}
+
+.text-info {
+  color: variables.$accent-blue !important;
+}
+
+.bg-success {
+  background-color: variables.$accent-green !important;
+}
+
+.bg-warning {
+  background-color: variables.$accent-yellow !important;
+}
+
+.bg-danger {
+  background-color: variables.$accent-pink !important;
+}
+
+.bg-info {
+  background-color: variables.$accent-blue !important;
+}
+
+// Colores de estado con transparencia
+.bg-success-10 {
+  background-color: rgba(variables.$accent-green, 0.1) !important;
+}
+
+.bg-warning-10 {
+  background-color: rgba(variables.$accent-yellow, 0.1) !important;
+}
+
+.bg-danger-10 {
+  background-color: rgba(variables.$accent-pink, 0.1) !important;
+}
+
+.bg-info-10 {
+  background-color: rgba(variables.$accent-blue, 0.1) !important;
+}
+
+// Bordes de estado
+.border-success {
+  border-color: variables.$accent-green !important;
+}
+
+.border-warning {
+  border-color: variables.$accent-yellow !important;
+}
+
+.border-danger {
+  border-color: variables.$accent-pink !important;
+}
+
+.border-info {
+  border-color: variables.$accent-blue !important;
+}
+
+// Hover states para colores
+@each $name, $color in variables.$colors {
+  .hover\:text-#{$name}:hover {
+    color: $color !important;
+  }
+  
+  .hover\:bg-#{$name}:hover {
+    background-color: $color !important;
+  }
+  
+  .hover\:border-#{$name}:hover {
+    border-color: $color !important;
+  }
+}
+
+// Focus states para colores
+@each $name, $color in variables.$colors {
+  .focus\:text-#{$name}:focus {
+    color: $color !important;
+  }
+  
+  .focus\:bg-#{$name}:focus {
+    background-color: $color !important;
+  }
+  
+  .focus\:border-#{$name}:focus {
+    border-color: $color !important;
+  }
+}
+
+// Colores responsive
+@each $breakpoint-name, $breakpoint-value in variables.$breakpoints {
+  @if $breakpoint-name != 'xs' {
+    @include mixins.respond-to($breakpoint-name) {
+      @each $name, $color in variables.$colors {
+        .#{$breakpoint-name}\:text-#{$name} {
+          color: $color !important;
+        }
+        
+        .#{$breakpoint-name}\:bg-#{$name} {
+          background-color: $color !important;
+        }
+        
+        .#{$breakpoint-name}\:border-#{$name} {
+          border-color: $color !important;
+        }
+      }
+    }
+  }
+}
+
+// Utilidades de opacidad
+.opacity-0 {
+  opacity: 0 !important;
+}
+
+.opacity-10 {
+  opacity: 0.1 !important;
+}
+
+.opacity-20 {
+  opacity: 0.2 !important;
+}
+
+.opacity-30 {
+  opacity: 0.3 !important;
+}
+
+.opacity-40 {
+  opacity: 0.4 !important;
+}
+
+.opacity-50 {
+  opacity: 0.5 !important;
+}
+
+.opacity-60 {
+  opacity: 0.6 !important;
+}
+
+.opacity-70 {
+  opacity: 0.7 !important;
+}
+
+.opacity-80 {
+  opacity: 0.8 !important;
+}
+
+.opacity-90 {
+  opacity: 0.9 !important;
+}
+
+.opacity-100 {
+  opacity: 1 !important;
+}
+
+// Hover opacity
+.hover\:opacity-0:hover {
+  opacity: 0 !important;
+}
+
+.hover\:opacity-50:hover {
+  opacity: 0.5 !important;
+}
+
+.hover\:opacity-100:hover {
+  opacity: 1 !important;
+}
+
+// Backdrop filter utilities
+.backdrop-blur {
+  backdrop-filter: blur(10px) !important;
+}
+
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px) !important;
+}
+
+.backdrop-blur-lg {
+  backdrop-filter: blur(16px) !important;
+}
+
+.backdrop-blur-none {
+  backdrop-filter: none !important;
+}
