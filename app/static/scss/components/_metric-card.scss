@@ -1,10 +1,19 @@
+@use "../base/functions";
+@use "../base/variables";
+
 /* Variables de color para facilitar el cambio de facción */
+
+.metric-card{
+    //background-color: royalblue;
+    display: flex;
+    gap: functions.spacing('4');
+    width: 100%;
+}
 
 .hub-metric-card {
     position: relative;
     background-color: var(--bg-surface);
     padding: 1.5rem;
-    min-width: 240px;
     overflow: hidden;
     transition: all 0.3s ease;
     backdrop-filter: blur(4px);
@@ -17,6 +26,7 @@
     flex-direction: column;
     justify-content: space-between;
     height: 140px;
+    flex: 1;
 }
 
 /* Variantes de color por clase */

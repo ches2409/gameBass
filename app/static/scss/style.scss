@@ -51,8 +51,9 @@
 // Componentes modulares y reutilizables
 // Cada componente debe ser independiente y reutilizable
 
-//@use 'components/menu';
+@use 'components/main_menu';
 @use 'components/buttons';
+@use "components/metric-card";
 //@use 'components/cards';
 //@use 'components/navigation';
 //@use 'components/forms';

@@ -1,0 +1,141 @@
+@use "../base/functions";
+@use "../base/mixins";
+@use "../base/variables";
+
+.command-center__sidebar{
+    background-color: #0A0C10;
+    height: 100%;
+
+    .command-suite{
+        //background-color: lightcoral;
+
+        border: #1A1E26 solid 1px;
+        display: flex;
+        flex-wrap: wrap;
+        height: 100%;
+        width: 100%;
+
+        &__header{
+            background-color: #020305;
+            height: 10vh;
+            width: 100%;
+            padding: 5%;
+        }
+        &__title{
+            h1{
+                color: white;
+                font-size: 1.8rem;
+            }
+
+        }
+        &__tag{
+            color: #A3FF00;
+            @include mixins.neon-text(variables.$accent-green);
+            font-size: .7rem;
+        }
+
+        &__main{
+            //background-color: forestgreen;
+            height: 80vh;
+            width: 100%;
+            padding: 5%;
+        }
+
+        &__item{
+            display: flex;
+            gap: 1rem;
+            //background-color: orangered;
+            transition: all 0.2s ease;
+            border-right: 0px solid transparent;
+            cursor: pointer;
+            height: 3rem;
+            width: 100%;
+            margin: .5rem 0;
+            padding-left: .5rem;
+            align-items: center;
+            
+            &:hover{
+                background-color: rgba(255, 255, 255, 0.05); /* Sutil transparencia blanca */
+                color: #ffffff;
+                text-shadow: 0 0 1.5px #d6f5e9;
+            }
+            &:active{
+                background-color: rgba(163, 255, 0, 0.1); /* Fondo verde traslúcido */
+                color : variables.$accent-green;
+                border-right: 2px solid variables.$accent-green; /* Indicador de estado */
+                box-shadow: inset -10px 0 20px rgba(163, 255, 0, 0.05);
+            }
+            
+            // Estado Activo (Persistente por URL) - Clase .active
+            &.active {
+                background-color: rgba(163, 255, 0, 0.1);
+                color: variables.$accent-green;
+                border-right: 2px solid variables.$accent-green;
+                box-shadow: inset -10px 0 20px rgba(163, 255, 0, 0.05);
+                
+                .icon-main {
+                    fill: variables.$accent-green;
+                    color: variables.$accent-green;
+                    transform: scale(1.1);
+                }
+            }
+
+            .icon-main{
+                //background-color: royalblue;
+                display: flex;
+                align-items: center;
+            }
+            &:hover .icon-main{
+                fill: variables.$accent-green;
+                transform: scale(1.1);
+                color: variables.$accent-green;
+                transition: all 0.3s ease;
+            }
+            .name-main{
+                //background-color: orchid;
+                display: flex;
+                align-items: center; // Centra verticalmente los hijos directos
+                
+                // Eliminamos el margen por defecto del párrafo para que el centrado sea perfecto
+                p {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        &__footer{
+            //background-color: purple;
+            background-color: #020305;
+            width: 100%;
+            height: 10vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        &__group{
+            //background-color: olive;
+            .button-abort{
+              //background-color: red;
+              display: flex;
+              gap: 1rem;
+              padding: 5% 10%;
+              cursor: pointer;
+
+                .icon_abort{
+                    svg{
+                        fill: #aaafab;
+                        transition: all 0.3s ease;
+                    }
+                }
+                &:hover .icon_abort svg {
+                    fill: red;
+                    filter: drop-shadow(0 0 5px red);
+                    transform: scale(1.5);
+                }
+            }
+        }
+    }
+    &:hover{
+        border-right: variables.$accent-green solid 1px;
+    }
+}

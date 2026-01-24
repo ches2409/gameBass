@@ -18,7 +18,7 @@
                                 <h1>Arkadex</h1>
                             </div>
                             <div class="command-suite__tag">
-                                <p>command_center</p>
+                                <p>command_suite</p>
                             </div>
                         </div>
                     </div>
@@ -58,13 +58,20 @@
             <div class="command-center__title-bar">
 
                 <div class="title-breadcrumbs">
-                    <div class="command-center__routes">
-                    <div class="icon_routes">
+                    <div class="command-center__routes routes">
+                        <div class="icon_routes">
 
-                        <span class="material-symbols-outlined card-bg-icon">terminal</span>
+                            <span class="material-symbols-outlined card-bg-icon">terminal</span>
 
-                    </div>
-                    <P class="text_normal"><span class="text_code">ARKADEX_SYSTEM_0X92 /</span> NEURAL_PROFILES</P>
+                        </div>
+                        <div class="text_routes">
+                            <P class="text_code">ARKADEX_SYSTEM_0X92 /</P>
+                        </div>
+
+                        <div class="route">
+                            <P class="text_normal">{{ url_data }}</P>
+                        </div>
+
                     </div>
                 </div>
 
@@ -98,22 +105,66 @@
                 </div>
             </div>
 
-            <div class="command-center__body"></div>
+            <div class="command-center__body">
+
+                <div class="intro_card">
+
+                    <div class="intro_main">
+                        <div class="command">
+
+                            <div class="command__code intel-badge">
+                                <p class="text_code">INTELLIGENCE_STREAM_0X82</p>
+                            </div>
+
+                            <div class="command__link">
+                                <div class="text_link">
+                                    <p class="text_code">LINK:</p>
+                                </div>
+
+                                <div class="type_command">
+                                    <p class="text_normal">ENCRYPTED_MASTERMODE</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="command__title">
+                            <h2 class="title">{{ page_title }}</h2>
+                        </div>
+                    </div>
+
+                    <div class="intro_status">
+                        <div class="metrics-container">
+                            <!-- Reloj del Sistema -->
+                            <p class="system-clock">
+                                LOCAL_CLOCK: <span class="clock-value">14:20:05</span>
+                            </p>
+
+                            <!-- Latencia de Sincronización -->
+                            <div class="sync-delay">
+                                <span class="delay-label">SYNC_DELAY:</span>
+                                <span class="delay-value">0.024ms</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+{#                Tarjetas de mainHub metricas#}
+
+                <div class="metric-card">
+                    {% block metricCard %}
+                        {% for card in metric_cards %}
+                            {% with label=card.label, value=card.value, trend=card.trend, icon=card.icon, color_class=card.color_class %}
+                                {% include 'components/metric-card.html' %}
+                            {% endwith %}
+                        {% endfor %}
+                    {% endblock %}
+                </div>
+            </div>
 
         </div>
-        <div class="prueba">
+{#        <div class="prueba">#}
 
-{#        Tarjetas de mainHub metricas#}
-
-{#        {% block metricCard %}#}
-{#            <div class="d-flex gap-4">#}
-{#                {% for card in metric_cards %}#}
-{#                    {% with label=card.label, value=card.value, trend=card.trend, icon=card.icon, color_class=card.color_class %}#}
-{#                        {% include 'components/metric-card.html' %}#}
-{#                    {% endwith %}#}
-{#                {% endfor %}#}
-{#            </div>#}
-{#        {% endblock %}#}
 
 
 {#        Alertas de ventana#}
@@ -131,6 +182,6 @@
 {#        {% endblock %}#}
 
 
-        </div>
+{#        </div>#}
     </div>
 {% endblock %}

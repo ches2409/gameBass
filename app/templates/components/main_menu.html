@@ -13,16 +13,16 @@
         {% for item in menu_data %}
             {# Solo mostramos el item si pertenece a esta sección #}
             {% if item.title_section == name_section %}
-                <div class="command-suite__item">
+                <a href="{{ item.url }}" class="command-suite__item {{ 'active' if item.active else '' }}" style="text-decoration: none; color: inherit;">
 
                     <div class="command-suite__item-icon icon-main">
-                        <span class="material-symbols-outlined card-bg-icon">{{ item.icon_main }}</span>
+                        <span class="material-symbols-outlined ">{{ item.icon_main }}</span>
                     </div>
 
                     <div class="command-suite__item-label name-main">
                         <p>{{ item.name_main }}</p>
-                    </div>
-                </div>
+                    </div> 
+                </a>
             {% endif %}
         {% endfor %}
         

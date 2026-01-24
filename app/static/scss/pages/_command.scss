@@ -18,7 +18,7 @@ body {
   font-weight: 300;
   font-style: normal;
   font-size: .7rem;
-  line-height: 5.5rem;
+  line-height: 4.5rem;
   color: #aaafab;
   letter-spacing: 0.4em;
   /*color: #3f4a4b*/
@@ -51,119 +51,7 @@ body {
     grid-template-rows: 100%;
     overflow: hidden; // Evita scrollbars dobles en la ventana principal
 
-    &__sidebar{
-        background-color: #0A0C10;
-        height: 100%;
-
-        .command-suite{
-
-            border: #1A1E26 solid 1px;
-            display: flex;
-            flex-wrap: wrap;
-            height: 100%;
-            width: 100%;
-
-            &__header{
-                background-color: #020305;
-                height: 10vh;
-                width: 100%;
-                padding: 5%;
-            }
-            &__title{
-                h1{
-                    color: white;
-                }
-
-            }
-            &__tag{
-                color: #A3FF00;
-                @include mixins.neon-text(variables.$accent-green);
-            }
-
-            &__main{
-                height: 70%;
-                width: 100%;
-                padding: 5%;
-            }
-
-            &__item{
-                display: flex;
-                gap: 1rem;
-                //background-color: orangered;
-                transition: all 0.2s ease;
-                border-right: 0px solid transparent;
-                cursor: pointer;
-                height: 3rem;
-                width: 100%;
-                margin: .5rem 0;
-                padding-left: .5rem;
-                align-items: center;
-                
-                &:hover{
-                    background-color: rgba(255, 255, 255, 0.05); /* Sutil transparencia blanca */
-                    color: #ffffff;
-                    text-shadow: 0 0 1.5px #d6f5e9;
-                }
-                &:active{
-                    background-color: rgba(163, 255, 0, 0.1); /* Fondo verde traslúcido */
-                    color : variables.$accent-green;
-                    border-right: 2px solid variables.$accent-green; /* Indicador de estado */
-                    box-shadow: inset -10px 0 20px rgba(163, 255, 0, 0.05);
-                }
-                .icon-main{
-                    //background-color: royalblue;
-                    display: flex;
-                    align-items: center;
-                }
-                &:hover .icon-main{
-                    fill: variables.$accent-green;
-                    transform: scale(1.1);
-                    color: variables.$accent-green;
-                    transition: all 0.3s ease;
-                }
-                .name-main{
-                    //background-color: orchid;
-                    display: flex;
-                    align-items: center; // Centra verticalmente los hijos directos
-                    
-                    // Eliminamos el margen por defecto del párrafo para que el centrado sea perfecto
-                    p {
-                        margin-bottom: 0;
-                    }
-                }
-            }
-
-            &__footer{
-                background-color: #020305;
-                width: 100%;
-            }
-            &__group{
-                //background-color: olive;
-                .button-abort{
-                  /*background-color: red;*/
-                  display: flex;
-                  gap: 1rem;
-                  padding: 5% 10%;
-                  cursor: pointer;
-
-                    .icon_abort{
-                        svg{
-                            fill: #aaafab;
-                            transition: all 0.3s ease;
-                        }
-                    }
-                    &:hover .icon_abort svg {
-                        fill: red;
-                        filter: drop-shadow(0 0 5px red);
-                        transform: scale(1.5);
-                    }
-                }
-            }
-        }
-        &:hover{
-            border-right: variables.$accent-green solid 1px;
-        }
-    }
+    
     
     &__viewport{
         //background-color: palegreen;
@@ -184,8 +72,42 @@ body {
         .title-breadcrumbs{
             //background-color: green;
             width: 50%;
-            align-content: center;
             padding-left: 3rem;
+            display: flex;
+            align-items: center;
+            .routes{
+                //background-color: fuchsia;
+                display: flex;
+                align-items: center;
+                height: 100%;
+                .icon_routes{
+                    //background-color: lightcoral;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .text_routes{
+                    //background-color: navy;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    p {
+                        margin-bottom: 0;
+                    }
+                }
+                .route{
+                    //background-color: rebeccapurple;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    p {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+            
         }
         //.lore{
         //    flex: 1;                  // Ocupa todo el espacio disponible
@@ -383,6 +305,181 @@ body {
                     fill:variables.$accent-blue;
                     filter:drop-shadow(0 0 5px variables.$accent-blue);
                 }
+            }
+        }
+    }
+    
+    &__body{
+        //background-color: dodgerblue;
+        padding: 2rem;
+        .intro_card{
+            //background-color: forestgreen;
+            display: flex;
+            .intro_main{
+                //background-color: lightcoral;
+                width: 60%;
+                margin-bottom: 1rem;
+                .command{
+                    //background-color: dodgerblue;
+                    display: flex;
+                    gap: 1rem;
+                    &__code{
+                        //background-color: chocolate;
+                        
+                        width: auto;
+                        height: 1.5rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        //padding: 0 .5rem;
+                        p{
+                            margin-bottom: 0;
+                        }
+                    }
+                    .intel-badge{
+                        padding: 2px 10px;
+                        background: rgba(163, 255, 0, 0.06);
+                        border: 1px solid variables.$accent-green;
+                        color: #A3FF00;
+                        font-size: 8px;
+                        font-weight: 900;
+                        text-transform: uppercase;
+                        letter-spacing: 0.25em;
+                        position: relative;
+                         /* Animación de resplandor suave */
+                        animation: tech-pulse 2s infinite ease-in-out;
+                        
+                    }
+                    /* Efecto de onda expansiva (Pseudo-elemento) */
+                    .intel-badge::before {
+                        content: '';
+                        position: absolute;
+                        top: -1px;
+                        left: -1px;
+                        right: -1px;
+                        bottom: -1px;
+                        border: 1px solid #A3FF00;
+                        opacity: 0.3;
+                        /* Animación de expansión */
+                        animation: tech-pulse-expand 2s infinite ease-in-out;
+                    }
+                    
+                    /* Keyframes para el pulso de brillo */
+                    @keyframes tech-pulse {
+                        0%, 100% {
+                            box-shadow: 0 0 5px rgba(163, 255, 0, 0.1);
+                        }
+                        50% {
+                            box-shadow: 0 0 15px rgba(163, 255, 0, 0.3);
+                        }
+                    }
+                    
+                    /* Keyframes para la onda de choque técnica */
+                    @keyframes tech-pulse-expand {
+                        0% {
+                            transform: scale(1);
+                            opacity: 0.4;
+                        }
+                        100% {
+                            transform: scale(1.1, 1.4);
+                            opacity: 0;
+                        }
+                    }
+                    
+                    &__link{
+                        //background-color: darkkhaki;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 1.5rem;
+                        font-size: .6rem;
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                        p{
+                            margin-bottom: 0;
+                        }
+                        .text_link{
+                            //background-color: indianred;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                        .type_command{
+                            //background-color: lightgreen;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: 500;
+                            height: 100%;
+                            padding: 0 0 0 .5rem;
+                            
+                        }
+                        
+                    }
+                    &__title{
+                        //background-color: cadetblue;
+                        .title{
+                            //background-color: cornflowerblue;
+                            font-size: 3.5rem;
+                            font-style: italic;
+                            color: white;
+                            
+                        }
+                    }
+                }
+            }
+            .intro_status{
+                //background-color: rebeccapurple;
+                width: 40%;
+                
+                .metrics-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end; /* Alineación a la derecha */
+                    gap: 4px;
+                    font-family: 'Fira Code', monospace;
+                    user-select: none;
+                    pointer-events: none;
+                }
+                
+                /* Estilos del Reloj */
+                .system-clock {
+                    font-size: 10px;
+                    color: #6b7280; /* Equivalente a text-gray-500 */
+                    letter-spacing: 0.15em;
+                    margin: 0;
+                    text-transform: uppercase;
+                }
+                
+                .clock-value {
+                    color: #ffffff;
+                    font-weight: 600;
+                }
+                
+                /* Estilos del Delay */
+                .sync-delay {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+                
+                .delay-label {
+                    font-size: 9px;
+                    color: #4b5563; /* Equivalente a text-gray-600 */
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                }
+                
+                .delay-value {
+                    font-size: 11px;
+                    color: #A3FF00; /* Color primario Arkadex */
+                    font-weight: 900;
+                    font-style: italic;
+                    /* Efecto de resplandor de datos activos */
+                    text-shadow: 0 0 10px rgba(163, 255, 0, 0.4);
+                }
+            
             }
         }
     }

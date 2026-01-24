@@ -9,7 +9,8 @@ def get_dashboard_data(current_path):
         {'label': 'NEURAL_SUBJECTS', 'value': '5', 'trend': '+12', 'icon': 'person', 'color_class': 'primary'},
         {'label': 'TACTICAL_UNITS', 'value': '128', 'trend': '+2', 'icon': 'shield_person', 'color_class': 'secondary'},
         {'label': 'ACTIVE_SQUADS', 'value': '32', 'trend': '-2', 'icon': 'groups', 'color_class': 'accent-yellow'},
-        {'label': 'ARENA_NODES', 'value': '99.8%', 'trend': '+0.1%', 'icon': 'stadium', 'color_class': 'accent-blue'}
+        {'label': 'ARENA_NODES', 'value': '6', 'trend': '+0.1%', 'icon': 'stadium', 'color_class': 'accent-blue'},
+        {'label': 'VIRTUAL_SOFTWARE', 'value': '8', 'trend': '+1', 'icon': 'sports_esports', 'color_class': 'primary'}
     ]
 
     # 2. Datos del Menú Lateral
@@ -20,13 +21,13 @@ def get_dashboard_data(current_path):
     ]
     
     menu_data = [
-        {'icon_main': 'dashboard', 'name_main': 'MAINFRAME_HUB', 'title_section': menu_titles[0]['name_section']},
-        {'icon_main': 'group', 'name_main': 'NEURAL_PROFILES', 'title_section': menu_titles[0]['name_section']},
-        {'icon_main': 'shield_person', 'name_main': 'TACTICAL_SQUADS', 'title_section': menu_titles[0]['name_section']},
-        {'icon_main': 'emoji_events', 'name_main': 'ARENA_OPS', 'title_section': menu_titles[1]['name_section']},
-        {'icon_main': 'sports_esports', 'name_main': 'VIRTUAL_SOFTWARE','title_section': menu_titles[1]['name_section']},
-        {'icon_main': 'verified_user', 'name_main': 'CLEARANCE_LVLS', 'title_section': menu_titles[2]['name_section']},
-        {'icon_main': 'settings_input_component', 'name_main': 'CORE_PROTOCOLS','title_section': menu_titles[2]['name_section']}
+        {'icon_main': 'dashboard', 'name_main': 'MAINFRAME_HUB', 'title_section': menu_titles[0]['name_section'], 'url': '/'},
+        {'icon_main': 'group', 'name_main': 'NEURAL_PROFILES', 'title_section': menu_titles[0]['name_section'], 'url': '/roles'},
+        {'icon_main': 'shield_person', 'name_main': 'TACTICAL_SQUADS', 'title_section': menu_titles[0]['name_section'], 'url': '/equipos'},
+        {'icon_main': 'emoji_events', 'name_main': 'ARENA_OPS', 'title_section': menu_titles[1]['name_section'], 'url': '/arena'},
+        {'icon_main': 'sports_esports', 'name_main': 'VIRTUAL_SOFTWARE','title_section': menu_titles[1]['name_section'], 'url': '/software'},
+        {'icon_main': 'verified_user', 'name_main': 'CLEARANCE_LVLS', 'title_section': menu_titles[2]['name_section'], 'url': '/clearance'},
+        {'icon_main': 'settings_input_component', 'name_main': 'CORE_PROTOCOLS','title_section': menu_titles[2]['name_section'], 'url': '/protocols'}
     ]
 
     # 3. Datos de Alertas
@@ -42,11 +43,34 @@ def get_dashboard_data(current_path):
         if alert['url_info'].rstrip('/') == current_path.rstrip('/'):
             alert_finish = alert
             break
+    if current_path.rstrip('/') == '':
+        route_path ='COMMAND_CENTER'
+    else:
+        route_path = current_path.rstrip('/').upper()
+        
+    # 5. Lógica para determinar el título de la página y el ítem activo del menú
+    page_title = 'MAINFRAME_HUB' # Título por defecto
+    
+    # Normalizamos la ruta actual (si es '/' se queda igual, si no, quitamos slash final)
+    norm_path = current_path.rstrip('/') if len(current_path) > 1 else current_path
+
+    for item in menu_data:
+        # Normalizamos la ruta del ítem
+        item_url = item.get('url', '#')
+        norm_item_url = item_url.rstrip('/') if len(item_url) > 1 else item_url
+        
+        if norm_item_url == norm_path:
+            item['active'] = True
+            page_title = item['name_main']
+        else:
+            item['active'] = False
 
     return {
         'metric_cards': metric_cards,
         'menu_titles': menu_titles,
         'menu_data': menu_data,
         'alerts_data': alerts_data,
-        'alert_finish': alert_finish
+        'alert_finish': alert_finish,
+        'url_data':route_path,
+        'page_title': page_title
     }
