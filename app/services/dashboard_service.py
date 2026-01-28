@@ -39,7 +39,7 @@ def get_dashboard_data(current_path):
     # 4. Lógica para encontrar la alerta activa
     alert_finish = None
     for alert in alerts_data:
-        # Normalizamos las rutas quitando barras finales para comparar '/roles' con '/roles/'
+        # Normalizar las rutas quitando barras finales para comparar '/roles' con '/roles/'
         if alert['url_info'].rstrip('/') == current_path.rstrip('/'):
             alert_finish = alert
             break
@@ -51,11 +51,11 @@ def get_dashboard_data(current_path):
     # 5. Lógica para determinar el título de la página y el ítem activo del menú
     page_title = 'MAINFRAME_HUB' # Título por defecto
     
-    # Normalizamos la ruta actual (si es '/' se queda igual, si no, quitamos slash final)
+    # Normalizar la ruta actual (si es '/' se queda igual, si no, quitamos slash final)
     norm_path = current_path.rstrip('/') if len(current_path) > 1 else current_path
 
     for item in menu_data:
-        # Normalizamos la ruta del ítem
+        # Normalizar la ruta del ítem
         item_url = item.get('url', '#')
         norm_item_url = item_url.rstrip('/') if len(item_url) > 1 else item_url
         

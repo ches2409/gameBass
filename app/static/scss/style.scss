@@ -38,12 +38,6 @@
 // Header, footer, sidebar, grid principal, etc.
 
 @use 'layout/grid';
-//@use "layout/main";
-//@use "layout/hero";
-//@use "layout/about";
-//@use "layout/cardsfact";
-//@use 'layout/header';
-//@use 'layout/footer';
 
 // ==========================================================================
 // 4. COMPONENTS - Componentes reutilizables
@@ -54,9 +48,9 @@
 @use 'components/main_menu';
 @use 'components/buttons';
 @use "components/metric-card";
-//@use 'components/cards';
-//@use 'components/navigation';
-//@use 'components/forms';
+@use 'components/tactical-card';
+@use 'components/subjects-card';
+@use 'components/alert-container';
 
 // ==========================================================================
 // 5. PAGES - Estilos específicos por página
@@ -65,15 +59,6 @@
 // Cada página tiene sus propios estilos organizados
 
 @use "pages/command";
-//@use "pages/header";
-//@use "pages/nosotros";
-//@use "pages/titulo";
-//@use "pages/facciones";
-//@use "pages/promo";
-//@use "pages/crud";
-//@use "pages/footerLogo";
-//@use "pages/acceso";
-//@use 'pages/equipos';
 
 // ==========================================================================
 // 6. UTILITIES - Clases auxiliares y overrides

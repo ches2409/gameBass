@@ -9,9 +9,9 @@
 
     <div class="command-suite__group fst-italic">
         
-        {# Recorremos la lista completa de items #}
+        {# Recorrer la lista completa de items #}
         {% for item in menu_data %}
-            {# Solo mostramos el item si pertenece a esta sección #}
+            {# Solo mostrar el item si pertenece a esta sección #}
             {% if item.title_section == name_section %}
                 <a href="{{ item.url }}" class="command-suite__item {{ 'active' if item.active else '' }}" style="text-decoration: none; color: inherit;">
 

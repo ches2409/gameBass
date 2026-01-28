@@ -53,6 +53,7 @@
 
             </div>
         </div>
+
         <div class="command-center__viewport">
 
             <div class="command-center__title-bar">
@@ -107,7 +108,8 @@
 
             <div class="command-center__body">
 
-                <div class="intro_card">
+                {% block dashboard_body %}
+                	<div class="intro_card">
 
                     <div class="intro_main">
                         <div class="command">
@@ -149,20 +151,42 @@
                     </div>
 
                 </div>
-{#                Tarjetas de mainHub metricas#}
 
-                <div class="metric-card">
-                    {% block metricCard %}
-                        {% for card in metric_cards %}
-                            {% with label=card.label, value=card.value, trend=card.trend, icon=card.icon, color_class=card.color_class %}
-                                {% include 'components/metric-card.html' %}
-                            {% endwith %}
-                        {% endfor %}
+    {#                Tarjetas de mainHub metricas#}
+
+                    <div class="metric-card">
+                        {% block metricCard %}
+                            {% for card in metric_cards %}
+                                {% with label=card.label, value=card.value, trend=card.trend, icon=card.icon, color_class=card.color_class %}
+                                    {% include 'components/metric-card.html' %}
+                                {% endwith %}
+                            {% endfor %}
+                        {% endblock %}
+                    </div>
+
+                    <div class="tactical-card">
+                        {% block tacticalCard %}
+                            {% include 'components/tactical-card.html' %}
+                        {% endblock %}
+                    </div>
+
+                    <div class="subjects-card">
+                    {% block subjectCard %}
+                        {% include 'components/subjects-card.html' %}
                     {% endblock %}
                 </div>
+                {% endblock %}
+
             </div>
 
         </div>
+
+
+
+
+
+
+
 {#        <div class="prueba">#}
 
 

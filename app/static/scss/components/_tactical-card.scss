@@ -1,0 +1,142 @@
+@use "../base/functions";
+@use "../base/variables";
+@use "../base/mixins";
+
+.tactical-container {
+    background-color: var(--bg-surface);
+    padding: 2rem;
+    border: 1px solid var(--border);
+    font-family: 'Rajdhani', sans-serif;
+    max-width: 800px;
+    /* Esquina superior izquierda cortada */
+    clip-path: polygon(40px 0, 100% 0, 100% 100%, 0 100%, 0 40px);
+    transition: all 0.3s ease;
+    @include mixins.fade-in-up()
+}
+.tactical-container:hover{
+    border: 1px solid variables.$accent-green;
+}
+
+/* Estilos de Título */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.accent-bar {
+    width: 6px;
+    height: 24px;
+    background-color: var(--secondary);
+    box-shadow: 0 0 15px var(--secondary);
+}
+
+.section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 2px;
+    font-style: italic;
+}
+
+/* Fila de Escuadrón */
+.squad-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 1.5rem;
+    //background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    /* Forma asimétrica de botón */
+    clip-path: polygon(0 0, 92% 0, 100% 30%, 100% 100%, 8% 100%, 0 70%);
+}
+
+.squad-row:hover {
+    border-color: rgba(213, 0, 249, 0.4);
+    //background-color: rgba(255, 255, 255, 0.02);
+    transform: translateX(5px);
+}
+
+/* Índice Numérico (01, 02...) */
+.squad-index {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.1);
+    transition: color 0.3s ease;
+}
+
+.squad-row:hover .squad-index {
+    color: var(--secondary);
+}
+
+/* Información Central */
+.squad-info {
+    flex: 1;
+}
+
+.info-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.squad-name {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 0.9rem;
+    color: white;
+    font-style: italic;
+}
+
+.squad-points {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--secondary);
+}
+
+/* Barra de Progreso */
+.progress-track {
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.05);
+    width: 100%;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--secondary);
+    position: relative;
+}
+
+.secondary-glow {
+    box-shadow: 0 0 10px var(--secondary);
+}
+
+/* Métrica Derecha (Win Rate) */
+.squad-metric {
+    text-align: right;
+    min-width: 80px;
+}
+
+.metric-label {
+    display: block;
+    font-family: 'Fira Code', monospace;
+    font-size: 8px;
+    color: #4b5563;
+    text-transform: uppercase;
+}
+
+.metric-value {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: white;
+    font-style: italic;
+}

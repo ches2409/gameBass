@@ -1,0 +1,193 @@
+@use "../base/functions";
+@use "../base/variables";
+@use "../base/mixins";
+
+:root {
+    --danger: #ff0000;
+}
+
+/* Contenedor principal*/
+
+.card-container{
+    //display: flex;
+    //gap: functions.spacing('4');
+    width: 100%;
+    
+    background-color: var(--bg-surface);
+    padding: 2rem;
+    border: 1px solid var(--border);
+    font-family: 'Rajdhani', sans-serif;
+    //max-width: 800px;
+    /* Esquina superior izquierda cortada */
+    clip-path: polygon(40px 0, 100% 0, 100% 100%, 0 100%, 0 40px);
+    transition: all 0.3s ease;
+    @include mixins.fade-in-up();
+    
+    &:hover{
+        border: 1px solid variables.$accent-green;
+    }
+    
+}
+.section-cards{
+    display: flex;
+    gap: functions.spacing('4');
+}
+.green {
+    width: 6px;
+    height: 24px;
+    background-color: variables.$accent-green;
+    box-shadow: 0 0 15px variables.$accent-green
+}
+
+
+/* Tarjeta Base */
+.hvt-card {
+    background-color: variables.$primary-bg;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+    min-width: 240px;
+    font-family: 'Rajdhani', sans-serif;
+    /* Corte en la esquina inferior derecha */
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+    
+}
+
+.hvt-card.optimun{
+        border: 2px solid rgba(87, 173, 228, 0.3);
+    }
+
+/* Variación para Sujetos Peligrosos (K/D alto) */
+.hvt-card.danger-alert {
+    border: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+.hvt-card:hover {
+    border-color: variables.$accent-green;
+    transform: translateY(-2px);
+}
+
+/* Cuadrícula de fondo */
+.card-grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(163, 255, 0, 0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(163, 255, 0, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+}
+
+/* Badge de Alerta Roja */
+.hvt-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--danger);
+    color: white;
+    font-family: 'Fira Code', monospace;
+    font-size: 7px;
+    font-weight: 900;
+    padding: 2px 8px;
+    text-transform: uppercase;
+    animation: alert-blink 1s infinite;
+}
+
+@keyframes alert-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Cabecera de la Tarjeta */
+.hvt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
+}
+
+.mono-label {
+    display: block;
+    font-family: 'Fira Code', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+}
+
+.subject-tag {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: white;
+    margin: 0;
+    font-style: italic;
+    letter-spacing: -1px;
+}
+
+/* Punto de estado Online */
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.status-indicator.online {
+    background-color: variables.$accent-green;
+    box-shadow: 0 0 10px variables.$accent-green;
+    animation: online-pulse 2s infinite;
+}
+
+@keyframes online-pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.6; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Footer de la Tarjeta */
+.hvt-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+    z-index: 1;
+}
+
+.rank-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 8px;
+    color: var(--primary);
+    font-weight: 900;
+    margin: 0 0 4px 0;
+}
+
+.points-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: white;
+    margin: 0;
+    line-height: 1;
+}
+
+/* Botón de monitoreo */
+.monitor-btn {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.3s ease;
+}
+
+.monitor-btn:hover {
+    color: white;
+}
+
+.material-symbols-outlined {
+    font-size: 20px;
+}

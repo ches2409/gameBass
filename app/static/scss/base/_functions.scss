@@ -6,6 +6,16 @@
 // ==========================================================================
 // Funciones auxiliares para recuperar valores de los mapas de variables
 
+// Función para obtener colores del mapa
+@function color($color-name) {
+  @if map.has-key(variables.$colors, $color-name) {
+    @return map.get(variables.$colors, $color-name);
+  } @else {
+    @warn "Color '#{$color-name}' no existe en el mapa $colors.";
+    @return null;
+  }
+}
+
 // Función para obtener espaciados del mapa $spacing
 @function spacing($key) {
   @if not map.has-key(variables.$spacing, $key) {
