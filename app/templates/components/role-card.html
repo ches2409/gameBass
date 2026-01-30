@@ -12,8 +12,29 @@
 
             <h3 class="role-name" >{{ role.nombre_rol | upper }}</h3>
             <p class="specialty" >{{ role.especialidad_rol.titulo | upper}}</p>
-            <div class="stat-bar"><div class="fill" style="width: 90%;"></div></div>
+            <div class="stat-bar"><div class="fill" style="width: 100%;"></div></div>
             <p class="description">{{ role.descripcion_rol }}</p>
+
+            <div class="action-group">
+                <!-- Botón Editar -->
+                <button class="action-btn edit-btn" 
+                        onclick="openUpdateModal(this)" 
+                        data-id="{{ role.id_rol }}"
+                        data-nombre="{{ role.nombre_rol }}"
+                        data-especialidad="{{ role.especialidad_rol.titulo }}"
+                        data-descripcion="{{ role.descripcion_rol }}"
+                        title="EDIT_NODE">
+                  <span class="material-symbols-outlined">edit</span>
+                </button>
+
+                <!-- Botón Eliminar -->
+                <button class="action-btn delete-btn" 
+                        title="PURGE_NODE"
+                        onclick="openDeleteModal('{{ url_for('roles.delete', id_rol=role.id_rol) }}', '{{ role.nombre_rol | upper }}')">
+                  <span class="material-symbols-outlined">delete</span>
+                </button>
+                
+            </div>
 
         </div>
     {% endfor %}
@@ -21,18 +42,13 @@
 
   <!-- VANGUARD (Defensa) -->
 
-
   <!-- GHOST (Sigilo) -->
-
 
   <!-- ARCHITECT (Control) -->
 
-
   <!-- BERSERKER (Ataque) -->
 
-
   <!-- PROPUESTA 1: ORACLE (Inteligencia) -->
-
 
   <!-- PROPUESTA 2: NETRUNNER (Hacker) -->
 

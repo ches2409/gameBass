@@ -20,6 +20,7 @@ $side-green   : #B9F23D;
 $side-orange  : #ff8a00;
 $side-pink    : #F229E5;
 $side-blue    : #00eaff;
+$alert: #ff0059;
 
 
 // Variables adicionales para Bootstrap
@@ -45,7 +46,8 @@ $colors: (
         'text-gray': $text-gray,
         'side-purple': $side-purple,
         'side-orange': $side-orange,
-        'side-blue': $side-blue
+        'side-blue': $side-blue,
+        'alert':$alert
 );
 
 // Tipografías

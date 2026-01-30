@@ -29,9 +29,9 @@
         <div class="actions">
 
         <div class="button-ok btn--accent btn--small">
-            <a href="{{ url_for('roles.create') }}" class="ms-auto">
-                    <span class="material-symbols-outlined">add</span> INYECTAR_SUJETO
-            </a>
+            <button type="button" onclick="toggleModal('createRoleModal')" class="btn-reset ms-auto" style="background:none; border:none; color:inherit; display:flex; align-items:center; cursor:pointer;">
+                    <span class="material-symbols-outlined">add</span> {{ btn_info | default('INYECCION') }}
+            </button>
         </div>
 
         </div>

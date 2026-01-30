@@ -1,0 +1,226 @@
+@use "../base/functions";
+@use "../base/mixins";
+@use "../base/variables";
+
+
+/* Fondo con desenfoque */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: functions.spacing('5');
+}
+
+/* Contenedor con Clip-Path */
+.modal-container {
+  width: 100%;
+  max-width: 600px;
+  background: var(--bg-modal);
+  border: 1px solid var(--border-white);
+  position: relative;
+  clip-path: polygon(0 20px, 20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+  animation: modalSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: scale(0.9) translateY(30px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Brackets de las esquinas */
+.corner-bracket {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 2px solid variables.$accent-green;
+  pointer-events: none;
+}
+.tl { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
+.tr { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
+.bl { bottom: 10px; left: 10px; border-right: 0; border-top: 0; }
+.br { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
+
+/* Cabecera */
+.modal-header {
+  //padding: 40px 40px 20px;
+  padding: functions.spacing('10') functions.spacing('10') functions.spacing('5');
+  border-bottom: 1px solid var(--border-white);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 5px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  background: variables.$accent-green;
+  border-radius: 50%;
+  box-shadow: 0 0 10px variables.$accent-green;
+  //box-shadow: functions.shadow('neon-green');
+  animation: pulse 2s infinite;
+}
+
+.modal-header h2 {
+  font-size: 24px;
+  margin: 0;
+  letter-spacing: 2px;
+  color: #fff;
+}
+
+.header-subtitle {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: variables.$accent-green;
+  opacity: 0.6;
+  margin: 0;
+  letter-spacing: 4px;
+}
+
+/* Formulario e Inputs */
+.injection-form {
+  padding: functions.spacing('8') functions.spacing('10') functions.spacing('10');
+  display: grid;
+  gap: 25px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-group label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+  color: #666;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.label-icon {
+  font-family: 'Material Symbols Outlined';
+  //font-size: 14px;
+  font-size: functions.font-size('lg');
+  color: variables.$accent-green;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-white);
+  padding: 15px;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* Estilo para el estado :focus, ahora incluyendo el select */
+input:focus, textarea:focus, select:focus {
+  border-color: variables.$accent-green;
+  background: rgba(163, 255, 0, 0.05);
+  box-shadow: 0 0 15px rgba(163, 255, 0, 0.1);
+}
+
+/* Estilo para las opciones del select (NOTA: No funciona en todos los navegadores) */
+select option {
+  background: #0a0c10; /* Un fondo oscuro que coincide con tu tema */
+  color: #fff;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Acciones / Botones */
+.modal-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn-cancel {
+  flex: 1;
+  background: transparent;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  color: #ff3d00;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 900;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 90% 100%, 0 100%);
+}
+
+.btn-cancel:hover {
+  background: rgba(255, 0, 0, 0.1);
+  border-color: #ff3d00;
+}
+
+.btn-submit {
+  flex: 2;
+  background: variables.$accent-green;
+  border: none;
+  color: #000;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 900;
+  padding: 15px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
+  transition: transform 0.2s;
+}
+
+.btn-submit:hover {
+  transform: scale(1.02);
+  filter: brightness(1.1);
+  box-shadow: 0 0 30px rgba(163, 255, 0, 0.4);
+}
+
+/* Efecto Láser de Escaneo dentro del Modal */
+.modal-laser-line {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, variables.$accent-green, transparent);
+  z-index: 5;
+  opacity: 0.5;
+  animation: laserScan 4s linear infinite;
+}
+
+@keyframes laserScan {
+  0% { top: 0; left: -100%; }
+  50% { left: 100%; top: 50%; }
+  100% { top: 100%; left: -100%; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}

@@ -42,13 +42,17 @@ $base-line-height: 1.6;
   
   --surface-border: rgba(255, 255, 255, 0.1);
   --border: rgba(255, 255, 255, 0.05);
+  --border-white: rgba(255, 255, 255, 0.1);
   --bg-surface: #{variables.$background-soft};
   --bg-card: #{variables.$background-soft};
   --bg-dark: #{variables.$primary-bg};
   --bg-alpha: #{rgba(variables.$accent-green, 0.1)};
+  --bg-modal: rgba(5, 7, 10, 0.95);
 
   --text-gray: #{variables.$text-gray};
   --text-dim: #{variables.$text-gray};
+  --font-display: 'Orbitron', sans-serif;
+  --font-mono: 'Fira Code', monospace;
   
 }
 

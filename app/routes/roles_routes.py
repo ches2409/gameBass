@@ -41,4 +41,28 @@ def create():
         if roles_services.create_rol(rol_nombre, rol_descripcion, rol_especialidad):
             return redirect(url_for('roles.index'))
     # Pasamos el Enum para que sirva de sugerencia en el datalist
-    return render_template("dashboard/create.html", roles_listado=RolUsuario, especialidad_enum=EspecialidadRol)
+    return render_template("dashboard/roles/create.html", roles_listado=RolUsuario, especialidad_enum=EspecialidadRol)
+
+@rol_bp.route('/update/<int:id_rol>', methods=['GET', 'POST'] , strict_slashes=False)
+def update(id_rol):
+    if request.method == 'POST':
+        nombre_rol = request.form['nombre_de_rol']
+        especialidad_rol_txt = request.form.get('especialidad_de_rol')
+        
+        # Convertimos el texto del input al objeto Enum correspondiente
+        especialidad_rol = next((e for e in EspecialidadRol if e.titulo == especialidad_rol_txt), None)
+        
+        # Actualizamos la descripción basada en la especialidad seleccionada
+        descripcion_rol = especialidad_rol.descripcion if especialidad_rol else request.form['descripcion_de_rol']
+        
+        roles_services.update_rol(id_rol, nombre_rol, descripcion_rol, especialidad_rol)
+        
+        return redirect(url_for('roles.index'))
+    return render_template("dashboard/roles/update.html", roles_listado=RolUsuario, especialidad_enum=EspecialidadRol)
+
+@rol_bp.route('/delete/<int:id_rol>', strict_slashes=False)
+def delete(id_rol):
+    roles_services.delete_rol(id_rol)
+    
+    return redirect(url_for('roles.index'))
+

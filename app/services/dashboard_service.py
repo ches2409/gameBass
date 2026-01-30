@@ -37,9 +37,9 @@ def get_dashboard_data(current_path):
 
     # 3. Datos de Alertas
     alerts_data = [
-        {'icon': 'frame_person', 'title': '[INYECCION_SUJETO_DETECTADA]','subtitle': 'Monitoreando nuevos enlaces neurales en el Sector_Omega...', 'url_info': '/usuarios'},
-        {'icon': 'hub', 'title': '[ARQUITECTURA_DE_SINCRO_ORDEN]','subtitle': 'Mapeo dinámico de capacidad nerual y autoridad de mando...', 'url_info': '/arche'},
-        {'icon': 'biotech', 'title': '[LIBRERÍA_DE_ADN_OPERATIVO]','subtitle': 'Gestión de arquetipos y modelos neurales...', 'url_info': '/roles'}
+        {'icon': 'frame_person', 'title': '[INYECCION_SUJETO_DETECTADA]','subtitle': 'Monitoreando nuevos enlaces neurales en el Sector_Omega...', 'url_info': '/usuarios', 'btn_info':'INYECTAR_SUJETO'},
+        {'icon': 'hub', 'title': '[ARQUITECTURA_DE_SINCRO_ORDEN]','subtitle': 'Mapeo dinámico de capacidad nerual y autoridad de mando...', 'url_info': '/arche','btn_info':'INYECTAR_SUJETO'},
+        {'icon': 'biotech', 'title': '[LIBRERÍA_DE_ADN_OPERATIVO]','subtitle': 'Gestión de arquetipos y modelos neurales...', 'url_info': '/roles', 'btn_info':'INYECTAR_ROL'}
     ]
 
     # 4. Lógica para encontrar la alerta activa

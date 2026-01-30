@@ -1,0 +1,38 @@
+<!-- Fondo con desenfoque y tinte rojo -->
+<div class="purge-overlay" id="deleteRoleModal" style="display: none;">
+  <!-- Contenedor del Modal con Corte de Esquina -->
+  <div class="purge-modal-frame">
+    <div class="purge-modal-content">
+
+      <!-- Efecto de Escaneo de Error (Línea roja que rebota) -->
+      <div class="scanline-error"></div>
+
+      <!-- Encabezado de Advertencia -->
+      <header class="purge-header">
+        <span class="material-symbols-outlined warning-icon">warning</span>
+        <h3 class="purge-title">PROTOCOLO_DE_PURGA</h3>
+        <p class="purge-subtitle">ESTADO: CRÍTICO_DISSONANCIA_RED</p>
+      </header>
+
+      <!-- Mensaje de Advertencia Técnica -->
+      <div class="purge-body">
+        <div class="warning-box">
+          <p class="warning-text">
+            ¿CONFIRMA LA ELIMINACIÓN PERMANENTE DEL NODO <span class="highlight-node" id="deleteRoleName">"NODO"</span> DEL MAINFRAME?
+          </p>
+          <p class="sub-warning">
+            ESTA ACCIÓN DESVINCULARÁ TODOS LOS SUJETOS ASOCIADOS Y PUEDE CAUSAR COLAPSO NEURAL EN LA RED PRINCIPAL DE ARKADEX.
+          </p>
+        </div>
+      </div>
+
+      <!-- Botones de Acción -->
+      <footer class="purge-footer">
+        <button class="btn-abort" onclick="toggleModal('deleteRoleModal')">ABORTAR</button>
+        <!-- Convertimos el botón en un enlace para que funcione la redirección -->
+        <a href="#" id="btnConfirmPurge" class="btn-confirm" style="text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center;">CONFIRMAR_PURGA</a>
+      </footer>
+
+    </div>
+  </div>
+</div>
