@@ -38,10 +38,6 @@
                     <div class="command-suite__group clip-btn">
                         <div class="button-abort ">
                             <div class="icon_abort">
-{#                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-box-arrow-right" viewBox="0 0 16 16">#}
-{#                                  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>#}
-{#                                  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>#}
-{#                                </svg>#}
 
                                 <span class="material-symbols-outlined card-bg-icon">logout</span>
 
@@ -74,28 +70,7 @@
                             <P class="text_normal">{{ page_data }}</P>
                         </div>
 
-{#                        <h2 class="glitch-title font-display" data-text="CLEARANCE_LEVELS">#}
-{#                          CLEARANCE_LEVELS#}
-{#                        </h2>#}
-
                     </div>
-
-
-{#                    <header class="admin-header">#}
-{#                      <div class="header-main">#}
-{#                        <!-- Indicador de Estatus Superior -->#}
-{#                        <div class="sector-status">#}
-{#                          <span class="pulse-dot"></span>#}
-{#                          <p class="status-code">SECTOR_ACCESS_GRANTED: CLEARANCE_LEVELS</p>#}
-{#                        </div>#}
-{##}
-{#                        <!-- Título Principal con Atributo de Datos para el Glitch -->#}
-{#                        <h2 class="glitch-title font-display" data-text={{ page_title }}>#}
-{#                            {{ page_title }}#}
-{#                        </h2>#}
-{#                      </div>#}
-{#                    </header>#}
-
 
                 </div>
 
@@ -132,12 +107,12 @@
             <div class="command-center__body">
 
                 {% block dashboard_body %}
-                	<div class="intro_card">
+                <div class="intro_card">
 
                     <div class="intro_main">
 
 
-{#                        contenido del banner#}
+    {#                        contenido del banner#}
 
                         <div class="command">
 
@@ -156,10 +131,6 @@
                             </div>
 
                         </div>
-
-{#                        <div class="command__title">#}
-{#                            <h2 class="title">{{ page_title }}</h2>#}
-{#                        </div>#}
 
                         <!-- Título Principal con Atributo de Datos para el Glitch -->
                         <h2 class="glitch-title font-display" data-text={{ page_title }}>
@@ -186,45 +157,42 @@
 
     {#                Tarjetas de mainHub metricas#}
 
-                    <div class="metric-card">
-                        {% block metricCard %}
-                            {% for card in metric_cards %}
-                                {% with label=card.label, value=card.value, trend=card.trend, icon=card.icon, color_class=card.color_class %}
-                                    {% include 'components/metric-card.html' %}
-                                {% endwith %}
-                            {% endfor %}
-                        {% endblock %}
-                    </div>
-
-                    <div class="tactical-card">
-                        {% block tacticalCard %}
-                            {% include 'components/tactical-card.html' %}
-                        {% endblock %}
-                    </div>
-
-                    <div class="subjects-card">
-                    {% block subjectCard %}
-                        {% include 'components/subjects-card.html' %}
+                <div class="metric-card">
+                    {% block metricCard %}
+                        {% for card in metric_cards %}
+                            {% with label=card.label, value=card.value, trend=card.trend, icon=card.icon, color_class=card.color_class %}
+                                {% include 'components/metric-card.html' %}
+                            {% endwith %}
+                        {% endfor %}
                     {% endblock %}
+                </div>
+
+                <div class="tactical-card">
+                    {% block tacticalCard %}
+                        {% include 'components/tactical-card.html' %}
+                    {% endblock %}
+                </div>
+
+                <div class="subjects-card">
+                {% block subjectCard %}
+                    {% include 'components/subjects-card.html' %}
+                {% endblock %}
                 </div>
                 {% endblock %}
 
+            </div>
+
+            <div class="command-center__footer">
+                {% include 'components/status-bar.html' %}
             </div>
 
         </div>
 
 
 
-
-
-
-
 {#        <div class="prueba">#}
 
-
-
 {#        Alertas de ventana#}
-
 
 {#        {% block alertContainer %}#}
 {##}

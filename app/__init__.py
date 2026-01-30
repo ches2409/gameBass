@@ -10,6 +10,7 @@ from app.db import db
 
 # Importar modelos para que SQLAlchemy los reconozca al crear tablas
 from app.models.roles_models import Rol
+from app.models.protocolos_models import Protocolo
 
 def create_app(config_class=DevConfig):
     base_dir = os.path.abspath(os.path.dirname(__file__))
@@ -24,9 +25,11 @@ def create_app(config_class=DevConfig):
     # registro de Blueprints
     from app.routes.roles_routes import rol_bp
     from app.routes.index_routes import inicio_bp
+    from app.routes.protocolos_routes import protocolo_bp
     
     app.register_blueprint(rol_bp)
     app.register_blueprint(inicio_bp)
+    app.register_blueprint(protocolo_bp)
     
     
     return app

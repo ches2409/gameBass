@@ -49,3 +49,9 @@ class EspecialidadRol(enum.Enum):
         self.titulo = titulo
         self.descripcion = descripcion
         self.color = color
+    
+class CategoriaProtocolo(enum.Enum):
+    system ="system"
+    user ="user"
+    arena ="arena"
+    

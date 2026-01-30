@@ -1,0 +1,139 @@
+/* Variables de Arkadex */
+:root {
+  --primary: #A3FF00;
+  --secondary: #D500F9;
+  --bg-bar: rgba(2, 3, 5, 0.9);
+  --border: rgba(163, 255, 0, 0.2);
+}
+
+/* Contenedor Principal */
+.arkadex-status-bar {
+  height: 40px;
+  background: var(--bg-bar);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;
+  font-family: 'Fira Code', monospace;
+  overflow: hidden;
+}
+
+/* Secciones genéricas */
+.status-section {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* 1. Uplink Node */
+.uplink-node {
+  padding-right: 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.status-light {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.pulse-green {
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--primary);
+  animation: pulse 2s infinite;
+}
+
+.status-label {
+  font-size: 9px;
+  font-weight: 900;
+  color: #555;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.text-primary { color: var(--primary); }
+
+/* 2. Neural Ticker (Marquesina) */
+.neural-ticker-container {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  min-width: 0; /* FIX: Permite que el flex item se encoja correctamente */
+}
+
+.ticker-content {
+  display: flex;
+  white-space: nowrap;
+  animation: ticker-move 40s linear infinite;
+  gap: 50px;
+}
+
+.ticker-item {
+  font-size: 8px;
+  color: #666;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.arrow { color: var(--primary); margin-right: 8px; }
+
+/* 3. System Metrics */
+.system-metrics {
+  padding-left: 20px;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.metric {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metric-icon {
+  font-size: 14px !important;
+  color: var(--primary);
+}
+
+.metric-value {
+  font-size: 10px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.clearance-badge {
+  background: rgba(163, 255, 0, 0.1);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 8px;
+  font-weight: 900;
+  color: var(--primary);
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
+/* Animaciones */
+@keyframes pulse {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ticker-move {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Media Query para móviles */
+@media (max-width: 768px) {
+  .neural-ticker-container { display: none; }
+  .arkadex-status-bar { justify-content: space-between; }
+}
