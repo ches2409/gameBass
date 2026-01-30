@@ -1,0 +1,124 @@
+/* Configuración Base */
+body {
+  //background-color: #020305;
+  //color: #fff;
+  //font-family: 'Segoe UI', sans-serif;
+  //padding: 40px;
+}
+
+.arkadex-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Estilo Base de la Tarjeta */
+.role-card {
+  --neon: #ffffff; /* Color por defecto */
+  background: #0a0c10;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 25px;
+  position: relative;
+  transition: all 0.4s ease;
+  clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
+  cursor: pointer;
+}
+
+/* Colores por Arquetipo */
+.frontLineDefense  { --neon: #A3FF00; } /* Verde Neón */
+.neuralStealth     { --neon: #D500F9; } /* Púrpura */
+.environmentMastery { --neon: #00E5FF; } /* Cian */
+.kineticOverload { --neon: #FF3D00; } /* Rojo/Naranja */
+.dataForesight    { --neon: #FFD600; } /* Amarillo Oro */
+.systemDisruption { --neon: #2979FF; } /* Azul Eléctrico */
+.neuralRestoration{ --neon: #00FFC8; } /* Turquesa Neón (Sanación/Soporte) */
+.spatialDislocation{ --neon: #9D00FF; } /* Violeta Eléctrico (Espacio/Warp) */
+.temporalLagInfliction{ --neon: #FF0055; } /* Carmesí Neón (Glitch/Tiempo) */
+.kineticAbsorption{ --neon: #FF9100; } /* Naranja Ámbar (Energía/Escudo) */
+/* Hover: Activación de Neón */
+.role-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--neon);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(var(--neon), 0.1);
+  background: linear-gradient(135deg, #0a0c10 0%, #050601 100%);
+}
+
+/* Cabecera de la tarjeta */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.id-tag {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #444;
+  font-family: monospace;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--neon);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--neon);
+}
+
+/* Icono central */
+.icon-box {
+  font-size: 40px;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 0 10px var(--neon));
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.role-card:hover .icon-box {
+  opacity: 1;
+}
+
+/* Textos */
+.role-name {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin: 0 0 5px 0;
+  font-style: italic;
+}
+
+.specialty {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--neon);
+  letter-spacing: 3px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.description {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #888;
+  margin-top: 15px;
+  text-transform: uppercase;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Barra de nivel / potencia */
+.stat-bar {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  margin-top: 10px;
+}
+
+.stat-bar .fill {
+  height: 100%;
+  background-color: var(--neon);
+  box-shadow: 0 0 10px var(--neon);
+}

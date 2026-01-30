@@ -9,10 +9,10 @@
     .command-suite{
         //background-color: lightcoral;
 
-        border: #1A1E26 solid 1px;
-        display: flex;
-        flex-wrap: wrap;
+        border: 1px solid #1A1E26;
+        display: grid;
         height: 100%;
+        grid-template-rows: 10vh 1fr 10vh; /* Header, Main (flexible), Footer */
         width: 100%;
 
         &__header{
@@ -39,6 +39,8 @@
             height: 80vh;
             width: 100%;
             padding: 5%;
+            overflow-y: auto; /* El scroll se aplica solo a esta sección */
+            position: relative;
         }
 
         &__item{

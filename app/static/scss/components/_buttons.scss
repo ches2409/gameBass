@@ -42,7 +42,7 @@
     left: 50%;
     width: 0;
     height: 0;
-    border-radius: 50%;
+    //border-radius: 50%;
     background: rgba(white, 0.3);
     transform: translate(-50%, -50%);
     transition: width 0.3s ease, height 0.3s ease;
@@ -78,9 +78,10 @@
 }
 
 .btn--accent {
-  @include mixins.button-hover(variables.$accent-pink, color.adjust(variables.$accent-pink, $lightness: 10%), white);
+  @include mixins.button-hover(variables.$accent-pink, color.adjust(variables.$accent-pink, $lightness: 20%), red, variables.$accent-pink);
   @include mixins.neon-text(white, 0.3);
-  
+  clip-path: polygon(0 0, 92% 0, 100% 40%, 100% 100%, 8% 100%, 0% 60%);
+  ransition: variables.$transition-base;
   &:hover {
     box-shadow: functions.shadow('neon-pink');
   }
@@ -95,8 +96,8 @@
 }
 
 .btn--ghost {
-  background: transparent;
-  color: variables.$accent-blue;
+  background: variables.$accent-blue;
+  color: variables.$text-main;
   border-color: variables.$accent-blue;
   
   &:hover {
@@ -105,6 +106,35 @@
     transform: translateY(-2px);
     box-shadow: functions.shadow('neon-blue');
   }
+}
+.btn--inyect{
+  background: variables.$accent-pink;
+  color: variables.$text-main;
+  border-color: variables.$accent-pink;
+  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: functions.spacing('3') functions.spacing('6');
+  font-family: variables.$font-body;
+  font-size: functions.font-size('sm');
+  //font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  //border: 2px solid white;
+  //border-radius: 0.25rem;
+  cursor: pointer;
+  transition: variables.$transition-base;
+  position: relative;
+  overflow: hidden;
+  min-width: 120px;
+  
+  clip-path: polygon(0 0, 92% 0, 100% 40%, 100% 100%, 8% 100%, 0% 60%);
+  //@include mixins.button-hover(variables.$accent-pink, color.adjust(variables.$accent-pink, $lightness: 10%),variables.$primary-bg);
+  //@include mixins.neon-text(white, 0.3);
+  //&:hover {
+  //  box-shadow: functions.shadow('neon-pink');
+  //}
 }
 
 .btn--outline {
@@ -121,7 +151,7 @@
 
 // Tamaños
 .btn--small {
-  padding: functions.spacing('2') functions.spacing('4');
+  padding: functions.spacing('2') functions.spacing('8');
   font-size: functions.font-size('sm');
   min-width: 80px;
 }

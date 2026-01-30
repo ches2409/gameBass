@@ -1,13 +1,121 @@
-/* Contenedor del Banner */
+@use "../base/functions";
+@use "../base/variables";
+@use "../base/mixins";
+
+/* Contenedor principal del banner*/
+.main-wrapper{
+    position: relative; // 1. Contenedor de posicionamiento
+    padding: 1px; // 2. Espacio para que el borde no se superponga
+    margin-bottom: .7rem;
+    
+    //display: flex;
+
+    // 3. El borde con clip-path se mueve a un pseudo-elemento
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0; // Ocupa el mismo espacio que el padre
+        z-index: 0; // Se coloca detrás del contenido
+        border: 1px solid rgba(variables.$accent-green, 0.8);
+        clip-path: polygon(20% 0, 100% 0, 100% 50%, 70% 100%, 0 100%, 0% 50%);
+        transition: clip-path 0.5s cubic-bezier(0.77, 0, 0.175, 1), border-color 0.5s ease; // 4. Animación
+    }
+
+    // 5. En el hover, cambiamos el clip-path y el color del borde del pseudo-elemento
+    &:hover::before {
+        border-color: rgba(variables.$accent-green, 0.8);
+        clip-path: polygon(0 0, 65% 0, 100% 90%, 100% 100%, 48% 99%, 0 10%);
+    }
+    .content{
+        //background-color: purple;
+        width: 80%;
+        display: flex;
+        gap: 1rem;
+    }
+    .actions{
+        //background-color: olivedrab;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20%;
+        .button-ok{
+            //background-color: orangered;
+            
+        }
+    }
+}
+
 .alert-container {
     display: flex;
     align-items: center;
     gap: 1.5rem;
     padding: 1.5rem;
     background-color: var(--bg-alpha);
-    border: 1px solid rgba(163, 255, 0, 0.2);
     font-family: 'Rajdhani', sans-serif;
+    position: relative; // 4. Asegura que el contenido esté por encima del borde
+    z-index: 1;
+    width: 100%;
+    //max-width: 100vw;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
+
+/* La línea del Láser */
+.laser-scanner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--primary);
+  z-index: 10;
+  pointer-events: none;
+  
+  /* Resplandor del láser (Glow) */
+  box-shadow:
+    0 0 15px var(--primary),
+    0 0 30px var(--primary),
+    0 0 50px var(--primary);
+    
+  /* Animación */
+  opacity: 0; /* Oculto por defecto */
+  // La animación se mueve al estado hover del padre
+}
+
+/* La estela de luz (Tail) que sigue al láser */
+.laser-tail {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0; /* Se pega al láser */
+  width: 200px; /* Longitud de la estela */
+  transform: translateX(-10%); /* Se posiciona detrás de la línea */
+  background: linear-gradient(to right, transparent, rgba(163, 255, 0, 0.15));
+}
+
+/* Definición del movimiento */
+@keyframes laser-sweep {
+  0% {
+    left: -5%; /* Comienza mucho más cerca del borde visible */
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    left: 120%;
+    opacity: 0;
+  }
+}
+
+/* Activar animación del láser al hacer hover en el contenedor principal */
+.main-wrapper:hover .laser-scanner {
+    animation: laser-sweep 1.5s cubic-bezier(0.65, 0, 0.35, 1) infinite; /* Más rápido */
+}
+
+/* Contenedor del Banner */
 
 /* Caja del Icono */
 .icon-wrapper {
@@ -71,7 +179,7 @@
 .alert-title {
     color: #FFFFFF;
     font-weight: 900;
-    font-size: 1.1rem;
+    font-size: 1.8rem;
     letter-spacing: -0.05em;
     text-shadow: 0 0 10px rgba(163, 255, 0, 0.5);
 }
@@ -82,4 +190,7 @@
     text-transform: uppercase;
     letter-spacing: 0.3em;
     opacity: 0.8;
+}
+.actions{
+    z-index: 100;
 }

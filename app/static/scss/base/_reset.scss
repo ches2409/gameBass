@@ -38,6 +38,7 @@ $base-line-height: 1.6;
   --font-main: #{variables.$font-primary};
   --primary-color: #{variables.$primary-bg};
   --secondary-color: #{variables.$accent-blue};
+  --secondary-glow: rgba(163, 255, 0, 0.4);
   
   --surface-border: rgba(255, 255, 255, 0.1);
   --border: rgba(255, 255, 255, 0.05);

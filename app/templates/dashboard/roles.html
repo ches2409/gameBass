@@ -33,42 +33,36 @@
                     <p class="text_code">SYSTEM_CONFIG_0X01</p>
                 </div>
             </div>
-            <div class="command__title">
-                <h2 class="title">{{ page_title }}</h2>
-            </div>
+{#            <div class="command__title">#}
+{#                <h2 class="title">{{ page_title }}</h2>#}
+{#            </div>#}
+
+            <!-- Título Principal con Atributo de Datos para el Glitch -->
+            <h2 class="glitch-title font-display" data-text={{ page_title }}>
+                {{ page_title }}
+            </h2>
+
         </div>
     </div>
 
     <!-- 3. Contenido Principal de Roles -->
-    <div class="tactical-container w-100" style="max-width: 100%;">
-        <div class="section-header">
-            <div class="accent-bar"></div>
-            <h3 class="section-title">LISTADO DE ROLES</h3>
-            
-            <!-- Botón para crear nuevo rol -->
-            <a href="{{ url_for('roles.create') }}" class="btn btn--secondary btn--small ms-auto">
-                <span class="material-symbols-outlined">add</span> NUEVO ROL
-            </a>
-        </div>
+{#    <div class="tactical-container w-100" style="max-width: 100%;">#}
+{#        <div class="section-header">#}
+{#            <div class="accent-bar"></div>#}
+{#            <h3 class="section-title">LISTADO DE ROLES</h3>#}
+{#            #}
+{#            <!-- Botón para crear nuevo rol -->#}
+{#            <a href="{{ url_for('roles.create') }}" class="btn btn--secondary btn--small ms-auto">#}
+{#                <span class="material-symbols-outlined">add</span> NUEVO ROL#}
+{#            </a>#}
+{#        </div>#}
+{##}
+{#    </div>#}
 
-        <!-- Lista de Roles -->
-        <div class="roles-grid">
-            {% for rol in roles %}
-                <div class="squad-row">
-                    <span class="squad-index">0{{ loop.index }}</span>
-                    <div class="squad-info">
-                        <div class="squad-name">{{ rol.nombre_rol }}</div>
-                        <div class="squad-points">{{ rol.descripcion_rol }}</div>
-                    </div>
-                    <div class="squad-metric">
-                        <button class="btn--icon-only btn--ghost btn--small">
-                            <span class="material-symbols-outlined">edit</span>
-                        </button>
-                    </div>
-                </div>
-            {% else %}
-                <p class="text-muted">No hay roles definidos en el sistema.</p>
-            {% endfor %}
-        </div>
+    <div class="role-container">
+        {% block roleContainer %}
+            {%  include 'components/role-card.html' %}
+        {% endblock %}
     </div>
+
 {% endblock %}

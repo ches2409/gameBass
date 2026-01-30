@@ -45,6 +45,7 @@ body {
 }
 
 .command-center{
+    //background-color: orangered;
     height: 100vh;
     display: grid;
     grid-template-columns: 15vw 1fr;
@@ -58,7 +59,6 @@ body {
         border: #1A1E26 solid 1px;
         width: 100%;
         height: 100%;
-        overflow-y: auto; // Permite que solo el contenido haga scroll, no el menú
         position: relative;
         
         display: grid;
@@ -312,6 +312,8 @@ body {
     &__body{
         //background-color: dodgerblue;
         padding: 2rem;
+        overflow-y: auto; // Permite que solo esta área haga scroll
+        position: relative; // Asegura un contexto de posicionamiento para animaciones
         .intro_card{
             //background-color: forestgreen;
             display: flex;

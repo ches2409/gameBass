@@ -66,14 +66,37 @@
 
                         </div>
                         <div class="text_routes">
-                            <P class="text_code">ARKADEX_SYSTEM_0X92 /</P>
+                            <P class="text_code">ARKADEX_SYSTEM_0X92 // </P>
+                            <p class="status-code">SECTOR_ACCESS_GRANTED:</p>
                         </div>
 
                         <div class="route">
-                            <P class="text_normal">{{ url_data }}</P>
+                            <P class="text_normal">{{ page_data }}</P>
                         </div>
 
+{#                        <h2 class="glitch-title font-display" data-text="CLEARANCE_LEVELS">#}
+{#                          CLEARANCE_LEVELS#}
+{#                        </h2>#}
+
                     </div>
+
+
+{#                    <header class="admin-header">#}
+{#                      <div class="header-main">#}
+{#                        <!-- Indicador de Estatus Superior -->#}
+{#                        <div class="sector-status">#}
+{#                          <span class="pulse-dot"></span>#}
+{#                          <p class="status-code">SECTOR_ACCESS_GRANTED: CLEARANCE_LEVELS</p>#}
+{#                        </div>#}
+{##}
+{#                        <!-- Título Principal con Atributo de Datos para el Glitch -->#}
+{#                        <h2 class="glitch-title font-display" data-text={{ page_title }}>#}
+{#                            {{ page_title }}#}
+{#                        </h2>#}
+{#                      </div>#}
+{#                    </header>#}
+
+
                 </div>
 
                 <div class="sync-status">
@@ -112,6 +135,10 @@
                 	<div class="intro_card">
 
                     <div class="intro_main">
+
+
+{#                        contenido del banner#}
+
                         <div class="command">
 
                             <div class="command__code intel-badge">
@@ -130,9 +157,14 @@
 
                         </div>
 
-                        <div class="command__title">
-                            <h2 class="title">{{ page_title }}</h2>
-                        </div>
+{#                        <div class="command__title">#}
+{#                            <h2 class="title">{{ page_title }}</h2>#}
+{#                        </div>#}
+
+                        <!-- Título Principal con Atributo de Datos para el Glitch -->
+                        <h2 class="glitch-title font-display" data-text={{ page_title }}>
+                            {{ page_title }}
+                        </h2>
                     </div>
 
                     <div class="intro_status">

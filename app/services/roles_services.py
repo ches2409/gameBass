@@ -8,7 +8,7 @@ def get_all_roles():
 def get_roles_by_id(rol_id):
     return session.query(Rol).get(rol_id)
 
-def create_rol(nombre, descripcion_rol):
+def create_rol(nombre, descripcion_rol, especialidad_rol):
     
     
     if nombre:
@@ -20,9 +20,11 @@ def create_rol(nombre, descripcion_rol):
         
         new_rol = Rol(
             nombre_rol=nombre,
-            descripcion_rol=descripcion_rol
+            descripcion_rol=descripcion_rol,
+            especialidad_rol=especialidad_rol
         )
         session.add(new_rol)
         session.commit()
         return new_rol
+    
     return False

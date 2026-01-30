@@ -46,11 +46,14 @@
 // Cada componente debe ser independiente y reutilizable
 
 @use 'components/main_menu';
+@use "components/title_menu";
 @use 'components/buttons';
 @use "components/metric-card";
 @use 'components/tactical-card';
 @use 'components/subjects-card';
 @use 'components/alert-container';
+@use "components/level-card";
+@use 'components/role-card';
 
 // ==========================================================================
 // 5. PAGES - Estilos específicos por página

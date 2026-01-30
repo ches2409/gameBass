@@ -1,0 +1,40 @@
+<!-- Contenedor General -->
+<div class="arkadex-grid">
+
+
+    {% for role in roles %}
+        <div class="role-card {{ role.especialidad_rol.color }}">
+
+            <div class="card-header">
+                <span class="id-tag">ARC-{{ role.nombre_rol[:4] | upper }}</span>
+                <div class="status-dot"></div>
+            </div>
+
+            <h3 class="role-name" >{{ role.nombre_rol | upper }}</h3>
+            <p class="specialty" >{{ role.especialidad_rol.titulo | upper}}</p>
+            <div class="stat-bar"><div class="fill" style="width: 90%;"></div></div>
+            <p class="description">{{ role.descripcion_rol }}</p>
+
+        </div>
+    {% endfor %}
+
+
+  <!-- VANGUARD (Defensa) -->
+
+
+  <!-- GHOST (Sigilo) -->
+
+
+  <!-- ARCHITECT (Control) -->
+
+
+  <!-- BERSERKER (Ataque) -->
+
+
+  <!-- PROPUESTA 1: ORACLE (Inteligencia) -->
+
+
+  <!-- PROPUESTA 2: NETRUNNER (Hacker) -->
+
+
+</div>
