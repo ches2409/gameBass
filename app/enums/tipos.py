@@ -55,3 +55,14 @@ class CategoriaProtocolo(enum.Enum):
     user ="user"
     arena ="arena"
     
+class CodigoProtocolo(enum.Enum):
+    sys_root=("SYS_ROOT","Acceso total al núcleo. Permite la reconfiguración de constantes globales del sistema.")
+    sys_purge=("SYS_PURGE", "Protocolo de borrado definitivo. Capacidad para eliminar nodos, registros y sujetos permanentemente.")
+    usr_rewrite=("USR_REWRITE","Alteración de perfiles neurales. Permite modificar rangos, reputación y datos de identidad.")
+    usr_ban =("USR_BAN","Corte forzado de enlace. Expulsa y bloquea el acceso de cualquier sujeto al mainframe.")
+    arn_build=("ARN_BUILD","Creación de nodos de combate. Permite desplegar y gestionar torneos y eventos en vivo.")
+    arn_broadcast =("ARN_BROADCAST","Emisión de prioridad absoluta. Envía mensajes y alertas que sobrepasan cualquier interfaz de usuario.")
+    
+    def __init__(self, codigo, capacidad):
+        self.codigo = codigo
+        self.capacidad = capacidad

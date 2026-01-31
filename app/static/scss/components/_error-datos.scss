@@ -1,0 +1,185 @@
+:root {
+    --sys-red: #FF0000;
+    --bg-dark: #020305;
+    --surface: #0a0c10;
+    --text-gray: #9ca3af;
+    --text-dim: #4b5563;
+}
+
+
+/* Contenedor Principal */
+.error-window {
+    width: 100%;
+    max-width: 60vw;
+    height: 60vh;
+    background-color: var(--surface);
+    //background-color: orangered;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    clip-path: polygon(30px 0, 100% 0, 100% 100%, 0 100%, 0 30px);
+    box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+    padding: 1rem;
+}
+
+/* Fondo de Cuadrícula Cyberpunk */
+.cyber-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 0, 0, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Animación de Escaneo Laser */
+.laser-scan {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: var(--sys-red);
+    box-shadow: 0 0 20px var(--sys-red);
+    z-index: 20;
+    animation: laser-move 2s linear infinite;
+}
+
+@keyframes laser-move {
+    0% { left: -5%; opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { left: 105%; opacity: 0; }
+}
+
+/* Icono de Error */
+.error-icon-box {
+    width: 120px;
+    height: 120px;
+    border: 2px solid rgba(255, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 0, 0, 0.05);
+    clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
+    margin-bottom: 50px;
+    position: relative;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+.error-icon-box .material-symbols-outlined {
+    font-size: 80px;
+    color: var(--sys-red);
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+}
+
+/* Texto Glitch */
+.title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    font-style: italic;
+    letter-spacing: 4px;
+    margin: 0;
+    position: relative;
+}
+
+.title::before, .title::after {
+    content: "NULL_UPLINK_DETECTED";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0.8;
+}
+
+.title::before { color: #ff00c1; z-index: -1; animation: glitch 0.4s infinite; }
+.title::after { color: #00fff9; z-index: -2; animation: glitch 0.4s reverse infinite; }
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+.subtitle-box {
+    display: inline-block;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    padding: 5px 15px;
+    margin-top: 15px;
+}
+
+.subtitle {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    color: var(--sys-red);
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
+
+.description-error {
+    font-family: 'Fira Code', monospace;
+    font-size: 12px;
+    color: var(--text-gray);
+    max-width: 450px;
+    line-height: 1.6;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Botón con Clip-Path */
+.retry-btn {
+    margin-top: 50px;
+    background: transparent;
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    color: var(--sys-red);
+    padding: 15px 40px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 11px;
+    letter-spacing: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .material-symbols-outlined{
+        color: inherit;
+    }
+}
+
+.retry-btn:hover {
+    background-color: var(--sys-red);
+    color: white;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+    transform: scale(1.05);
+}
+
+/* Decoración de esquinas */
+.corner-label {
+    position: absolute;
+    font-family: 'Fira Code', monospace;
+    font-size: 8px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.top-left { top: 20px; left: 40px; }
+.bottom-right { bottom: 20px; right: 40px; }

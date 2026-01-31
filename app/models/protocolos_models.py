@@ -1,7 +1,7 @@
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 from app.db import Base
-from app.enums.tipos import CategoriaProtocolo
+from app.enums.tipos import CategoriaProtocolo, CodigoProtocolo
 
 from sqlalchemy import Enum as _Enum
 
@@ -10,13 +10,21 @@ class Protocolo(Base):
     __tablename__ = "Protocolos"
     __table_args__ = {
         "sqlite_autoincrement": True,
+        'comment':' gestionan el comportamiento fundamental del ecosistema'
     }
     
     id_protocolo : Mapped[int] = mapped_column(Integer, primary_key=True)
-    codigo_protocolo : Mapped[str] = mapped_column(String(20),nullable=False)
+    codigo_protocolo:Mapped[CodigoProtocolo] = mapped_column(
+        _Enum(CodigoProtocolo, name="codigo_protocolo_enum", values_callable=lambda x:[e.name for e in x]),
+        nullable=False,
+        default=CodigoProtocolo.arn_build,
+        server_default=CodigoProtocolo.arn_build.name,
+        comment="representan las capacidades críticas de administración del Mainframe"
+        
+    )
     nombre_protocolo : Mapped[str] = mapped_column(String(50), nullable=False)
     categoria_protocolo : Mapped[CategoriaProtocolo] = mapped_column(
-        _Enum(CategoriaProtocolo, name="caategoria_protocolo_enum"),
+        _Enum(CategoriaProtocolo, name="categoria_protocolo_enum"),
         nullable=False,
         default=CategoriaProtocolo.user,
         server_default="user"

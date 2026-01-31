@@ -1,0 +1,114 @@
+
+{% if not protocolos %}
+    <div class="error-container">
+        {%  include 'components/error-datos.html'%}
+    </div>
+{% else %}
+    <!-- PROTOCOLO DE SISTEMA -->
+    <div class="protocol-grid">
+        <div class="protocol-card system">
+            <div class="card-edge"></div>
+            <div class="card-content">
+
+                <header class="protocol-header">
+                    <span class="category-tag">SYSTEM_CORE</span>
+                    <div class="status-indicator">
+                        <span class="pulse-dot"></span>
+                        ENCRYPTED
+                    </div>
+                </header>
+
+                <div class="protocol-body">
+                    <h3 class="protocol-id">SYS_ROOT</h3>
+                    <p class="protocol-desc">Acceso total al núcleo del sistema Arkadex. Permite la reescritura de constantes universales.</p>
+                </div>
+
+                <footer class="protocol-footer">
+                    <div class="bit-stream">01011101 00101010</div>
+                    <div class="auth-key">KEY_0xOMEGA</div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endif %}
+
+
+{#
+
+  <!-- PROTOCOLO DE ARENA -->
+  <div class="protocol-card arena">
+    <div class="card-edge"></div>
+    <div class="card-content">
+      <header class="protocol-header">
+        <span class="category-tag">ARENA_LOGIC</span>
+        <div class="status-indicator">
+          <span class="pulse-dot"></span>
+          READY
+        </div>
+      </header>
+
+      <div class="protocol-body">
+        <h3 class="protocol-id">ARN_MATCH</h3>
+        <p class="protocol-desc">Arbitraje y resolución de conflictos de combate. Valida la integridad de la victoria.</p>
+      </div>
+
+      <footer class="protocol-footer">
+        <div class="bit-stream">11000101 01111000</div>
+        <div class="auth-key">KEY_0xGAMMA</div>
+      </footer>
+    </div>
+  </div>
+
+    <!-- PROTOCOLO DE SISTEMA -->
+  <div class="protocol-card system">
+    <div class="card-edge"></div>
+    <div class="card-content">
+      <header class="protocol-header">
+        <span class="category-tag">SYSTEM_CORE</span>
+        <div class="status-indicator">
+          <span class="pulse-dot"></span>
+          ENCRYPTED
+        </div>
+      </header>
+
+      <div class="protocol-body">
+        <h3 class="protocol-id">SYS_ROOT</h3>
+        <p class="protocol-desc">Acceso total al núcleo del sistema Arkadex. Permite la reescritura de constantes universales.</p>
+      </div>
+
+      <footer class="protocol-footer">
+        <div class="bit-stream">01011101 00101010</div>
+        <div class="auth-key">KEY_0xOMEGA</div>
+      </footer>
+    </div>
+  </div>
+
+    <!-- PROTOCOLO DE ARENA -->
+  <div class="protocol-card arena">
+    <div class="card-edge"></div>
+    <div class="card-content">
+      <header class="protocol-header">
+        <span class="category-tag">ARENA_LOGIC</span>
+        <div class="status-indicator">
+          <span class="pulse-dot"></span>
+          READY
+        </div>
+      </header>
+
+      <div class="protocol-body">
+        <h3 class="protocol-id">ARN_MATCH</h3>
+        <p class="protocol-desc">Arbitraje y resolución de conflictos de combate. Valida la integridad de la victoria.</p>
+      </div>
+
+      <footer class="protocol-footer">
+        <div class="bit-stream">11000101 01111000</div>
+        <div class="auth-key">KEY_0xGAMMA</div>
+      </footer>
+    </div>
+  </div>
+
+#}
+

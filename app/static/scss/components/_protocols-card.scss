@@ -1,0 +1,161 @@
+
+
+:root {
+  --sys-color: #FF0000;    /* Rojo Sistema */
+  --usr-color: #00E5FF;    /* Cyan Usuario */
+  --arn-color: #FFD600;    /* Amarillo Arena */
+  --bg-dark: #05070a;
+}
+
+.error-container{
+  //background-color: navajowhite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.protocol-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(max(380px, 30%), 1fr));
+  gap: 20px;
+  padding: 20px;
+  background: #020305;
+}
+
+/* Tarjeta Base */
+.protocol-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+/* El "filo" lateral de color */
+.card-edge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: currentColor;
+  box-shadow: 0 0 15px currentColor;
+}
+
+.card-content {
+  padding: 20px 25px;
+  display: flex;
+  flex-col: column;
+  height: 100%;
+}
+
+/* Header */
+.protocol-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  margin-right: 15px;
+}
+
+.category-tag {
+  font-family: 'Fira Code', monospace;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.03);
+  color: #666;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Fira Code', monospace;
+  font-size: 8px;
+  color: #444;
+}
+
+.pulse-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 1.5s infinite;
+}
+
+/* Body */
+.protocol-id {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  color: #fff;
+  margin: 0 0 10px 0;
+  letter-spacing: 1px;
+}
+
+.protocol-desc {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: #888;
+  line-height: 1.6;
+  margin: 0;
+  height: 60px; /* Mantener altura uniforme */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Footer */
+.protocol-footer {
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bit-stream {
+  font-family: 'Fira Code', monospace;
+  font-size: 7px;
+  color: rgba(255, 255, 255, 0.1);
+}
+
+.auth-key {
+  font-family: 'Fira Code', monospace;
+  font-size: 8px;
+  color: #555;
+  background: #000;
+  padding: 2px 6px;
+}
+
+/* --- COLORES POR CATEGORÍA --- */
+
+.system { color: var(--sys-color); }
+.system .protocol-id { text-shadow: 0 0 10px rgba(255, 0, 0, 0.3); }
+
+.arena { color: var(--arn-color); }
+.arena .protocol-id { text-shadow: 0 0 10px rgba(255, 214, 0, 0.3); }
+
+.user { color: var(--usr-color); }
+.user .protocol-id { text-shadow: 0 0 10px rgba(0, 229, 255, 0.3); }
+
+/* Hover State */
+.protocol-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+.protocol-card:hover .category-tag {
+  color: #fff;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
+}

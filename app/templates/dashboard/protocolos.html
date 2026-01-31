@@ -7,7 +7,7 @@
 
         <!-- Si existe una alerta específica para esta URL (alert_finish), la mostramos -->
         {% if alert_finish %}
-            {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info %}
+            {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info, modal_target='createProtocolModal' %}
                 {% include 'components/alert-container.html' %}
             {% endwith %}
         {% endif %}
@@ -29,4 +29,66 @@
 
         </div>
     </div>
+
+    <div class="protocolos_card">
+
+        {% block protocolsCard %}
+        	{% include 'components/protocols-card.html' %}
+        {% endblock %}
+
+    </div>
+
+    {% include 'dashboard/protocolos/create.html' %}
+
+    <script>
+        function toggleModal(modalID) {
+            const modal = document.getElementById(modalID);
+            if (modal) {
+                // Si usas display: none en CSS
+                if (modal.style.display === "none" || modal.style.display === "") {
+                    modal.style.display = "flex";
+                } else {
+                    modal.style.display = "none";
+                }
+                // O si usas una clase .active en tu CSS:
+                // modal.classList.toggle('active');
+            }
+        }
+{#
+        function openUpdateModal(button) {
+            // 1. Obtener datos del botón
+            const id = button.getAttribute('data-id');
+            const nombre = button.getAttribute('data-nombre');
+            const especialidad = button.getAttribute('data-especialidad');
+            const descripcion = button.getAttribute('data-descripcion');
+
+            // 2. Construir la URL de actualización dinámicamente
+            // Usamos un ID '0' temporal para que Flask genere la base de la URL, y luego lo reemplazamos
+            const baseUrl = "{{ url_for('roles.update', id_rol=0) }}";
+            const updateUrl = baseUrl.replace('0', id);
+
+            // 3. Asignar al formulario y a los inputs
+            document.getElementById('formUpdateRole').action = updateUrl;
+            document.getElementById('inputNombreRol').value = nombre;
+            document.getElementById('inputEspecialidadRol').value = especialidad;
+            document.getElementById('inputDescripcionRol').value = descripcion;
+
+            // 4. Abrir el modal
+            toggleModal('updateRoleModal');
+        }
+
+        function openDeleteModal(deleteUrl, roleName) {
+            // 1. Actualizar el enlace del botón de confirmación
+            document.getElementById('btnConfirmPurge').href = deleteUrl;
+
+            // 2. Mostrar el nombre del rol en la advertencia
+            document.getElementById('deleteRoleName').textContent = roleName;
+
+            // 3. Abrir el modal
+            toggleModal('deleteRoleModal');
+        }
+
+        #}
+    </script>
+
 {% endblock %}

@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Fira+Code:wght@500&display=swap');
+
+:root {
+  --bg-card: #0a0c10;
+  --omega-color: #FF0000;
+  --delta-color: #D500F9;
+  --gamma-color: #FFD600;
+  --beta-color: #00E5FF;
+  --alpha-color: #A3FF00;
+  --void-color: #4A4A4A;
+}
+
+.clearance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 40px;
+  background: #020305;
+}
+
+/* Tarjeta Base */
+.clearance-card {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1px; /* Para el borde fino */
+  clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px);
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-inner {
+  background: var(--bg-card);
+  padding: 30px;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Identificador de Nodo */
+.node-id {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-family: 'Fira Code', monospace;
+  font-size: 7px;
+  color: rgba(255, 255, 255, 0.1);
+  letter-spacing: 3px;
+}
+
+/* Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.level-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 32px;
+  color: #fff;
+  line-height: 1;
+  margin: 0;
+  font-style: italic;
+}
+
+.level-subtitle {
+  font-family: 'Fira Code', monospace;
+  font-size: 9px;
+  margin: 5px 0 0 0;
+  letter-spacing: 3px;
+  font-weight: 900;
+}
+
+.access-hex {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+/* Bandwidth Bar */
+.bandwidth-section {
+  margin-bottom: 30px;
+}
+
+.bar-label {
+  font-family: 'Fira Code', monospace;
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.progress-container {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  box-shadow: 0 0 15px currentColor;
+  transition: width 2s ease-in-out;
+}
+
+/* Protocolos */
+.protocol-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.protocol-tag {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 6px 12px;
+  font-family: 'Fira Code', monospace;
+  font-size: 8px;
+  color: #888;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
+}
+
+.protocol-tag span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Footer */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.status-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.dot {
+  width: 12px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.status-text {
+  font-family: 'Fira Code', monospace;
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 1px;
+}
+
+/* --- VARIACIONES DE COLOR --- */
+
+.omega { color: var(--omega-color); border: 1px solid rgba(255, 0, 0, 0.2); }
+.omega .progress-bar, .omega .status-dots .dot.active { background: var(--omega-color); }
+.omega .level-subtitle { color: var(--omega-color); }
+
+.delta { color: var(--delta-color); border: 1px solid rgba(213, 0, 249, 0.2); }
+.delta .progress-bar, .delta .status-dots .dot.active { background: var(--delta-color); }
+.delta .level-subtitle { color: var(--delta-color); }
+
+.alpha { color: var(--alpha-color); border: 1px solid rgba(163, 255, 0, 0.2); }
+.alpha .progress-bar, .alpha .status-dots .dot.active { background: var(--alpha-color); }
+.alpha .level-subtitle { color: var(--alpha-color); }
+
+/* Hover Effect */
+.clearance-card:hover {
+  transform: translateY(-10px);
+  filter: brightness(1.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}

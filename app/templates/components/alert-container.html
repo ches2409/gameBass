@@ -29,7 +29,7 @@
         <div class="actions">
 
         <div class="button-ok btn--accent btn--small">
-            <button type="button" onclick="toggleModal('createRoleModal')" class="btn-reset ms-auto" style="background:none; border:none; color:inherit; display:flex; align-items:center; cursor:pointer;">
+            <button type="button" onclick="toggleModal('{{ modal_target }}')" class="btn-reset ms-auto" style="background:none; border:none; color:inherit; display:flex; align-items:center; cursor:pointer;">
                     <span class="material-symbols-outlined">add</span> {{ btn_info | default('INYECCION') }}
             </button>
         </div>
