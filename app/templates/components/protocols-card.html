@@ -4,14 +4,19 @@
         {%  include 'components/error-datos.html'%}
     </div>
 {% else %}
-    <!-- PROTOCOLO DE SISTEMA -->
+
     <div class="protocol-grid">
-        <div class="protocol-card system">
+    {% for protocolo in protocolos %}
+
+    <!-- PROTOCOLO DE SISTEMA -->
+        <div class="protocol-card {{ protocolo.categoria_protocolo.value }}">
+
             <div class="card-edge"></div>
+
             <div class="card-content">
 
                 <header class="protocol-header">
-                    <span class="category-tag">SYSTEM_CORE</span>
+                    <span class="category-tag">{{ protocolo.categoria_protocolo.value | upper}}_CORE</span>
                     <div class="status-indicator">
                         <span class="pulse-dot"></span>
                         ENCRYPTED
@@ -19,96 +24,45 @@
                 </header>
 
                 <div class="protocol-body">
-                    <h3 class="protocol-id">SYS_ROOT</h3>
-                    <p class="protocol-desc">Acceso total al núcleo del sistema Arkadex. Permite la reescritura de constantes universales.</p>
+                    <h3 class="protocol-id">{{ protocolo.nombre_protocolo | upper}}</h3>
+                    <p class="protocol-desc">{{ protocolo.descripcion_protocolo }}</p>
                 </div>
 
                 <footer class="protocol-footer">
-                    <div class="bit-stream">01011101 00101010</div>
-                    <div class="auth-key">KEY_0xOMEGA</div>
+                    <div class="bit-stream">01011101 00101010 11010100</div>
+
+                    <div class="auth-key">KEY_0x_ID_{{ protocolo.codigo_protocolo.value[0] | upper }}</div>
                 </footer>
+
+
+                <div class="action-group">
+                    <!-- Botón Editar -->
+                    <button class="action-btn edit-btn"
+                            onclick="openUpdateModal(this)"
+                            data-id="{{ protocolo.id_protocolo }}"
+                            data-nombre="{{ protocolo.nombre_protocolo }}"
+                            data-codigo="{{ protocolo.codigo_protocolo.value[0] }}"
+                            data-categoria="{{ protocolo.categoria_protocolo.value }}"
+                            data-descripcion="{{ protocolo.descripcion_protocolo }}"
+                            title="EDIT_NODE">
+                      <span class="material-symbols-outlined">edit</span>
+                    </button>
+
+                    <!-- Botón Eliminar -->
+                    <button class="action-btn delete-btn"
+                            title="PURGE_NODE"
+                            onclick="openDeleteModal('{{ url_for('protocolo.delete', id_protocolo=protocolo.id_protocolo) }}', '{{ protocolo.nombre_protocolo | upper }}')">
+                      <span class="material-symbols-outlined">delete</span>
+                    </button>
+
+                </div>
+
+
             </div>
+
         </div>
+
+    {% endfor %}
     </div>
-
-
 
 {% endif %}
-
-
-{#
-
-  <!-- PROTOCOLO DE ARENA -->
-  <div class="protocol-card arena">
-    <div class="card-edge"></div>
-    <div class="card-content">
-      <header class="protocol-header">
-        <span class="category-tag">ARENA_LOGIC</span>
-        <div class="status-indicator">
-          <span class="pulse-dot"></span>
-          READY
-        </div>
-      </header>
-
-      <div class="protocol-body">
-        <h3 class="protocol-id">ARN_MATCH</h3>
-        <p class="protocol-desc">Arbitraje y resolución de conflictos de combate. Valida la integridad de la victoria.</p>
-      </div>
-
-      <footer class="protocol-footer">
-        <div class="bit-stream">11000101 01111000</div>
-        <div class="auth-key">KEY_0xGAMMA</div>
-      </footer>
-    </div>
-  </div>
-
-    <!-- PROTOCOLO DE SISTEMA -->
-  <div class="protocol-card system">
-    <div class="card-edge"></div>
-    <div class="card-content">
-      <header class="protocol-header">
-        <span class="category-tag">SYSTEM_CORE</span>
-        <div class="status-indicator">
-          <span class="pulse-dot"></span>
-          ENCRYPTED
-        </div>
-      </header>
-
-      <div class="protocol-body">
-        <h3 class="protocol-id">SYS_ROOT</h3>
-        <p class="protocol-desc">Acceso total al núcleo del sistema Arkadex. Permite la reescritura de constantes universales.</p>
-      </div>
-
-      <footer class="protocol-footer">
-        <div class="bit-stream">01011101 00101010</div>
-        <div class="auth-key">KEY_0xOMEGA</div>
-      </footer>
-    </div>
-  </div>
-
-    <!-- PROTOCOLO DE ARENA -->
-  <div class="protocol-card arena">
-    <div class="card-edge"></div>
-    <div class="card-content">
-      <header class="protocol-header">
-        <span class="category-tag">ARENA_LOGIC</span>
-        <div class="status-indicator">
-          <span class="pulse-dot"></span>
-          READY
-        </div>
-      </header>
-
-      <div class="protocol-body">
-        <h3 class="protocol-id">ARN_MATCH</h3>
-        <p class="protocol-desc">Arbitraje y resolución de conflictos de combate. Valida la integridad de la victoria.</p>
-      </div>
-
-      <footer class="protocol-footer">
-        <div class="bit-stream">11000101 01111000</div>
-        <div class="auth-key">KEY_0xGAMMA</div>
-      </footer>
-    </div>
-  </div>
-
-#}
-

@@ -23,7 +23,7 @@
             </div>
 
             <!-- Título Principal con Atributo de Datos para el Glitch -->
-            <h2 class="glitch-title font-display" data-text={{ page_title }}>
+            <h2 class="glitch-title font-display" data-text="{{ page_title }}">
                 {{ page_title }}
             </h2>
 
@@ -39,6 +39,8 @@
     </div>
 
     {% include 'dashboard/protocolos/create.html' %}
+    {% include 'dashboard/protocolos/update.html' %}
+    {% include 'components/delete-modal.html' %}
 
     <script>
         function toggleModal(modalID) {
@@ -54,41 +56,43 @@
                 // modal.classList.toggle('active');
             }
         }
-{#
+
         function openUpdateModal(button) {
             // 1. Obtener datos del botón
             const id = button.getAttribute('data-id');
             const nombre = button.getAttribute('data-nombre');
-            const especialidad = button.getAttribute('data-especialidad');
+            const codigo = button.getAttribute('data-codigo');
+            const categoria = button.getAttribute('data-categoria');
             const descripcion = button.getAttribute('data-descripcion');
 
             // 2. Construir la URL de actualización dinámicamente
             // Usamos un ID '0' temporal para que Flask genere la base de la URL, y luego lo reemplazamos
-            const baseUrl = "{{ url_for('roles.update', id_rol=0) }}";
-            const updateUrl = baseUrl.replace('0', id);
+            const baseUrlProtocol = "{{ url_for('protocolo.update', id_protocolo=0) }}";
+            const updateUrlProtocol = baseUrlProtocol.replace('0', id);
 
             // 3. Asignar al formulario y a los inputs
-            document.getElementById('formUpdateRole').action = updateUrl;
-            document.getElementById('inputNombreRol').value = nombre;
-            document.getElementById('inputEspecialidadRol').value = especialidad;
-            document.getElementById('inputDescripcionRol').value = descripcion;
+            document.getElementById('formUpdateProtocolo').action = updateUrlProtocol;
+            document.getElementById('inputNombreProtocolo').value = nombre;
+            document.getElementById('inputCodigoProtocolo').value = codigo;
+            document.getElementById('inputCategoriaProtocolo').value = categoria;
+            document.getElementById('inputDescripcionProtocolo').value = descripcion;
 
             // 4. Abrir el modal
-            toggleModal('updateRoleModal');
+            toggleModal('updateProtocolModal');
         }
 
-        function openDeleteModal(deleteUrl, roleName) {
+        function openDeleteModal(deleteUrl, itemName) {
             // 1. Actualizar el enlace del botón de confirmación
             document.getElementById('btnConfirmPurge').href = deleteUrl;
 
-            // 2. Mostrar el nombre del rol en la advertencia
-            document.getElementById('deleteRoleName').textContent = roleName;
+            // 2. Mostrar el nombre del item (protocolo) en la advertencia
+            document.getElementById('deleteItemName').textContent = itemName;
 
             // 3. Abrir el modal
-            toggleModal('deleteRoleModal');
+            toggleModal('deleteConfirmationModal');
         }
 
-        #}
+
     </script>
 
 {% endblock %}

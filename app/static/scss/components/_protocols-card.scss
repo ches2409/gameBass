@@ -1,4 +1,4 @@
-
+@use "../base/variables";
 
 :root {
   --sys-color: #FF0000;    /* Rojo Sistema */
@@ -16,7 +16,7 @@
 
 .protocol-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(max(380px, 30%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(max(250px, 22%), 1fr));
   gap: 20px;
   padding: 20px;
   background: #020305;
@@ -29,6 +29,7 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
   overflow: hidden;
+  display: flex;
 }
 
 /* El "filo" lateral de color */
@@ -45,17 +46,19 @@
 .card-content {
   padding: 20px 25px;
   display: flex;
-  flex-col: column;
+  flex-direction: column;
   height: 100%;
+  width: 100%;
 }
 
 /* Header */
 .protocol-header {
+  //background-color: magenta;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 25px;
-  margin-right: 15px;
+  width: 60%;
 }
 
 .category-tag {
@@ -71,7 +74,7 @@
 .status-indicator {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 1rem;
   font-family: 'Fira Code', monospace;
   font-size: 8px;
   color: #444;
@@ -86,6 +89,13 @@
 }
 
 /* Body */
+
+.protocol-body {
+  //background-color: lightgreen;
+  //width: 100%;
+
+}
+
 .protocol-id {
   font-family: 'Orbitron', sans-serif;
   font-size: 18px;
@@ -94,10 +104,13 @@
   letter-spacing: 1px;
 }
 
+
+
 .protocol-desc {
   font-family: 'Fira Code', monospace;
   font-size: 11px;
   color: #888;
+  width: 100%;
   line-height: 1.6;
   margin: 0;
   height: 60px; /* Mantener altura uniforme */
@@ -109,6 +122,7 @@
 
 /* Footer */
 .protocol-footer {
+  //background-color: orangered;
   margin-top: 25px;
   padding-top: 15px;
   border-top: 1px solid rgba(255, 255, 255, 0.03);
@@ -119,8 +133,25 @@
 
 .bit-stream {
   font-family: 'Fira Code', monospace;
-  font-size: 7px;
-  color: rgba(255, 255, 255, 0.1);
+  font-size: 9px;
+  letter-spacing: 1px;
+  position: relative;
+  visibility: hidden; /* Oculta el texto estático del HTML */
+
+  &::after {
+    content: "10010110 10101101 01100010"; /* Cadena más larga */
+    visibility: visible;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.1) 100%);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Combina el flujo de luz (bit-flow) con el cambio de números (bit-swap) */
+    animation: bit-flow 3s linear infinite, bit-swap 0.4s steps(1) infinite;
+  }
 }
 
 .auth-key {
@@ -144,10 +175,11 @@
 
 /* Hover State */
 .protocol-card:hover {
-  background: rgba(255, 255, 255, 0.05);
+  //background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.15);
   transform: scale(1.02);
-  cursor: pointer;
+  //cursor: pointer;
+  background: linear-gradient(135deg, #080e15 0%, #050601 100%);
 }
 
 .protocol-card:hover .category-tag {
@@ -158,4 +190,76 @@
   0% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.3; transform: scale(1.2); }
   100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bit-flow {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+@keyframes bit-swap {
+  0% { content: "100101101 1101101 01100010"; }
+  25% { content: "01101001 01010011 10110101"; }
+  50% { content: "11010010 110010100 1101001"; }
+  75% { content: "00101101 00110101 00110"; }
+}
+
+/* El grupo de botones oculto por defecto */
+.protocol-card .action-group {
+  top: 10px;
+  right: 10px;
+}
+
+/* Mostrar botones al hacer hover en la tarjeta */
+.protocol-card:hover .action-group {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Estilo Base de los Botones */
+.action-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #666;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 75% 100%, 0 100%);
+}
+
+.action-btn .material-symbols-outlined {
+  font-size: 18px;
+  color: inherit;
+}
+.delete-btn{
+  color: variables.$alert;
+  border: 1px solid rgba(variables.$alert, 0.5);
+}
+
+/* Hover: Botón Editar (Verde Neón) */
+.edit-btn:hover {
+  color: variables.$accent-yellow;
+  border-color: variables.$accent-yellow;
+  background: rgba(163, 255, 0, 0.05);
+  box-shadow: 0 0 15px rgba(163, 255, 0, 0.3);
+  transform: scale(1.1);
+}
+
+/* Hover: Botón Eliminar (Rojo Crítico) */
+.delete-btn:hover {
+  background: variables.$alert;
+  color: #fff;
+  border-color: variables.$alert;
+  box-shadow: 0 0 20px rgba(variables.$alert, 0.4);
+  transform: scale(1.1);
+}
+
+/* Efecto de pulsación */
+.action-btn:active {
+  transform: scale(0.9);
 }

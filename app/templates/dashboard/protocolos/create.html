@@ -29,8 +29,8 @@
 
         <!-- Campo: Codigo de protocolo -->
         <div class="input-group">
-          <label><span class="label-icon">psychology</span> ID_SISTEMA_UNICO</label>
-          <input type="text" name="codigo_de_protocolo" list="codigos_list" placeholder="Ej: PRT_ZQRM" required>
+          <label><span class="label-icon">fingerprint</span> ID_SISTEMA_UNICO</label>
+          <input type="text" name="codigo_de_protocolo" list="codigos_list" placeholder="Ej: PRT_ZQRM" id="inputCodigoProtocoloCreate" required>
           <datalist id="codigos_list">
               {% for codigo in codigos_listado %}
                   <option value="{{ codigo.codigo }}">{{ codigo.codigo }}</option>
@@ -41,30 +41,29 @@
 
         <!-- Campo: Nombre del Protocolo -->
         <div class="input-group">
-          <label><span class="label-icon">fingerprint</span> ETIQUETA_VISUAL</label>
+          <label><span class="label-icon">badge</span> ETIQUETA_VISUAL</label>
           <input type="text" name="nombre_de_protocolo" placeholder="Ej: Global Shutdown" required>
           <div class="input-focus-line"></div>
         </div>
 
         <!-- Campo: Categoria -->
         <div class="input-group">
-          <label><span class="label-icon">psychology</span> CAPA_DE_SISTEMA</label>
-          <input type="text" name="categoria_de_protocolo" list="categorias_list" placeholder="Ej: KINETIC_OVERLOAD" required>
+          <label><span class="label-icon">layers</span> CAPA_DE_SISTEMA</label>
+          <input type="text" name="categoria_de_protocolo" list="categorias_list" placeholder="Selecciona la categoria del protocolo" required>
           <datalist id="categorias_list">
               {% for categoria in categorias_listado %}
                   <option value="{{ categoria.name }}">{{ categoria.value | upper}}-CORE</option>
               {% endfor %}
           </datalist>
         
-        
         </div>
 
 
         <!-- Descripción -->
         <div class="input-group">
-          <label>MANIFIESTO_DE_EJECUCIÓN</label>
+          <label><span class="label-icon">terminal</span> MANIFIESTO_DE_EJECUCIÓN</label>
           <!-- Agregamos name y readonly -->
-          <textarea name="descripcion_de_protocolo" placeholder="Se asignará automáticamente según el ID_SISTEMA_UNICO..." readonly></textarea>
+          <textarea name="descripcion_de_protocolo" placeholder="Se asignará automáticamente según el ID_SISTEMA_UNICO..." id="inputDescripcionProtocoloCreate" readonly></textarea>
         </div>
 
         <!-- Botones de Acción -->
@@ -81,3 +80,32 @@
     </div>
   </div>
 </div>
+
+<script>
+  // Esperamos a que el HTML termine de cargar completamente
+  document.addEventListener('DOMContentLoaded', function() {
+      
+      // PASO 1: EL PUENTE DE DATOS (Python -> JavaScript)
+      // Creamos un objeto constante en JS. Jinja2 escribirá las claves y valores aquí.
+      // Al ver el código fuente en el navegador, verás un objeto JSON puro.
+      const mapaDescripciones = {
+          {% for codigo in codigos_listado %}
+              "{{ codigo.codigo }}": {{ codigo.capacidad | tojson }},
+          {% endfor %}
+      };
+
+      // PASO 2: REFERENCIAS AL DOM (Document Object Model)
+      // Buscamos los elementos HTML que vamos a manipular
+      const inputCodigo = document.getElementById('inputCodigoProtocoloCreate');
+      const txtDescripcion = document.getElementById('inputDescripcionProtocoloCreate');
+
+      // PASO 3: EL ESCUCHADOR DE EVENTOS (Event Listener)
+      // Detectamos cuando el usuario escribe o selecciona algo en el input
+      inputCodigo.addEventListener('input', function() {
+          const valorSeleccionado = this.value;
+          
+          // Buscamos en el mapa: Si existe la clave, ponemos su valor. Si no, ponemos vacío ("").
+          txtDescripcion.value = mapaDescripciones[valorSeleccionado] || "";
+      });
+  });
+</script>

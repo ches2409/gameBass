@@ -1,0 +1,124 @@
+<!-- Fondo del Modal (Backdrop) -->
+<div class="modal-overlay" id="updateProtocolModal" style="display: none;">
+
+  <!-- Contenedor del Modal -->
+  <div class="modal-container">
+
+    <!-- Elementos Decorativos de Esquina -->
+    <div class="corner-bracket tl"></div>
+    <div class="corner-bracket tr"></div>
+    <div class="corner-bracket bl"></div>
+    <div class="corner-bracket br"></div>
+
+    <!-- Escáner Láser Decorativo (Animado) -->
+    <div class="modal-laser-line"></div>
+
+    <!-- Contenido del Formulario -->
+    <div class="modal-content">
+
+      <header class="modal-header">
+        <div class="header-main">
+          <span class="status-indicator"></span>
+          <h2>INYECTAR_NUEVO_PROTOCOLO</h2>
+        </div>
+        <p class="header-subtitle">REESCRIBIENDO_MATRIZ_DE_PODER_v4.2</p>
+      </header>
+
+
+      <form class="injection-form" id="formUpdateProtocolo" action="{{ url_for('protocolo.update', id_protocolo=0) }}" method="POST">
+
+        <!-- Campo: Codigo de protocolo -->
+        <div class="input-group">
+          <label><span class="label-icon">fingerprint</span> ID_SISTEMA_UNICO</label>
+{#          <input type="text" name="codigo_de_protocolo" list="codigos_list_update" placeholder="Ej: PRT_ZQRM" id="inputCodigoProtocolo" required>#}
+{#          <datalist id="codigos_list_update">#}
+{#              {% for codigo in codigos_listado %}#}
+{#                  <option value="{{ codigo.codigo }}">{{ codigo.codigo }}</option>#}
+{#              {% endfor %}#}
+{#          </datalist>#}
+
+            <select name="codigo_de_protocolo" id="inputCodigoProtocolo">
+                {% for codigo in codigos_listado %}
+                  <option value="{{ codigo.codigo }}">{{ codigo.codigo }}</option>
+              {% endfor %}
+            </select>
+
+
+
+        </div>
+
+
+        <!-- Campo: Nombre del Protocolo -->
+        <div class="input-group">
+          <label><span class="label-icon">badge</span> ETIQUETA_VISUAL</label>
+          <input type="text" name="nombre_de_protocolo" placeholder="Ej: Global Shutdown" id="inputNombreProtocolo" required>
+          <div class="input-focus-line"></div>
+        </div>
+
+        <!-- Campo: Categoria -->
+        <div class="input-group">
+
+            <label><span class="label-icon">layers</span> CAPA_DE_SISTEMA</label>
+            <select name="categoria_de_protocolo" id="inputCategoriaProtocolo" required>
+                <option value="" disabled>Selecciona la categoria del protocolo</option>
+                {% for categoria in categorias_listado %}#}
+                    <option value="{{ categoria.name }}">{{ categoria.value | upper}}-CORE</option>
+                {% endfor %}
+            </select>
+
+        </div>
+
+
+
+
+
+        <!-- Descripción -->
+        <div class="input-group">
+          <label><span class="label-icon">terminal</span> MANIFIESTO_DE_EJECUCIÓN</label>
+          <!-- Agregamos name y readonly -->
+          <textarea name="descripcion_de_protocolo" placeholder="Se asignará automáticamente según el ID_SISTEMA_UNICO..." id="inputDescripcionProtocolo" readonly></textarea>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="toggleModal('updateProtocolModal')">ABORTAR_PROCESO</button>
+          <button type="submit" class="btn-submit">
+            <span class="btn-glow"></span>
+            RECALIBRAR_NODO
+          </button>
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Esperamos a que el HTML termine de cargar completamente
+  document.addEventListener('DOMContentLoaded', function() {
+
+      // PASO 1: EL PUENTE DE DATOS (Python -> JavaScript)
+      // Creamos un objeto constante en JS. Jinja2 escribirá las claves y valores aquí.
+      // Al ver el código fuente en el navegador, verás un objeto JSON puro.
+      const mapaDescripciones = {
+          {% for codigo in codigos_listado %}
+              "{{ codigo.codigo }}": {{ codigo.capacidad | tojson }},
+          {% endfor %}
+      };
+
+      // PASO 2: REFERENCIAS AL DOM (Document Object Model)
+      // Buscamos los elementos HTML que vamos a manipular
+      const inputCodigo = document.getElementById('inputCodigoProtocolo');
+      const txtDescripcion = document.getElementById('inputDescripcionProtocolo');
+
+      // PASO 3: EL ESCUCHADOR DE EVENTOS (Event Listener)
+      // Detectamos cuando el usuario escribe o selecciona algo en el input
+      inputCodigo.addEventListener('input', function() {
+          const valorSeleccionado = this.value;
+
+          // Buscamos en el mapa: Si existe la clave, ponemos su valor. Si no, ponemos vacío ("").
+          txtDescripcion.value = mapaDescripciones[valorSeleccionado] || "";
+      });
+  });
+</script>

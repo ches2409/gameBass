@@ -85,15 +85,15 @@
             toggleModal('updateRoleModal');
         }
 
-        function openDeleteModal(deleteUrl, roleName) {
+        function openDeleteModal(deleteUrl, itemName) {
             // 1. Actualizar el enlace del botón de confirmación
             document.getElementById('btnConfirmPurge').href = deleteUrl;
 
             // 2. Mostrar el nombre del rol en la advertencia
-            document.getElementById('deleteRoleName').textContent = roleName;
+            document.getElementById('deleteItemName').textContent = itemName;
 
             // 3. Abrir el modal
-            toggleModal('deleteRoleModal');
+            toggleModal('deleteConfirmationModal');
         }
     </script>
 

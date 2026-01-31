@@ -12,7 +12,6 @@ def index():
     
     context = dashboard_service.get_dashboard_data(request.path)
     
-    # CORRECCIÓN: Usamos 'codigos_listado' y 'categorias_listado' para coincidir con el HTML
     return render_template("dashboard/protocolos.html", protocolos=protocolos, codigos_listado=CodigoProtocolo, categorias_listado=CategoriaProtocolo ,**context)
 
 @protocolo_bp.route("/create", methods=['GET', 'POST'] , strict_slashes=False)
@@ -24,10 +23,51 @@ def create():
         descripcion_protocolo = request.form.get('descripcion_de_protocolo')
         
         codigo_protocolo = next((e for e in CodigoProtocolo if e.codigo == codigo_protocolo_txt), None)
-        categoria_protocolo = next(e for e in CodigoProtocolo if e.capacidad == categoria_protocolo_txt)
         
-        if protocolos_services.create_protocol(codigo_protocolo, nombre_protocolo, categoria_protocolo):
+        categoria_protocolo = next((e for e in CategoriaProtocolo if e.name == categoria_protocolo_txt), None)
+        
+        # Validación de seguridad: Si codigo_protocolo es válido, usamos su capacidad.
+        if codigo_protocolo:
+            descripcion_protocolo = codigo_protocolo.capacidad
+        else:
+            descripcion_protocolo = request.form.get('descripcion_de_protocolo')
+        
+        if protocolos_services.create_protocol(codigo_protocolo, nombre_protocolo, categoria_protocolo, descripcion_protocolo):
             return redirect(url_for('protocolo.index'))
         
     return render_template("dashboard/protocolos/create.html", codigos_listado=CodigoProtocolo, categorias_listado=CategoriaProtocolo)
+
+@protocolo_bp.route('/update/<int:id_protocolo>',methods=['GET', 'POST'] , strict_slashes=False)
+def update(id_protocolo):
+    if request.method == 'POST':
+        codigo_protocolo_txt = request.form.get('codigo_de_protocolo')
+        nombre_protocolo = request.form.get('nombre_de_protocolo')
+        categoria_protocolo_txt = request.form.get('categoria_de_protocolo')
+        descripcion_protocolo = request.form.get('descripcion_de_protocolo')
+        
+        codigo_protocolo = next((e for e in CodigoProtocolo if e.codigo == codigo_protocolo_txt), None)
+        
+        categoria_protocolo = next((e for e in CategoriaProtocolo if e.name == categoria_protocolo_txt), None)
+        
+        # Validación de seguridad: Evita crash si codigo_protocolo es None
+        if codigo_protocolo:
+            descripcion_protocolo = codigo_protocolo.capacidad
+        else:
+            descripcion_protocolo = request.form.get('descripcion_de_protocolo')
+        
+        protocolos_services.update_protocol(id_protocolo, codigo_protocolo, nombre_protocolo, categoria_protocolo, descripcion_protocolo)
+        
+        return redirect(url_for('protocolo.index'))
+    
+    return render_template("dashboard/protocolos/update.html", codigos_listado=CodigoProtocolo, categorias_listado=CategoriaProtocolo)
+
+
+@protocolo_bp.route('/delete/<int:id_protocolo>', strict_slashes=False)
+def delete(id_protocolo):
+    
+    protocolos_services.delete_protocolo(id_protocolo)
+    
+    return redirect(url_for('protocolo.index'))
+    
+    
     
