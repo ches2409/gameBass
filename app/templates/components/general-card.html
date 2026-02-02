@@ -1,0 +1,134 @@
+{% if not protocolos %}
+
+    {#
+    <div class="error-container">
+        {%  include 'components/error-datos.html'%}
+    </div>
+    #}
+
+    <div class="nodo-grid">
+
+        <div class="nodo-card colorDinamico">
+
+        <!-- Encabezado de Rango -->
+            <div class="card-header ">
+                <span class="id-tag counter colorDinamicoLevel">LVL_99</span>
+            </div>
+
+            <h3 class="rank-name text-7xl">OMEGA</h3>
+            <p class="rank-subtitle">THE_SINGULARITY</p>
+
+            <!-- Cuerpo de Datos -->
+            <div class="card-body">
+                <p class="rank-description">Control absoluto sobre la infraestructura neural y protocolos de purga.</p>
+
+                <!-- Matriz de Protocolos -->
+                <div class="item-tags">
+                    <span class="tag">ROOT_ACCESS</span>
+                    <span class="tag">CORE_PURGE</span>
+                    <span class="tag">BIOMETRIC_REWRITE</span>
+                    <span class="tag">NEURAL_DISCONNECT</span>
+                    <span class="tag">ARENA_ARCHITECT</span>
+                </div>
+            </div>
+
+            <!-- Indicador de Peso de Autoridad -->
+            <div class="card-footer">
+                <div class="stat-bar"><div class="fill" style="width: 100%;"></div></div>
+{#                <div class="progress-container">#}
+{#                    <div class="stat-bar"><div class="fill" style="width: 100%;"></div></div>#}
+{#                </div>#}
+                <span class="footer-label">AUTH_WEIGHT</span>
+            </div>
+
+    {#    <div class="action-group">#}
+    {#        <!-- Botón Editar -->#}
+    {#        <button class="action-btn edit-btn"#}
+    {#                onclick="openUpdateModal(this)"#}
+    {#                data-id="{{ role.id_rol }}"#}
+    {#                data-nombre="{{ role.nombre_rol }}"#}
+    {#                data-especialidad="{{ role.especialidad_rol.titulo }}"#}
+    {#                data-descripcion="{{ role.descripcion_rol }}"#}
+    {#                title="EDIT_NODE">#}
+    {#          <span class="material-symbols-outlined">edit</span>#}
+    {#        </button>#}
+    {##}
+    {#        <!-- Botón Eliminar -->#}
+    {#        <button class="action-btn delete-btn"#}
+    {#                title="PURGE_NODE"#}
+    {#                onclick="openDeleteModal('{{ url_for('roles.delete', id_rol=role.id_rol) }}', '{{ role.nombre_rol | upper }}')">#}
+    {#          <span class="material-symbols-outlined">delete</span>#}
+    {#        </button>#}
+    {##}
+    {#    </div>#}
+
+        </div>
+
+
+
+    </div>
+
+
+{% else %}
+
+    <div class="jerarquia-grid">
+    <div class="clearance-card">
+  <!-- Botones de Acción (Visibles al hacer Hover) -->
+{#  <div class="card-actions">#}
+{#    <button class="btn-edit"><span class="material-symbols-outlined">edit</span></button>#}
+{#    <button class="btn-delete"><span class="material-symbols-outlined">delete</span></button>#}
+{#  </div>#}
+
+  <!-- Encabezado de Rango -->
+  <div class="card-header">
+    <h4 class="rank-name">OMEGA</h4>
+    <span class="access-lvl" style="color: #FF0000;">LVL_99</span>
+  </div>
+  <p class="rank-subtitle" style="color: #FF0000;">THE_SINGULARITY</p>
+
+  <!-- Cuerpo de Datos -->
+  <div class="card-body">
+    <p class="rank-description">Control absoluto sobre la infraestructura neural y protocolos de purga.</p>
+
+    <!-- Matriz de Protocolos -->
+    <div class="protocol-tags">
+      <span class="tag">ROOT_ACCESS</span>
+      <span class="tag">CORE_PURGE</span>
+      <span class="tag">BIOMETRIC_REWRITE</span>
+      <span class="tag">NEURAL_DISCONNECT</span>
+    </div>
+  </div>
+
+  <!-- Indicador de Peso de Autoridad -->
+  <div class="card-footer">
+    <div class="progress-container">
+      <div class="progress-bar" style="width: 99%; background-color: #FF0000;"></div>
+    </div>
+    <span class="footer-label">AUTH_WEIGHT</span>
+  </div>
+
+{#    <div class="action-group">#}
+{#        <!-- Botón Editar -->#}
+{#        <button class="action-btn edit-btn"#}
+{#                onclick="openUpdateModal(this)"#}
+{#                data-id="{{ role.id_rol }}"#}
+{#                data-nombre="{{ role.nombre_rol }}"#}
+{#                data-especialidad="{{ role.especialidad_rol.titulo }}"#}
+{#                data-descripcion="{{ role.descripcion_rol }}"#}
+{#                title="EDIT_NODE">#}
+{#          <span class="material-symbols-outlined">edit</span>#}
+{#        </button>#}
+{##}
+{#        <!-- Botón Eliminar -->#}
+{#        <button class="action-btn delete-btn"#}
+{#                title="PURGE_NODE"#}
+{#                onclick="openDeleteModal('{{ url_for('roles.delete', id_rol=role.id_rol) }}', '{{ role.nombre_rol | upper }}')">#}
+{#          <span class="material-symbols-outlined">delete</span>#}
+{#        </button>#}
+{##}
+{#    </div>#}
+
+</div>
+</div>
+
+{% endif %}

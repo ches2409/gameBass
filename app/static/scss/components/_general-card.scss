@@ -1,7 +1,7 @@
 @use "../base/variables";
 
 
-.arkadex-grid {
+.nodo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(max(250px, 22%), 1fr));
   gap: 20px;
@@ -9,12 +9,13 @@
 }
 
 /* Estilo Base de la Tarjeta */
-.role-card {
+.nodo-card {
   --neon: #ffffff; /* Color por defecto */
   background: #0a0c10;
   border: 1px solid rgba(255, 255, 255, 0.05);
   padding: 25px;
   position: relative;
+  max-width: 450px;
   //width: 300px;
   overflow: hidden;
   transition: all 0.4s ease;
@@ -33,10 +34,11 @@
 .spatialDislocation{ --neon: #9D00FF; } /* Violeta Eléctrico (Espacio/Warp) */
 .temporalLagInfliction{ --neon: #FF0055; } /* Carmesí Neón (Glitch/Tiempo) */
 .kineticAbsorption{ --neon: #FF9100; } /* Naranja Ámbar (Energía/Escudo) */
+.colorDinamico  { --neon: #A3FF00; } /* Verde Neón */
 
 
 /* Hover: Activación de Neón */
-.role-card:hover {
+.nodo-card:hover {
   transform: translateY(-5px);
   border-color: var(--neon);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(var(--neon), 0.1);
@@ -45,6 +47,7 @@
 
 /* Cabecera de la tarjeta */
 .card-header {
+  //background-color: lightblue;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -69,11 +72,11 @@
 
 /* Icono central */
 .icon-box {
-  font-size: 40px;
-  margin-bottom: 15px;
-  filter: drop-shadow(0 0 10px var(--neon));
-  opacity: 0.8;
-  transition: opacity 0.3s;
+  //font-size: 40px;
+  //margin-bottom: 15px;
+  //filter: drop-shadow(0 0 10px var(--neon));
+  //opacity: 0.8;
+  //transition: opacity 0.3s;
 }
 
 .role-card:hover .icon-box {
@@ -81,7 +84,7 @@
 }
 
 /* Textos */
-.role-name {
+.rank-name {
   font-size: 24px;
   font-weight: 900;
   letter-spacing: -1px;
@@ -89,7 +92,7 @@
   font-style: italic;
 }
 
-.specialty {
+.rank-subtitle {
   font-size: 10px;
   font-weight: 800;
   color: var(--neon);
@@ -98,13 +101,19 @@
   text-transform: uppercase;
 }
 
-.description {
+.rank-description {
   font-size: 12px;
   line-height: 1.5;
   color: #888;
   margin-top: 15px;
   text-transform: uppercase;
   font-family: 'Segoe UI', sans-serif;
+}
+.counter {
+  //font-family: 'Fira Code', monospace;
+  //font-size: 0.75rem;
+  //font-weight: bold;
+  padding-top: 1rem;
 }
 
 /* Barra de nivel / potencia */
@@ -121,6 +130,54 @@
   box-shadow: 0 0 10px var(--neon);
 }
 
+.item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  //background-color: hotpink;
+  margin-bottom: 1rem;
+}
+
+.tag {
+  font-family: 'Fira Code', monospace;
+  font-size: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.5rem;
+  color: #9ca3af;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Footer y Barra de Progreso */
+.card-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-label {
+  font-family: 'Fira Code', monospace;
+  font-size: 8px;
+  color: #4b5563;
+}
+
+.progress-container {
+  //height: 4px;
+  //background: rgba(255, 255, 255, 0.05);
+  //flex: 1;
+  //margin-right: 1rem;
+  //border-radius: 2px;
+  //overflow: hidden;
+}
+
+.progress-bar {
+  //height: 100%;
+  //box-shadow: 0 0 10px currentColor;
+}
+
+
+
 
 /* El grupo de botones oculto por defecto */
 .action-group {
@@ -136,7 +193,7 @@
 }
 
 /* Mostrar botones al hacer hover en la tarjeta */
-.role-card:hover .action-group {
+.nodo-card:hover .action-group {
   opacity: 1;
   transform: translateY(0);
 }

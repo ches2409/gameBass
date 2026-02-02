@@ -1,0 +1,106 @@
+<!-- Fondo del Modal (Backdrop) -->
+<div class="modal-overlay" id="createJerarquiaModal" style="display: none;">
+
+  <!-- Contenedor del Modal -->
+  <div class="modal-container">
+
+    <!-- Elementos Decorativos de Esquina -->
+    <div class="corner-bracket tl"></div>
+    <div class="corner-bracket tr"></div>
+    <div class="corner-bracket bl"></div>
+    <div class="corner-bracket br"></div>
+
+    <!-- Escáner Láser Decorativo (Animado) -->
+    <div class="modal-laser-line"></div>
+
+    <!-- Contenido del Formulario -->
+    <div class="modal-content">
+
+      <header class="modal-header">
+        <div class="header-main">
+          <span class="status-indicator"></span>
+          <h2>INYECTAR_NIVEL_ACCESO</h2>
+        </div>
+        <p class="header-subtitle">REESCRIBIENDO_CAPACIDADES_NEURALES_v4.2</p>
+      </header>
+
+    <form class="injection-form" action="{{ url_for('jerarquias.create') }}" method="POST">
+
+        <!-- Campo: Nombre de Jerarquia / nivel de acceso -->
+        <div class="input-group">
+
+            <label><span class="label-icon">shield</span> NOMBRE_RANGO</label>
+            <input type="text" name="nombre_de_jerarquia" placeholder="Ej: Omega" required>
+            <div class="input-focus-line"></div>
+        </div>
+
+        <!-- Campo: Subtitulo de Jerarquia-->
+        <div class="input-group">
+
+            <label><span class="label-icon">category</span> SUBTITULO_TECH</label>
+            <input type="text" name="subtitulo_de_jerarquia" placeholder="Ej: THE SINGULARITY" required>
+            <div class="input-focus-line"></div>
+        </div>
+
+        <!-- Campo: peso o nivel de Jerarquia -->
+        <div class="input-group">
+
+            <label><span class="label-icon">lock_open</span> NIVEL_ACCESO</label>
+            <input type="number" name="nivel_jerarquia" placeholder="RANGO 10 / 100" required>
+            <div class="input-focus-line"></div>
+        </div>
+
+
+{#    Crear "MATRIZ_DE_PROTOCOLOS_VINCULADOS" security_update_good#}
+
+
+        <!-- Descripción -->
+        <div class="input-group">
+          <label><span class="label-icon">description</span> DEFINICION_OPERATIVA</label>
+          <!-- Agregamos name y readonly -->
+          <textarea name="descripcion_de_jerarquia" placeholder="Manifiesto detallado de las facultades del rango" id="inputDescripcionJerarquiaCreate" readonly></textarea>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="toggleModal('createJerarquiaModal')">ABORTAR_PROCESO</button>
+          <button type="submit" class="btn-submit">
+            <span class="btn-glow"></span>
+            CONFIRMAR_INYECCIÓN
+          </button>
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Esperamos a que el HTML termine de cargar completamente
+  document.addEventListener('DOMContentLoaded', function() {
+
+      // PASO 1: EL PUENTE DE DATOS (Python -> JavaScript)
+      // Creamos un objeto constante en JS. Jinja2 escribirá las claves y valores aquí.
+      // Al ver el código fuente en el navegador, verás un objeto JSON puro.
+      const mapaDescripciones = {
+          {% for codigo in codigos_listado %}
+              "{{ codigo.codigo }}": {{ codigo.capacidad | tojson }},
+          {% endfor %}
+      };
+
+      // PASO 2: REFERENCIAS AL DOM (Document Object Model)
+      // Buscamos los elementos HTML que vamos a manipular
+      const inputCodigo = document.getElementById('inputCodigoProtocoloCreate');
+      const txtDescripcion = document.getElementById('inputDescripcionProtocoloCreate');
+
+      // PASO 3: EL ESCUCHADOR DE EVENTOS (Event Listener)
+      // Detectamos cuando el usuario escribe o selecciona algo en el input
+      inputCodigo.addEventListener('input', function() {
+          const valorSeleccionado = this.value;
+
+          // Buscamos en el mapa: Si existe la clave, ponemos su valor. Si no, ponemos vacío ("").
+          txtDescripcion.value = mapaDescripciones[valorSeleccionado] || "";
+      });
+  });
+</script>

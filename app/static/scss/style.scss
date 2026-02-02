@@ -48,13 +48,13 @@
 @use 'components/main_menu';
 @use "components/title_menu";
 @use "components/status-bar";
+@use 'components/alert-container';
 @use 'components/buttons';
 @use "components/metric-card";
 @use 'components/tactical-card';
 @use 'components/subjects-card';
-@use 'components/alert-container';
 @use "components/level-card";
-@use 'components/role-card';
+@use 'components/general-card';
 @use 'components/protocols-card';
 @use 'components/matriz-card';
 @use "components/modal-form";
@@ -77,7 +77,7 @@
 
 //@use 'utilities/spacing';
 //@use 'utilities/colors';
-//@use 'utilities/typography';
+@use 'utilities/typography';
 //@use 'utilities/layout';
 
 // ==========================================================================

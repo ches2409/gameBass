@@ -29,7 +29,7 @@ def get_dashboard_data(current_path):
         {'icon_main': 'shield_person', 'name_main': 'TACTICAL_SQUADS', 'title_section': menu_titles[0]['name_section'], 'url': '/equipos','name_breadcrumbs':'SYNERGY_CORES'},
         {'icon_main': 'emoji_events', 'name_main': 'ARENA_OPS', 'title_section': menu_titles[1]['name_section'], 'url': '/arena','name_breadcrumbs':'CONFLICT_THEATERS'},
         {'icon_main': 'sports_esports', 'name_main': 'VIRTUAL_SOFTWARE','title_section': menu_titles[1]['name_section'], 'url': '/software','name_breadcrumbs':'DIGITAL_FABRIC'},
-        {'icon_main': 'verified_user', 'name_main': 'CLEARANCE_LVLS', 'title_section': menu_titles[2]['name_section'], 'url': '/arche','name_breadcrumbs':'ASCENSION_STRATA'},
+        {'icon_main': 'verified_user', 'name_main': 'CLEARANCE_LVLS', 'title_section': menu_titles[2]['name_section'], 'url': '/jerarquias','name_breadcrumbs':'ASCENSION_STRATA'},
         {'icon_main': 'settings_input_component', 'name_main': 'CORE_PROTOCOLS','title_section': menu_titles[2]['name_section'], 'url': '/protocolos','name_breadcrumbs':'NEURAL_CORE'},
         {'icon_main': 'genetics', 'name_main': 'NEURAL_ARCHETYPES', 'title_section': menu_titles[2]['name_section'], 'url': '/roles', 'name_breadcrumbs': 'PRIME_ETHOS'}
         
@@ -38,7 +38,7 @@ def get_dashboard_data(current_path):
     # 3. Datos de Alertas
     alerts_data = [
         {'icon': 'frame_person', 'title': '[INYECCION_SUJETO_DETECTADA]','subtitle': 'Monitoreando nuevos enlaces neurales en el Sector_Omega...', 'url_info': '/usuarios', 'btn_info':'INYECTAR_SUJETO'},
-        {'icon': 'hub', 'title': '[ARQUITECTURA_DE_SINCRO_ORDEN]','subtitle': 'Mapeo dinámico de capacidad nerual y autoridad de mando...', 'url_info': '/arquetipos','btn_info':'INYECTAR_SUJETO'},
+        {'icon': 'hub', 'title': '[ARQUITECTURA_DE_SINCRO_ORDEN]','subtitle': 'Mapeo dinámico de capacidad nerual y autoridad de mando...', 'url_info': '/jerarquias','btn_info':'INYECTAR_NIVEL_ACCESO'},
         {'icon': 'biotech', 'title': '[LIBRERÍA_DE_ADN_OPERATIVO]','subtitle': 'Gestión de arquetipos y modelos neurales...', 'url_info': '/roles', 'btn_info':'INYECTAR_ROL'},
         {'icon': 'terminal', 'title': '[MATRIZ_PROTOCOLOS_EJECUCIÓN]', 'subtitle': 'Definición de reglas de acceso al nucleo...', 'url_info': '/protocolos', 'btn_info': 'INYECTAR_NODO'},
     ]

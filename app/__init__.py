@@ -11,6 +11,7 @@ from app.db import db
 # Importar modelos para que SQLAlchemy los reconozca al crear tablas
 from app.models.roles_models import Rol
 from app.models.protocolos_models import Protocolo
+from app.models.jerarquias_models import Jerarquia
 
 def create_app(config_class=DevConfig):
     base_dir = os.path.abspath(os.path.dirname(__file__))
@@ -26,10 +27,12 @@ def create_app(config_class=DevConfig):
     from app.routes.roles_routes import rol_bp
     from app.routes.index_routes import inicio_bp
     from app.routes.protocolos_routes import protocolo_bp
+    from app.routes.jerarquias_routes import jerarquia_bp
     
     app.register_blueprint(rol_bp)
     app.register_blueprint(inicio_bp)
     app.register_blueprint(protocolo_bp)
+    app.register_blueprint(jerarquia_bp)
     
     
     return app

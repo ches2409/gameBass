@@ -1,19 +1,19 @@
 <!-- Contenedor General -->
-<div class="arkadex-grid">
+<div class="nodo-grid">
 
 
     {% for role in roles %}
-        <div class="role-card {{ role.especialidad_rol.color }}">
+        <div class="nodo-card {{ role.especialidad_rol.color }}">
 
             <div class="card-header">
                 <span class="id-tag">ARC-{{ role.nombre_rol[:4] | upper }}</span>
                 <div class="status-dot"></div>
             </div>
 
-            <h3 class="role-name" >{{ role.nombre_rol | upper }}</h3>
-            <p class="specialty" >{{ role.especialidad_rol.titulo | upper}}</p>
+            <h3 class="rank-name" >{{ role.nombre_rol | upper }}</h3>
+            <p class="rank-subtitle" >{{ role.especialidad_rol.titulo | upper}}</p>
             <div class="stat-bar"><div class="fill" style="width: 100%;"></div></div>
-            <p class="description">{{ role.descripcion_rol }}</p>
+            <p class="rank-description">{{ role.descripcion_rol }}</p>
 
             <div class="action-group">
                 <!-- Botón Editar -->

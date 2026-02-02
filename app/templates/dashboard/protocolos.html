@@ -3,6 +3,7 @@
 {% block title %}Protocolos | Arkadex{% endblock %}
 
 {% block dashboard_body %}
+
 	{% block alertContainer %}
 
         <!-- Si existe una alerta específica para esta URL (alert_finish), la mostramos -->
@@ -14,21 +15,7 @@
 
     {% endblock %}
 
-    <div class="intro_card mb-4">
-        <div class="intro_main w-100">
-            <div class="command">
-                <div class="command__code intel-badge">
-                    <p class="text_code">SYSTEM_CONFIG_0X01</p>
-                </div>
-            </div>
-
-            <!-- Título Principal con Atributo de Datos para el Glitch -->
-            <h2 class="glitch-title font-display" data-text="{{ page_title }}">
-                {{ page_title }}
-            </h2>
-
-        </div>
-    </div>
+    {% include 'components/header-section.html' %}
 
     <div class="protocolos_card">
 
