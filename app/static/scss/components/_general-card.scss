@@ -58,7 +58,7 @@
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 2px;
-  color: #444;
+  color: var(--neon); /* <-- Ahora usará el color dinámico */
   font-family: monospace;
 }
 

@@ -1,86 +1,122 @@
-{#Niveles de acceso#}
-
 {% extends 'dashboard/index.html' %}
 
-{% block title %}Jerarquias | Arkadex{% endblock %}
+{% block title %}Jerarquías | Arkadex{% endblock %}
 
 {% block dashboard_body %}
 
-{#    Alertas de ventana#}
-
     {% block alertContainer %}
-
-        <!-- Si existe una alerta específica para esta URL (alert_finish), la mostramos -->
         {% if alert_finish %}
-            {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info, modal_target='createJerarquiaModal'%}
+            {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info, modal_target='createJerarquiaModal' %}
                 {% include 'components/alert-container.html' %}
             {% endwith %}
         {% endif %}
-
     {% endblock %}
 
     {% include 'components/header-section.html' %}
 
-    <div class="jerarquia-container">
-        {% block jerarquiaContainer %}
-            {%  include 'components/general-card.html' %}
-        {% endblock %}
+    <!-- Contenedor para nuestras tarjetas, usando un grid para ordenarlas -->
+    <div class="nodo-grid">
+        {% if jerarquias %}
+            <!-- 1. Bucle: Por cada 'jerarquia' en la lista 'jerarquias' que nos envió Python... -->
+            {% for jerarquia in jerarquias %}
+                <!-- 2. Incluir el molde: Usamos nuestro componente y le pasamos la jerarquia actual -->
+                {% include 'components/general-card.html' %}
+            {% endfor %}
+        {% else %}
+            <!-- Mensaje si no hay ninguna jerarquía creada todavía -->
+
+            <div class="error-container">
+                {%  include 'components/error-datos.html'%}
+            </div>
+
+        {% endif %}
     </div>
 
+    {# Incluimos el modal de creación que ya tiene toda la lógica de los tags #}
     {% include 'dashboard/jerarquias/create.html' %}
-    {% include 'dashboard/jerarquias/update.html' %}
+     {% include 'dashboard/jerarquias/update.html' %}
     {% include 'components/delete-modal.html' %}
+    
+    <style>
+        /* Estilos para la barra de progreso de autoridad */
+        .stat-bar {
+            /* ... aquí puedes poner estilos para el contenedor de la barra ... */
+            width: 100%;
+            height: 5px;
+            background-color: rgba(128, 128, 128, 0.2);
+        }
+        .stat-bar .fill {
+            height: 100%;
+            {#background-color: var(--accent-color, var(--primary)); /* Usa el color de acento del sistema */#}
+            width: var(--auth-weight, 0%); /* ¡LA MAGIA! Usa la variable, y si no existe, usa 0% */
+            transition: width 0.5s ease-out; /* Animación suave */
+        }
+    </style>
 
     <script>
         function toggleModal(modalID) {
             const modal = document.getElementById(modalID);
             if (modal) {
-                // Si usas display: none en CSS
-                if (modal.style.display === "none" || modal.style.display === "") {
-                    modal.style.display = "flex";
-                } else {
-                    modal.style.display = "none";
-                }
-                // O si usas una clase .active en tu CSS:
-                // modal.classList.toggle('active');
+                modal.style.display = (modal.style.display === "none" || modal.style.display === "") ? "flex" : "none";
             }
         }
-{#
+
         function openUpdateModal(button) {
             // 1. Obtener datos del botón
             const id = button.getAttribute('data-id');
             const nombre = button.getAttribute('data-nombre');
-            const especialidad = button.getAttribute('data-especialidad');
-            const descripcion = button.getAttribute('data-descripcion');
+            const subtitulo = button.getAttribute('data-subtitulo');
+            const nivel = button.getAttribute('data-nivelJerarquia');
+            const color = button.getAttribute('data-colorJerarquia');
+            const descripcion = button.getAttribute('data-descripcionJerarquia');
+            // Obtenemos la cadena de IDs: "1,5,12"
+            const protocolosIdsStr = button.getAttribute('data-protocolos');
 
             // 2. Construir la URL de actualización dinámicamente
-            // Usamos un ID '0' temporal para que Flask genere la base de la URL, y luego lo reemplazamos
-            const baseUrl = "{{ url_for('jerarquias.update', id_rol=0) }}";
-            const updateUrl = baseUrl.replace('0', id);
+            const form = document.getElementById('formUpdateJerarquia');
+            const baseUrl = "{{ url_for('jerarquia.update', id_jerarquia=0) }}"; // URL base con '0'
+            const updateUrl = baseUrl.replace('/0', '/' + id); // Reemplazo seguro
 
-            // 3. Asignar al formulario y a los inputs
-            document.getElementById('formUpdateJerarquia').action = updateUrl;
+            // 3. Asignar valores a los inputs del formulario
+            form.action = updateUrl;
             document.getElementById('inputNombreJerarquia').value = nombre;
-            document.getElementById('inputEspecialidadJerarquia').value = especialidad;
+            document.getElementById('inputSubtituloJerarquia').value = subtitulo;
+            document.getElementById('inputNivelJerarquia').value = nivel;
+            document.getElementById('inputColorJerarquia').value = color;
             document.getElementById('inputDescripcionJerarquia').value = descripcion;
 
-            // 4. Abrir el modal
+            // 4. Manejar los checkboxes de protocolos
+            // Convertimos la cadena "1,5,12" en un array de strings: ["1", "5", "12"]
+            const protocolosSeleccionados = protocolosIdsStr ? protocolosIdsStr.split(',') : [];
+
+            // Obtenemos TODOS los checkboxes del modal de ACTUALIZACIÓN
+            const allCheckboxes = document.querySelectorAll('#updateJerarquiaModal .hidden-checkbox');
+
+            // Iteramos sobre todos los checkboxes para marcarlos o desmarcarlos
+            allCheckboxes.forEach(checkbox => {
+                // El .value del checkbox es un string. Comparamos si está en nuestro array.
+                checkbox.checked = protocolosSeleccionados.includes(checkbox.value);
+            });
+
+            // 5. Abrir el modal
             toggleModal('updateJerarquiaModal');
         }
-
-        function openDeleteModal(deleteUrl, jerarquiaName) {
+        function openDeleteModal(deleteUrl, itemName) {
             // 1. Actualizar el enlace del botón de confirmación
             document.getElementById('btnConfirmPurge').href = deleteUrl;
 
             // 2. Mostrar el nombre del rol en la advertencia
-            document.getElementById('deleteJerarquiaName').textContent = jerarquiaName;
+            document.getElementById('deleteItemName').textContent = itemName;
 
             // 3. Abrir el modal
-            toggleModal('deleteJerarquiaModal');
+            toggleModal('deleteConfirmationModal');
         }
-        #}
+
+        // Las funciones openUpdateModal y openDeleteModal ya están preparadas en la tarjeta.
+        // Cuando implementes la actualización, solo necesitarás crear el modal 'updateJerarquiaModal'
+        // y la lógica en esta sección de script, similar a como lo hiciste para Roles y Protocolos.
+        // La función openDeleteModal ya es genérica y debería funcionar.
 
     </script>
-
 
 {% endblock %}

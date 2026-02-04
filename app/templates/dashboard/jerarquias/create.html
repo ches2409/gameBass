@@ -16,15 +16,48 @@
     <!-- Contenido del Formulario -->
     <div class="modal-content">
 
+      <!-- ESTILOS LOCALES PARA EL SISTEMA DE TAGS -->
+      <style>
+        /* Ocultamos el checkbox real pero lo mantenemos accesible para el formulario */
+        .hidden-checkbox {
+            display: none;
+        }
+
+        /* Estilo base del Tag (Label) - Estado Inactivo */
+        .selectable-tag {
+            cursor: pointer;
+            opacity: 0.5;
+            border: 1px solid var(--border-color, #333); /* Fallback color */
+            transition: all 0.3s ease;
+            user-select: none; /* Evita que se seleccione el texto al hacer click rápido */
+        }
+
+        .selectable-tag:hover {
+            opacity: 0.8;
+            border-color: var(--accent-color, #00ffcc);
+            box-shadow: 0 0 8px rgba(0, 255, 204, 0.2);
+        }
+
+        /* Estado ACTIVO: Cuando el checkbox hermano anterior está marcado */
+        .hidden-checkbox:checked + .selectable-tag {
+            opacity: 1;
+            background: rgba(0, 255, 204, 0.15);
+            border-color: #00ffcc;
+            color: #00ffcc;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+            text-shadow: 0 0 5px rgba(0, 255, 204, 0.8);
+        }
+      </style>
+
       <header class="modal-header">
         <div class="header-main">
           <span class="status-indicator"></span>
           <h2>INYECTAR_NIVEL_ACCESO</h2>
         </div>
-        <p class="header-subtitle">REESCRIBIENDO_CAPACIDADES_NEURALES_v4.2</p>
+        <p class="header-subtitle">INYECTANDO_CAPACIDADES_NEURALES_v4.2</p>
       </header>
 
-    <form class="injection-form" action="{{ url_for('jerarquias.create') }}" method="POST">
+    <form class="injection-form" action="{{ url_for('jerarquia.create') }}" method="POST">
 
         <!-- Campo: Nombre de Jerarquia / nivel de acceso -->
         <div class="input-group">
@@ -50,15 +83,41 @@
             <div class="input-focus-line"></div>
         </div>
 
+        <!-- Campo: Color Identificador -->
+        <div class="input-group">
+            <label><span class="label-icon">palette</span> COLOR_IDENTIFICADOR</label>
+            <!-- Este input mostrará un selector de color nativo del navegador -->
+            <input type="color" name="color_jerarquia" value="#A3FF00" class="color-picker">
+        </div>
 
-{#    Crear "MATRIZ_DE_PROTOCOLOS_VINCULADOS" security_update_good#}
+        <!-- SECCIÓN DE PROTOCOLOS VINCULADOS -->
+        <label style="margin-top: 15px; display: block;"><span class="label-icon">security_key</span> MATRIZ_DE_PROTOCOLOS_VINCULADOS</label>
+        <div class="protocol-tags">
+            {% if protocolos_listado %}
+                {% for protocolo in protocolos_listado %}
+                    <!-- 1. El Checkbox: name="protocolos_ids" enviará una lista de IDs seleccionados al servidor -->
+                    <input type="checkbox"
+                           id="proto_create_{{ protocolo.id_protocolo }}"
+                           name="protocolos_ids"
+                           value="{{ protocolo.id_protocolo }}"
+                           class="hidden-checkbox">
+
+                    <!-- 2. El Label: Actúa como el botón visual -->
+                    <label for="proto_create_{{ protocolo.id_protocolo }}" class="tag selectable-tag">
+                        {{ protocolo.codigo_protocolo.codigo }}
+                    </label>
+                {% endfor %}
+            {% else %}
+                <p style="color: #666; font-size: 0.8rem;">NO_HAY_PROTOCOLOS_DISPONIBLES_EN_LA_RED</p>
+            {% endif %}
+        </div>
 
 
         <!-- Descripción -->
         <div class="input-group">
           <label><span class="label-icon">description</span> DEFINICION_OPERATIVA</label>
           <!-- Agregamos name y readonly -->
-          <textarea name="descripcion_de_jerarquia" placeholder="Manifiesto detallado de las facultades del rango" id="inputDescripcionJerarquiaCreate" readonly></textarea>
+          <textarea name="descripcion_de_jerarquia" placeholder="Manifiesto detallado de las facultades del rango" id="inputDescripcionJerarquiaCreate"></textarea>
         </div>
 
         <!-- Botones de Acción -->
@@ -75,32 +134,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  // Esperamos a que el HTML termine de cargar completamente
-  document.addEventListener('DOMContentLoaded', function() {
-
-      // PASO 1: EL PUENTE DE DATOS (Python -> JavaScript)
-      // Creamos un objeto constante en JS. Jinja2 escribirá las claves y valores aquí.
-      // Al ver el código fuente en el navegador, verás un objeto JSON puro.
-      const mapaDescripciones = {
-          {% for codigo in codigos_listado %}
-              "{{ codigo.codigo }}": {{ codigo.capacidad | tojson }},
-          {% endfor %}
-      };
-
-      // PASO 2: REFERENCIAS AL DOM (Document Object Model)
-      // Buscamos los elementos HTML que vamos a manipular
-      const inputCodigo = document.getElementById('inputCodigoProtocoloCreate');
-      const txtDescripcion = document.getElementById('inputDescripcionProtocoloCreate');
-
-      // PASO 3: EL ESCUCHADOR DE EVENTOS (Event Listener)
-      // Detectamos cuando el usuario escribe o selecciona algo en el input
-      inputCodigo.addEventListener('input', function() {
-          const valorSeleccionado = this.value;
-
-          // Buscamos en el mapa: Si existe la clave, ponemos su valor. Si no, ponemos vacío ("").
-          txtDescripcion.value = mapaDescripciones[valorSeleccionado] || "";
-      });
-  });
-</script>

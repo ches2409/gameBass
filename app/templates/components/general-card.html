@@ -1,134 +1,65 @@
-{% if not protocolos %}
-
-    {#
-    <div class="error-container">
-        {%  include 'components/error-datos.html'%}
+<!--
+Este componente ahora solo representa UNA tarjeta.
+El contenedor de la grilla (nodo-grid) se moverá al template padre (jerarquias.html).
+-->
+<div class="nodo-card" style="--neon: {{ jerarquia.color_hex | default('#A3FF00') }};">
+    <!-- Encabezado de Rango -->
+    <div class="card-header ">
+        <span class="id-tag counter">LVL_{{ jerarquia.nivel_acceso }}</span>
     </div>
-    #}
 
-    <div class="nodo-grid">
+    <h3 class="rank-name text-7xl">{{ jerarquia.nombre_jerarquia }}</h3>
+    <p class="rank-subtitle">{{ jerarquia.subtitulo_jerarquia }}</p>
 
-        <div class="nodo-card colorDinamico">
+    <div class="card-body">
+        <p class="rank-description">{{ jerarquia.descripcion_jerarquia | truncate(120) }}</p>
+    </div>
 
-        <!-- Encabezado de Rango -->
-            <div class="card-header ">
-                <span class="id-tag counter colorDinamicoLevel">LVL_99</span>
-            </div>
-
-            <h3 class="rank-name text-7xl">OMEGA</h3>
-            <p class="rank-subtitle">THE_SINGULARITY</p>
-
-            <!-- Cuerpo de Datos -->
-            <div class="card-body">
-                <p class="rank-description">Control absoluto sobre la infraestructura neural y protocolos de purga.</p>
-
-                <!-- Matriz de Protocolos -->
-                <div class="item-tags">
-                    <span class="tag">ROOT_ACCESS</span>
-                    <span class="tag">CORE_PURGE</span>
-                    <span class="tag">BIOMETRIC_REWRITE</span>
-                    <span class="tag">NEURAL_DISCONNECT</span>
-                    <span class="tag">ARENA_ARCHITECT</span>
-                </div>
-            </div>
-
-            <!-- Indicador de Peso de Autoridad -->
-            <div class="card-footer">
-                <div class="stat-bar"><div class="fill" style="width: 100%;"></div></div>
-{#                <div class="progress-container">#}
-{#                    <div class="stat-bar"><div class="fill" style="width: 100%;"></div></div>#}
-{#                </div>#}
-                <span class="footer-label">AUTH_WEIGHT</span>
-            </div>
-
-    {#    <div class="action-group">#}
-    {#        <!-- Botón Editar -->#}
-    {#        <button class="action-btn edit-btn"#}
-    {#                onclick="openUpdateModal(this)"#}
-    {#                data-id="{{ role.id_rol }}"#}
-    {#                data-nombre="{{ role.nombre_rol }}"#}
-    {#                data-especialidad="{{ role.especialidad_rol.titulo }}"#}
-    {#                data-descripcion="{{ role.descripcion_rol }}"#}
-    {#                title="EDIT_NODE">#}
-    {#          <span class="material-symbols-outlined">edit</span>#}
-    {#        </button>#}
-    {##}
-    {#        <!-- Botón Eliminar -->#}
-    {#        <button class="action-btn delete-btn"#}
-    {#                title="PURGE_NODE"#}
-    {#                onclick="openDeleteModal('{{ url_for('roles.delete', id_rol=role.id_rol) }}', '{{ role.nombre_rol | upper }}')">#}
-    {#          <span class="material-symbols-outlined">delete</span>#}
-    {#        </button>#}
-    {##}
-    {#    </div>#}
-
+    <!-- Sección para mostrar los protocolos asociados como tags -->
+    <div class="card-tags-section">
+        <div class="card-tags">
+            {% if jerarquia.protocolos %}
+                {% for protocolo in jerarquia.protocolos %}
+                    <span class="tag">{{ protocolo.codigo_protocolo.codigo }}</span>
+                {% endfor %}
+            {% else %}
+                <span class="tag tag-empty">SIN_PROTOCOLOS</span>
+            {% endif %}
         </div>
+    </div>
 
-
-
+    <!-- Indicador de Peso de Autoridad -->
+    <div class="card-footer">
+        <div class="stat-bar" style="--auth-weight: {{ jerarquia.nivel_acceso }}%;">
+            <div class="fill"></div>
+        </div>
+        <span class="footer-label">AUTH_WEIGHT</span>
     </div>
 
 
-{% else %}
+    <div class="action-group">
+                    <!-- Botón Editar -->
+                    <button class="action-btn edit-btn"
+                            onclick="openUpdateModal(this)"
+                            data-id="{{ jerarquia.id_jerarquia }}"
+                            data-nombre="{{ jerarquia.nombre_jerarquia }}"
+                            data-subtitulo="{{ jerarquia.subtitulo_jerarquia }}"
+                            data-nivelJerarquia="{{ jerarquia.nivel_acceso }}"
+                            data-colorJerarquia="{{ jerarquia.color_hex }}"
+                            data-descripcionJerarquia="{{ jerarquia.descripcion_jerarquia }}"
+                            data-protocolos="{{ jerarquia.protocolos|map(attribute='id_protocolo')|join(',') }}"
+                            title="EDIT_NODE">
+                      <span class="material-symbols-outlined">edit</span>
+                    </button>
 
-    <div class="jerarquia-grid">
-    <div class="clearance-card">
-  <!-- Botones de Acción (Visibles al hacer Hover) -->
-{#  <div class="card-actions">#}
-{#    <button class="btn-edit"><span class="material-symbols-outlined">edit</span></button>#}
-{#    <button class="btn-delete"><span class="material-symbols-outlined">delete</span></button>#}
-{#  </div>#}
+                    <!-- Botón Eliminar -->
+                    <button class="action-btn delete-btn"
+                            title="PURGE_NODE"
+                            onclick="openDeleteModal('{{ url_for('jerarquia.delete', id_jerarquia=jerarquia.id_jerarquia) }}', '{{ jerarquia.nombre_jerarquia | upper }}')">
+                      <span class="material-symbols-outlined">delete</span>
+                    </button>
 
-  <!-- Encabezado de Rango -->
-  <div class="card-header">
-    <h4 class="rank-name">OMEGA</h4>
-    <span class="access-lvl" style="color: #FF0000;">LVL_99</span>
-  </div>
-  <p class="rank-subtitle" style="color: #FF0000;">THE_SINGULARITY</p>
+                </div>
 
-  <!-- Cuerpo de Datos -->
-  <div class="card-body">
-    <p class="rank-description">Control absoluto sobre la infraestructura neural y protocolos de purga.</p>
-
-    <!-- Matriz de Protocolos -->
-    <div class="protocol-tags">
-      <span class="tag">ROOT_ACCESS</span>
-      <span class="tag">CORE_PURGE</span>
-      <span class="tag">BIOMETRIC_REWRITE</span>
-      <span class="tag">NEURAL_DISCONNECT</span>
-    </div>
-  </div>
-
-  <!-- Indicador de Peso de Autoridad -->
-  <div class="card-footer">
-    <div class="progress-container">
-      <div class="progress-bar" style="width: 99%; background-color: #FF0000;"></div>
-    </div>
-    <span class="footer-label">AUTH_WEIGHT</span>
-  </div>
-
-{#    <div class="action-group">#}
-{#        <!-- Botón Editar -->#}
-{#        <button class="action-btn edit-btn"#}
-{#                onclick="openUpdateModal(this)"#}
-{#                data-id="{{ role.id_rol }}"#}
-{#                data-nombre="{{ role.nombre_rol }}"#}
-{#                data-especialidad="{{ role.especialidad_rol.titulo }}"#}
-{#                data-descripcion="{{ role.descripcion_rol }}"#}
-{#                title="EDIT_NODE">#}
-{#          <span class="material-symbols-outlined">edit</span>#}
-{#        </button>#}
-{##}
-{#        <!-- Botón Eliminar -->#}
-{#        <button class="action-btn delete-btn"#}
-{#                title="PURGE_NODE"#}
-{#                onclick="openDeleteModal('{{ url_for('roles.delete', id_rol=role.id_rol) }}', '{{ role.nombre_rol | upper }}')">#}
-{#          <span class="material-symbols-outlined">delete</span>#}
-{#        </button>#}
-{##}
-{#    </div>#}
 
 </div>
-</div>
-
-{% endif %}
