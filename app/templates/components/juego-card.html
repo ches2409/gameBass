@@ -1,0 +1,59 @@
+
+<div class="nodo-card" style="--neon: {{ juego.color_juego | default('#A3FF00') }};">
+    <!-- Encabezado de Rango -->
+    <div class="card-header ">
+
+        <div class="engine-icon" >
+            <span class="material-symbols-outlined">sports_esports</span>
+        </div>
+
+    </div>
+
+    <h3 class="rank-name text-7xl">{{ juego.nombre_juego | upper}}</h3>
+    <p class="rank-subtitle">{{ juego.genero_juego | upper }}</p>
+
+    <div class="card-body">
+
+        <div class="tech-specs">
+            <div class="spec-row">
+              <span class="label">ENGINE</span>
+              <span class="value">{{ juego.motor_juego | upper }}</span>
+            </div>
+            <div class="spec-row">
+              <span class="label">STATUS</span>
+              <span class="value status-{{ juego.estado_juego.name | lower }}">{{ juego.estado_juego.value | upper }}</span>
+            </div>
+      </div>
+
+    </div>
+
+
+
+    <div class="action-group">
+        <!-- Botón Editar -->
+        <button class="action-btn edit-btn"
+                onclick="openUpdateModal(this)"
+                data-id="{{ juego.id_juego }}"
+                data-nombre="{{ juego.nombre_juego }}"
+                data-motor="{{ juego.motor_juego }}"
+                data-genero="{{ juego.genero_juego }}"
+                data-estado="{{ juego.estado_juego.name }}"
+                data-color="{{ juego.color_juego }}"
+                title="UPDATE_NODE">
+          <span class="material-symbols-outlined">edit</span>
+        </button>
+
+
+        <!-- Botón Eliminar -->
+        <button class="action-btn delete-btn"
+                title="PURGE_NODE"
+                onclick="openDeleteModal('{{ url_for('juego.delete', id_juego=juego.id_juego) }}', '{{ juego.nombre_juego | upper }}')">
+          <span class="material-symbols-outlined">delete</span>
+        </button>
+
+
+    </div>
+
+
+
+</div>

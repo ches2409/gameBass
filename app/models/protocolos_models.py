@@ -6,7 +6,6 @@ from typing import List
 
 from sqlalchemy import Enum as _Enum
 
-# Nota: No necesitamos importar Jerarquia aqui si usamos strings ("Jerarquia") para la relacion
 
 class Protocolo(Base):
     __tablename__ = "Protocolos"

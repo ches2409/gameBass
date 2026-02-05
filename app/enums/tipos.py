@@ -33,6 +33,11 @@ class EstadoParticipacion(enum.Enum):
     activo="activo"
     eliminado="eliminado"
     
+class EstadoJuego(enum.Enum):
+    estable="estable"
+    degraded="degrade"
+    beta="beta"
+    
 class EspecialidadRol(enum.Enum):
     frontLine_defense = ("FRONTLINE_DEFENSE", "Resiliencia neural absoluta. Especialista en mitigación de daños y control de presión.","frontLineDefense")
     neural_stealth = ("NEURAL_STEALTH", "Infiltración profunda. Capaz de evadir escaneos de seguridad y eliminación silenciosa.","neuralStealth")

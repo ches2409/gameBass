@@ -1,0 +1,52 @@
+<div class="card-item">
+    <!-- Esquina superior izquierda con el nivel de acceso -->
+    <div class="card-corner-badge">
+        <span class="level-text">LVL</span>
+        <span class="level-value">{{ jerarquia.nivel_acceso }}</span>
+    </div>
+
+    <!-- Contenido principal de la tarjeta -->
+    <div class="card-content">
+        <div class="card-header">
+            <div class="card-icon-container">
+                <span class="material-symbols-outlined card-bg-icon">shield_person</span>
+            </div>
+            <div class="card-title-group">
+                <h3 class="card-title">{{ jerarquia.nombre_jerarquia }}</h3>
+                <p class="card-subtitle">{{ jerarquia.subtitulo_jerarquia }}</p>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <p class="card-description">{{ jerarquia.descripcion_jerarquia | truncate(120) }}</p>
+        </div>
+
+        <!-- Sección para mostrar los protocolos asociados como tags -->
+        <div class="card-tags-section">
+            <span class="tags-label">PROTOCOLOS_ASIGNADOS:</span>
+            <div class="card-tags">
+                {% if jerarquia.protocolos %}
+                    {% for protocolo in jerarquia.protocolos %}
+                        <span class="tag">{{ protocolo.codigo_protocolo.codigo }}</span>
+                    {% endfor %}
+                {% else %}
+                    <span class="tag tag-empty">SIN_PROTOCOLOS</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie de la tarjeta con los botones de acción -->
+    <div class="card-footer">
+        <div class="footer-line-art"></div>
+        <div class="card-actions">
+            {# Estos botones no funcionarán aún, pero preparamos la estructura #}
+            <button class="btn-action btn-update" onclick="openUpdateModal(this)">
+                <span class="material-symbols-outlined">edit</span> RECALIBRAR
+            </button>
+            <button class="btn-action btn-delete" onclick="openDeleteModal('{{ url_for('jerarquia.delete', id_jerarquia=jerarquia.id_jerarquia) }}', '{{ jerarquia.nombre_jerarquia }}')">
+                <span class="material-symbols-outlined">delete</span> PURGAR
+            </button>
+        </div>
+    </div>
+</div>

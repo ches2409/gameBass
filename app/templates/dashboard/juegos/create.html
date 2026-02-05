@@ -1,0 +1,87 @@
+<!-- Fondo del Modal (Backdrop) -->
+<div class="modal-overlay" id="createJuegoModal" style="display: none;">
+
+  <!-- Contenedor del Modal -->
+  <div class="modal-container">
+
+    <!-- Elementos Decorativos de Esquina -->
+    <div class="corner-bracket tl"></div>
+    <div class="corner-bracket tr"></div>
+    <div class="corner-bracket bl"></div>
+    <div class="corner-bracket br"></div>
+
+    <!-- Escáner Láser Decorativo (Animado) -->
+    <div class="modal-laser-line"></div>
+
+    <!-- Contenido del Formulario -->
+    <div class="modal-content">
+
+
+      <header class="modal-header">
+        <div class="header-main">
+          <span class="status-indicator"></span>
+          <h2>INYECTAR_NIVEL_ACCESO</h2>
+        </div>
+        <p class="header-subtitle">INYECTANDO_CAPACIDADES_NEURALES_v4.2</p>
+      </header>
+
+    <form class="injection-form" action="{{ url_for('juego.create') }}" method="POST">
+
+        <!-- Campo: Nombre de Juego -->
+        <div class="input-group">
+
+            <label><span class="label-icon">shield</span> NOMBRE_SOFTWARE</label>
+            <input type="text" name="nombre_de_juego" placeholder="Ej: Valorant" required>
+            <div class="input-focus-line"></div>
+        </div>
+
+        <!-- Campo: Motor de Juego-->
+        <div class="input-group">
+
+            <label><span class="label-icon">category</span> MOTOR_ENGINE</label>
+            <input type="text" name="motor_de_juego" placeholder="Ej: Riot_Kernel" required>
+            <div class="input-focus-line"></div>
+        </div>
+
+        <!-- Campo: Genero del juego -->
+        <div class="input-group">
+
+            <label><span class="label-icon">lock_open</span> GENERO_ENCLAVE_NEURAL</label>
+            <input type="text" name="genero_de_juego" placeholder="TACTICAL_FPS" required>
+            <div class="input-focus-line"></div>
+        </div>
+
+        <!-- Select: seleccionar el estado del juego (traido del enum) -->
+        <div class="input-group">
+            <label><span class="label-icon">fingerprint</span> ESTADO_ACTUAL</label>
+            <select name="estado_de_juego" id="" class="estado_juego">
+                {% for estado in estados %}
+                    <option value="{{ estado.name }}">{{ estado.value | upper  }}</option>
+                {% endfor %}
+
+            </select>
+        </div>
+
+        <!-- Campo: Color Identificador -->
+        <div class="input-group">
+            <label><span class="label-icon">palette</span> FIRMA_CROMATICA</label>
+            <!-- Este input mostrará un selector de color nativo del navegador -->
+            <input type="color" name="color_de_juego" value="#A3FF00" class="color-picker">
+        </div>
+
+
+
+        <!-- Botones de Acción -->
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="toggleModal('createJuegoModal')">ABORTAR_PROCESO</button>
+          <button type="submit" class="btn-submit">
+            <span class="btn-glow"></span>
+            CONFIRMAR_INYECCIÓN
+          </button>
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+</div>

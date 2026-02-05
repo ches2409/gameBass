@@ -1,0 +1,89 @@
+{% extends 'dashboard/index.html' %}
+
+{% block title %}VIRTUAL_SOFTWARE | GameBass{% endblock %}
+
+{% block dashboard_body %}
+
+    {% block alertContainer %}
+        {% if alert_finish %}
+            {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info, modal_target='createJuegoModal' %}
+                {% include 'components/alert-container.html' %}
+            {% endwith %}
+        {% endif %}
+    {% endblock %}
+
+    {% include 'components/header-section.html' %}
+
+    <!-- Contenedor para nuestras tarjetas, usando un grid para ordenarlas -->
+    <div class="nodo-grid">
+        {% if juegos %}
+            <!-- 1. Bucle: Por cada 'juego' en la lista 'juegos' que nos envió Python... -->
+            {% for juego in juegos %}
+                <!-- 2. Incluir el molde: Usamos nuestro componente de tarjeta para juegos -->
+                {% include 'components/juego-card.html' %}
+            {% endfor %}
+        {% else %}
+            <!-- Mensaje si no hay ninguna jerarquía creada todavía -->
+
+            <div class="error-container">
+                {%  include 'components/error-datos.html'%}
+            </div>
+
+        {% endif %}
+    </div>
+
+    {# Aquí incluiremos los modales para Crear, Actualizar y Eliminar Juegos #}
+     {% include 'dashboard/juegos/create.html' %}
+     {% include 'dashboard/juegos/update.html' %}
+     {% include 'components/delete-modal.html' %}
+
+    <script>
+        // Función genérica para abrir/cerrar cualquier modal
+        function toggleModal(modalID) {
+            const modal = document.getElementById(modalID);
+            if (modal) {
+                modal.style.display = (modal.style.display === "none" || modal.style.display === "") ? "flex" : "none";
+            }
+        }
+
+
+        function openUpdateModal(button) {
+            // 1. Obtener datos del botón
+            const id = button.getAttribute('data-id');
+            const nombre = button.getAttribute('data-nombre');
+            const motor = button.getAttribute('data-motor');
+            const genero = button.getAttribute('data-genero');
+            const estado = button.getAttribute('data-estado');
+            const color = button.getAttribute('data-color');
+            // 2. Construir la URL de actualización dinámicamente
+            const form = document.getElementById('formUpdateJuego');
+            const baseUrl = "{{ url_for('juego.update', id_juego=0) }}"; // URL base con '0'
+            const updateUrl = baseUrl.replace('/0', '/' + id); // Reemplazo seguro
+
+            // 3. Asignar valores a los inputs del formulario
+            form.action = updateUrl;
+            document.getElementById('inputNombreJuego').value = nombre;
+            document.getElementById('inputMotorJuego').value = motor;
+            document.getElementById('inputGeneroJuego').value = genero;
+            document.getElementById('inputEstadoJuego').value = estado;
+            document.getElementById('inputColorJuego').value = color;
+
+            // 4. Mostrar el modal
+            toggleModal('updateJuegoModal');
+
+        }
+
+        function openDeleteModal(deleteUrl, itemName) {
+            // 1. Actualizar el enlace del botón de confirmación
+            document.getElementById('btnConfirmPurge').href = deleteUrl;
+
+            // 2. Mostrar el nombre del rol en la advertencia
+            document.getElementById('deleteItemName').textContent = itemName;
+
+            // 3. Abrir el modal
+            toggleModal('deleteConfirmationModal');
+        }
+
+    </script>
+
+{% endblock %}

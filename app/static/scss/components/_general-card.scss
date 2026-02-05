@@ -3,20 +3,31 @@
 
 .nodo-grid {
   display: grid;
+  /* Usamos auto-fit para crear tantas columnas de 320px como quepan.
+     El '1fr' se elimina para evitar que las tarjetas se estiren y dejen huecos. */
+  //grid-template-columns: repeat(auto-fit, 400px);
   grid-template-columns: repeat(auto-fit, minmax(max(250px, 22%), 1fr));
   gap: 20px;
   margin: 0 auto;
+  /* Alineamos el conjunto de tarjetas a la izquierda. */
+  justify-content: center;
+  /* Forzamos que todos los items de una fila se estiren a la misma altura.
+     Aunque es el valor por defecto, lo hacemos explícito para asegurar el comportamiento. */
+  //align-items: stretch;
 }
 
 /* Estilo Base de la Tarjeta */
 .nodo-card {
   --neon: #ffffff; /* Color por defecto */
+  display: flex;
+  flex-direction: column;
   background: #0a0c10;
   border: 1px solid rgba(255, 255, 255, 0.05);
   padding: 25px;
   position: relative;
-  max-width: 450px;
-  //width: 300px;
+  /* La tarjeta ocupará el ancho definido por el grid.
+     Eliminamos max-width para que no haya conflictos. */
+   //max-width: 450px;
   overflow: hidden;
   transition: all 0.4s ease;
   clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
@@ -146,6 +157,70 @@
   color: #9ca3af;
   background: rgba(255, 255, 255, 0.03);
 }
+
+/* TABLA DE SPECS */
+.tech-specs {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border-white);
+  padding: 10px;
+}
+
+/* Hacemos que el cuerpo de la tarjeta crezca para ocupar el espacio sobrante */
+.nodo-card .card-body {
+  flex-grow: 1;
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+.spec-row:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.spec-row .label {
+  font-family: 'Fira Code', monospace;
+  font-size: 8px;
+  color: var(--text-muted);
+}
+
+.spec-row .value {
+  font-family: 'Fira Code', monospace;
+  font-size: 9px;
+  color: white;
+  font-weight: bold;
+}
+
+.status-estable { color: #A3FF00 !important; }
+.status-degraded { color: #FF3E3E !important; animation: blink 1.5s infinite; }
+
+@keyframes blink {
+  50% { opacity: 0.4; }
+}
+
+
+/* Engine icon*/
+.engine-icon {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--neon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.3);
+}
+
+.engine-icon span {
+  color: var(--neon);
+  font-size: 20px;
+}
+
+
+
+
+
 
 /* Footer y Barra de Progreso */
 .card-footer {
