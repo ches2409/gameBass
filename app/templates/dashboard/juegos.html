@@ -32,9 +32,24 @@
         {% endif %}
     </div>
 
-    {# Aquí incluiremos los modales para Crear, Actualizar y Eliminar Juegos #}
-     {% include 'dashboard/juegos/create.html' %}
-     {% include 'dashboard/juegos/update.html' %}
+    {# 1. Importamos nuestro "libro de recetas" y le damos un apodo ('forms') #}
+    {% import 'macros/juego_form_macro.html' as forms %}
+
+    {# 2. Usamos la receta para "cocinar" el modal de CREACIÓN #}
+    {{ forms.render_juego_modal(
+        modal_id='createJuegoModal',
+        form_action=url_for('juego.create'),
+        submit_text='CONFIRMAR_INYECCIÓN',
+        estados=estados,
+        is_create=True) }}
+
+    {# 3. Usamos la MISMA receta para "cocinar" el modal de ACTUALIZACIÓN #}
+    {{ forms.render_juego_modal(
+        modal_id='updateJuegoModal',
+        form_action=url_for('juego.update', id_juego=0),
+        submit_text='ACTUALIZAR_INYECCIÓN',
+        estados=estados) }}
+
      {% include 'components/delete-modal.html' %}
 
     <script>
@@ -56,7 +71,7 @@
             const estado = button.getAttribute('data-estado');
             const color = button.getAttribute('data-color');
             // 2. Construir la URL de actualización dinámicamente
-            const form = document.getElementById('formUpdateJuego');
+            const form = document.getElementById('formupdateJuegoModal'); // ID del form ahora coincide con el del modal
             const baseUrl = "{{ url_for('juego.update', id_juego=0) }}"; // URL base con '0'
             const updateUrl = baseUrl.replace('/0', '/' + id); // Reemplazo seguro
 
