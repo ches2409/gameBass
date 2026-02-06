@@ -28,6 +28,9 @@
                 {% endmacro %}
 
                 {{ render_data_card(jerarquia, card_type='jerarquia',
+                    item_id=jerarquia.id_jerarquia,
+                    item_name=jerarquia.nombre_jerarquia,
+                    neon_color=jerarquia.color_hex,
                     title=jerarquia.nombre_jerarquia,
                     subtitle=jerarquia.subtitulo_jerarquia,
                     edit_data_attributes={'id': jerarquia.id_jerarquia, 'nombre': jerarquia.nombre_jerarquia, 'subtitulo': jerarquia.subtitulo_jerarquia, 'nivelJerarquia': jerarquia.nivel_acceso, 'colorJerarquia': jerarquia.color_hex, 'descripcionJerarquia': jerarquia.descripcion_jerarquia, 'protocolos': jerarquia.protocolos|map(attribute='id_protocolo')|join(',')},

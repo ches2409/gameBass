@@ -3,6 +3,7 @@
 {% block title %}VIRTUAL_SOFTWARE | GameBass{% endblock %}
 
 {% block dashboard_body %}
+
     {% from 'macros/data_card_macro.html' import render_data_card %}
     {% from 'macros/juego_form_macro.html' import render_juego_modal %}
 
@@ -33,9 +34,18 @@
                 {% endmacro %}
 
                 {{ render_data_card(juego, card_type='juego',
+                    item_id=juego.id_juego,
+                    item_name=juego.nombre_juego,
+                    neon_color=juego.color_juego,
                     title=juego.nombre_juego | upper,
                     subtitle=juego.genero_juego | upper,
-                    edit_data_attributes={'id': juego.id_juego, 'nombre': juego.nombre_juego, 'motor': juego.motor_juego, 'genero': juego.genero_juego, 'estado': juego.estado_juego.name, 'color': juego.color_juego},
+                    edit_data_attributes={
+                        'id': juego.id_juego,
+                        'nombre': juego.nombre_juego,
+                        'motor': juego.motor_juego,
+                        'genero': juego.genero_juego,
+                        'estado': juego.estado_juego.name,
+                        'color': juego.color_juego},
                     card_header_content=card_header_content,
                     card_body_content=card_body_content) }}
             {% endfor %}

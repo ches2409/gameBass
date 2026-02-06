@@ -41,13 +41,10 @@
        )
     }}
 #}
-{% macro render_data_card(item, card_type, edit_data_attributes, title, subtitle=None, card_header_content=None, card_body_content=None, card_footer_content=None) %}
+{% macro render_data_card(item, card_type, edit_data_attributes, neon_color, item_id, item_name, title, subtitle=None, card_header_content=None, card_body_content=None, card_footer_content=None) %}
 
-{# Determina el color neón. Busca 'color_hex' para jerarquías y 'color_juego' para juegos. #}
-{% set neon_color = item.color_hex if card_type == 'jerarquia' else item.color_juego %}
-{% set item_id = item.id_jerarquia if card_type == 'jerarquia' else item.id_juego %}
-{% set item_name = item.nombre_jerarquia if card_type == 'jerarquia' else item.nombre_juego %}
-{% set delete_url = url_for(card_type ~ '.delete', id_jerarquia=item_id) if card_type == 'jerarquia' else url_for(card_type ~ '.delete', id_juego=item_id) %}
+{% set url_kwargs = {('id_'~card_type):item_id}%}
+{% set delete_url = url_for(card_type ~ '.delete', **url_kwargs)%}
 
 <div class="nodo-card" style="--neon: {{ neon_color | default('#A3FF00') }};">
 
