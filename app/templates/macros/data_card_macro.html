@@ -1,0 +1,103 @@
+{#
+    MACRO: render_data_card
+    Propósito: Renderizar un marco de tarjeta genérico (nodo-card). Esta macro es el
+    esqueleto de la tarjeta y utiliza un patrón de "inyección de dependencias"
+    aceptando otras macros como argumentos para renderizar el contenido de
+    sus secciones. Esto elimina ambigüedades de renderizado y asegura un
+    comportamiento predecible y robusto.
+
+    Parámetros:
+    - item: El objeto de datos (ej: un objeto 'jerarquia' o 'juego').
+    - card_type: Un string que identifica el tipo de tarjeta ('jerarquia' o 'juego').
+                 Usado para construir URLs dinámicas.
+    - edit_data_attributes: Un diccionario con los atributos data-* para el botón de editar.
+    - title: El texto para el título principal de la tarjeta.
+    - subtitle: (Opcional) El texto para el subtítulo.
+    - card_header_content: (Opcional) Una macro que renderiza el HTML para la cabecera.
+    - card_body_content: (Opcional) Una macro que renderiza el HTML para el cuerpo.
+    - card_footer_content: (Opcional) Una macro que renderiza el HTML para el pie.
+
+    Ejemplo de Uso (en otra plantilla):
+
+    {# 1. Definir las macros de contenido #}
+    {% macro mi_header(item) %}
+        <span class="id-tag">{{ item.id }}</span>
+    {% endmacro %}
+
+    {% macro mi_body(item) %}
+        <p>{{ item.descripcion }}</p>
+    {% endmacro %}
+
+    {# 2. Llamar a la macro principal inyectando el contenido #}
+
+    {#
+
+    {{ render_data_card(
+        item=mi_objeto,
+        card_type='mi_tipo',
+        title=mi_objeto.nombre,
+        card_header_content=mi_header(mi_objeto),
+        card_body_content=mi_body(mi_objeto)
+       )
+    }}
+#}
+{% macro render_data_card(item, card_type, edit_data_attributes, title, subtitle=None, card_header_content=None, card_body_content=None, card_footer_content=None) %}
+
+{# Determina el color neón. Busca 'color_hex' para jerarquías y 'color_juego' para juegos. #}
+{% set neon_color = item.color_hex if card_type == 'jerarquia' else item.color_juego %}
+{% set item_id = item.id_jerarquia if card_type == 'jerarquia' else item.id_juego %}
+{% set item_name = item.nombre_jerarquia if card_type == 'jerarquia' else item.nombre_juego %}
+{% set delete_url = url_for(card_type ~ '.delete', id_jerarquia=item_id) if card_type == 'jerarquia' else url_for(card_type ~ '.delete', id_juego=item_id) %}
+
+<div class="nodo-card" style="--neon: {{ neon_color | default('#A3FF00') }};">
+
+    <!-- Slot para la cabecera -->
+    {% if card_header_content %}
+    <div class="card-header">
+        {{ card_header_content() }}
+    </div>
+    {% endif %}
+
+    <!-- =================================== -->
+    <!--           CARD-INFO-SECTION         -->
+    <!-- =================================== -->
+    <div class="card-info-section">
+        <h3 class="rank-name text-7xl">{{ title }}</h3>
+    {% if subtitle %}
+        <p class="rank-subtitle">{{ subtitle }}</p>
+    {% endif %}
+    </div>
+
+    <!-- Cuerpo principal de la tarjeta -->
+    {% if card_body_content %}
+    <div class="card-body">
+        <!-- Slot para el contenido del cuerpo -->
+        {{ card_body_content() }}
+    </div>
+    {% endif %}
+
+    <!-- Slot para el pie de la tarjeta (opcional) -->
+    {% if card_footer_content %}
+    <div class="card-footer">
+        {{ card_footer_content() }}
+    </div>
+    {% endif %}
+
+    <!-- =================================== -->
+    <!--      GRUPO DE ACCIONES (BOTONES)    -->
+    <!-- =================================== -->
+    <div class="action-group">
+        <button class="action-btn edit-btn" onclick="openUpdateModal(this)"
+            {% for key, value in edit_data_attributes.items() %}
+                data-{{ key }}="{{ value }}"
+            {% endfor %}
+            title="EDIT_NODE">
+            <span class="material-symbols-outlined">edit</span>
+        </button>
+        <button class="action-btn delete-btn" title="PURGE_NODE" onclick="openDeleteModal('{{ delete_url }}', '{{ item_name | upper }}')">
+            <span class="material-symbols-outlined">delete</span>
+        </button>
+    </div>
+
+</div>
+{% endmacro %}

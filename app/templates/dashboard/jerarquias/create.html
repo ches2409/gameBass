@@ -91,25 +91,25 @@
         </div>
 
         <!-- SECCIÓN DE PROTOCOLOS VINCULADOS -->
-        <label style="margin-top: 15px; display: block;"><span class="label-icon">security_key</span> MATRIZ_DE_PROTOCOLOS_VINCULADOS</label>
         <div class="protocol-tags">
-            {% if protocolos_listado %}
-                {% for protocolo in protocolos_listado %}
-                    <!-- 1. El Checkbox: name="protocolos_ids" enviará una lista de IDs seleccionados al servidor -->
-                    <input type="checkbox"
-                           id="proto_create_{{ protocolo.id_protocolo }}"
-                           name="protocolos_ids"
-                           value="{{ protocolo.id_protocolo }}"
-                           class="hidden-checkbox">
+            <label style="margin-top: 15px; display: block;"><span class="label-icon">security_key</span> MATRIZ_DE_PROTOCOLOS_VINCULADOS</label>
+        {% if protocolos_listado %}
+            {% for protocolo in protocolos_listado %}
+                <!-- 1. El Checkbox: name="protocolos_ids" enviará una lista de IDs seleccionados al servidor -->
+                <input type="checkbox"
+                       id="proto_create_{{ protocolo.id_protocolo }}"
+                       name="protocolos_ids"
+                       value="{{ protocolo.id_protocolo }}"
+                       class="hidden-checkbox">
 
-                    <!-- 2. El Label: Actúa como el botón visual -->
-                    <label for="proto_create_{{ protocolo.id_protocolo }}" class="tag selectable-tag">
-                        {{ protocolo.codigo_protocolo.codigo }}
-                    </label>
-                {% endfor %}
-            {% else %}
-                <p style="color: #666; font-size: 0.8rem;">NO_HAY_PROTOCOLOS_DISPONIBLES_EN_LA_RED</p>
-            {% endif %}
+                <!-- 2. El Label: Actúa como el botón visual -->
+                <label for="proto_create_{{ protocolo.id_protocolo }}" class="tag selectable-tag">
+                    {{ protocolo.codigo_protocolo.codigo }}
+                </label>
+            {% endfor %}
+        {% else %}
+            <p style="color: #666; font-size: 0.8rem;">NO_HAY_PROTOCOLOS_DISPONIBLES_EN_LA_RED</p>
+        {% endif %}
         </div>
 
 

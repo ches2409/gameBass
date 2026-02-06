@@ -103,6 +103,11 @@
   font-style: italic;
 }
 
+/* Sección de información (título/subtítulo) */
+.card-info-section {
+  margin-bottom: 20px;
+}
+
 .rank-subtitle {
   font-size: 10px;
   font-weight: 800;
@@ -129,22 +134,25 @@
 
 /* Barra de nivel / potencia */
 .stat-bar {
-  width: 100%;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.05);
+  width: 100%; /* Ocupa todo el ancho disponible en el footer */
+  height: 5px; /* Aumentamos el grosor para mayor impacto visual */
+  background: rgba(128, 128, 128, 0.2); /* Un fondo más oscuro y neutro */
   margin-top: 10px;
 }
 
 .stat-bar .fill {
   height: 100%;
   background-color: var(--neon);
-  box-shadow: 0 0 10px var(--neon);
+  box-shadow: 0 0 10px var(--neon); /* Mantenemos el brillo */
+  width: var(--auth-weight, 0%); /* La magia: el ancho es controlado por una variable CSS */
+  transition: width 0.5s ease-out; /* Animación suave al cambiar el valor */
 }
 
 .item-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  //margin-top: 1rem;
   //background-color: hotpink;
   margin-bottom: 1rem;
 }

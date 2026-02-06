@@ -3,7 +3,7 @@
 {% block title %}Jerarquías | Arkadex{% endblock %}
 
 {% block dashboard_body %}
-
+    {% from 'macros/data_card_macro.html' import render_data_card %}
     {% block alertContainer %}
         {% if alert_finish %}
             {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info, modal_target='createJerarquiaModal' %}
@@ -17,10 +17,23 @@
     <!-- Contenedor para nuestras tarjetas, usando un grid para ordenarlas -->
     <div class="nodo-grid">
         {% if jerarquias %}
-            <!-- 1. Bucle: Por cada 'jerarquia' en la lista 'jerarquias' que nos envió Python... -->
             {% for jerarquia in jerarquias %}
-                <!-- 2. Incluir el molde: Usamos nuestro componente y le pasamos la jerarquia actual -->
-                {% include 'components/general-card.html' %}
+                {% macro card_header_content() %}<span class="id-tag counter">LVL_{{ jerarquia.nivel_acceso }}</span>{% endmacro %}
+                {% macro card_body_content() %}
+                    <p class="rank-description">{{ jerarquia.descripcion_jerarquia | truncate(120) }}</p>
+                    <div class="item-tags">{% for protocolo in jerarquia.protocolos %}<span class="tag">{{ protocolo.codigo_protocolo.codigo }}</span>{% else %}<span class="tag tag-empty">SIN_PROTOCOLOS</span>{% endfor %}</div>
+                {% endmacro %}
+                {% macro card_footer_content() %}
+                    <div class="stat-bar" style="--auth-weight: {{ jerarquia.nivel_acceso }}%;"><div class="fill"></div></div><span class="footer-label">AUTH_WEIGHT</span>
+                {% endmacro %}
+
+                {{ render_data_card(jerarquia, card_type='jerarquia',
+                    title=jerarquia.nombre_jerarquia,
+                    subtitle=jerarquia.subtitulo_jerarquia,
+                    edit_data_attributes={'id': jerarquia.id_jerarquia, 'nombre': jerarquia.nombre_jerarquia, 'subtitulo': jerarquia.subtitulo_jerarquia, 'nivelJerarquia': jerarquia.nivel_acceso, 'colorJerarquia': jerarquia.color_hex, 'descripcionJerarquia': jerarquia.descripcion_jerarquia, 'protocolos': jerarquia.protocolos|map(attribute='id_protocolo')|join(',')},
+                    card_header_content=card_header_content,
+                    card_body_content=card_body_content,
+                    card_footer_content=card_footer_content) }}
             {% endfor %}
         {% else %}
             <!-- Mensaje si no hay ninguna jerarquía creada todavía -->
@@ -36,22 +49,6 @@
     {% include 'dashboard/jerarquias/create.html' %}
      {% include 'dashboard/jerarquias/update.html' %}
     {% include 'components/delete-modal.html' %}
-    
-    <style>
-        /* Estilos para la barra de progreso de autoridad */
-        .stat-bar {
-            /* ... aquí puedes poner estilos para el contenedor de la barra ... */
-            width: 100%;
-            height: 5px;
-            background-color: rgba(128, 128, 128, 0.2);
-        }
-        .stat-bar .fill {
-            height: 100%;
-            {#background-color: var(--accent-color, var(--primary)); /* Usa el color de acento del sistema */#}
-            width: var(--auth-weight, 0%); /* ¡LA MAGIA! Usa la variable, y si no existe, usa 0% */
-            transition: width 0.5s ease-out; /* Animación suave */
-        }
-    </style>
 
     <script>
         function toggleModal(modalID) {
@@ -112,10 +109,6 @@
             toggleModal('deleteConfirmationModal');
         }
 
-        // Las funciones openUpdateModal y openDeleteModal ya están preparadas en la tarjeta.
-        // Cuando implementes la actualización, solo necesitarás crear el modal 'updateJerarquiaModal'
-        // y la lógica en esta sección de script, similar a como lo hiciste para Roles y Protocolos.
-        // La función openDeleteModal ya es genérica y debería funcionar.
 
     </script>
 

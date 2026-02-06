@@ -3,6 +3,8 @@
 {% block title %}VIRTUAL_SOFTWARE | GameBass{% endblock %}
 
 {% block dashboard_body %}
+    {% from 'macros/data_card_macro.html' import render_data_card %}
+    {% from 'macros/juego_form_macro.html' import render_juego_modal %}
 
     {% block alertContainer %}
         {% if alert_finish %}
@@ -17,10 +19,25 @@
     <!-- Contenedor para nuestras tarjetas, usando un grid para ordenarlas -->
     <div class="nodo-grid">
         {% if juegos %}
-            <!-- 1. Bucle: Por cada 'juego' en la lista 'juegos' que nos envió Python... -->
             {% for juego in juegos %}
-                <!-- 2. Incluir el molde: Usamos nuestro componente de tarjeta para juegos -->
-                {% include 'components/juego-card.html' %}
+                {# Definimos las macros de contenido DENTRO del bucle para que tengan acceso a la variable 'juego'. #}
+                {% macro card_header_content() %}
+                    <div class="engine-icon"><span class="material-symbols-outlined">sports_esports</span></div>
+                {% endmacro %}
+
+                {% macro card_body_content() %}
+                    <div class="tech-specs">
+                        <div class="spec-row"><span class="label">ENGINE</span><span class="value">{{ juego.motor_juego | upper }}</span></div>
+                        <div class="spec-row"><span class="label">STATUS</span><span class="value status-{{ juego.estado_juego.name | lower }}">{{ juego.estado_juego.value | upper }}</span></div>
+                    </div>
+                {% endmacro %}
+
+                {{ render_data_card(juego, card_type='juego',
+                    title=juego.nombre_juego | upper,
+                    subtitle=juego.genero_juego | upper,
+                    edit_data_attributes={'id': juego.id_juego, 'nombre': juego.nombre_juego, 'motor': juego.motor_juego, 'genero': juego.genero_juego, 'estado': juego.estado_juego.name, 'color': juego.color_juego},
+                    card_header_content=card_header_content,
+                    card_body_content=card_body_content) }}
             {% endfor %}
         {% else %}
             <!-- Mensaje si no hay ninguna jerarquía creada todavía -->
@@ -32,11 +49,8 @@
         {% endif %}
     </div>
 
-    {# 1. Importamos nuestro "libro de recetas" y le damos un apodo ('forms') #}
-    {% import 'macros/juego_form_macro.html' as forms %}
-
     {# 2. Usamos la receta para "cocinar" el modal de CREACIÓN #}
-    {{ forms.render_juego_modal(
+    {{ render_juego_modal(
         modal_id='createJuegoModal',
         form_action=url_for('juego.create'),
         submit_text='CONFIRMAR_INYECCIÓN',
@@ -44,7 +58,7 @@
         is_create=True) }}
 
     {# 3. Usamos la MISMA receta para "cocinar" el modal de ACTUALIZACIÓN #}
-    {{ forms.render_juego_modal(
+    {{ render_juego_modal(
         modal_id='updateJuegoModal',
         form_action=url_for('juego.update', id_juego=0),
         submit_text='ACTUALIZAR_INYECCIÓN',
@@ -71,17 +85,18 @@
             const estado = button.getAttribute('data-estado');
             const color = button.getAttribute('data-color');
             // 2. Construir la URL de actualización dinámicamente
-            const form = document.getElementById('formupdateJuegoModal'); // ID del form ahora coincide con el del modal
+            const form = document.getElementById('form-updateJuegoModal'); // ID del form ahora es único
             const baseUrl = "{{ url_for('juego.update', id_juego=0) }}"; // URL base con '0'
             const updateUrl = baseUrl.replace('/0', '/' + id); // Reemplazo seguro
 
             // 3. Asignar valores a los inputs del formulario
             form.action = updateUrl;
-            document.getElementById('inputNombreJuego').value = nombre;
-            document.getElementById('inputMotorJuego').value = motor;
-            document.getElementById('inputGeneroJuego').value = genero;
-            document.getElementById('inputEstadoJuego').value = estado;
-            document.getElementById('inputColorJuego').value = color;
+            // Prefijamos el ID del input con el ID del modal para asegurar unicidad
+            document.getElementById('updateJuegoModal-nombre').value = nombre;
+            document.getElementById('updateJuegoModal-motor').value = motor;
+            document.getElementById('updateJuegoModal-genero').value = genero;
+            document.getElementById('updateJuegoModal-estado').value = estado;
+            document.getElementById('updateJuegoModal-color').value = color;
 
             // 4. Mostrar el modal
             toggleModal('updateJuegoModal');

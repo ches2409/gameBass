@@ -4,17 +4,12 @@
 
 {% block dashboard_body %}
 
-{#    Alertas de ventana#}
-
     {% block alertContainer %}
-
-        <!-- Si existe una alerta específica para esta URL (alert_finish), la mostramos -->
         {% if alert_finish %}
             {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info, modal_target='createRoleModal' %}
                 {% include 'components/alert-container.html' %}
             {% endwith %}
         {% endif %}
-
     {% endblock %}
 
     {% include 'components/header-section.html' %}
