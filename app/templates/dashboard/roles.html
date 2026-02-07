@@ -4,6 +4,9 @@
 
 {% block dashboard_body %}
 
+    {% from 'macros/data_card_macro.html' import render_data_card %}
+    {% from 'macros/rol_form_macro.html' import render_rol_modal %}
+
     {% block alertContainer %}
         {% if alert_finish %}
             {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info, modal_target='createRoleModal' %}
@@ -14,28 +17,81 @@
 
     {% include 'components/header-section.html' %}
 
-    <div class="role-container">
-        {% block roleContainer %}
-            {%  include 'components/role-card.html' %}
-        {% endblock %}
+    <!-- Contenedor para tarjetas, usando un grid para ordenarlas -->
+
+    <div class="nodo-grid">
+
+        {% if roles %}
+        	{% for rol in roles %}
+
+                {% macro card_header_content() %}
+
+                    <span class="id-tag">ARC-{{ rol.nombre_rol[:4] | upper }}</span>
+                    <div class="status-dot"></div>
+
+                {% endmacro %}
+
+                {% macro card_info_section() %}
+                    <div class="stat-bar"><div class="fill" style="width: 100%;"></div></div>
+                    <p class="rank-description">{{ rol.descripcion_rol }}</p>
+                {% endmacro %}
+
+                {% macro card_body_content() %}
+
+{#                    <p class="rank-description">{{ rol.descripcion_rol | truncate(120) }}</p>#}
+
+                {% endmacro %}
+
+                {{ render_data_card(rol, card_type = 'rol',
+                        item_id = rol.id_rol,
+                        item_name = rol.nombre_rol,
+                        item_descripcion = rol.descripcion_rol,
+                        neon_color = rol.especialidad_rol.color,
+                        title = rol.nombre_rol | upper,
+                        subtitle = rol.especialidad_rol.titulo | upper,
+                        edit_data_attributes = {
+                            'id': rol.id_rol,
+                            'nombre': rol.nombre_rol,
+                            'especialidad': rol.especialidad_rol.titulo,
+                            'descripcion': rol.descripcion_rol},
+                        card_header_content = card_header_content,
+                        card_info_section = card_info_section
+                )}}
+
+        	{% endfor %}
+
+        {% else %}
+        	<div class="error-container">
+                {%  include 'components/error-datos.html'%}
+            </div>
+        {% endif %}
+
     </div>
 
-    {% include 'dashboard/roles/create.html' %}
-    {% include 'dashboard/roles/update.html' %}
+    {# 2. Usamos la receta para "cocinar" el modal de CREACIÓN #}
+    {{ render_rol_modal(
+        modal_id='createRolModal',
+        form_action=url_for('rol.create'),
+        submit_text='CONFIRMAR_INYECCIÓN',
+        is_create=True) }}
+
+    {# 3. Usamos la MISMA receta para "cocinar" el modal de ACTUALIZACIÓN #}
+    {{ render_rol_modal(
+        modal_id='updateRolModal',
+        form_action=url_for('rol.update', id_rol=0),
+        submit_text='ACTUALIZAR_INYECCIÓN') }}
+
     {% include 'components/delete-modal.html' %}
 
     <script>
         function toggleModal(modalID) {
             const modal = document.getElementById(modalID);
             if (modal) {
-                // Si usas display: none en CSS
                 if (modal.style.display === "none" || modal.style.display === "") {
                     modal.style.display = "flex";
                 } else {
                     modal.style.display = "none";
                 }
-                // O si usas una clase .active en tu CSS:
-                // modal.classList.toggle('active');
             }
         }
 
@@ -47,18 +103,19 @@
             const descripcion = button.getAttribute('data-descripcion');
 
             // 2. Construir la URL de actualización dinámicamente
-            // Usamos un ID '0' temporal para que Flask genere la base de la URL, y luego lo reemplazamos
-            const baseUrl = "{{ url_for('roles.update', id_rol=0) }}";
-            const updateUrl = baseUrl.replace('0', id);
+            const form = document.getElementById('form-updateRolModal');
+            const baseUrl = "{{ url_for('rol.update', id_rol=0) }}";
+            // MEJORA: Reemplazamos '/0' en lugar de '0' para evitar cambiar accidentalmente otros '0' en la URL.
+            const updateUrl = baseUrl.replace('/0', '/' + id);
 
             // 3. Asignar al formulario y a los inputs
-            document.getElementById('formUpdateRole').action = updateUrl;
-            document.getElementById('inputNombreRol').value = nombre;
-            document.getElementById('inputEspecialidadRol').value = especialidad;
-            document.getElementById('inputDescripcionRol').value = descripcion;
+            form.action = updateUrl; // ¡LA CONEXIÓN PERDIDA! Esta línea es la que faltaba.
+            document.getElementById('updateRolModal-nombre').value = nombre;
+            document.getElementById('updateRolModal-especialidad').value = especialidad;
+            document.getElementById('updateRolModal-descripcion').value = descripcion;
 
             // 4. Abrir el modal
-            toggleModal('updateRoleModal');
+            toggleModal('updateRolModal');
         }
 
         function openDeleteModal(deleteUrl, itemName) {
@@ -71,6 +128,38 @@
             // 3. Abrir el modal
             toggleModal('deleteConfirmationModal');
         }
+
+        // --- MEJORA DE UX: Actualización dinámica de la descripción ---
+        // Este script se ejecuta una vez que el DOM está completamente cargado.
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Creamos un mapa en JavaScript con los datos del Enum de Python.
+            //    Esto nos permite acceder a las descripciones sin consultar al servidor.
+            const especialidadMap = {
+                {% for esp in especialidad_enum %}
+                    "{{ esp.titulo }}": "{{ esp.descripcion }}",
+                {% endfor %}
+            };
+
+            // 2. Seleccionamos TODOS los inputs de especialidad (tanto en el modal de crear como en el de actualizar).
+            const especialidadInputs = document.querySelectorAll('input[name="especialidad_de_rol"]');
+
+            // 3. A cada input, le añadimos un "oyente" que se activa cuando el usuario escribe.
+            especialidadInputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    const selectedEspecialidad = this.value;
+                    const descripcion = especialidadMap[selectedEspecialidad] || ''; // Si no se encuentra, la descripción es vacía.
+
+                    // 4. Buscamos el textarea correspondiente DENTRO del mismo formulario.
+                    const form = this.closest('form');
+                    const descripcionTextarea = form.querySelector('textarea[name="descripcion_de_rol"]');
+
+                    // 5. Actualizamos el valor del textarea.
+                    if (descripcionTextarea) {
+                        descripcionTextarea.value = descripcion;
+                    }
+                });
+            });
+        });
     </script>
 
 {% endblock %}

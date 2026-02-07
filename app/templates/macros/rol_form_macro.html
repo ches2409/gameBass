@@ -1,0 +1,69 @@
+{% macro render_rol_modal(modal_id, form_action, submit_text, estados, is_create=False) %}
+<!-- Fondo del Modal (Backdrop) -->
+<div class="modal-overlay" id="{{ modal_id }}" style="display: none;">
+
+  <!-- Contenedor del Modal -->
+  <div class="modal-container">
+
+    <!-- Elementos Decorativos de Esquina -->
+    <div class="corner-bracket tl"></div>
+    <div class="corner-bracket tr"></div>
+    <div class="corner-bracket bl"></div>
+    <div class="corner-bracket br"></div>
+
+    <!-- Escáner Láser Decorativo (Animado) -->
+    <div class="modal-laser-line"></div>
+
+    <!-- Contenido del Formulario -->
+    <div class="modal-content">
+
+      <header class="modal-header">
+        <div class="header-main">
+            <span class="status-indicator"></span>
+            <h2>INYECTAR_NUEVO_ROL</h2>
+        </div>
+        <p class="header-subtitle">REESCRIBIENDO_MATRIZ_DE_PODER_v4.2</p>
+      </header>
+
+      <form class="injection-form" id="form-{{ modal_id }}" action="{{ form_action }}" method="POST">
+
+        <!-- Campo: Nombre de Rol -->
+        <div class="input-group">
+            <label><span class="label-icon">fingerprint</span> ETIQUETA_IDENTIDAD</label>
+            <input type="text" name="nombre_de_rol" id="{{ modal_id }}-nombre" {% if is_create %}placeholder="Ej: VOID_WALKER"{% endif %} required>
+            <div class="input-focus-line"></div>
+        </div>
+
+        <!-- Campo: especialidad-->
+        <div class="input-group">
+            <label><span class="label-icon">psychology</span> ESPECIALIZACIÓN_NEURAL</label>
+            <input type="text" name="especialidad_de_rol" list="especialidades_list" id="{{ modal_id }}-especialidad" {% if is_create %}placeholder="Ej: KINETIC_OVERLOAD"{% endif %} required>
+            <datalist id="especialidades_list">
+            {% for especialidad in especialidad_enum %}
+              <option value="{{ especialidad.titulo }}">{{ especialidad.titulo }}</option>
+            {% endfor %}
+            </datalist>
+
+
+        </div>
+
+        <!-- Descripción -->
+        <div class="input-group">
+            <label><span class="label-icon">lock_open</span> DIRECTIVA_DE_COMPORTAMIENT</label>
+            <!-- Agregamos name y readonly -->
+            <textarea name="descripcion_de_rol" id="{{ modal_id }}-descripcion" placeholder="Se asignará automáticamente según la especialidad..." readonly></textarea>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="toggleModal('{{ modal_id }}')">ABORTAR_PROCESO</button>
+          <button type="submit" class="btn-submit">
+            <span class="btn-glow"></span>
+            {{ submit_text }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endmacro %}

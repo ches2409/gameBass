@@ -11,6 +11,10 @@ class TipoTorneo(enum.Enum):
     eliminacion="eliminacion"
 
 class EstadoTorneo(enum.Enum):
+    draft="draft"
+    open="open"
+    live="live"
+    finished="finished"
     pendiente="pendiente"
     activo="activo"
     finalizado="finalizado"

@@ -3,7 +3,7 @@ from app.services import roles_services
 from app.enums.tipos import RolUsuario, EspecialidadRol
 from app.services import dashboard_service
 
-rol_bp = Blueprint('roles', __name__, url_prefix='/roles')
+rol_bp = Blueprint('rol', __name__, url_prefix='/roles')
 
 @rol_bp.route('', strict_slashes=False)
 @rol_bp.route('/', strict_slashes=False)
@@ -39,7 +39,7 @@ def create():
 
         # Pasamos los 3 argumentos que espera el servicio
         if roles_services.create_rol(rol_nombre, rol_descripcion, rol_especialidad):
-            return redirect(url_for('roles.index'))
+            return redirect(url_for('rol.index'))
     # Pasamos el Enum para que sirva de sugerencia en el datalist
     return render_template("dashboard/roles/create.html", roles_listado=RolUsuario, especialidad_enum=EspecialidadRol)
 
@@ -57,12 +57,12 @@ def update(id_rol):
         
         roles_services.update_rol(id_rol, nombre_rol, descripcion_rol, especialidad_rol)
         
-        return redirect(url_for('roles.index'))
+        return redirect(url_for('rol.index'))
     return render_template("dashboard/roles/update.html", roles_listado=RolUsuario, especialidad_enum=EspecialidadRol)
 
 @rol_bp.route('/delete/<int:id_rol>', strict_slashes=False)
 def delete(id_rol):
     roles_services.delete_rol(id_rol)
     
-    return redirect(url_for('roles.index'))
+    return redirect(url_for('rol.index'))
 

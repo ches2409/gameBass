@@ -41,12 +41,15 @@
        )
     }}
 #}
-{% macro render_data_card(item, card_type, edit_data_attributes, neon_color, item_id, item_name, title, subtitle=None, card_header_content=None, card_body_content=None, card_footer_content=None) %}
+{% macro render_data_card(item, card_type, edit_data_attributes, neon_color, item_id, item_name, title, subtitle=None, item_descripcion=None, card_header_content=None, card_info_section=None, card_body_content=None, card_footer_content=None) %}
 
 {% set url_kwargs = {('id_'~card_type):item_id}%}
 {% set delete_url = url_for(card_type ~ '.delete', **url_kwargs)%}
 
-<div class="nodo-card" style="--neon: {{ neon_color | default('#A3FF00') }};">
+<div class="nodo-card {{ neon_color if card_type == 'rol' else '' }}"
+    {% if card_type != 'rol' %}
+        style="--neon: {{ neon_color | default('#A3FF00') }};"
+    {% endif %}>
 
     <!-- Slot para la cabecera -->
     {% if card_header_content %}
@@ -58,12 +61,15 @@
     <!-- =================================== -->
     <!--           CARD-INFO-SECTION         -->
     <!-- =================================== -->
-    <div class="card-info-section">
-        <h3 class="rank-name text-7xl">{{ title }}</h3>
+{#    <div class="card-info-section">#}
+        <h3 class="rank-name">{{ title | upper }}</h3>
     {% if subtitle %}
-        <p class="rank-subtitle">{{ subtitle }}</p>
+        <p class="rank-subtitle">{{ subtitle | upper }}</p>
     {% endif %}
-    </div>
+    {% if card_info_section %}
+    	{{ card_info_section() }}
+    {% endif %}
+{#    </div>#}
 
     <!-- Cuerpo principal de la tarjeta -->
     {% if card_body_content %}

@@ -1,0 +1,45 @@
+from sqlalchemy import Integer, String, DateTime, func
+from sqlalchemy.orm import Mapped, mapped_column
+
+from app.db import Base
+from app.enums.tipos import EstadoTorneo
+
+from sqlalchemy import Enum as _Enum
+
+
+class Torneo(Base):
+    __tablename__ = 'torneos'
+    __table_args__ = {
+        "sqlite_autoincrement":True,
+        "comment":"Orquesta la disponibilidad de los torneos"
+    }
+    
+    id_torneo: Mapped[int] = mapped_column(Integer, primary_key=True)
+    nombre_torneo : Mapped[str] = mapped_column(String(50), nullable=False)
+    recompensa_torneo : Mapped[str] = mapped_column(String(50), nullable=False)
+    estado_torneo : Mapped[EstadoTorneo] = mapped_column(
+        _Enum(
+            EstadoTorneo,
+            name="estado_torneo_enum",
+            nullable=False,
+            default=EstadoTorneo.pendiente,
+            server_default="draft"
+        )
+    )
+    max_competidores : Mapped[int] = mapped_column(Integer, nullable=False, comment="capacidad maxima de sujetos o equipos en el torneo")
+    fecha_creacion : Mapped[DateTime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+        comment="fecha de creacion del torneo"
+    )
+    fecha_inicio : Mapped[DateTime] = mapped_column(
+        DateTime(timezone=True),
+        comment="fecha de inicio del torneo"
+    )
+    fecha_fin : Mapped[DateTime] = mapped_column(
+        DateTime(timezone=True),
+        comment="fecha de fin del torneo"
+    )
+    
+    def __repr__(self) -> str:
+        return f"<Torneo(id={self.id_torneo}, nombre='{self.nombre_torneo}', estado='{self.estado_torneo.name}')>"

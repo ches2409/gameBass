@@ -27,7 +27,7 @@ def get_dashboard_data(current_path):
         {'icon_main': 'dashboard', 'name_main': 'MAINFRAME_HUB', 'title_section': menu_titles[0]['name_section'], 'url': '/','name_breadcrumbs':'NEXUS_OVERWATCH'},
         {'icon_main': 'group', 'name_main': 'NEURAL_PROFILES', 'title_section': menu_titles[0]['name_section'], 'url': '/usuarios','name_breadcrumbs':'GHOST_ARCHIVES'},
         {'icon_main': 'shield_person', 'name_main': 'TACTICAL_SQUADS', 'title_section': menu_titles[0]['name_section'], 'url': '/equipos','name_breadcrumbs':'SYNERGY_CORES'},
-        {'icon_main': 'emoji_events', 'name_main': 'ARENA_OPS', 'title_section': menu_titles[1]['name_section'], 'url': '/arena','name_breadcrumbs':'CONFLICT_THEATERS'},
+        {'icon_main': 'emoji_events', 'name_main': 'ARENA_OPS', 'title_section': menu_titles[1]['name_section'], 'url': '/torneos','name_breadcrumbs':'CONFLICT_THEATERS'},
         {'icon_main': 'sports_esports', 'name_main': 'VIRTUAL_SOFTWARE','title_section': menu_titles[1]['name_section'], 'url': '/juegos','name_breadcrumbs':'DIGITAL_FABRIC'},
         {'icon_main': 'verified_user', 'name_main': 'CLEARANCE_LVLS', 'title_section': menu_titles[2]['name_section'], 'url': '/jerarquias','name_breadcrumbs':'ASCENSION_STRATA'},
         {'icon_main': 'settings_input_component', 'name_main': 'CORE_PROTOCOLS','title_section': menu_titles[2]['name_section'], 'url': '/protocolos','name_breadcrumbs':'NEURAL_CORE'},
@@ -71,6 +71,13 @@ def get_dashboard_data(current_path):
             "subtitle": "Enclaves neurales de alta densidad...",
             "url_info": "/juegos",
             "btn_info": "INYECTAR_MOTOR",
+        },
+        {
+            "icon": "emoji_events",
+            "title": "[OPERACIONES_DE_ARENA_GLOBAL]",
+            "subtitle": "Despliegue de simulaciones de combate...",
+            "url_info": "/torneos",
+            "btn_info": "INYECTAR_ARENA",
         },
     ]
 

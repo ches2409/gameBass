@@ -17,7 +17,6 @@ from app.models.jerarquias_models import Jerarquia
 from app.models.juegos_models import Juego
 
 def create_app(config_class=DevConfig):
-    # Flask busca automáticamente las carpetas 'templates' y 'static' en el mismo nivel.
     app = Flask(__name__)
     app.config.from_object(config_class)
     db.init_app(app)

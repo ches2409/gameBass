@@ -18,11 +18,16 @@
     <div class="nodo-grid">
         {% if jerarquias %}
             {% for jerarquia in jerarquias %}
-                {% macro card_header_content() %}<span class="id-tag counter">LVL_{{ jerarquia.nivel_acceso }}</span>{% endmacro %}
+
+                {% macro card_header_content() %}
+                    <span class="id-tag counter">LVL_{{ jerarquia.nivel_acceso }}</span>
+                {% endmacro %}
+
                 {% macro card_body_content() %}
                     <p class="rank-description">{{ jerarquia.descripcion_jerarquia | truncate(120) }}</p>
                     <div class="item-tags">{% for protocolo in jerarquia.protocolos %}<span class="tag">{{ protocolo.codigo_protocolo.codigo }}</span>{% else %}<span class="tag tag-empty">SIN_PROTOCOLOS</span>{% endfor %}</div>
                 {% endmacro %}
+
                 {% macro card_footer_content() %}
                     <div class="stat-bar" style="--auth-weight: {{ jerarquia.nivel_acceso }}%;"><div class="fill"></div></div><span class="footer-label">AUTH_WEIGHT</span>
                 {% endmacro %}
@@ -50,7 +55,7 @@
 
     {# Incluimos el modal de creación que ya tiene toda la lógica de los tags #}
     {% include 'dashboard/jerarquias/create.html' %}
-     {% include 'dashboard/jerarquias/update.html' %}
+    {% include 'dashboard/jerarquias/update.html' %}
     {% include 'components/delete-modal.html' %}
 
     <script>
