@@ -15,10 +15,10 @@ class EstadoTorneo(enum.Enum):
     open="open"
     live="live"
     finished="finished"
-    pendiente="pendiente"
-    activo="activo"
-    finalizado="finalizado"
-    cancelado="cancelado"
+    # pendiente="pendiente"
+    # activo="activo"
+    # finalizado="finalizado"
+    # cancelado="cancelado"
 
 class EstadoEquipo(enum.Enum):
     activo="activo"

@@ -1,10 +1,14 @@
-from sqlalchemy import Integer, String, DateTime, func
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import Integer, String, DateTime, func, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from typing import TYPE_CHECKING
 
 from app.db import Base
 from app.enums.tipos import EstadoTorneo
 
 from sqlalchemy import Enum as _Enum
+
+if TYPE_CHECKING:
+    from .juegos_models import Juego # Importación para type hinting
 
 
 class Torneo(Base):
@@ -22,7 +26,7 @@ class Torneo(Base):
             EstadoTorneo,
             name="estado_torneo_enum",
             nullable=False,
-            default=EstadoTorneo.pendiente,
+            default=EstadoTorneo.draft,
             server_default="draft"
         )
     )
@@ -40,6 +44,14 @@ class Torneo(Base):
         DateTime(timezone=True),
         comment="fecha de fin del torneo"
     )
+
+    # --- Clave Foránea (Foreign Key) ---
+    # Esta columna vincula el torneo con un juego.
+    id_juego: Mapped[int] = mapped_column(ForeignKey("juegos.id_juego"), nullable=False)
+
+    # --- Relación de Vuelta (Back-reference) ---
+    # Permite acceder al objeto Juego desde una instancia de Torneo (ej: mi_torneo.juego)
+    juego: Mapped["Juego"] = relationship("Juego", back_populates="torneos")
     
     def __repr__(self) -> str:
         return f"<Torneo(id={self.id_torneo}, nombre='{self.nombre_torneo}', estado='{self.estado_torneo.name}')>"

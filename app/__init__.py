@@ -15,6 +15,8 @@ from app.models.roles_models import Rol
 from app.models.protocolos_models import Protocolo
 from app.models.jerarquias_models import Jerarquia
 from app.models.juegos_models import Juego
+from app.models.torneos_models import Torneo
+
 
 def create_app(config_class=DevConfig):
     app = Flask(__name__)
@@ -28,12 +30,16 @@ def create_app(config_class=DevConfig):
     from app.routes.protocolos_routes import protocolo_bp
     from app.routes.jerarquias_routes import jerarquia_bp
     from app.routes.juegos_routes import juegos_bp
+    from app.routes.torneos_routes import torneos_bp
     
     app.register_blueprint(rol_bp)
     app.register_blueprint(inicio_bp)
     app.register_blueprint(protocolo_bp)
     app.register_blueprint(jerarquia_bp)
     app.register_blueprint(juegos_bp)
+    app.register_blueprint(torneos_bp)
+    
+    return app
     
     
     return app
