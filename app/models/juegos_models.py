@@ -7,6 +7,9 @@ from app.enums.tipos import EstadoJuego
 
 if TYPE_CHECKING:
     from .torneos_models import Torneo
+    from .registros_models import Registro
+
+
 
 class Juego(Base):
     __tablename__ = 'juegos'
@@ -29,7 +32,12 @@ class Juego(Base):
     )
     color_juego: Mapped[str] = mapped_column(String(7), default="#ffffff")
 
-    # --- Relación hacia los "Muchos" (Torneos) ---
+    # --- Relaciones ---
+    # --- Relación 1:N con registros (muchos) ---
+    registros: Mapped[List["Registro"]] = relationship(
+        "Registro",
+        back_populates="juego")
+    
     # Esto crea una colección de objetos Torneo en cada instancia de Juego.
     torneos: Mapped[List["Torneo"]] = relationship(
         "Torneo", 

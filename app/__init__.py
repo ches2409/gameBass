@@ -17,6 +17,7 @@ from app.models.jerarquias_models import Jerarquia
 from app.models.juegos_models import Juego
 from app.models.torneos_models import Torneo
 from app.models.equipos_models import Equipo
+from app.models.usuarios_models import Usuario
 
 
 def create_app(config_class=DevConfig):
@@ -42,5 +43,3 @@ def create_app(config_class=DevConfig):
     
     return app
     
-    
-    return app

@@ -10,6 +10,11 @@ from sqlalchemy import Enum as _Enum
 
 if TYPE_CHECKING:
     from app.models.usuarios_models import Usuario
+    from app.models.registros_models import Registro
+    from app.models.resultados_models import Resultado
+
+
+
 
 # --- Tabla de Asociación (Muchos a Muchos) ---
 # Define la tabla intermedia que conecta Usuarios y Equipos.
@@ -65,6 +70,19 @@ class Equipo(Base):
         "Usuario", 
         secondary=miembros_equipo, 
         back_populates="membresias"
+    )
+
+    # Relacion 1:N con Registro (muchos)
+    registros: Mapped[List["Registro"]] = relationship(
+        "Registro",
+        back_populates="equipo",
+        cascade="all, delete-orphan"
+    )
+
+    # Relacion 1:N con Resultado (muchos) - (Historial de podios del equipo)
+    resultados: Mapped[List["Resultado"]] = relationship(
+        "Resultado",
+        back_populates="equipo"
     )
 
     def __str__(self):

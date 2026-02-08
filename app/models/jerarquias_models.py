@@ -49,4 +49,3 @@ class Jerarquia(Base):
     def __str__(self):
         return f"{self.nombre_jerarquia}"
     
-
