@@ -1,9 +1,13 @@
 from sqlalchemy import Integer, String, Table, Column, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from typing import List
+from typing import List, TYPE_CHECKING
 
 from app.db import Base
 # Nota: Usamos string forward reference "Protocolo" para evitar importaciones circulares
+
+if TYPE_CHECKING:
+    from app.models.protocolos_models import Protocolo
+    
 
 jerarquia_protocolo = Table(
     'jerarquia_protocolo',
@@ -27,7 +31,7 @@ class Jerarquia(Base):
 
     color_hex: Mapped[str] = mapped_column(String(7), nullable=True, default="#A3FF00")
 
-    # Relación Muchos a Muchos
+    # Relación de N:M -- protocolos
     # secondary: apunta a la tabla intermedia definida arriba
     # back_populates: debe coincidir con el nombre de la variable en la clase Protocolo
     protocolos: Mapped[List["Protocolo"]] = relationship(
@@ -35,3 +39,14 @@ class Jerarquia(Base):
         secondary=jerarquia_protocolo,
         back_populates="jerarquias"
     )
+    
+    # Relación de 1:N -- usuarios (muchos)
+    usuarios: Mapped[List["Usuario"]] = relationship(
+        "Usuario",
+        back_populates="jerarquia"
+    )
+    
+    def __str__(self):
+        return f"{self.nombre_jerarquia}"
+    
+

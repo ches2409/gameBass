@@ -79,6 +79,13 @@ def get_dashboard_data(current_path):
             "url_info": "/torneos",
             "btn_info": "INYECTAR_ARENA",
         },
+        {
+            "icon": "emoji_events",
+            "title": "[COLECTIVOS_DE_GUERRA_TÁCTICA]",
+            "subtitle": "Unificacion de nodos de combate | Letalidad grupal y sinergia de red local...",
+            "url_info": "/equipos",
+            "btn_info": "FORJAR_RED_COMBATE",
+        },
     ]
 
     # 4. Lógica para encontrar la alerta activa

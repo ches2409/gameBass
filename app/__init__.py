@@ -16,6 +16,7 @@ from app.models.protocolos_models import Protocolo
 from app.models.jerarquias_models import Jerarquia
 from app.models.juegos_models import Juego
 from app.models.torneos_models import Torneo
+from app.models.equipos_models import Equipo
 
 
 def create_app(config_class=DevConfig):

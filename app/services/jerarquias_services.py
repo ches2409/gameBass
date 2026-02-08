@@ -45,9 +45,9 @@ def update_jerarquia(id_jerarquia, nombre, subtitulo, descripcion, nivel, protoc
 
 def delete_jerarquia(id_jerarquia):
     jerarquia = get_jerarquia_by_id(id_jerarquia)
+    
     if not jerarquia:
-        # En una aplicación real, manejarías este error de forma más robusta
-        return False
+        return ValueError(f"La jerarquia '{jerarquia.nombre_jerarquia}' no existe")
     
     session.delete(jerarquia)
     session.commit()

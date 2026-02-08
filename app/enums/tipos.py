@@ -21,7 +21,9 @@ class EstadoTorneo(enum.Enum):
     # cancelado="cancelado"
 
 class EstadoEquipo(enum.Enum):
+    pendiente="pendiente"
     activo="activo"
+    inactivo="inactivo"
     eliminado="eliminado"
 
 class RolEquipo(enum.Enum):
