@@ -26,12 +26,12 @@ def get_dashboard_data(current_path):
     menu_data = [
         {'icon_main': 'dashboard', 'name_main': 'MAINFRAME_HUB', 'title_section': menu_titles[0]['name_section'], 'url': '/','name_breadcrumbs':'NEXUS_OVERWATCH'},
         {'icon_main': 'group', 'name_main': 'NEURAL_PROFILES', 'title_section': menu_titles[0]['name_section'], 'url': '/usuarios','name_breadcrumbs':'USUARIOS'},
-        {'icon_main': 'shield_person', 'name_main': 'TACTICAL_SQUADS', 'title_section': menu_titles[0]['name_section'], 'url': '/equipos','name_breadcrumbs':'SYNERGY_CORES'},
-        {'icon_main': 'emoji_events', 'name_main': 'ARENA_OPS', 'title_section': menu_titles[1]['name_section'], 'url': '/torneos','name_breadcrumbs':'CONFLICT_THEATERS'},
-        {'icon_main': 'sports_esports', 'name_main': 'VIRTUAL_SOFTWARE','title_section': menu_titles[1]['name_section'], 'url': '/juegos','name_breadcrumbs':'DIGITAL_FABRIC'},
+        {'icon_main': 'shield_person', 'name_main': 'TACTICAL_SQUADS', 'title_section': menu_titles[0]['name_section'], 'url': '/equipos','name_breadcrumbs':'EQUIPOS'},
+        {'icon_main': 'emoji_events', 'name_main': 'ARENA_OPS', 'title_section': menu_titles[1]['name_section'], 'url': '/torneos','name_breadcrumbs':'TORNEOS'},
+        {'icon_main': 'sports_esports', 'name_main': 'VIRTUAL_SOFTWARE','title_section': menu_titles[1]['name_section'], 'url': '/juegos','name_breadcrumbs':'JUEGOS'},
         {'icon_main': 'verified_user', 'name_main': 'CLEARANCE_LVLS', 'title_section': menu_titles[2]['name_section'], 'url': '/jerarquias','name_breadcrumbs':'NIVELES_DE_ACCESO'},
         {'icon_main': 'settings_input_component', 'name_main': 'CORE_PROTOCOLS','title_section': menu_titles[2]['name_section'], 'url': '/protocolos','name_breadcrumbs':'PROTOCOLOS'},
-        {'icon_main': 'genetics', 'name_main': 'NEURAL_ARCHETYPES', 'title_section': menu_titles[2]['name_section'], 'url': '/roles', 'name_breadcrumbs': 'ROLES'}
+        {'icon_main': 'genetics', 'name_main': 'NEURAL_ARCHETYPES', 'title_section': menu_titles[2]['name_section'], 'url': '/roles', 'name_breadcrumbs': 'ROLES_JERARQUIAS'}
         
     ]
 

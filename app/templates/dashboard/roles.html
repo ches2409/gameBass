@@ -1,6 +1,6 @@
 {% extends 'dashboard/index.html' %}
 
-{% block title %}Roles | Arkadex{% endblock %}
+{% block title %}Roles {% endblock %}
 
 {% block dashboard_body %}
 
@@ -70,7 +70,7 @@
 
     {# 2. Usamos la receta para "cocinar" el modal de CREACIÓN #}
     {{ render_rol_modal(
-        modal_id='createRolModal',
+        modal_id='createRoleModal',
         form_action=url_for('rol.create'),
         submit_text='CONFIRMAR_INYECCIÓN',
         is_create=True) }}

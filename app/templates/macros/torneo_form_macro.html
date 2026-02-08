@@ -1,0 +1,101 @@
+{% macro render_torneo_modal(modal_id, form_action, submit_text, estados, juegos_list, is_create=False) %}
+<!-- Fondo del Modal (Backdrop) -->
+<div class="modal-overlay" id="{{ modal_id }}" style="display: none;">
+
+  <!-- Contenedor del Modal -->
+  <div class="modal-container">
+
+    <!-- Elementos Decorativos de Esquina -->
+    <div class="corner-bracket tl"></div>
+    <div class="corner-bracket tr"></div>
+    <div class="corner-bracket bl"></div>
+    <div class="corner-bracket br"></div>
+
+    <!-- Escáner Láser Decorativo (Animado) -->
+    <div class="modal-laser-line"></div>
+
+    <!-- Contenido del Formulario -->
+    <div class="modal-content">
+
+      <header class="modal-header">
+        <div class="header-main">
+            <span class="status-indicator"></span>
+            <h2>INYECTAR_NUEVO_TORNEO</h2>
+        </div>
+        <p class="header-subtitle">REESCRIBIENDO_MATRIZ_DE_PODER_v4.2</p>
+      </header>
+
+      <form class="injection-form" id="form-{{ modal_id }}" action="{{ form_action }}" method="POST">
+
+        <!-- Campo: Nombre de Torneo -->
+        <div class="input-group">
+            <label><span class="label-icon">fingerprint</span> ETIQUETA_ARENA</label>
+            <input type="text" name="nombre_de_torneo" id="{{ modal_id }}-nombre" {% if is_create %}placeholder="Ej: VOID_WALKER"{% endif %} required>
+            <div class="input-focus-line"></div>
+        </div>
+
+        <!-- Campo: Recompensa del Torneo -->
+        <div class="input-group">
+            <label><span class="label-icon">fingerprint</span> RECOMPENSA_ARENA</label>
+            <input type="text" name="recompensa_de_torneo" id="{{ modal_id }}-recompensa" {% if is_create %}placeholder="Ej: 5k_experience_points"{% endif %} required>
+            <div class="input-focus-line"></div>
+        </div>
+
+        <!-- Campo: estado de torneo-->
+        <div class="input-group">
+            <label><span class="label-icon">psychology</span> ESTADO_OPERATIVO</label>
+            <select name="estado_de_torneo" id="{{ modal_id }}-estado" class="estado_juego" required>
+                {% for estado in estados %}
+                    <option value="{{ estado.name }}">{{ estado.value | upper }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Campo: Maximo de competidores del Torneo -->
+        <div class="input-group">
+            <label><span class="label-icon">fingerprint</span> maximo sujetos</label>
+            <input type="number" name="max_de_competidores" id="{{ modal_id }}-limite" {% if is_create %}placeholder="Ej: 5"{% endif %} required>
+            <div class="input-focus-line"></div>
+        </div>
+
+        <!-- Campo: Fecha de inicio del Torneo -->
+        <div class="input-group">
+            <label><span class="label-icon">fingerprint</span> inicia</label>
+            <input type="datetime-local" name="fecha_de_inicio" id="{{ modal_id }}-inicio" {% if is_create %}placeholder="Ej: 5k_experience_points"{% endif %} required>
+            <div class="input-focus-line"></div>
+        </div>
+
+        <!-- Campo: Fecha de finalización del Torneo -->
+        <div class="input-group">
+            <label><span class="label-icon">fingerprint</span> finaliza</label>
+            <input type="datetime-local" name="fecha_de_fin" id="{{ modal_id }}-fin" {% if is_create %}placeholder="Ej: 5k_experience_points"{% endif %} required>
+            <div class="input-focus-line"></div>
+        </div>
+
+
+        <!-- Select: seleccionar el juego-->
+        <div class="input-group">
+          <label><span class="label-icon">fingerprint</span> JUEGO BASE</label>
+          <select name="id_de_juego" id="{{ modal_id }}-juego" class="juego">
+            {% for juego in juegos_list %}
+            <option value="{{ juego.id_juego }}">{{ juego.nombre_juego | upper }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+
+
+
+        <!-- Botones de Acción -->
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="toggleModal('{{ modal_id }}')">ABORTAR_PROCESO</button>
+          <button type="submit" class="btn-submit">
+            <span class="btn-glow"></span>
+            {{ submit_text }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endmacro %}
