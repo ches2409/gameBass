@@ -26,9 +26,9 @@ class Resultado(Base):
     recompensa_entregada:Mapped[str] = mapped_column(String(100), nullable=True)
     
     # --- Vinculos ---
-    id_torneo:Mapped[int] = mapped_column(ForeignKey('torneos.id_torneo'), ondelete="SET NULL")
+    id_torneo:Mapped[int] = mapped_column(ForeignKey('torneos.id_torneo', ondelete="SET NULL"),nullable=True)
     id_usuario:Mapped[int] = mapped_column(ForeignKey('usuarios.id_usuario'), nullable=False)
-    id_equipo:Mapped[int] = mapped_column(ForeignKey('equipos.id_equipo'), nullable=True)
+    id_equipo:Mapped[int] = mapped_column(ForeignKey('equipos.id_equipo', ondelete="SET NULL"), nullable=True)
     
     # --- Relaciones ---
     torneo:Mapped["Torneo"]=relationship("Torneo", back_populates="resultados")

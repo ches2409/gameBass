@@ -1,10 +1,14 @@
+from typing import List, TYPE_CHECKING
 
 from sqlalchemy import Integer, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db import Base
 from app.enums.tipos import EspecialidadRol
 
 from sqlalchemy import Enum as _Enum
+
+if TYPE_CHECKING:
+    from app.models.registros_models import Registro
 
 
 class Rol(Base):
@@ -12,7 +16,7 @@ class Rol(Base):
     __table_args__ = {
         "sqlite_autoincrement": True
     }
-    
+
     id_rol : Mapped[int] = mapped_column(Integer, primary_key=True)
     nombre_rol : Mapped[str] = mapped_column(String(50), nullable=False, unique=True)
     especialidad_rol:Mapped[EspecialidadRol] = mapped_column(
@@ -23,8 +27,10 @@ class Rol(Base):
         comment='Especialidad o arquetipo neural, define al jugador y su comportamiento en la arena'
     )
     descripcion_rol : Mapped[str] = mapped_column( String(100), nullable=True)
-    
-    
+
+    # Relación con Registros
+    registros: Mapped[List["Registro"]] = relationship("Registro", back_populates="rol")
+
     def __init__(self,nombre_rol, descripcion_rol, especialidad_rol):
         self.nombre_rol=nombre_rol
         self.descripcion_rol=descripcion_rol
