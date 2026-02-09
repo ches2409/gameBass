@@ -63,4 +63,3 @@ def delete(id_torneo):
     
     return redirect(url_for('torneo.index'))
     
-    return

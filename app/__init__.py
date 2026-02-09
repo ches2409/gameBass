@@ -18,6 +18,8 @@ from app.models.juegos_models import Juego
 from app.models.torneos_models import Torneo
 from app.models.equipos_models import Equipo
 from app.models.usuarios_models import Usuario
+from app.models.registros_models import Registro
+from app.models.resultados_models import Resultado
 
 
 def create_app(config_class=DevConfig):
@@ -27,15 +29,15 @@ def create_app(config_class=DevConfig):
     migrate = Migrate(app, db)
     
     # registro de Blueprints
-    from app.routes.roles_routes import rol_bp
     from app.routes.index_routes import inicio_bp
+    from app.routes.roles_routes import rol_bp
     from app.routes.protocolos_routes import protocolo_bp
     from app.routes.jerarquias_routes import jerarquia_bp
     from app.routes.juegos_routes import juegos_bp
     from app.routes.torneos_routes import torneos_bp
     
-    app.register_blueprint(rol_bp)
     app.register_blueprint(inicio_bp)
+    app.register_blueprint(rol_bp)
     app.register_blueprint(protocolo_bp)
     app.register_blueprint(jerarquia_bp)
     app.register_blueprint(juegos_bp)
