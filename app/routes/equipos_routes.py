@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, redirect, url_for
 
 from app.enums.tipos import EstadoEquipo
-from app.services import dashboard_service, equipos_services
+from app.services import dashboard_service, equipos_services, usuarios_services
 
 equipos_bp = Blueprint('equipo', __name__, url_prefix='/equipos')
 
@@ -9,12 +9,13 @@ equipos_bp = Blueprint('equipo', __name__, url_prefix='/equipos')
 def index():
     context = dashboard_service.get_dashboard_data(request.path)
     equipos_list = equipos_services.get_all_equipos()
-    # usuarios_list
+    usuarios_list = usuarios_services.get_all_usuarios()
     
     return render_template(
         'dashboard/equipos.html',
         estados_equipo=EstadoEquipo,
-        equipos_list=equipos_list,
+        equipos=equipos_list,
+        usuarios=usuarios_list,
         **context
     )
 

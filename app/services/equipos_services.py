@@ -12,7 +12,7 @@ def get_equipos_by_id(id_equipo):
 def create_equipo(nombre_equipo, lema_equipo, estado_equipo, id_comandante):
     
     if not all ([nombre_equipo, estado_equipo, id_comandante]):
-        raise ValueError("Nombre, estado y comandante son campos obligatorios")
+        raise ValueError("Nombre, estado y comandante son campos obligatorios.")
     
     try:
         estado_enum = EstadoEquipo[estado_equipo]
@@ -40,15 +40,18 @@ def update_equipo(id_equipo, nombre_equipo, lema_equipo, estado_equipo, id_coman
         raise ValueError("Equipo no encontrado")
     
     try:
+        # Se actualiza solo los campos que se proporcionan, aplicando la conversión de tipos.
         if nombre_equipo is not None:
             equipo_existente.nombre_equipo = nombre_equipo
         if lema_equipo is not None:
             equipo_existente.lema_equipo = lema_equipo
         if estado_equipo is not None:
-            equipo_existente.estado_equipo = estado_equipo
+            equipo_existente.estado_equipo = EstadoEquipo[estado_equipo]
         if id_comandante is not None:
-            equipo_existente.id_comandante = id_comandante
+            equipo_existente.id_comandante = int(id_comandante)
     except (KeyError, ValueError) as e:
+        # Si la conversión falla, revertimos la sesión para no dejarla en un estado inconsistente.
+        session.rollback()
         raise TypeError(f"Dato de entrada inválido al actualizar: {e}")
     
     session.commit()

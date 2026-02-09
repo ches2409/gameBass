@@ -35,6 +35,8 @@ def create_app(config_class=DevConfig):
     from app.routes.jerarquias_routes import jerarquia_bp
     from app.routes.juegos_routes import juegos_bp
     from app.routes.torneos_routes import torneos_bp
+    from app.routes.equipos_routes import equipos_bp
+    from app.routes.usuarios_routes import usuarios_bp
     
     app.register_blueprint(inicio_bp)
     app.register_blueprint(rol_bp)
@@ -42,6 +44,8 @@ def create_app(config_class=DevConfig):
     app.register_blueprint(jerarquia_bp)
     app.register_blueprint(juegos_bp)
     app.register_blueprint(torneos_bp)
+    app.register_blueprint(equipos_bp)
+    app.register_blueprint(usuarios_bp)
     
     return app
     
