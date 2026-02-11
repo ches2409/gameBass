@@ -1,0 +1,125 @@
+{% extends 'dashboard/index.html' %}
+
+{% block title %}VIRTUAL_SOFTWARE | GameBass{% endblock %}
+
+{% block dashboard_body %}
+
+    {% from 'macros/data_card_macro.html' import render_data_card %}
+    {% from 'macros/usuario_form_macro.html' import render_usuario_modal %}
+
+    {% block alertContainer %}
+        {% if alert_finish %}
+            {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info, modal_target='createUserModal' %}
+                {% include 'components/alert-container.html' %}
+            {% endwith %}
+        {% endif %}
+    {% endblock %}
+
+    {% include 'components/header-section.html' %}
+
+    <!-- Contenedor para nuestras tarjetas, usando un grid para ordenarlas -->
+    <div class="nodo-grid">
+        {% if usuarios %}
+            {% for usuario in usuarios %}
+                {# Definimos las macros de contenido DENTRO del bucle para que tengan acceso a la variable 'usuario'. #}
+                {% macro card_header_content() %}
+                    <div class="engine-info text-2xs text-soft">
+                        ID_{{ usuario.jerarquia.nombre_jerarquia | upper }}{{ usuario.jerarquia.nivel_acceso }}X{{ "%03d" | format(usuario.id_usuario) }}
+                    </div>
+
+                {% endmacro %}
+
+                {{ render_data_card(usuario, card_type='usuario',
+                    item_id=usuario.id_usuario,
+                    item_name=usuario.alias_usuario,
+                    neon_color=usuario.jerarquia.color_hex,
+                    title=usuario.alias_usuario | upper,
+                    subtitle=usuario.email_usuario | upper,
+                    edit_data_attributes={
+                        'id': usuario.id_usuario,
+                        'nombre': usuario.alias_usuario,
+                        'email': usuario.email_usuario,
+                        'jerarquia': usuario.id_jerarquia,
+                        },
+                    card_header_content=card_header_content
+                    )
+                }}
+            {% endfor %}
+        {% else %}
+            <!-- Mensaje si no hay ninguna jerarquía creada todavía -->
+
+            <div class="error-container">
+                {%  include 'components/error-datos.html'%}
+            </div>
+
+        {% endif %}
+    </div>
+
+    {# 2. Usamos la macro para renderizar el modal de CREACIÓN de usuario #}
+    {{ render_usuario_modal(
+        modal_id='createUserModal',
+        form_action=url_for('usuario.create'),
+        submit_text='INICIAR_INYECCION',
+        jerarquias=jerarquias_list,
+        is_create=True) }}
+
+    {# 3. Usamos la MISMA macro para renderizar el modal de ACTUALIZACIÓN de usuario #}
+    {{ render_usuario_modal(
+        modal_id='updateUserModal',
+        form_action=url_for('usuario.update', id_usuario=0),
+        submit_text='ACTUALIZAR USUARIO',
+        jerarquias=jerarquias_list)
+    }}
+
+     {% include 'components/delete-modal.html' %}
+
+    <script>
+        // Función genérica para abrir/cerrar cualquier modal
+        function toggleModal(modalID) {
+            const modal = document.getElementById(modalID);
+            if (modal) {
+                modal.style.display = (modal.style.display === "none" || modal.style.display === "") ? "flex" : "none";
+            }
+        }
+
+        function openUpdateModal(button) {
+            // 1. Obtener datos del botón
+            const id = button.getAttribute('data-id');
+            const nombre = button.getAttribute('data-nombre');
+            const email = button.getAttribute('data-email');
+            const jerarquia = button.getAttribute('data-jerarquia');
+
+
+            // 2. Construir la URL de actualización dinámicamente
+            const form = document.getElementById('form-updateUserModal'); // ID del form ahora es único
+            const baseUrl = "{{ url_for('usuario.update', id_usuario=0) }}"; // URL base con '0'
+            const updateUrl = baseUrl.replace('/0', '/' + id); // Reemplazo seguro
+
+            // 3. Asignar valores a los inputs del formulario
+            form.action = updateUrl;
+            // Prefijamos el ID del input con el ID del modal para asegurar unicidad
+            document.getElementById('updateUserModal-alias').value = nombre;
+            document.getElementById('updateUserModal-email').value = email;
+            document.getElementById('updateUserModal-password').value = '';
+            document.getElementById('updateUserModal-jerarquia').value = jerarquia;
+
+
+            // 4. Mostrar el modal
+            toggleModal('updateUserModal');
+
+        }
+
+        function openDeleteModal(deleteUrl, itemName) {
+            // 1. Actualizar el enlace del botón de confirmación
+            document.getElementById('btnConfirmPurge').href = deleteUrl;
+
+            // 2. Mostrar el nombre del rol en la advertencia
+            document.getElementById('deleteItemName').textContent = itemName;
+
+            // 3. Abrir el modal
+            toggleModal('deleteConfirmationModal');
+        }
+
+    </script>
+
+{% endblock %}

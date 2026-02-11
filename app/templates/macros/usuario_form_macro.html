@@ -1,0 +1,83 @@
+{% macro render_usuario_modal(modal_id, form_action, submit_text, jerarquias, is_create=False) %}
+<!-- Fondo del Modal (Backdrop) -->
+<div class="modal-overlay" id="{{ modal_id }}" style="display: none;">
+
+  <!-- Contenedor del Modal -->
+  <div class="modal-container">
+
+    <!-- Elementos Decorativos de Esquina -->
+    <div class="corner-bracket tl"></div>
+    <div class="corner-bracket tr"></div>
+    <div class="corner-bracket bl"></div>
+    <div class="corner-bracket br"></div>
+
+    <!-- Escáner Láser Decorativo (Animado) -->
+    <div class="modal-laser-line"></div>
+
+    <!-- Contenido del Formulario -->
+    <div class="modal-content">
+
+      <header class="modal-header">
+        <div class="header-main">
+            <span class="status-indicator"></span>
+
+        {% if is_create %}
+            <h2>[PROTOCOLO_INCORPORACIÓN]</h2>
+        {% else %}
+            <h2>[STATUS_SUJETO]</h2>
+        {% endif %}
+
+        </div>
+        {% if is_create %}
+            <p class="header-subtitle">PREPARANDO_SLOT_NUEVO_PERFIL_BIOLÓGICO</p>
+        {% else %}
+            <p class="header-subtitle">EXTRAYENDO_TELEMETRIA_ENLACE_NEURAL...</p>
+        {% endif %}
+      </header>
+
+      <form class="injection-form" id="form-{{ modal_id }}" action="{{ form_action }}" method="POST">
+
+        <!-- Campo: Nombre de usuario -->
+        <div class="input-group">
+            <label><span class="label-icon">fingerprint</span> NOMBRE_OPERADOR</label>
+            <input type="text" name="alias_usuario" id="{{ modal_id }}-alias" {% if is_create %}placeholder="Tu indentidad unica en la RED"{% endif %} required>
+            <div class="input-focus-line"></div>
+        </div>
+
+        <!-- campo: email -->
+        <div class="input-group">
+            <label><span class="label-icon">fingerprint</span> ENLACE_NEURAL_[EMAIL]</label>
+            <input type="email" name="email_usuario" id="{{ modal_id }}-email" {% if is_create %}placeholder="correo@mainframe.com"{% endif %} required>
+            <div class="input-focus-line"></div>
+        </div>
+
+        <!-- campo: password -->
+        <div class="input-group">
+            <label><span class="label-icon">fingerprint</span> LLAVE_DE_ENCRIPTACIÓN</label>
+            <input type="password" name="password_usuario" id="{{ modal_id }}-password" {% if is_create %}placeholder="minimo 8 caracteres" required{% else %}placeholder="Dejar en blanco para no cambiar"{% endif %}>
+            <div class="input-focus-line"></div>
+        </div>
+
+        <!-- Campo: jerarquias-->
+        <div class="input-group">
+            <label><span class="label-icon">psychology</span> RANGO_DE_AUTORIDAD</label>
+            <select name="id_jerarquia" id="{{ modal_id }}-jerarquia" class="id_jerarquia" required>
+                {% for jerarquia in jerarquias %}
+                    <option value="{{ jerarquia.id_jerarquia }}">{{ jerarquia.nombre_jerarquia | upper }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="toggleModal('{{ modal_id }}')">ABORTAR_PROCESO</button>
+          <button type="submit" class="btn-submit">
+            <span class="btn-glow"></span>
+            {{ submit_text }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endmacro %}

@@ -29,9 +29,9 @@ def get_dashboard_data(current_path):
         {'icon_main': 'shield_person', 'name_main': 'TACTICAL_SQUADS', 'title_section': menu_titles[0]['name_section'], 'url': '/equipos','name_breadcrumbs':'EQUIPOS'},
         {'icon_main': 'emoji_events', 'name_main': 'ARENA_OPS', 'title_section': menu_titles[1]['name_section'], 'url': '/torneos','name_breadcrumbs':'TORNEOS'},
         {'icon_main': 'sports_esports', 'name_main': 'VIRTUAL_SOFTWARE','title_section': menu_titles[1]['name_section'], 'url': '/juegos','name_breadcrumbs':'JUEGOS'},
-        {'icon_main': 'verified_user', 'name_main': 'CLEARANCE_LVLS', 'title_section': menu_titles[2]['name_section'], 'url': '/jerarquias','name_breadcrumbs':'NIVELES_DE_ACCESO'},
+        {'icon_main': 'verified_user', 'name_main': 'CLEARANCE_LVLS', 'title_section': menu_titles[2]['name_section'], 'url': '/jerarquias','name_breadcrumbs':'NIVELES_DE_AUTORIZACION'},
         {'icon_main': 'settings_input_component', 'name_main': 'CORE_PROTOCOLS','title_section': menu_titles[2]['name_section'], 'url': '/protocolos','name_breadcrumbs':'PROTOCOLOS'},
-        {'icon_main': 'genetics', 'name_main': 'NEURAL_ARCHETYPES', 'title_section': menu_titles[2]['name_section'], 'url': '/roles', 'name_breadcrumbs': 'ROLES_JERARQUIAS'}
+        {'icon_main': 'genetics', 'name_main': 'NEURAL_ARCHETYPES', 'title_section': menu_titles[2]['name_section'], 'url': '/roles', 'name_breadcrumbs': 'ROLES | ARQUETIPOS'}
         
     ]
 
@@ -39,10 +39,10 @@ def get_dashboard_data(current_path):
     alerts_data = [
         {
             "icon": "frame_person",
-            "title": "[INYECCION_SUJETO_DETECTADA]",
-            "subtitle": "Monitoreando nuevos enlaces neurales en el Sector_Omega...",
+            "title": "[REGISTRO_DE_SUJETOS_ACTIVO]",
+            "subtitle": "Indexando firmas neurales en la base de datos central... Acceso concedido.",
             "url_info": "/usuarios",
-            "btn_info": "INYECTAR_SUJETO",
+            "btn_info": "VINCULAR_SUJETO",
         },
         {
             "icon": "hub",

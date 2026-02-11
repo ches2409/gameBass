@@ -8,6 +8,7 @@
 $primary-bg   : #020305;
 $background-dark: #0C111D;
 $background-soft: #0A0C10;
+$soft: #2a3141;
 $accent-green : #A3FF00;
 $accent-pink  : #D500F9;
 $accent-blue  : #57ADE4;
@@ -35,6 +36,7 @@ $black: #000000;
 // Paleta de colores extendida
 $colors: (
         'primary': $primary-bg,
+        'soft': $soft,
         'background-dark': $background-dark,
         'background-soft': $background-soft,
         'accent-green': $accent-green,

@@ -2,7 +2,8 @@ from app.db import session
 from app.models.jerarquias_models import Jerarquia
 
 def get_all_jerarquias():
-    return session.query(Jerarquia).order_by(Jerarquia.nivel_acceso.desc()).all()
+    # return session.query(Jerarquia).order_by(Jerarquia.nivel_acceso.desc()).all()
+    return session.query(Jerarquia).all()
 
 def get_jerarquia_by_id(id_jerarquia):
     return session.query(Jerarquia).filter_by(id_jerarquia=id_jerarquia).first()

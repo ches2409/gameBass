@@ -11,9 +11,6 @@ if TYPE_CHECKING:
     from app.models.registros_models import Registro
     from app.models.resultados_models import Resultado
 
-
-
-
 class Usuario(Base):
     __tablename__ = 'usuarios'
     __table_args__ = {
@@ -23,6 +20,7 @@ class Usuario(Base):
     id_usuario: Mapped[int] = mapped_column(Integer, primary_key=True)
     alias_usuario: Mapped[str] = mapped_column(String(50), nullable=False,unique=True, comment="nombre único en la red")
     email_usuario: Mapped[str] = mapped_column(String(100),nullable=False, unique=True, comment="Correo electrónico de contacto")
+    password_usuario: Mapped[str] = mapped_column(String(255), nullable=False)
     creacion_usuario: Mapped[DateTime] = mapped_column(
         DateTime(timezone=True),
         server_default=func.now()
