@@ -38,6 +38,7 @@ class Equipo(Base):
         server_default=func.now(),
         comment="fecha de creación del equipo"
     )
+    color_equipo: Mapped[str] = mapped_column(String(7), nullable=False)
     estado_equipo: Mapped[EstadoEquipo] = mapped_column(
         _Enum(
             EstadoEquipo,

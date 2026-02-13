@@ -9,7 +9,7 @@ def get_all_equipos():
 def get_equipos_by_id(id_equipo):
     return session.query(Equipo).filter_by(id_equipo=id_equipo).first()
 
-def create_equipo(nombre_equipo, lema_equipo, estado_equipo, id_comandante):
+def create_equipo(nombre_equipo, lema_equipo,color_equipo, estado_equipo, id_comandante):
     
     if not all ([nombre_equipo, estado_equipo, id_comandante]):
         raise ValueError("Nombre, estado y comandante son campos obligatorios.")
@@ -23,6 +23,7 @@ def create_equipo(nombre_equipo, lema_equipo, estado_equipo, id_comandante):
     nuevo_equipo = Equipo(
         nombre_equipo=nombre_equipo,
         lema_equipo=lema_equipo,
+        color_equipo=color_equipo,
         estado_equipo=estado_enum,
         id_comandante=id_comandante_int
     )
@@ -32,7 +33,7 @@ def create_equipo(nombre_equipo, lema_equipo, estado_equipo, id_comandante):
     
     return nuevo_equipo
 
-def update_equipo(id_equipo, nombre_equipo, lema_equipo, estado_equipo, id_comandante):
+def update_equipo(id_equipo, nombre_equipo, lema_equipo, color_equipo,estado_equipo, id_comandante):
     
     equipo_existente = get_equipos_by_id(id_equipo)
     
@@ -45,6 +46,8 @@ def update_equipo(id_equipo, nombre_equipo, lema_equipo, estado_equipo, id_coman
             equipo_existente.nombre_equipo = nombre_equipo
         if lema_equipo is not None:
             equipo_existente.lema_equipo = lema_equipo
+        if color_equipo is not None:
+            equipo_existente.color_equipo = color_equipo
         if estado_equipo is not None:
             equipo_existente.estado_equipo = EstadoEquipo[estado_equipo]
         if id_comandante is not None:

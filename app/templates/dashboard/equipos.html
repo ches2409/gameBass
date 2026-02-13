@@ -1,0 +1,133 @@
+{% extends 'dashboard/index.html' %}
+
+{% block title %} Equipos | GameBass{% endblock %}
+
+{% block dashboard_body %}
+
+    {% from 'macros/data_card_macro.html' import render_data_card %}
+    {% from 'macros/equipo_form_macro.html' import render_equipo_modal %}
+
+    {% block alertContainer %}
+        {% if alert_finish %}
+            {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info, modal_target='createEquipoModal' %}
+                {% include 'components/alert-container.html' %}
+            {% endwith %}
+        {% endif %}
+    {% endblock %}
+
+    {% include 'components/header-section.html' %}
+
+    <!-- Contenedor para nuestras tarjetas, usando un grid para ordenarlas -->
+    <div class="nodo-grid">
+        {% if equipos %}
+            {% for equipo in equipos %}
+                {% macro card_header_content() %}
+                    <div class="engine-icon"><span class="material-symbols-outlined">sports_esports</span></div>
+                {% endmacro %}
+
+                {% macro card_info_section() %}
+                    <p class="rank-info_text">Formación: {{ equipo.fecha_formacion.strftime("%Y-%m-%d") }}</p>
+                {% endmacro %}
+
+                {% macro card_body_content() %}
+                    <div class="tech-specs">
+                        <div class="spec-row"><span class="label">ENGINE</span><span class="value">{{ equipo.nombre_equipo | upper }}</span></div>
+                        <div class="spec-row"><span class="label">deployment_status</span><span class="value status-{{ equipo.estado_equipo.name | lower }}">{{ equipo.estado_equipo.value | upper }}</span></div>
+                    </div>
+                {% endmacro %}
+
+                {{ render_data_card(equipo, card_type='equipo',
+                    item_id=equipo.id_equipo,
+                    item_name=equipo.nombre_equipo,
+                    neon_color=equipo.color_equipo,
+                    title=equipo.nombre_equipo | upper,
+                    subtitle=equipo.lema_equipo | upper,
+                    edit_data_attributes={
+                        'id': equipo.id_equipo,
+                        'nombre': equipo.nombre_equipo,
+                        'lema': equipo.lema_equipo,
+                        'color': equipo.color_equipo,
+                        'estado': equipo.estado_equipo.name,
+                        'comandante': equipo.id_comandante},
+                    card_header_content=card_header_content,
+                    card_info_section=card_info_section,
+                    card_body_content=card_body_content) }}
+            {% endfor %}
+        {% else %}
+            <!-- Mensaje si no hay ninguna jerarquía creada todavía -->
+
+            <div class="error-container">
+                {%  include 'components/error-datos.html'%}
+            </div>
+
+        {% endif %}
+    </div>
+
+    {{ render_equipo_modal(
+        modal_id='createEquipoModal',
+        form_action=url_for('equipo.create'),
+        submit_text='CONFIRMAR_INYECCIÓN',
+        estados=estados_equipo,
+        usuarios=usuarios,
+        is_create=True) }}
+
+    {{ render_equipo_modal(
+        modal_id='updateEquipoModal',
+        form_action=url_for('equipo.update', id_equipo=0),
+        submit_text='ACTUALIZAR_INYECCIÓN',
+        estados=estados_equipo,
+        usuarios=usuarios
+    ) }}
+
+     {% include 'components/delete-modal.html' %}
+
+    <script>
+        // Función genérica para abrir/cerrar cualquier modal
+        function toggleModal(modalID) {
+            const modal = document.getElementById(modalID);
+            if (modal) {
+                modal.style.display = (modal.style.display === "none" || modal.style.display === "") ? "flex" : "none";
+            }
+        }
+
+
+        function openUpdateModal(button) {
+            // 1. Obtener datos del botón
+            const id = button.getAttribute('data-id');
+            const nombre = button.getAttribute('data-nombre');
+            const lema = button.getAttribute('data-lema');
+            const color = button.getAttribute('data-color');
+            const estado = button.getAttribute('data-estado');
+            const comandante = button.getAttribute('data-comandante');
+            // 2. Construir la URL de actualización dinámicamente
+            const form = document.getElementById('form-updateEquipoModal');
+            const baseUrl = "{{ url_for('equipo.update', id_equipo=0) }}";
+            const updateUrl = baseUrl.replace('/0', '/' + id);
+
+            // 3. Asignar valores a los inputs del formulario
+            form.action = updateUrl;
+            // Prefijamos el ID del input con el ID del modal para asegurar unicidad
+            document.getElementById('updateEquipoModal-nombre').value = nombre;
+            document.getElementById('updateEquipoModal-lema').value = lema;
+            document.getElementById('updateEquipoModal-color').value = color;
+            document.getElementById('updateEquipoModal-estado').value = estado;
+            document.getElementById('updateEquipoModal-comandante').value = comandante;
+
+            // 4. Mostrar el modal
+            toggleModal('updateEquipoModal');
+
+        }
+
+        function openDeleteModal(deleteUrl, itemName) {
+            document.getElementById('btnConfirmPurge').href = deleteUrl;
+
+            // 2. Mostrar el nombre del rol en la advertencia
+            document.getElementById('deleteItemName').textContent = itemName;
+
+            // 3. Abrir el modal
+            toggleModal('deleteConfirmationModal');
+        }
+
+    </script>
+
+{% endblock %}

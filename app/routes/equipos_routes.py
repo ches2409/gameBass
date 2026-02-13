@@ -24,10 +24,11 @@ def create():
     
     nombre_equipo = request.form.get('nombre_equipo')
     lema_equipo = request.form.get('lema_equipo')
+    color_equipo = request.form.get('color_equipo')
     estado_equipo = request.form.get('estado_equipo')
     id_comandante = request.form.get('id_comandante')
     
-    equipos_services.create_equipo(nombre_equipo, lema_equipo, estado_equipo, id_comandante)
+    equipos_services.create_equipo(nombre_equipo, lema_equipo,color_equipo, estado_equipo, id_comandante)
     
     return redirect(url_for('equipo.index'))
 
@@ -42,10 +43,11 @@ def update(id_equipo):
     
     nombre_equipo = request.form.get('nombre_equipo')
     lema_equipo = request.form.get('lema_equipo')
+    color_equipo = request.form.get('color_equipo')
     estado_equipo = request.form.get('estado_equipo')
     id_comandante = request.form.get('id_comandante')
     
-    equipos_services.update_equipo(id_equipo, nombre_equipo, lema_equipo, estado_equipo, id_comandante)
+    equipos_services.update_equipo(id_equipo, nombre_equipo, lema_equipo, color_equipo, estado_equipo, id_comandante)
     
     return redirect(url_for('equipo.index'))
 
