@@ -57,6 +57,8 @@
 @use 'components/general-card';
 @use 'components/protocols-card';
 @use 'components/matriz-card';
+@use 'components/user_card';
+@use "components/manage_equipo";
 @use "components/modal-form";
 @use "components/modal-delete";
 @use "components/error-datos";

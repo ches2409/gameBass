@@ -9,10 +9,10 @@ def get_all_usuarios():
 def get_usuarios_by_id(id_usuario):
     return session.query(Usuario).filter_by(id_usuario=id_usuario).first()
 
-def create_usuario(alias_usuario, email_usuario, password, id_jerarquia):
+def create_usuario(alias_usuario, email_usuario, password,foto_usuario, id_jerarquia):
     
-    if not all ([alias_usuario, email_usuario, password, id_jerarquia]):
-        raise ValueError("Alias, email, password y jerarquia son campos obligatorios")
+    if not all([alias_usuario, email_usuario, password, id_jerarquia]):
+        raise ValueError("Alias, email, password y jerarquía son campos obligatorios.")
     
     try:
         id_jerarquia_int = int(id_jerarquia)
@@ -24,6 +24,7 @@ def create_usuario(alias_usuario, email_usuario, password, id_jerarquia):
         alias_usuario=alias_usuario,
         email_usuario=email_usuario,
         password_usuario=hashed_password,
+        foto_usuario=foto_usuario,
         id_jerarquia=id_jerarquia_int
     )
     
@@ -32,7 +33,7 @@ def create_usuario(alias_usuario, email_usuario, password, id_jerarquia):
     
     return nuevo_usuario
 
-def update_usuario(id_usuario, alias_usuario, email_usuario, password, id_jerarquia):
+def update_usuario(id_usuario, alias_usuario, email_usuario, password, foto_usuario, id_jerarquia):
     usuario = get_usuarios_by_id(id_usuario)
     
     if not usuario:
@@ -45,6 +46,8 @@ def update_usuario(id_usuario, alias_usuario, email_usuario, password, id_jerarq
             usuario.email_usuario = email_usuario
         if password: # Solo actualiza la contraseña si se proporciona una nueva
             usuario.password_usuario = generate_password_hash(password)
+        if foto_usuario is not None:
+            usuario.foto_usuario = foto_usuario
         if id_jerarquia is not None:
             usuario.id_jerarquia = int(id_jerarquia)
     except (KeyError, ValueError) as e:

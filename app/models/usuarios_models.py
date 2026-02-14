@@ -20,7 +20,8 @@ class Usuario(Base):
     id_usuario: Mapped[int] = mapped_column(Integer, primary_key=True)
     alias_usuario: Mapped[str] = mapped_column(String(50), nullable=False,unique=True, comment="nombre único en la red")
     email_usuario: Mapped[str] = mapped_column(String(100),nullable=False, unique=True, comment="Correo electrónico de contacto")
-    password_usuario: Mapped[str] = mapped_column(String(255), nullable=False)
+    password_usuario: Mapped[str] = mapped_column(String(255), nullable=False, comment="Contraseña hasheada del usuario")
+    foto_usuario: Mapped[str] = mapped_column(String(255), nullable=True, comment="URL completa o nombre de archivo del avatar del usuario")
     creacion_usuario: Mapped[DateTime] = mapped_column(
         DateTime(timezone=True),
         server_default=func.now()
@@ -52,7 +53,7 @@ class Usuario(Base):
     equipos_comandados: Mapped[List["Equipo"]] = relationship(
         "Equipo",
         back_populates="comandante",
-        cascade="all, delete-orphan"
+        # cascade="all, delete-orphan"
     )
     # 2. Relación de MEMBRESÍA: Todos los equipos a los que PERTENECE (M:N)
     membresias: Mapped[List["Equipo"]] = relationship(

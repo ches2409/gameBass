@@ -1,0 +1,113 @@
+{% extends 'dashboard/index.html' %}
+
+{% block title %}Gestionar {{ equipo.nombre_equipo }} | GameBass{% endblock %}
+
+{% block dashboard_body %}
+
+    {# Cabecera de la sección, mostrando el nombre del equipo que estamos gestionando #}
+    <div class="intro_card mb-4">
+        <div class="intro_main w-100">
+            <div class="command">
+                <div class="command__code intel-badge">
+                    <p class="text_code">SQUAD_MANAGEMENT_TERMINAL</p>
+                </div>
+            </div>
+            <h2 class="glitch-title" data-text="GESTIONAR: {{ equipo.nombre_equipo | upper }}">
+                GESTIONAR: {{ equipo.nombre_equipo | upper }}
+            </h2>
+        </div>
+    </div>
+
+    <header class="modal-header">
+            <div class="header-title">
+            <h3>RECALIBRAR_UNIDAD_TÁCTICA</h3>
+            <span class="header-subtitle">ARQUITECTURA DE SINERGIA DE RED V2.9</span>
+        </div>
+        <div class="capacity-counter">
+            <span class="capacity-label">CAPACIDAD_RED_SQUAD</span>
+            <span class="capacity-value">{{ equipo.miembros|length }}/ {{ equipo.maximo_miembros }}</span>
+        </div>
+    </header>
+
+    <main class="modal-body">
+        <div class="column" style="background: rgba(96, 165, 250, 0.02);">
+            <div class="column-header">
+                <span class="header-subtitle" style="font-size: 8px;">RED_ENLAZADA</span>
+                <span class="header-subtitle" style="font-size: 7px; opacity: 0.6;">ACTIVE_SYNC</span>
+            </div>
+
+
+            {% for miembro in equipo.miembros %}
+            <div class="{% if miembro.id_usuario == equipo.id_comandante %} linked-node {% else %} recruit-item{% endif %}">
+                <div class="member-info">
+                {% if miembro.foto_usuario and miembro.foto_usuario.startswith('http') %}
+                    <img src="{{ miembro.foto_usuario }}" class="avatar-small">
+                {% elif miembro.foto_usuario %}
+                    <img src="{{ url_for('static', filename='uploads/avatars/' ~ miembro.foto_usuario) }}" class="avatar-small">
+                {% else %}
+                    <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed={{ miembro.alias_usuario }}" class="avatar-small">
+                {% endif %}
+                    <div class="member-names">
+                        <h5>{{ miembro.alias_usuario }}</h5>
+                        <p>{{ miembro.jerarquia.nombre_jerarquia | upper }}</p>
+                    </div>
+                </div>
+                {% if miembro.id_usuario == equipo.id_comandante %}
+                    <h6>Comandante</h6>
+                    <span class="badge-root">ROOT_NODE</span>
+                {% else %}
+                    <a href="{{ url_for('equipo.remove_member', id_equipo=equipo.id_equipo, id_usuario=miembro.id_usuario) }}" class="remove-member-btn" title="Desvincular Nodo">
+                        <span class="material-symbols-outlined">link_off</span>
+                    </a>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+        </div>
+
+
+        <!-- Col 3: Available Assets -->
+        <div class="column">
+                <div class="search-container">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                    <input type="text" class="cyber-input search-input" placeholder="  BUSCAR NUEVOS ACTIVOS">
+                </div>
+
+                {% if equipo.miembros|length < equipo.maximo_miembros %}
+                    <p class="field-label" style="font-size: 8px; margin-bottom: 15px;">ACTIVOS_MAINFRAME_DISPONIBLES</p>
+                    <!-- Recruits List -->
+                    {# Bucle 2: Itera sobre la lista de usuarios que el backend ya ha filtrado #}
+                    {% for usuario in usuarios_disponibles %}
+                        <form action="{{ url_for('equipo.add_member', id_equipo=equipo.id_equipo) }}" method="POST">
+                            <input type="hidden" name="id_usuario" value="{{ usuario.id_usuario }}">
+                            <div class="recruit-item">
+                                <div class="member-info">
+                                    {% if usuario.foto_usuario and usuario.foto_usuario.startswith('http') %}
+                                        <img src="{{ usuario.foto_usuario }}" class="avatar-small" alt="Usuario {{ usuario.alias_usuario }}">
+                                    {% elif usuario.foto_usuario %}
+                                        <img src="{{ url_for('static', filename='uploads/avatars/' ~ usuario.foto_usuario) }}" class="avatar-small" alt="Usuario {{ usuario.alias_usuario }}">
+                                    {% else %}
+                                        <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed={{ usuario.alias_usuario }}" class="avatar-small" alt="Usuario {{ usuario.alias_usuario }}">
+                                    {% endif %}
+                                    <div class="member-names">
+                                        <h5 style="font-size: 10px;">{{ usuario.alias_usuario }}</h5>
+                                        <p style="font-size: 6px;">{{ usuario.jerarquia.nombre_jerarquia | upper }}</p>
+                                    </div>
+                                </div>
+                                <button type="submit" class="add-icon-btn">
+                                    <span class="material-symbols-outlined add-icon">add_circle</span>
+                                </button>
+                            </div>
+                        </form>
+                    {% else %}
+                        <p class="capacity-full-message">NO_HAY_ACTIVOS_DISPONIBLES_EN_LA_RED</p>
+                    {% endfor %}
+                {% else %}
+                    <p class="capacity-full-message">CAPACIDAD_MÁXIMA_DE_RED_ALCANZADA</p>
+                {% endif %}
+
+            </div>
+
+    </main>
+
+{% endblock %}

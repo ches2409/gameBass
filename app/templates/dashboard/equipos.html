@@ -3,8 +3,6 @@
 {% block title %} Equipos | GameBass{% endblock %}
 
 {% block dashboard_body %}
-
-    {% from 'macros/data_card_macro.html' import render_data_card %}
     {% from 'macros/equipo_form_macro.html' import render_equipo_modal %}
 
     {% block alertContainer %}
@@ -21,37 +19,7 @@
     <div class="nodo-grid">
         {% if equipos %}
             {% for equipo in equipos %}
-                {% macro card_header_content() %}
-                    <div class="engine-icon"><span class="material-symbols-outlined">sports_esports</span></div>
-                {% endmacro %}
-
-                {% macro card_info_section() %}
-                    <p class="rank-info_text">Formación: {{ equipo.fecha_formacion.strftime("%Y-%m-%d") }}</p>
-                {% endmacro %}
-
-                {% macro card_body_content() %}
-                    <div class="tech-specs">
-                        <div class="spec-row"><span class="label">ENGINE</span><span class="value">{{ equipo.nombre_equipo | upper }}</span></div>
-                        <div class="spec-row"><span class="label">deployment_status</span><span class="value status-{{ equipo.estado_equipo.name | lower }}">{{ equipo.estado_equipo.value | upper }}</span></div>
-                    </div>
-                {% endmacro %}
-
-                {{ render_data_card(equipo, card_type='equipo',
-                    item_id=equipo.id_equipo,
-                    item_name=equipo.nombre_equipo,
-                    neon_color=equipo.color_equipo,
-                    title=equipo.nombre_equipo | upper,
-                    subtitle=equipo.lema_equipo | upper,
-                    edit_data_attributes={
-                        'id': equipo.id_equipo,
-                        'nombre': equipo.nombre_equipo,
-                        'lema': equipo.lema_equipo,
-                        'color': equipo.color_equipo,
-                        'estado': equipo.estado_equipo.name,
-                        'comandante': equipo.id_comandante},
-                    card_header_content=card_header_content,
-                    card_info_section=card_info_section,
-                    card_body_content=card_body_content) }}
+                {% include 'components/user_card.html' %}
             {% endfor %}
         {% else %}
             <!-- Mensaje si no hay ninguna jerarquía creada todavía -->
@@ -96,6 +64,7 @@
             const id = button.getAttribute('data-id');
             const nombre = button.getAttribute('data-nombre');
             const lema = button.getAttribute('data-lema');
+            const maximo_miembros = button.getAttribute('data-maximo_miembros');
             const color = button.getAttribute('data-color');
             const estado = button.getAttribute('data-estado');
             const comandante = button.getAttribute('data-comandante');
@@ -109,6 +78,7 @@
             // Prefijamos el ID del input con el ID del modal para asegurar unicidad
             document.getElementById('updateEquipoModal-nombre').value = nombre;
             document.getElementById('updateEquipoModal-lema').value = lema;
+            document.getElementById('updateEquipoModal-maximo_miembros').value = maximo_miembros;
             document.getElementById('updateEquipoModal-color').value = color;
             document.getElementById('updateEquipoModal-estado').value = estado;
             document.getElementById('updateEquipoModal-comandante').value = comandante;

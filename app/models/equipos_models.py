@@ -33,6 +33,7 @@ class Equipo(Base):
     id_equipo: Mapped[int] = mapped_column(Integer, primary_key=True)
     nombre_equipo: Mapped[str] = mapped_column(String(50), nullable=False, comment="nombre oficial del equipo en la arena")
     lema_equipo:Mapped[str] = mapped_column(String(100), nullable=True, comment="lema o firma digital que identifica al equipo")
+    maximo_miembros: Mapped[int] = mapped_column(Integer, default=2, nullable=False)
     fecha_formacion: Mapped[DateTime] = mapped_column(
         DateTime(timezone=True),
         server_default=func.now(),

@@ -1,0 +1,253 @@
+@use "../base/variables";
+/* --- CONFIGURACIÓN DE FUENTES --- */
+// La importación de fuentes se ha movido a layout.html para evitar cargas redundantes.
+
+:root {
+    --primary: #A3FF00;      /* Verde Arkadex */
+    --secondary: #D500F9;    /* Morado Cyber */
+    --blue-neon: #60A5FA;    /* Azul de Red */
+    --bg-dark: #020305;
+    --surface: #0a0c10;
+    --border: rgba(255, 255, 255, 0.05);
+    --font-display: 'Orbitron', sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
+    --font-mono: 'Fira Code', monospace;
+}
+
+/* --- CLIPS TÁCTICOS (POLÍGONOS) --- */
+.clip-corner-tl {
+    clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%, 0 15%);
+}
+
+.clip-btn {
+    clip-path: polygon(0 0, 92% 0, 100% 25%, 100% 100%, 8% 100%, 0 75%);
+}
+
+/* --- ESTILO DE LA TARJETA (SQUAD CARD) --- */
+.squad-card {
+    --neon: #ffffff; /* Color por defecto */
+    background-color: var(--surface);
+    //border: 1px solid var(--border);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: var(--font-body);
+    //width: 100%;
+    max-width: 450px;
+    &::before{
+        content: '';
+        position: absolute;
+        inset: 0; // Ocupa el mismo espacio que el padre
+        z-index: 0; // Se coloca detrás del contenido
+        border: 1px solid var(--neon);
+        //border-color: var(--neon);
+        clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
+        transition: clip-path 0.5s cubic-bezier(0.77, 0, 0.175, 1), border-color 0.5s ease;
+    }
+    &:hover::before {
+    //border-color: rgba(variables.$accent-green, 0.8);
+    border-color: var(--neon);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(var(--neon), 0.1);
+    clip-path: polygon(0 0, 50% 0, 100% 60%, 100% 100%, 60% 100%, 0 10%);
+    }
+}
+
+//.squad-card:hover {
+//    border-color: rgba(var(--neon), 0.4);
+//    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+//}
+
+/* Marca de agua de fondo */
+.card-watermark {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1.25rem;
+    opacity: 0.05;
+    font-size: 4rem;
+    pointer-events: none;
+}
+
+/* --- CABECERA --- */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2.5rem;
+}
+
+.card-title-group h4 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 2.25rem;
+    color: white;
+    text-transform: uppercase;
+    font-style: italic;
+    letter-spacing: -0.05em;
+    margin: 0;
+    line-height: 1;
+}
+
+.card-faction {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: rgba(96, 165, 250, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+    font-weight: 700;
+    margin-top: 0.75rem;
+}
+
+/* --- NODO COMANDANTE --- */
+.commander-node {
+    margin-bottom: 2.5rem;
+    padding: 1.25rem;
+    background-color: rgba(163, 255, 0, 0.05);
+    border-left: 4px solid rgba(163, 255, 0, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.commander-node:hover {
+    background-color: rgba(163, 255, 0, 0.1);
+}
+
+.commander-avatar {
+    width: 3.5rem;
+    height: 3.5rem;
+    filter: grayscale(1);
+    border: 1px solid rgba(163, 255, 0, 0.2);
+    transition: filter 0.5s;
+    object-fit: cover;
+}
+
+.commander-node:hover .commander-avatar {
+    filter: grayscale(0);
+}
+
+.commander-info p:first-child {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    color: rgba(163, 255, 0, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin: 0 0 0.25rem 0;
+}
+
+.commander-info h5 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.25rem;
+    color: white;
+    font-style: italic;
+    margin: 0;
+}
+
+/* --- LISTA DE MIEMBROS --- */
+.members-section {
+    margin-bottom: 3rem;
+}
+
+.members-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.members-header span {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    color: #4b5563;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.members-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.member-slot {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 2px solid var(--surface);
+    background-color: #111;
+    filter: grayscale(1);
+    transition: all 0.3s;
+}
+
+.member-slot:hover {
+    filter: grayscale(0);
+    transform: scale(1.1);
+    z-index: 10;
+}
+
+.add-member-btn {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #4b5563;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.add-member-btn:hover {
+    border-color: white;
+    color: var(--primary);
+}
+
+/* --- BOTONES ACCIÓN --- */
+.card-actions {
+    display: flex;
+    gap: 1rem;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+}
+
+.btn-recalibrate {
+    flex: 1;
+    padding: 1rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-recalibrate:hover {
+    background-color: var(--blue-neon);
+    color: black;
+}
+
+.btn-delete {
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: rgba(127, 29, 29, 0.1);
+    border: 1px solid rgba(220, 38, 38, 0.3);
+    color: #ef4444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    background-color: #dc2626;
+    color: white;
+}

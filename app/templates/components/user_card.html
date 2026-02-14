@@ -1,0 +1,80 @@
+{#
+    Componente especializado para mostrar un Equipo (Squad).
+    Recibe un objeto 'equipo' del bucle en la plantilla padre.
+#}
+<div class="squad-card " style="--neon: {{ equipo.color_equipo | default('#00E5FF') }};">
+    <!-- Icono de Fondo -->
+    <div class="card-watermark">
+        <span class="material-symbols-outlined">groups</span>
+    </div>
+
+    <!-- Cabecera -->
+    <div class="squad-card-header">
+        <div class="card-title-group">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <span class="material-symbols-outlined" style="color: var(--neon);">groups</span>
+                <h4>{{ equipo.nombre_equipo | upper }}</h4>
+            </div>
+            <p class="card-faction">{{ equipo.lema_equipo | default('NO_LEMA_DEFINED') }}</p>
+        </div>
+{#        <div class="squad-stats">#}
+{#            <p class="stats-label">WIN_RATE</p>#}
+{#            <p class="stats-value">--%</p>#}
+{#        </div>#}
+    </div>
+
+    <!-- Nodo Comandante -->
+    <div class="commander-node " style="border-color: var(--neon);">
+        {% if equipo.comandante.foto_usuario %}
+            {% if equipo.comandante.foto_usuario.startswith('http') %}
+                <img src="{{ equipo.comandante.foto_usuario }}" class="commander-avatar clip-corner-tl" alt="Comandante {{ equipo.comandante.alias_usuario }}">
+            {% else %}
+                <img src="{{ url_for('static', filename='uploads/avatars/' ~ equipo.comandante.foto_usuario) }}" class="commander-avatar clip-corner-tl" alt="Comandante {{ equipo.comandante.alias_usuario }}">
+            {% endif %}
+        {% else %}
+            {# Si no hay foto, se muestra un avatar genérico por defecto. #}
+            <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed={{ equipo.comandante.alias_usuario }}" class="commander-avatar clip-corner-tl" alt="Comandante {{ equipo.comandante.alias_usuario }}">
+        {% endif %}
+        <div class="commander-info">
+            <p style="color: var(--neon);">NODE_COMMANDER</p>
+            <h5>{{ equipo.comandante.alias_usuario }}</h5>
+        </div>
+    </div>
+
+    <!-- Miembros -->
+    <div class="members-section">
+        <div class="members-header">
+            <span>ACTIVE_SINAPSE_LINKS ({{ equipo.miembros|length }}/{{ equipo.maximo_miembros }})</span>
+        </div>
+        <div class="members-list">
+            {# Renderiza los avatares de los miembros actuales #}
+            {% for miembro in equipo.miembros %}
+
+                {% if miembro.foto_usuario %}
+                    {% if miembro.foto_usuario.startswith('http') %}
+                        <img src="{{ miembro.foto_usuario }}" class="commander-avatar member-slot" alt="Comandante {{ miembro.alias_usuario }}">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='uploads/avatars/' ~ miembro.foto_usuario) }}" class="commander-avatar member-slot" alt="Comandante {{ miembro.alias_usuario }}">
+                    {% endif %}
+                {% else %}
+                    <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed={{ miembro.alias_usuario }}" class="commander-avatar member-slot" alt="Comandante {{ miembro.alias_usuario }}">
+                {% endif %}
+
+            {% endfor %}
+
+            {# Renderiza los slots vacíos para añadir nuevos miembros #}
+            {# Este botón ahora es un enlace que dirige a la página de gestión del equipo. #}
+            <a href="{{ url_for('equipo.manage_members', id_equipo=equipo.id_equipo) }}" class="add-member-btn" title="Gestionar Unidad">
+                <span class="material-symbols-outlined">group_add</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Acciones -->
+    <div class="card-actions">
+        <button class="btn-recalibrate clip-btn" onclick="openUpdateModal(this)" data-id="{{ equipo.id_equipo }}" data-nombre="{{ equipo.nombre_equipo }}" data-lema="{{ equipo.lema_equipo }}" data-maximo_miembros="{{ equipo.maximo_miembros }}" data-color="{{ equipo.color_equipo }}" data-estado="{{ equipo.estado_equipo.name }}" data-comandante="{{ equipo.id_comandante }}">RECALIBRAR_UNIDAD</button>
+        <button class="btn-delete clip-btn" onclick="openDeleteModal('{{ url_for('equipo.delete', id_equipo=equipo.id_equipo) }}', '{{ equipo.nombre_equipo | upper }}')">
+            <span class="material-symbols-outlined">delete</span>
+        </button>
+    </div>
+</div>

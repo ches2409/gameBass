@@ -179,6 +179,7 @@ def get_dashboard_data(current_path):
 
     # 5. Lógica para determinar el título de la página y el ítem activo del menú
     page_title = 'MAINFRAME_HUB' # Título por defecto
+    page_data = 'COMMAND_CENTER' # Valor por defecto para el breadcrumb
 
     # Normalizar la ruta actual (si es '/' se queda igual, si no, quitamos slash final)
     norm_path = current_path.rstrip('/') if len(current_path) > 1 else current_path

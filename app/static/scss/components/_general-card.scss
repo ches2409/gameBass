@@ -118,6 +118,25 @@
   margin-bottom: 20px;
 }
 
+.user-avatar-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.user-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--neon);
+  background-color: var(--bg-dark);
+  box-shadow: 0 0 20px rgba(var(--neon), 0.4);
+}
+
+
 .rank-subtitle {
   font-size: 10px;
   font-weight: 800;

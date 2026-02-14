@@ -71,6 +71,10 @@
     {% endif %}
 {#    </div>#}
 
+    <!-- =================================== -->
+    <!--           CARD-BODY-SECTION         -->
+    <!-- =================================== -->
+
     <!-- Cuerpo principal de la tarjeta -->
     {% if card_body_content %}
     <div class="card-body">
@@ -78,6 +82,10 @@
         {{ card_body_content() }}
     </div>
     {% endif %}
+
+    <!-- =================================== -->
+    <!--          CARD-FOOTER-SECTION        -->
+    <!-- =================================== -->
 
     <!-- Slot para el pie de la tarjeta (opcional) -->
     {% if card_footer_content %}

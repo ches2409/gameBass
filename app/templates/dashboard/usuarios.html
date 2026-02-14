@@ -22,11 +22,28 @@
         {% if usuarios %}
             {% for usuario in usuarios %}
                 {# Definimos las macros de contenido DENTRO del bucle para que tengan acceso a la variable 'usuario'. #}
+
                 {% macro card_header_content() %}
                     <div class="engine-info text-2xs text-soft">
                         ID_{{ usuario.jerarquia.nombre_jerarquia | upper }}{{ usuario.jerarquia.nivel_acceso }}X{{ "%03d" | format(usuario.id_usuario) }}
                     </div>
 
+                {% endmacro %}
+
+                {% macro card_body_content() %}
+                    <div class="user-avatar-container">
+                    {% if usuario.foto_usuario %}
+                    	{# Si el campo 'foto_usuario' empieza con 'http' es una URL completa. #}
+                        {% if usuario.foto_usuario.startswith('http') %}
+                            <img src="{{ usuario.foto_usuario }}" alt="avatar de {{ usuario.alias_usuario }}" class="user-avatar">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='uploads/avatars/' ~ usuario.foto_usuario) }}" alt="avatar de {{ usuario.alias_usuario }}" class="user-avatar">
+                        {% endif %}
+                        {% else %}
+                            {# Si no hay foto, se muestra un avatar generico por defecto. #}
+                            <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed={{ usuario.alias_usuario }}" class="user-avatar" alt="avatar por defecto">
+                    {% endif %}
+                    </div>
                 {% endmacro %}
 
                 {{ render_data_card(usuario, card_type='usuario',
@@ -40,8 +57,10 @@
                         'nombre': usuario.alias_usuario,
                         'email': usuario.email_usuario,
                         'jerarquia': usuario.id_jerarquia,
+                        'foto': usuario.foto_usuario,
                         },
-                    card_header_content=card_header_content
+                    card_header_content=card_header_content,
+                    card_body_content=card_body_content
                     )
                 }}
             {% endfor %}
@@ -88,6 +107,8 @@
             const nombre = button.getAttribute('data-nombre');
             const email = button.getAttribute('data-email');
             const jerarquia = button.getAttribute('data-jerarquia');
+            const foto = button.getAttribute('data-foto');
+
 
 
             // 2. Construir la URL de actualización dinámicamente
@@ -102,6 +123,10 @@
             document.getElementById('updateUserModal-email').value = email;
             document.getElementById('updateUserModal-password').value = '';
             document.getElementById('updateUserModal-jerarquia').value = jerarquia;
+            document.getElementById('updateUserModal-foto').value = ''; // Limpia el input de archivo.
+            document.getElementById('updateUserModal-url').value = (foto && foto.startsWith('http')) ? foto : ''; // Rellena la URL si es una URL.
+
+
 
 
             // 4. Mostrar el modal

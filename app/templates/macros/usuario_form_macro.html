@@ -35,13 +35,26 @@
         {% endif %}
       </header>
 
-      <form class="injection-form" id="form-{{ modal_id }}" action="{{ form_action }}" method="POST">
+      {# enctype="multipart/form-data" permite la subida de archivos. #}
+      <form class="injection-form" id="form-{{ modal_id }}" action="{{ form_action }}" method="POST" enctype="multipart/form-data">
 
         <!-- Campo: Nombre de usuario -->
         <div class="input-group">
             <label><span class="label-icon">fingerprint</span> NOMBRE_OPERADOR</label>
             <input type="text" name="alias_usuario" id="{{ modal_id }}-alias" {% if is_create %}placeholder="Tu indentidad unica en la RED"{% endif %} required>
             <div class="input-focus-line"></div>
+        </div>
+
+        <!-- Campo: Subir archivo de avatar -->
+        <div class="input-group">
+            <label><span class="label-icon">upload_file</span> SUBIR_AVATAR_LOCAL</label>
+            <input type="file" name="avatar_file" id="{{ modal_id }}-foto" accept="image/png, image/jpeg, image/gif">
+        </div>
+
+        <!-- Campo: URL del avatar -->
+        <div class="input-group">
+            <label><span class="label-icon">link</span> O_USAR_URL_EXTERNA</label>
+            <input type="text" name="avatar_url" id="{{ modal_id }}-url" placeholder="Pega la URL de una imagen aquí">
         </div>
 
         <!-- campo: email -->
