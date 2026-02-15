@@ -9,18 +9,24 @@ $primary-bg   : #020305;
 $background-dark: #0C111D;
 $background-soft: #0A0C10;
 $soft: #2a3141;
+
 $accent-green : #A3FF00;
 $accent-pink  : #D500F9;
 $accent-blue  : #57ADE4;
 $accent-blue-dark  : #13547e;
 $accent-yellow: #DDFF00;
+
 $text-main    : #d6f5e9;
-$text-gray    : #c3cdd9;
+//$text-gray    : #c3cdd9;
+$text-gray: #9ca3af;
+$text-dim:#4b5563;
+
 $side-purple  : #ad6ad6;
 $side-green   : #B9F23D;
 $side-orange  : #ff8a00;
 $side-pink    : #F229E5;
 $side-blue    : #00eaff;
+
 $alert: #ff0059;
 
 
@@ -56,7 +62,7 @@ $colors: (
 $font-primary: 'Orbitron', 'Arial', monospace;
 $font-secondary: 'Rajdhani', sans-serif;
 $font-body: 'Orbitron', sans-serif;
-$font-display: 'Fira Code', sans-serif;
+$font-display: 'Fira Code', monospace;
 
 // Tamaños de fuente
 $font-sizes: (
@@ -136,35 +142,14 @@ $border-radius: (
 
 // Sombras
 $shadows: (
-  'sm': 0 1px 2px 0 rgba(0, 0, 0, 0.05),
-  'base': 0 1px 3px 0 rgba(0, 0, 0, 0.1),
-  'md': 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-  'lg': 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-  'xl': 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-  '2xl': 0 25px 50px -12px rgba(0, 0, 0, 0.25),
-  'neon-blue': 0 0 20px rgba(126, 219, 252, 0.5),
-  'neon-pink': 0 0 20px rgba(255, 0, 195, 0.5),
-  'neon-green': 0 0 20px rgba(186, 255, 62, 0.5)
+    'sm': 0 1px 2px 0 rgba(0, 0, 0, 0.05),
+    'base': 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    'md': 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    'lg': 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    'xl': 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    '2xl': 0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    'dark-base': 0 0 30px rgba(0,0,0,0.5),
+    'neon-blue': 0 0 20px rgba(126, 219, 252, 0.5),
+    'neon-pink': 0 0 20px rgba(255, 0, 195, 0.5),
+    'neon-green': 0 0 20px rgba(186, 255, 62, 0.5)
 );
-
-// ==========================================================================
-// CSS Custom Properties (Variables Globales)
-// ==========================================================================
-// Se definen aquí para que estén disponibles en todo el proyecto.
-// Usamos las variables SASS ($) para asignar los valores.
-
-//:root {
-  //--primary: #{$accent-green};
-  //--secondary: #{$accent-pink};
-  //--accent-blue: #{$accent-blue};
-  //--accent-yellow: #{$accent-yellow};
-  
-
-  //--bg-surface: #{$background-soft};
-  //--bg-card: #{$background-soft};
-  //--bg-dark: #{$primary-bg};
-  //--bg-alpha: #{rgba($accent-green, 0.1)};
-  //
-  //--text-gray: #{$text-gray};
-  //--text-dim: #{$text-gray};
-//}

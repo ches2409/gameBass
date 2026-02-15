@@ -26,6 +26,7 @@ $base-line-height: 1.6;
   --accent-pink: #{variables.$accent-pink};
   --accent-blue: #{variables.$accent-blue};
   --accent-yellow: #{variables.$accent-yellow};
+  
   --text-main: #{variables.$text-main};
   --text-gray: #{variables.$text-gray};
   --side-purple: #{variables.$side-purple};
@@ -33,8 +34,10 @@ $base-line-height: 1.6;
   --side-orange: #{variables.$side-orange};
   --side-pink: #{variables.$side-pink};
   --side-blue: #{variables.$side-blue};
+  
   --white: #{variables.$white};
   --black: #{variables.$black};
+  
   --font-main: #{variables.$font-primary};
   --primary-color: #{variables.$primary-bg};
   --secondary-color: #{variables.$accent-blue};
@@ -43,6 +46,7 @@ $base-line-height: 1.6;
   --surface-border: rgba(255, 255, 255, 0.1);
   --border: rgba(255, 255, 255, 0.05);
   --border-white: rgba(255, 255, 255, 0.1);
+  
   --bg-surface: #{variables.$background-soft};
   --bg-card: #{variables.$background-soft};
   --bg-dark: #{variables.$primary-bg};
@@ -50,7 +54,7 @@ $base-line-height: 1.6;
   --bg-modal: rgba(5, 7, 10, 0.95);
 
   --text-gray: #{variables.$text-gray};
-  --text-dim: #{variables.$text-gray};
+  --text-dim: #{variables.$text-dim};
   --font-display: 'Orbitron', sans-serif;
   --font-mono: 'Fira Code', monospace;
   
@@ -287,7 +291,7 @@ hr {
 
 // Scrollbar personalizado para el proyecto
 html {
-  @include mixins.custom-scrollbar(variables.$accent-blue, rgba(variables.$primary-bg, 0.8));
+  @include mixins.custom-scrollbar(variables.$soft, rgba(variables.$primary-bg, 0.8));
 }
 
 // Selección de texto personalizada

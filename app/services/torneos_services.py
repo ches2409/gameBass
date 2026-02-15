@@ -2,10 +2,14 @@ from datetime import datetime
 from app import Torneo
 from app.db import session
 from app.enums.tipos import EstadoTorneo
+from sqlalchemy.orm import selectinload
 
 
 def get_all_torneos():
-    return session.query(Torneo).all()
+    return session.query(Torneo).options(
+        selectinload(Torneo.juego),
+        selectinload(Torneo.registros)
+    ).all()
 
 def get_torneos_by_id(id_torneo):
     return session.query(Torneo).filter_by(id_torneo=id_torneo).first()

@@ -84,5 +84,16 @@ class Equipo(Base):
         back_populates="equipo"
     )
 
+    @property
+    def win_rate(self) -> float:
+        """Calcula el porcentaje de victorias basado en los resultados."""
+        total_jugados = len(self.resultados)
+        if total_jugados == 0:
+            return 0.0
+        
+        victorias = sum(1 for resultado in self.resultados if getattr(resultado, 'posicion_final', 0) == 1)
+        
+        return round((victorias / total_jugados) * 100, 1)
+
     def __str__(self):
         return f"{self.nombre_equipo}"

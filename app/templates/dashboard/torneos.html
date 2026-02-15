@@ -24,21 +24,51 @@
             {% for torneo in torneos_list %}
                 {# Definimos las macros de contenido DENTRO del bucle para que tengan acceso a la variable 'torneo'. #}
                 {% macro card_header_content() %}
-                    <div class="engine-icon" style="border-color: {{ torneo.juego.color_juego }};"><span class="material-symbols-outlined" style="color: {{ torneo.juego.color_juego }};">emoji_events</span></div>
-                    <span class="id-tag" style="color: {{ torneo.juego.color_juego }};">{{ torneo.juego.nombre_juego | upper }}</span>
+{#                    <div class="engine-icon" style="border-color: {{ torneo.juego.color_juego }};"><span class="material-symbols-outlined" style="color: {{ torneo.juego.color_juego }};">emoji_events</span></div>#}
+                    <span class="id-tag text-xl" style="color: {{ torneo.juego.color_juego }};">{{ torneo.juego.nombre_juego | upper }}</span>
                 {% endmacro %}
-
+{#
                 {% macro card_body_content() %}
                     <div class="tech-specs">
                         <div class="spec-row"><span class="label">RECOMPENSA</span><span class="value">{{ torneo.recompensa_torneo }}</span></div>
                         <div class="spec-row"><span class="label">INICIO</span><span class="value">{{ torneo.fecha_inicio.strftime('%Y-%m-%d %H:%M') }}</span></div>
                         <div class="spec-row"><span class="label">FIN</span><span class="value">{{ torneo.fecha_fin.strftime('%Y-%m-%d %H:%M') }}</span></div>
-                        <div class="spec-row"><span class="label">ESTADO</span><span class="value status-{{ torneo.estado_torneo.name | lower }}">{{ torneo.estado_torneo.value | upper }}</span></div>
+                    </div>
+                {% endmacro %}
+#}
+                {% macro card_body_content() %}
+                    <div class="arena-wrapper">
+                        <div class="arena-stat">
+                            <p class="stat-label">Recompensa</p>
+                            <p class="stat-value">{{ torneo.recompensa_torneo }}</p>
+                        </div>
+                        <div class="arena-stat secondary">
+                            <p class="stat-label">Competidores</p>
+                            <p class="stat-value">{{ torneo.registros|length }}/{{ torneo.max_competidores }}</p>
+                        </div>
+                    </div>
+
+                    <div class="tech-specs">
+                        <div class="spec-row"><span class="label">INICIO</span><span class="value">{{ torneo.fecha_inicio.strftime('%Y-%m-%d %H:%M') }}</span></div>
+                        <div class="spec-row"><span class="label">FIN</span><span class="value">{{ torneo.fecha_fin.strftime('%Y-%m-%d %H:%M') }}</span></div>
+                    </div>
+
+                {% endmacro %}
+
+
+
+                {% macro card_footer_content() %}
+                    <div class="status-tournament">
+                        <span class="value status-{{ torneo.estado_torneo.name | lower }} badge">{{ torneo.estado_torneo.value | upper }}</span>
                     </div>
                 {% endmacro %}
 
+
+
                 {{ render_data_card(torneo, card_type='torneo',
                     item_id=torneo.id_torneo,
+                    item_name=torneo.nombre_torneo,
+                    neon_color=torneo.juego.color_juego,
                     title=torneo.nombre_torneo | upper,
                     subtitle='MAX_COMPETIDORES: ' ~ torneo.max_competidores,
                     edit_data_attributes={
@@ -51,7 +81,9 @@
                         'fecha_fin': torneo.fecha_fin.isoformat(),
                         'juego_id': torneo.id_juego},
                     card_header_content=card_header_content,
-                    card_body_content=card_body_content) }}
+                    card_body_content=card_body_content,
+                    card_footer_content=card_footer_content
+                ) }}
             {% endfor %}
         {% else %}
             <!-- Mensaje si no hay ningún torneo creado todavía -->

@@ -1,3 +1,6 @@
+@use "../base/mixins";
+@use "../base/variables";
+
 /* Contenedor del encabezado */
 .admin-header {
     display: flex;
@@ -21,63 +24,22 @@
 .pulse-dot {
     width: 0.5rem;
     height: 0.5rem;
-    background-color: #A3FF00; /* Verde Arkadex */
+    background-color: variables.$accent-green;
     border-radius: 50%;
     animation: pulse 2s infinite;
 }
 
 .status-code {
-    font-family: 'Fira Code', monospace;
+    font-family: variables.$font-display;
     font-size: 10px;
-    color: #A3FF00;
+    color: variables.$accent-green;
     font-weight: 900;
     letter-spacing: 0.1em;
 }
 
-/* EFECTO GLITCH DEL TÍTULO */
+/* EFECTO GLITCH*/
 .glitch-title {
-    position: relative;
-    display: inline-block;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    font-size: 3.5rem;
-    color: #FFFFFF;
-    text-transform: uppercase;
-    font-style: italic;
-    letter-spacing: -0.05em;
-}
-
-/* Las capas fantasma creadas mediante pseudoelementos */
-.glitch-title::before,
-.glitch-title::after {
-    content: attr(data-text); /* Clona el texto del atributo HTML */
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    opacity: 0.8;
-}
-
-/* Capa Verde (Se desplaza en una dirección) */
-.glitch-title::before {
-    color: #A3FF00;
-    z-index: -1;
-    animation: glitch-anim 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
-}
-
-/* Capa Púrpura (Se desplaza en dirección opuesta) */
-.glitch-title::after {
-    color: #D500F9;
-    z-index: -2;
-    animation: glitch-anim 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
-}
-
-/* Keyframes de la vibración técnica */
-@keyframes glitch-anim {
-    0% { transform: translate(0); }
-    20% { transform: translate(-3px, 3px); }
-    40% { transform: translate(-3px, -3px); }
-    60% { transform: translate(3px, 3px); }
-    80% { transform: translate(3px, -3px); }
-    100% { transform: translate(0); }
+    @include mixins.glitch-title()
 }
 
 @keyframes pulse {

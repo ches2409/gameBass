@@ -17,10 +17,10 @@
             </div>
             <p class="card-faction">{{ equipo.lema_equipo | default('NO_LEMA_DEFINED') }}</p>
         </div>
-{#        <div class="squad-stats">#}
-{#            <p class="stats-label">WIN_RATE</p>#}
-{#            <p class="stats-value">--%</p>#}
-{#        </div>#}
+        <div class="squad-stats">
+            <p class="stats-label">WIN_RATE</p>
+            <p class="stats-value">{{ equipo.win_rate }}%</p>
+        </div>
     </div>
 
     <!-- Nodo Comandante -->
@@ -50,14 +50,13 @@
             {# Renderiza los avatares de los miembros actuales #}
             {% for miembro in equipo.miembros %}
 
-                {% if miembro.foto_usuario %}
-                    {% if miembro.foto_usuario.startswith('http') %}
-                        <img src="{{ miembro.foto_usuario }}" class="commander-avatar member-slot" alt="Comandante {{ miembro.alias_usuario }}">
-                    {% else %}
-                        <img src="{{ url_for('static', filename='uploads/avatars/' ~ miembro.foto_usuario) }}" class="commander-avatar member-slot" alt="Comandante {{ miembro.alias_usuario }}">
-                    {% endif %}
+                {# CORRECCIÓN: Usamos solo la clase 'member-slot' para un tamaño consistente. #}
+                {% if miembro.foto_usuario and miembro.foto_usuario.startswith('http') %}
+                    <img src="{{ miembro.foto_usuario }}" class="member-slot" alt="Miembro {{ miembro.alias_usuario }}">
+                {% elif miembro.foto_usuario %}
+                    <img src="{{ url_for('static', filename='uploads/avatars/' ~ miembro.foto_usuario) }}" class="member-slot" alt="Miembro {{ miembro.alias_usuario }}">
                 {% else %}
-                    <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed={{ miembro.alias_usuario }}" class="commander-avatar member-slot" alt="Comandante {{ miembro.alias_usuario }}">
+                    <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed={{ miembro.alias_usuario }}" class="member-slot" alt="Miembro {{ miembro.alias_usuario }}">
                 {% endif %}
 
             {% endfor %}

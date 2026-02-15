@@ -12,7 +12,8 @@ def get_all_equipos():
     """
     return session.query(Equipo).options(
         selectinload(Equipo.miembros).joinedload(Usuario.jerarquia), # Carga miembros y su jerarquía
-        selectinload(Equipo.comandante).joinedload(Usuario.jerarquia) # Carga comandante y su jerarquía
+        selectinload(Equipo.comandante).joinedload(Usuario.jerarquia), # Carga comandante y su jerarquía
+        selectinload(Equipo.resultados) # Carga el historial de resultados para calcular el win_rate
     ).all()
 
 def get_equipos_by_id(id_equipo):

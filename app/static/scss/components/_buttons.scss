@@ -53,6 +53,87 @@
     height: 300px;
   }
 }
+// Botón con resplandor
+.btn-glow{
+  /*
+  La estructura de html para este botón debe ser la siguiente:
+  a>i*2+span
+  */
+    --glow: #{variables.$accent-yellow};
+    --glow2: #{variables.$accent-blue};
+    --glow-bg: #{variables.$background-dark};
+  a{
+    background-color: white;
+    position: relative;
+    width: 180px;
+    height: 55px;
+    display: inline-block;
+    border-radius: 5px;
+    transition: variables.$transition-base;
+    
+    i{
+      background-color: red;
+      position: absolute;
+      inset: -2px;
+      display: block;
+      border-radius: 5px;
+    }
+    i, i:nth-child(2){
+      background: linear-gradient(45deg, var(--glow), var(--glow-bg),var(--glow-bg), var(--glow));
+    }
+    &:hover{
+      i, i:nth-child(2){
+      
+      background: linear-gradient(95deg, var(--glow), var(--glow-bg),var(--glow-bg), var(--glow));
+      }
+      span {
+        font-size: functions.font-size('xs');
+        transform: skew(0deg);
+        &::before {
+          left: 0;
+          width: 200%;
+          height: 200%;
+          background: rgba(var(--glow), 0.05);
+        }
+      }
+    }
+    i:nth-child(2){
+      filter:blur(10px);
+    }
+    span{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border: 1px solid #040a29;
+      border-radius: 3px;
+      //background: rgba(14,21,56,0.65);
+      background: rgba(variables.$background-soft, 0.65);
+      overflow: hidden;
+      //font-size: 1rem;
+      font-size: functions.font-size('2xs');
+      
+      &::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -50px;
+        width: 100%;
+        height: 100%;
+        background: rgba(161, 161, 189, 0.03);
+        transform: skew(25deg);
+        
+      }
+    }
+  }
+}
 
 .clip-btn {
   @include mixins.button-clip(#777977,#d6f5e9,red,der)
