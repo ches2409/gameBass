@@ -42,9 +42,13 @@
           <textarea name="lema_equipo" id="{{ modal_id }}-lema" {% if is_create %}placeholder="Lema del equipo"{% endif %}></textarea>
         </div>
 
-        <!-- campo: numero maximo de miembros -->
+
+
+
+        <div class="data-group">
+            <!-- campo: numero maximo de miembros -->
         <div class="input-group">
-            <label><span class="label-icon">shield</span> SQUAD_POPULATION [MAXIMO_MIEMBROS]</label>
+            <label><span class="label-icon">shield</span> SQUAD_POPULATION</label>
             <input type="number" name="maximo_miembros" id="{{ modal_id }}-maximo_miembros" {% if is_create %}placeholder="maximo de mimebros del equipo"{% endif %} required>
             <div class="input-focus-line"></div>
         </div>
@@ -58,6 +62,8 @@
             <option value="{{ estado.name }}">{{ estado.value | upper }}</option>
             {% endfor %}
           </select>
+        <div class="input-focus-line"></div>
+        </div>
         </div>
 
         <!-- Select: seleccionar el comandante del equipo (traído de usuarios) -->
@@ -68,6 +74,7 @@
             <option value="{{ usuario.id_usuario }}">{{ usuario.alias_usuario | upper }} [{{ usuario.jerarquia.nombre_jerarquia | upper }}]</option>
             {% endfor %}
           </select>
+          <div class="input-focus-line"></div>
         </div>
 
         <!-- Campo: Color Identificador -->

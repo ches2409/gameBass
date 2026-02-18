@@ -34,42 +34,56 @@
             <div class="input-focus-line"></div>
         </div>
 
-        <!-- Campo: Recompensa del Torneo -->
-        <div class="input-group">
-            <label><span class="label-icon">fingerprint</span> RECOMPENSA_ARENA</label>
-            <input type="text" name="recompensa_de_torneo" id="{{ modal_id }}-recompensa" {% if is_create %}placeholder="Ej: 5k_experience_points"{% endif %} required>
-            <div class="input-focus-line"></div>
+        <div class="data-group">
+            <!-- Campo: Recompensa del Torneo -->
+            <div class="input-group">
+                <label><span class="label-icon">fingerprint</span> RECOMPENSA_ARENA</label>
+                <input type="text" name="recompensa_de_torneo" id="{{ modal_id }}-recompensa" {% if is_create %}placeholder="Ej: 5k_experience_points"{% endif %} required>
+                <div class="input-focus-line"></div>
+            </div>
+
+            <!-- Campo: Nivel de acceso minimo del Torneo -->
+            <div class="input-group">
+                <label><span class="label-icon">fingerprint</span> ACCESO_MINIMO_REQUERIDO</label>
+                <input type="number" name="nivel_de_acceso_minimo" id="{{ modal_id }}-acceso_minimo" {% if is_create %}placeholder="Mínimo requerido [5 - 100]"{% endif %} required>
+                <div class="input-focus-line"></div>
+            </div>
         </div>
 
-        <!-- Campo: estado de torneo-->
-        <div class="input-group">
-            <label><span class="label-icon">psychology</span> ESTADO_OPERATIVO</label>
-            <select name="estado_de_torneo" id="{{ modal_id }}-estado" class="estado_juego" required>
-                {% for estado in estados %}
-                    <option value="{{ estado.name }}">{{ estado.value | upper }}</option>
-                {% endfor %}
-            </select>
+        <div class="data-group">
+            <!-- Campo: estado de torneo-->
+            <div class="input-group">
+                <label><span class="label-icon">psychology</span> ESTADO_OPERATIVO</label>
+                <select name="estado_de_torneo" id="{{ modal_id }}-estado" class="estado_juego" required>
+                    {% for estado in estados %}
+                        <option value="{{ estado.name }}">{{ estado.value | upper }}</option>
+                    {% endfor %}
+                </select>
+                <div class="input-focus-line"></div>
+            </div>
+
+            <!-- Campo: Maximo de competidores del Torneo -->
+            <div class="input-group">
+                <label><span class="label-icon">fingerprint</span> maximo sujetos</label>
+                <input type="number" name="max_de_competidores" id="{{ modal_id }}-limite" {% if is_create %}placeholder="Ej: 5"{% endif %} required>
+                <div class="input-focus-line"></div>
+            </div>
         </div>
 
-        <!-- Campo: Maximo de competidores del Torneo -->
-        <div class="input-group">
-            <label><span class="label-icon">fingerprint</span> maximo sujetos</label>
-            <input type="number" name="max_de_competidores" id="{{ modal_id }}-limite" {% if is_create %}placeholder="Ej: 5"{% endif %} required>
-            <div class="input-focus-line"></div>
-        </div>
+        <div class="date-group">
+            <!-- Campo: Fecha de inicio del Torneo -->
+            <div class="input-group">
+                <label><span class="label-icon">fingerprint</span> inicia</label>
+                <input type="datetime-local" name="fecha_de_inicio" id="{{ modal_id }}-inicio" {% if is_create %}placeholder="Ej: 5k_experience_points"{% endif %} required>
+                <div class="input-focus-line"></div>
+            </div>
 
-        <!-- Campo: Fecha de inicio del Torneo -->
-        <div class="input-group">
-            <label><span class="label-icon">fingerprint</span> inicia</label>
-            <input type="datetime-local" name="fecha_de_inicio" id="{{ modal_id }}-inicio" {% if is_create %}placeholder="Ej: 5k_experience_points"{% endif %} required>
-            <div class="input-focus-line"></div>
-        </div>
-
-        <!-- Campo: Fecha de finalización del Torneo -->
-        <div class="input-group">
-            <label><span class="label-icon">fingerprint</span> finaliza</label>
-            <input type="datetime-local" name="fecha_de_fin" id="{{ modal_id }}-fin" {% if is_create %}placeholder="Ej: 5k_experience_points"{% endif %} required>
-            <div class="input-focus-line"></div>
+            <!-- Campo: Fecha de finalización del Torneo -->
+            <div class="input-group">
+                <label><span class="label-icon">fingerprint</span> finaliza</label>
+                <input type="datetime-local" name="fecha_de_fin" id="{{ modal_id }}-fin" {% if is_create %}placeholder="Ej: 5k_experience_points"{% endif %} required>
+                <div class="input-focus-line"></div>
+            </div>
         </div>
 
 
@@ -81,6 +95,7 @@
             <option value="{{ juego.id_juego }}">{{ juego.nombre_juego | upper }}</option>
             {% endfor %}
           </select>
+          <div class="input-focus-line"></div>
         </div>
 
 

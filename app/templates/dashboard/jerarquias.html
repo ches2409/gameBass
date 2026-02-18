@@ -4,6 +4,8 @@
 
 {% block dashboard_body %}
     {% from 'macros/data_card_macro.html' import render_data_card %}
+    {% from 'macros/jerarquia_form_macro.html' import render_jerarquia_modal %}
+
     {% block alertContainer %}
         {% if alert_finish %}
             {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info, modal_target='createJerarquiaModal' %}
@@ -53,9 +55,21 @@
         {% endif %}
     </div>
 
-    {# Incluimos el modal de creación que ya tiene toda la lógica de los tags #}
-    {% include 'dashboard/jerarquias/create.html' %}
-    {% include 'dashboard/jerarquias/update.html' %}
+    {# Aquí irán los modales para crear y actualizar torneos en el futuro #}
+    {{ render_jerarquia_modal(
+            modal_id='createJerarquiaModal',
+            form_action=url_for('jerarquia.create'),
+            submit_text="CONFIRMAR_INYECCIÓN",
+            protocolos=protocolos_listado,
+            is_create=True
+    ) }}
+    {{ render_jerarquia_modal(
+            modal_id='updateJerarquiaModal',
+            form_action=url_for('jerarquia.update', id_jerarquia=0),
+            submit_text="ACTUALIZAR_JERARQUIA",
+            protocolos=protocolos_listado
+    ) }}
+
     {% include 'components/delete-modal.html' %}
 
     <script>
@@ -78,17 +92,17 @@
             const protocolosIdsStr = button.getAttribute('data-protocolos');
 
             // 2. Construir la URL de actualización dinámicamente
-            const form = document.getElementById('formUpdateJerarquia');
+            const form = document.getElementById('form-updateJerarquiaModal');
             const baseUrl = "{{ url_for('jerarquia.update', id_jerarquia=0) }}"; // URL base con '0'
             const updateUrl = baseUrl.replace('/0', '/' + id); // Reemplazo seguro
 
             // 3. Asignar valores a los inputs del formulario
             form.action = updateUrl;
-            document.getElementById('inputNombreJerarquia').value = nombre;
-            document.getElementById('inputSubtituloJerarquia').value = subtitulo;
-            document.getElementById('inputNivelJerarquia').value = nivel;
-            document.getElementById('inputColorJerarquia').value = color;
-            document.getElementById('inputDescripcionJerarquia').value = descripcion;
+            document.getElementById('updateJerarquiaModal-nombre').value = nombre;
+            document.getElementById('updateJerarquiaModal-subtitulo').value = subtitulo;
+            document.getElementById('updateJerarquiaModal-nivelJerarquia').value = nivel;
+            document.getElementById('updateJerarquiaModal-colorJerarquia').value = color;
+            document.getElementById('updateJerarquiaModal-descripcionJerarquia').value = descripcion;
 
             // 4. Manejar los checkboxes de protocolos
             // Convertimos la cadena "1,5,12" en un array de strings: ["1", "5", "12"]

@@ -50,6 +50,7 @@
 @use "components/status-bar";
 @use 'components/alert-container';
 @use 'components/buttons';
+@use "components/sys-tags";
 @use "components/metric-card";
 @use 'components/tactical-card';
 @use 'components/subjects-card';
@@ -62,6 +63,7 @@
 @use "components/modal-form";
 @use "components/modal-delete";
 @use "components/error-datos";
+@use "components/registros";
 
 // ==========================================================================
 // 5. PAGES - Estilos específicos por página

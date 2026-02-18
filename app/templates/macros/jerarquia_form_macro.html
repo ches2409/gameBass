@@ -1,0 +1,116 @@
+{% macro render_jerarquia_modal(modal_id, form_action, submit_text, protocolos, is_create=False) %}
+    <!-- Fondo del Modal (Backdrop) -->
+    <div class="modal-overlay" id="{{ modal_id }}" style="display: none;">
+
+        <!-- Contenedor del Modal -->
+        <div class="modal-container">
+
+            <!-- Elementos Decorativos de Esquina -->
+            <div class="corner-bracket tl"></div>
+            <div class="corner-bracket tr"></div>
+            <div class="corner-bracket bl"></div>
+            <div class="corner-bracket br"></div>
+
+            <!-- Escáner Láser Decorativo (Animado) -->
+            <div class="modal-laser-line"></div>
+
+            <!-- Contenido del Formulario -->
+            <div class="modal-content">
+
+                <header class="modal-header">
+                    <div class="header-main">
+                        <span class="status-indicator"></span>
+                        <h2>INYECTAR_NIVEL_ACCESO</h2>
+                    </div>
+                    <p class="header-subtitle">INYECTANDO_CAPACIDADES_NEURALES_v4.2</p>
+                </header>
+
+                <form class="injection-form" id="form-{{ modal_id }}" action="{{ form_action }}" method="POST">
+
+                    <!-- Campo: Nombre de Jerarquia / nivel de acceso -->
+                    <div class="input-group">
+
+                        <label><span class="label-icon">shield</span> NOMBRE_RANGO</label>
+                        <input type="text" name="nombre_de_jerarquia" id="{{ modal_id }}-nombre"
+                               {% if is_create %}placeholder="Ej: Omega"{% endif %} required>
+                        <div class="input-focus-line"></div>
+                    </div>
+
+                    <!-- Campo: Subtitulo de Jerarquia-->
+                    <div class="input-group">
+
+                        <label><span class="label-icon">category</span> SUBTITULO_TECH</label>
+                        <input type="text" name="subtitulo_de_jerarquia" id="{{ modal_id }}-subtitulo"
+                               {% if is_create %}placeholder="Ej: THE SINGULARITY"{% endif %} required>
+                        <div class="input-focus-line"></div>
+                    </div>
+
+                    <div class="data-group">
+                        <!-- Campo: peso o nivel de Jerarquia -->
+                        <div class="input-group">
+
+                            <label><span class="label-icon">lock_open</span> NIVEL_ACCESO</label>
+                            <input type="number" name="nivel_jerarquia" id="{{ modal_id }}-nivelJerarquia"
+                                   {% if is_create %}placeholder="Rango [10 - 100]"{% endif %} required>
+                            <div class="input-focus-line"></div>
+                        </div>
+
+                        <!-- Campo: Color Identificador -->
+                        <div class="input-group">
+                            <label><span class="label-icon">palette</span> COLOR_IDENTIFICADOR</label>
+                            <input type="color" name="color_jerarquia" id="{{ modal_id }}-colorJerarquia"
+                                   value="#A3FF00" class="color-picker">
+                        </div>
+
+                    </div>
+
+
+                    <!-- SECCIÓN DE PROTOCOLOS VINCULADOS -->
+                    <label style="margin-top: 15px; display: block;"><span class="label-icon">security_key</span>
+                        MATRIZ_DE_PROTOCOLOS_VINCULADOS</label>
+                    <div class="protocol-tags">
+                        {% if protocolos %}
+                            {% for protocolo in protocolos %}
+                                <!-- 1. El Checkbox: name="protocolos_ids" enviará una lista de IDs seleccionados al servidor -->
+                                <input type="checkbox"
+                                       id="{{ modal_id }}-protocolos_{{ protocolo.id_protocolo }}"
+                                       name="protocolos_ids"
+                                       value="{{ protocolo.id_protocolo }}"
+                                       class="hidden-checkbox">
+
+                                <!-- 2. El Label: Actúa como el botón visual -->
+                                <label for="{{ modal_id }}-protocolos_{{ protocolo.id_protocolo }}"
+                                       class="tag selectable-tag">
+                                    {{ protocolo.codigo_protocolo.codigo }}
+                                </label>
+                            {% endfor %}
+                        {% else %}
+                            <p style="color: #666; font-size: 0.8rem;">NO_HAY_PROTOCOLOS_DISPONIBLES_EN_LA_RED</p>
+                        {% endif %}
+                    </div>
+
+
+                    <!-- Descripción -->
+                    <div class="input-group">
+                        <label><span class="label-icon">description</span> DEFINICION_OPERATIVA</label>
+                        <!-- Agregamos name y readonly -->
+                        <textarea name="descripcion_de_jerarquia" id="{{ modal_id }}-descripcionJerarquia"
+                                  {% if is_create %}placeholder="Manifiesto detallado de las facultades del rango"{% endif %}></textarea>
+                    </div>
+
+
+                    <!-- Botones de Acción -->
+                    <div class="modal-actions">
+                        <button type="button" class="btn-cancel" onclick="toggleModal('{{ modal_id }}')">
+                            ABORTAR_PROCESO
+                        </button>
+                        <button type="submit" class="btn-submit">
+                            <span class="btn-glow"></span>
+                            {{ submit_text }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

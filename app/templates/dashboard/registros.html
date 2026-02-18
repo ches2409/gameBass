@@ -1,0 +1,194 @@
+{% extends 'dashboard/index.html' %}
+
+{% block title %}REGISTROS | GameBass{% endblock %}
+
+{% block dashboard_body %}
+
+    {% block alertContainer %}
+        {% if alert_finish %}
+            {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info, modal_target=None %}
+                {% include 'components/alert-container.html' %}
+            {% endwith %}
+        {% endif %}
+    {% endblock %}
+
+    {% include 'components/header-section.html' %}
+
+    <div class="nodo-grid">
+        <!-- CONTENEDOR PRINCIPAL DE REGISTROS -->
+        <div class="registros-view">
+{#
+
+        <!-- ENCABEZADO DE SECCIÓN -->
+        <div class="portal-header">
+            <div class="header-content">
+                <div class="header-icon">
+                    <span class="material-symbols-outlined">app_registration</span>
+                </div>
+                <div class="header-text">
+                    <h2>[PORTAL_DE_ENLACE_A_ARENA]</h2>
+                    <p>
+                        INICIA TU SECUENCIA DE REGISTRO NEURAL. ELIGE TU MODO DE COMBATE E INYÉCTATE EN LA SIMULACIÓN...
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="page-title-container">
+            <h2 class="glitch-title" data-text="REGISTROS">
+                REGISTROS
+            </h2>
+        </div>
+#}
+        <!-- GRID DE INTERACCIÓN -->
+        <!-- FORMULARIO PURO HTML (Sin JS) -->
+        <form action="{{ url_for('registro.create') }}" method="POST" class="registros-form" id="registrationForm">
+
+            <!-- PANEL IZQUIERDO: SELECCIÓN DE PROTOCOLO -->
+            <div class="protocol-panel">
+                <div class="panel-card">
+                    <h4 class="panel-title">
+                        SELECCIÓN_DE_PROTOCOLO
+                    </h4>
+
+                    <!-- GRUPO DE RADIOS PARA MODO DE JUEGO -->
+                    <div class="protocol-options">
+
+                        <!-- 1. Opción Individual -->
+                        <div class="option-wrapper">
+                            <input type="radio" name="modo_registro" id="mode_individual" value="individual" class="sr-only"
+                                   checked>
+                            <label for="mode_individual" class="protocol-btn">
+                                <span class="material-symbols-outlined">person</span>
+                                <div class="btn-text">
+                                    <p class="btn-title">INDIVIDUAL_UPLINK</p>
+                                    <p class="btn-subtitle">Sincronía de ADN único</p>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- 2. Opción Equipo -->
+                        <div class="option-wrapper">
+                            <!-- La clase 'peer/team' es clave para activar el dropdown de abajo -->
+                            <input type="radio" name="modo_registro" id="mode_equipo" value="equipo" class="sr-only">
+                            <label for="mode_equipo" class="protocol-btn">
+                                <span class="material-symbols-outlined">groups</span>
+                                <div class="btn-text">
+                                    <p class="btn-title">TACTICAL_SQUAD_SYNC</p>
+                                    <p class="btn-subtitle">Enlace de facción grupal</p>
+                                </div>
+                            </label>
+
+                            <!-- 3. Selector de Equipo (CSS Magic: Solo visible si el radio 'peer/team' está checked) -->
+                            <div class="team-selector">
+                                <label class="selector-label">SELECCIONAR UNIDAD DE COMBATE</label>
+                                <select name="id_equipo" class="cyber-select">
+                                    <option value="" disabled selected>-- SELECCIONAR EQUIPO --</option>
+                                    {% if equipos %}
+                                        {% for equipo in equipos %}
+                                            <option value="{{ equipo.id_equipo }}">{{ equipo.nombre_equipo }}</option>
+                                        {% endfor %}
+                                    {% else %}
+                                        <option value="" disabled>NO TIENES EQUIPOS ACTIVOS</option>
+                                    {% endif %}
+                                </select>
+                                <p class="selector-hint">* Requerido para protocolo grupal</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer de Selección -->
+                    <div class="panel-footer">
+                        <div class="status-row">
+                            <p class="status-label">ESTADO_DEL_ENLACE</p>
+                            <p class="status-value">ESPERANDO_CONFIRMACION...</p>
+                        </div>
+
+                        <button type="submit" class="cyber-button-submit">
+                            CONFIRMAR_ENLACE
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL DERECHO: DETECTOR DE ARENAS -->
+            <div class="arenas-panel">
+                <div class="arenas-header">
+                    <h4>ARENAS_DETECTOR_v1.0</h4>
+                    <p>Detectando señales de conflicto...</p>
+                </div>
+
+                <div class="arenas-grid">
+
+                    <!-- Bucle Jinja2 para Torneos -->
+                    {% if torneos %}
+                        {% for torneo in torneos %}
+
+                            <!-- Tarjeta de Arena (Implementada como Radio Button + Label) -->
+                            <div class="arena-card-wrapper">
+                                <input type="radio" name="id_torneo" id="torneo_{{ torneo.id_torneo }}"
+                                       value="{{ torneo.id_torneo }}" class="sr-only" required>
+
+                                <label for="torneo_{{ torneo.id_torneo }}" class="arena-card">
+
+                                    <div class="card-image-container">
+                                        <!-- Imagen dinámica -->
+                                        <img src="{{ url_for('static', filename='uploads/torneos/' ~ torneo.imagen) if torneo.imagen else 'https://loremflickr.com/600/400/gaming,scifi,cyberpunk/all?lock=' ~ torneo.id_torneo }}"
+                                             class="card-img"/>
+
+                                        <div class="card-overlay"></div>
+                                        <div class="card-badges">
+                               <span class="badge-game">
+                                  {{ torneo.juego.nombre_juego if torneo.juego else 'UNKNOWN' }}
+                               </span>
+                                            <span class="badge-count">
+                                  {{ torneo.registros|length }}/{{ torneo.max_competidores }}
+                               </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-content">
+                                        <h5>{{ torneo.nombre_torneo }}</h5>
+                                        <p>PRIZE: <span>{{ torneo.recompensa_torneo }}</span></p>
+                                    </div>
+
+                                    <!-- Indicador de selección (CSS puro: visible si el input hermano está checked) -->
+                                    <div class="selection-indicator">
+                                        <span class="material-symbols-outlined">check_circle</span>
+                                    </div>
+                                </label>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="no-signals">
+                            <p>NO_ARENA_SIGNALS_DETECTED</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- LOGS RECIENTES -->
+                <div class="system-logs">
+                    <div class="logs-bg"></div>
+                    <h4 class="logs-title">
+                        ENLACES_RECIENTES_EN_LA_CADENA
+                    </h4>
+                    <div class="logs-list">
+                        <div class="log-item">
+                            <div class="log-content">
+                                <span class="log-user">>> KaosMaster99</span>
+                                <span class="log-action">Enlazado_A</span>
+                                <span class="log-target">VOID STRIKE CHAMPIONSHIP</span>
+                            </div>
+                            <span class="log-time">21:06:36</span>
+                        </div>
+                        <!-- ... más logs ... -->
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    </div>
+
+{% endblock %}

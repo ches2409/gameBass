@@ -6,11 +6,41 @@ def get_dashboard_data(current_path):
 
     # 1. Datos de Métricas (Header)
     metric_cards = [
-        {'label': 'NEURAL_SUBJECTS', 'value': '5', 'trend': '+12', 'icon': 'person', 'color_class': 'primary'},
-        {'label': 'TACTICAL_UNITS', 'value': '128', 'trend': '+2', 'icon': 'shield_person', 'color_class': 'secondary'},
-        {'label': 'ACTIVE_SQUADS', 'value': '32', 'trend': '-2', 'icon': 'groups', 'color_class': 'accent-yellow'},
-        {'label': 'ARENA_NODES', 'value': '6', 'trend': '+0.1%', 'icon': 'stadium', 'color_class': 'accent-blue'},
-        {'label': 'VIRTUAL_SOFTWARE', 'value': '8', 'trend': '+1', 'icon': 'sports_esports', 'color_class': 'primary'}
+        {
+            "label": "NEURAL_SUBJECTS",
+            "value": "5",
+            "trend": "+12",
+            "icon": "person",
+            "color_class": "primary",
+        },
+        {
+            "label": "TACTICAL_UNITS",
+            "value": "128",
+            "trend": "+2",
+            "icon": "shield_person",
+            "color_class": "secondary",
+        },
+        {
+            "label": "ACTIVE_SQUADS",
+            "value": "32",
+            "trend": "-2",
+            "icon": "groups",
+            "color_class": "accent-yellow",
+        },
+        {
+            "label": "ARENA_NODES",
+            "value": "6",
+            "trend": "+0.1%",
+            "icon": "stadium",
+            "color_class": "accent-blue",
+        },
+        {
+            "label": "VIRTUAL_SOFTWARE",
+            "value": "8",
+            "trend": "+1",
+            "icon": "sports_esports",
+            "color_class": "primary",
+        },
     ]
 
     # 2. Datos del Menú Lateral
@@ -84,7 +114,7 @@ def get_dashboard_data(current_path):
         # --- SECCIÓN: DATA_TELEMETRY ---
         {
             "icon_main": "receipt_long",  # Representa una lista de eventos/logs
-            "name_main": "ACTION_LOGS",
+            "name_main": "REGISTER_ACTION",
             "title_section": "DATA_TELEMETRY",
             "url": "/registros",
             "name_breadcrumbs": "SINCRO_HISTORY_LOG",
@@ -150,14 +180,14 @@ def get_dashboard_data(current_path):
             "btn_info": "FORJAR_CLUSTER",
         },
         {
-            "icon": "History_Edu",  # Representa la "Caja Negra" o bitácora
+            "icon": "History_Edu",
             "title": "[REGISTROS_DE_SINCRONIZACIÓN]",
-            "subtitle": "Extrayendo bitácoras de participación en la Arena... Reconstruyendo eventos de combate.",
+            "subtitle": "INICIA TU SECUENCIA DE REGISTRO NEURAL. ELIGE TU MODO DE COMBATE E INYÉCTATE EN LA SIMULACIÓN...",
             "url_info": "/registros",
             "btn_info": "TRAZAR_SESIÓN",
         },
         {
-            "icon": "monitoring",  # Representa telemetría y gráficos
+            "icon": "monitoring",
             "title": "[TELEMETRÍA_Y_EXTRACCIÓN_DE_DATOS]",
             "subtitle": "Cuantificando rendimiento neural post-combate... Generando reportes de eficiencia técnica.",
             "url_info": "/resultados",
@@ -169,40 +199,40 @@ def get_dashboard_data(current_path):
     alert_finish = None
     for alert in alerts_data:
         # Normalizar las rutas quitando barras finales para comparar '/roles' con '/roles/'
-        if alert['url_info'].rstrip('/') == current_path.rstrip('/'):
+        if alert["url_info"].rstrip("/") == current_path.rstrip("/"):
             alert_finish = alert
             break
-    if current_path.rstrip('/') == '':
-        route_path ='COMMAND_CENTER'
+    if current_path.rstrip("/") == "":
+        route_path = "COMMAND_CENTER"
     else:
-        route_path = current_path.rstrip('/').upper()
+        route_path = current_path.rstrip("/").upper()
 
     # 5. Lógica para determinar el título de la página y el ítem activo del menú
-    page_title = 'MAINFRAME_HUB' # Título por defecto
-    page_data = 'COMMAND_CENTER' # Valor por defecto para el breadcrumb
+    page_title = "MAINFRAME_HUB"  # Título por defecto
+    page_data = "COMMAND_CENTER"  # Valor por defecto para el breadcrumb
 
     # Normalizar la ruta actual (si es '/' se queda igual, si no, quitamos slash final)
-    norm_path = current_path.rstrip('/') if len(current_path) > 1 else current_path
+    norm_path = current_path.rstrip("/") if len(current_path) > 1 else current_path
 
     for item in menu_data:
         # Normalizar la ruta del ítem
-        page_breadcrumbs= item['name_breadcrumbs']
-        item_url = item.get('url', '#')
-        norm_item_url = item_url.rstrip('/') if len(item_url) > 1 else item_url
+        page_breadcrumbs = item["name_breadcrumbs"]
+        item_url = item.get("url", "#")
+        norm_item_url = item_url.rstrip("/") if len(item_url) > 1 else item_url
 
         if norm_item_url == norm_path:
-            item['active'] = True
-            page_title = item['name_main']
-            page_data = item['name_breadcrumbs']
+            item["active"] = True
+            page_title = item["name_main"]
+            page_data = item["name_breadcrumbs"]
         else:
-            item['active'] = False
+            item["active"] = False
 
     return {
-        'metric_cards': metric_cards,
-        'menu_titles': menu_titles,
-        'menu_data': menu_data,
-        'alerts_data': alerts_data,
-        'alert_finish': alert_finish,
-        'page_data':page_data,
-        'page_title': page_title
+        "metric_cards": metric_cards,
+        "menu_titles": menu_titles,
+        "menu_data": menu_data,
+        "alerts_data": alerts_data,
+        "alert_finish": alert_finish,
+        "page_data": page_data,
+        "page_title": page_title,
     }

@@ -1,10 +1,13 @@
+from sqlalchemy.orm import joinedload
+
 from app import Usuario
 from app.db import session
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
 def get_all_usuarios():
-    return session.query(Usuario).all()
+    return session.query(Usuario).options(joinedload(Usuario.jerarquia)).all()
+
 
 def get_usuarios_by_id(id_usuario):
     return session.query(Usuario).filter_by(id_usuario=id_usuario).first()

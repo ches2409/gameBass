@@ -42,10 +42,12 @@
                             <p class="stat-label">Recompensa</p>
                             <p class="stat-value">{{ torneo.recompensa_torneo }}</p>
                         </div>
+
                         <div class="arena-stat secondary">
                             <p class="stat-label">Competidores</p>
                             <p class="stat-value">{{ torneo.registros|length }}/{{ torneo.max_competidores }}</p>
                         </div>
+
                     </div>
 
                     <div class="tech-specs">
@@ -61,6 +63,10 @@
                     <div class="status-tournament">
                         <span class="value status-{{ torneo.estado_torneo.name | lower }} badge">{{ torneo.estado_torneo.value | upper }}</span>
                     </div>
+
+                    <div class="access-level-min">
+                        <span class="value">{{ torneo.nivel_acceso_min }}</span>
+                    </div>
                 {% endmacro %}
 
 
@@ -75,6 +81,7 @@
                         'id': torneo.id_torneo,
                         'nombre': torneo.nombre_torneo,
                         'recompensa': torneo.recompensa_torneo,
+                        'nivel_acceso_min': torneo.nivel_acceso_min,
                         'estado': torneo.estado_torneo.name,
                         'max_competidores': torneo.max_competidores,
                         'fecha_inicio': torneo.fecha_inicio.isoformat(),
@@ -129,6 +136,7 @@
             const id = button.getAttribute('data-id');
             const nombre = button.getAttribute('data-nombre');
             const recompensa = button.getAttribute('data-recompensa');
+            const acceso_minimo = button.getAttribute('data-acceso_minimo');
             const estado = button.getAttribute('data-estado');
             const max_competidores = button.getAttribute('data-max_competidores');
             const fecha_inicio = button.getAttribute('data-fecha_inicio');
@@ -144,6 +152,7 @@
             // Prefijamos el ID del input con el ID del modal para asegurar unicidad
             document.getElementById('updateTorneoModal-nombre').value = nombre;
             document.getElementById('updateTorneoModal-recompensa').value = recompensa;
+            document.getElementById('updateTorneoModal-acceso_minimo').value = acceso_minimo;
             document.getElementById('updateTorneoModal-estado').value = estado;
             document.getElementById('updateTorneoModal-limite').value = max_competidores;
             document.getElementById('updateTorneoModal-inicio').value = fecha_inicio;

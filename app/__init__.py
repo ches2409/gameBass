@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 
 # Añadir el directorio raíz del proyecto a la ruta de Python para que
 # encuentre el módulo 'config' sin importar cómo se ejecute la app.
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from config import DevConfig
 from app.db import db
@@ -27,7 +27,7 @@ def create_app(config_class=DevConfig):
     app.config.from_object(config_class)
     db.init_app(app)
     migrate = Migrate(app, db)
-    
+
     # registro de Blueprints
     from app.routes.index_routes import inicio_bp
     from app.routes.roles_routes import rol_bp
@@ -37,7 +37,8 @@ def create_app(config_class=DevConfig):
     from app.routes.torneos_routes import torneos_bp
     from app.routes.equipos_routes import equipos_bp
     from app.routes.usuarios_routes import usuarios_bp
-    
+    from app.routes.registros_routes import registros_bp
+
     app.register_blueprint(inicio_bp)
     app.register_blueprint(rol_bp)
     app.register_blueprint(protocolo_bp)
@@ -46,6 +47,6 @@ def create_app(config_class=DevConfig):
     app.register_blueprint(torneos_bp)
     app.register_blueprint(equipos_bp)
     app.register_blueprint(usuarios_bp)
-    
+    app.register_blueprint(registros_bp)
+
     return app
-    

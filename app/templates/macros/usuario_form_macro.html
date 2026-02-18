@@ -64,21 +64,24 @@
             <div class="input-focus-line"></div>
         </div>
 
-        <!-- campo: password -->
-        <div class="input-group">
-            <label><span class="label-icon">fingerprint</span> LLAVE_DE_ENCRIPTACIÓN</label>
-            <input type="password" name="password_usuario" id="{{ modal_id }}-password" {% if is_create %}placeholder="minimo 8 caracteres" required{% else %}placeholder="Dejar en blanco para no cambiar"{% endif %}>
-            <div class="input-focus-line"></div>
-        </div>
+        <div class="data-group">
+            <!-- campo: password -->
+            <div class="input-group">
+                <label><span class="label-icon">fingerprint</span> LLAVE_DE_ENCRIPTACIÓN</label>
+                <input type="password" name="password_usuario" id="{{ modal_id }}-password" {% if is_create %}placeholder="minimo 8 caracteres" required{% else %}placeholder="Dejar en blanco para no cambiar"{% endif %}>
+                <div class="input-focus-line"></div>
+            </div>
 
-        <!-- Campo: jerarquias-->
-        <div class="input-group">
-            <label><span class="label-icon">psychology</span> RANGO_DE_AUTORIDAD</label>
-            <select name="id_jerarquia" id="{{ modal_id }}-jerarquia" class="id_jerarquia" required>
-                {% for jerarquia in jerarquias %}
-                    <option value="{{ jerarquia.id_jerarquia }}">{{ jerarquia.nombre_jerarquia | upper }}</option>
-                {% endfor %}
-            </select>
+            <!-- Campo: jerarquias-->
+            <div class="input-group">
+                <label><span class="label-icon">psychology</span> RANGO_DE_AUTORIDAD</label>
+                <select name="id_jerarquia" id="{{ modal_id }}-jerarquia" class="id_jerarquia" required>
+                    {% for jerarquia in jerarquias %}
+                        <option value="{{ jerarquia.id_jerarquia }}">{{ jerarquia.nombre_jerarquia | upper }}</option>
+                    {% endfor %}
+                </select>
+                <div class="input-focus-line"></div>
+            </div>
         </div>
 
         <!-- Botones de Acción -->

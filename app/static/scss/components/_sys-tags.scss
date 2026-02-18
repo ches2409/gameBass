@@ -1,0 +1,30 @@
+//SISTEMA DE TAGS
+/* Ocultamos el checkbox real pero lo mantenemos accesible para el formulario */
+.hidden-checkbox {
+    display: none;
+}
+
+/* Estilo base del Tag (Label) - Estado Inactivo */
+.selectable-tag {
+    cursor: pointer;
+    opacity: 0.5;
+    border: 1px solid var(--border-color, #333); /* Fallback color */
+    transition: all 0.3s ease;
+    user-select: none; /* Evita que se seleccione el texto al hacer click rápido */
+}
+
+.selectable-tag:hover {
+    opacity: 0.8;
+    border-color: var(--accent-color, #00ffcc);
+    box-shadow: 0 0 8px rgba(0, 255, 204, 0.2);
+}
+
+/* Estado ACTIVO: Cuando el checkbox hermano anterior está marcado */
+.hidden-checkbox:checked + .selectable-tag {
+    opacity: 1;
+    background: rgba(0, 255, 204, 0.15);
+    border-color: #00ffcc;
+    color: #00ffcc;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+    text-shadow: 0 0 5px rgba(0, 255, 204, 0.8);
+}

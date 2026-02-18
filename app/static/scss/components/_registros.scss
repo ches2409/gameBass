@@ -1,0 +1,541 @@
+// Variables (Ajustar según tu _variables.scss global)
+$primary-color : #a3ff00;
+$bg-dark       : #050601;
+$surface-dark  : #1a1a1a;
+$text-white    : #ffffff;
+$text-gray     : #888888;
+$border-color  : rgba(255, 255, 255, 0.1);
+
+// Mixins
+@mixin clip-corner-tl {
+    clip-path : polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px);
+}
+
+@mixin neon-shadow {
+    box-shadow : 0 0 20px rgba($primary-color, 0.3);
+}
+
+// --- ESTILOS DE LA PÁGINA DE REGISTROS ---
+
+.registros-view {
+    animation : fadeIn 0.7s ease-out;
+    
+    // Header
+    .portal-header {
+        background-color : $bg-dark;
+        border           : 1px solid rgba($primary-color, 0.6);
+        padding          : 4px; // p-1 equivalent
+        margin-bottom    : 1.5rem;
+        position         : relative;
+        overflow         : hidden;
+        box-shadow       : 0 0 40px rgba($primary-color, 0.15);
+        
+        .header-content {
+            display          : flex;
+            align-items      : center;
+            gap              : 2.5rem;
+            padding          : 1.75rem;
+            background-color : rgba(0, 0, 0, 0.9);
+        }
+        
+        .header-icon {
+            width            : 5rem;
+            height           : 5rem;
+            border           : 2px solid $primary-color;
+            display          : flex;
+            align-items      : center;
+            justify-content  : center;
+            background-color : rgba($primary-color, 0.1);
+            box-shadow       : 0 0 30px rgba($primary-color, 0.25);
+            
+            span {
+                color     : $primary-color;
+                font-size : 3rem;
+            }
+        }
+        
+        .header-text {
+            h2 {
+                font-family    : "Display", sans-serif; // Asumiendo tu fuente
+                font-weight    : 900;
+                font-size      : 2.25rem;
+                color          : $text-white;
+                text-transform : uppercase;
+                letter-spacing : -0.05em;
+                margin-bottom  : 0.25rem;
+            }
+            
+            p {
+                font-family    : "Mono", monospace;
+                font-size      : 11px;
+                color          : rgba($primary-color, 0.7);
+                text-transform : uppercase;
+                font-weight    : 900;
+                letter-spacing : 0.4em;
+                font-style     : italic;
+                line-height    : 1;
+            }
+        }
+    }
+    
+    // Título Gigante
+    .page-title-container {
+        margin-bottom : 3rem;
+        
+        .glitch-title {
+            font-family    : "Display", sans-serif;
+            font-weight    : 900;
+            font-size      : 110px;
+            color          : $text-white;
+            text-transform : uppercase;
+            font-style     : italic;
+            letter-spacing : -0.05em;
+            line-height    : 0.8;
+            margin-left    : -0.5rem;
+            user-select    : none;
+            // Aquí iría tu efecto glitch si lo tienes en otro mixin
+        }
+    }
+    
+    // Grid Principal
+    .registros-form {
+        display               : grid;
+        grid-template-columns : 1fr;
+        gap                   : 2.5rem;
+        
+        @media (min-width : 1024px) {
+            grid-template-columns : repeat(12, 1fr);
+        }
+    }
+    
+    // --- PANEL IZQUIERDO (Protocolo) ---
+    .protocol-panel {
+        @media (min-width : 1024px) {
+            grid-column : span 4;
+        }
+        
+        .panel-card {
+            padding          : 2rem;
+            background-color : $surface-dark;
+            border           : 1px solid $border-color;
+            @include clip-corner-tl;
+        }
+        
+        .panel-title {
+            font-family    : "Display", sans-serif;
+            font-weight    : 900;
+            font-size      : 0.875rem;
+            color          : $primary-color;
+            text-transform : uppercase;
+            letter-spacing : 0.3em;
+            border-bottom  : 1px solid rgba($primary-color, 0.2);
+            padding-bottom : 1rem;
+            margin-bottom  : 2rem;
+            font-style     : italic;
+        }
+        
+        .protocol-options {
+            display        : flex;
+            flex-direction : column;
+            gap            : 1rem;
+        }
+        
+        // Lógica de Botones (Radio + Label)
+        .option-wrapper {
+            position : relative;
+            
+            .sr-only {
+                position : absolute;
+                width    : 1px;
+                height   : 1px;
+                padding  : 0;
+                margin   : -1px;
+                overflow : hidden;
+                clip     : rect(0, 0, 0, 0);
+                border   : 0;
+            }
+            
+            .protocol-btn {
+                cursor           : pointer;
+                width            : 100%;
+                padding          : 1.5rem;
+                border           : 1px solid $border-color;
+                display          : flex;
+                align-items      : center;
+                gap              : 1.5rem;
+                background-color : rgba(0, 0, 0, 0.4);
+                color            : $text-gray;
+                transition       : all 0.3s ease;
+                @include clip-corner-tl; // Si tienes un mixin para clip-path
+                
+                &:hover {
+                    border-color : rgba(255, 255, 255, 0.3);
+                }
+                
+                .material-symbols-outlined {
+                    font-size : 1.875rem;
+                }
+                
+                .btn-text {
+                    text-align : left;
+                    
+                    .btn-title {
+                        font-family    : "Display", sans-serif;
+                        font-weight    : 900;
+                        font-size      : 0.75rem;
+                        text-transform : uppercase;
+                        line-height    : 1;
+                        margin-bottom  : 0.25rem;
+                    }
+                    
+                    .btn-subtitle {
+                        font-family    : "Mono", monospace;
+                        font-size      : 8px;
+                        text-transform : uppercase;
+                        letter-spacing : 0.1em;
+                    }
+                }
+            }
+            
+            // ESTADO ACTIVO (Zero-JS Magic)
+            input:checked + .protocol-btn {
+                background-color : $primary-color;
+                border-color     : $primary-color;
+                color            : #000; // Texto negro sobre verde neón
+                @include neon-shadow;
+            }
+            
+            // SELECTOR DE EQUIPO (Sibling Selector Magic)
+            .team-selector {
+                display      : none; // Oculto por defecto
+                margin-top   : 1.5rem;
+                border-left  : 2px solid $primary-color;
+                padding-left : 1rem;
+                margin-left  : 1rem;
+                animation    : slideDown 0.3s ease-out;
+                
+                .selector-label {
+                    font-family    : "Mono", monospace;
+                    font-size      : 9px;
+                    color          : $primary-color;
+                    text-transform : uppercase;
+                    margin-bottom  : 0.5rem;
+                    display        : block;
+                }
+                
+                .cyber-select {
+                    width            : 100%;
+                    background-color : #000;
+                    border           : 1px solid rgba(255, 255, 255, 0.2);
+                    color            : white;
+                    font-family      : "Mono", monospace;
+                    font-size        : 0.75rem;
+                    padding          : 0.75rem;
+                    outline          : none;
+                    appearance       : none;
+                    cursor           : pointer;
+                    transition       : border-color 0.2s;
+                    
+                    &:focus {
+                        border-color : $primary-color;
+                    }
+                }
+                
+                .selector-hint {
+                    margin-top  : 0.5rem;
+                    font-family : "Mono", monospace;
+                    font-size   : 8px;
+                    color       : $text-gray;
+                }
+            }
+            
+            // Mostrar selector cuando el radio de equipo está checked
+            input#mode_equipo:checked ~ .team-selector {
+                display : block;
+            }
+        }
+        
+        .panel-footer {
+            padding-top : 1.5rem;
+            border-top  : 1px solid rgba(255, 255, 255, 0.05);
+            margin-top  : 2rem;
+            
+            .status-row {
+                display         : flex;
+                justify-content : space-between;
+                align-items     : center;
+                margin-bottom   : 1.5rem;
+                
+                .status-label {
+                    font-size   : 9px;
+                    color       : #666;
+                    font-weight : 900;
+                    font-family : "Mono";
+                }
+                
+                .status-value {
+                    font-size   : 10px;
+                    color       : $primary-color;
+                    font-style  : italic;
+                    font-weight : 900;
+                    font-family : "Display";
+                }
+            }
+            
+            .cyber-button-submit {
+                width            : 100%;
+                padding          : 1.5rem 0;
+                background-color : $primary-color;
+                color            : black;
+                font-family      : "Display", sans-serif;
+                font-weight      : 900;
+                font-size        : 0.75rem;
+                text-transform   : uppercase;
+                letter-spacing   : 0.5em;
+                font-style       : italic;
+                border           : none;
+                cursor           : pointer;
+                transition       : all 0.3s;
+                @include clip-corner-tl;
+                
+                &:hover {
+                    box-shadow : 0 0 30px rgba($primary-color, 0.5);
+                }
+            }
+        }
+    }
+    
+    // --- PANEL DERECHO (Arenas) ---
+    .arenas-panel {
+        @media (min-width : 1024px) {
+            grid-column : span 8;
+        }
+        
+        .arenas-header {
+            display         : flex;
+            justify-content : space-between;
+            align-items     : flex-end;
+            margin-bottom   : 1rem;
+            
+            h4 {
+                font-family : "Display";
+                font-weight : 900;
+                font-size   : 1.25rem;
+                color       : white;
+                font-style  : italic;
+            }
+            
+            p {
+                font-family    : "Mono";
+                font-size      : 9px;
+                color          : #666;
+                text-transform : uppercase;
+            }
+        }
+        
+        .arenas-grid {
+            display               : grid;
+            grid-template-columns : 1fr;
+            gap                   : 1.5rem;
+            
+            @media (min-width : 768px) {
+                grid-template-columns : 1fr 1fr;
+            }
+        }
+        
+        .arena-card-wrapper {
+            position : relative;
+            height   : 100%;
+            
+            .sr-only {
+                display : none;
+            }
+            
+            // Ocultar radio
+            
+            .arena-card {
+                display          : block;
+                height           : 100%;
+                position         : relative;
+                cursor           : pointer;
+                border           : 1px solid rgba(255, 255, 255, 0.1);
+                background-color : rgba(0, 0, 0, 0.4);
+                transition       : all 0.5s;
+                @include clip-corner-tl;
+                
+                &:hover {
+                    border-color : rgba($primary-color, 0.5);
+                }
+                
+                .card-image-container {
+                    height   : 8rem;
+                    position : relative;
+                    overflow : hidden;
+                    
+                    .card-img {
+                        width      : 100%;
+                        height     : 100%;
+                        object-fit : cover;
+                        filter     : grayscale(100%) brightness(0.5);
+                        transition : all 0.7s;
+                    }
+                    
+                    .card-overlay {
+                        position   : absolute;
+                        inset      : 0;
+                        background : linear-gradient(to top, $bg-dark, transparent);
+                    }
+                    
+                    .card-badges {
+                        position : absolute;
+                        bottom   : 0.75rem;
+                        left     : 0.75rem;
+                        display  : flex;
+                        gap      : 0.5rem;
+                        
+                        span {
+                            padding        : 2px 8px;
+                            font-family    : "Mono";
+                            font-size      : 8px;
+                            text-transform : uppercase;
+                            letter-spacing : 0.1em;
+                            border         : 1px solid;
+                        }
+                        
+                        .badge-game {
+                            border-color : rgba(255, 255, 255, 0.2);
+                            background   : rgba(0, 0, 0, 0.6);
+                            color        : white;
+                        }
+                        
+                        .badge-count {
+                            border-color : rgba($primary-color, 0.4);
+                            background   : rgba($primary-color, 0.1);
+                            color        : $primary-color;
+                        }
+                    }
+                }
+                
+                .card-content {
+                    padding : 1.5rem;
+                    
+                    h5 {
+                        font-family   : "Display";
+                        font-weight   : 900;
+                        font-size     : 1.125rem;
+                        color         : white;
+                        font-style    : italic;
+                        margin-bottom : 0.25rem;
+                    }
+                    
+                    p {
+                        font-family : "Mono";
+                        font-size   : 9px;
+                        color       : #666;
+                        
+                        span {
+                            color       : $primary-color;
+                            font-weight : bold;
+                        }
+                    }
+                }
+                
+                .selection-indicator {
+                    position   : absolute;
+                    top        : 0.5rem;
+                    right      : 0.5rem;
+                    color      : $primary-color;
+                    opacity    : 0;
+                    transition : opacity 0.3s;
+                }
+            }
+            
+            // ESTADO ACTIVO ARENA
+            input:checked + .arena-card {
+                border-color     : $primary-color;
+                background-color : rgba(0, 0, 0, 0.6);
+                box-shadow       : 0 0 30px rgba($primary-color, 0.2);
+                
+                .card-img {
+                    filter : grayscale(0);
+                }
+                
+                .selection-indicator {
+                    opacity : 1;
+                }
+            }
+        }
+    }
+    
+    // Logs
+    .system-logs {
+        margin-top       : 3rem;
+        padding          : 2rem;
+        background-color : rgba(0, 0, 0, 0.4);
+        border           : 1px solid rgba(255, 255, 255, 0.05);
+        position         : relative;
+        overflow         : hidden;
+        @include clip-corner-tl;
+        
+        .logs-title {
+            font-family    : "Mono";
+            font-size      : 10px;
+            color          : #666;
+            font-weight    : 900;
+            letter-spacing : 0.4em;
+            margin-bottom  : 1.5rem;
+            position       : relative;
+            z-index        : 10;
+        }
+        
+        .log-item {
+            display         : flex;
+            justify-content : space-between;
+            font-family     : "Mono";
+            font-size       : 10px;
+            border-bottom   : 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom  : 0.5rem;
+            
+            .log-user {
+                color        : $primary-color;
+                font-weight  : 900;
+                margin-right : 1rem;
+            }
+            
+            .log-action {
+                color          : #666;
+                text-transform : uppercase;
+                margin-right   : 1rem;
+            }
+            
+            .log-target {
+                color      : white;
+                font-style : italic;
+            }
+            
+            .log-time {
+                color : #444;
+            }
+        }
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity   : 0;
+        transform : translateY(-10px);
+    }
+    to {
+        opacity   : 1;
+        transform : translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity : 0;
+    }
+    to {
+        opacity : 1;
+    }
+}
