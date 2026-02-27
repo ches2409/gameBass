@@ -134,9 +134,32 @@
     }
   }
 }
+.action-btn {
+  @include mixins.button-action()
+}
+
+.btn-submit{
+  @include mixins.button-submit();
+  @include mixins.actions-values(2)
+}
+
+.btn-cancel{
+  @include mixins.button-cancel();
+  @include mixins.actions-values()
+}
+
+.edit-btn{
+  @include mixins.button-edit()
+}
+.delete-btn{
+  @include mixins.button-delete()
+}
 
 .clip-btn {
   @include mixins.button-clip(#777977,#d6f5e9,red,der)
+}
+.clip-btn-yellow {
+  @include mixins.button-clip($text-color:variables.$soft,$text_color-hover:#d6f5e9,$hover-accent-color:variables.$accent-yellow,$mode:der)
 }
 
 // Variantes de color

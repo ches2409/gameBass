@@ -199,46 +199,6 @@ select option {
   margin-top: 20px;
 }
 
-.btn-cancel {
-  flex: 1;
-  background: transparent;
-  border: 1px solid rgba(255, 0, 0, 0.3);
-  color: #ff3d00;
-  font-family: var(--font-display);
-  font-size: 10px;
-  font-weight: 900;
-  padding: 15px;
-  cursor: pointer;
-  transition: all 0.3s;
-  clip-path: polygon(0 0, 100% 0, 100% 70%, 90% 100%, 0 100%);
-}
-
-.btn-cancel:hover {
-  background: rgba(255, 0, 0, 0.1);
-  border-color: #ff3d00;
-}
-
-.btn-submit {
-  flex: 2;
-  background: variables.$accent-green;
-  border: none;
-  color: #000;
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 900;
-  padding: 15px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
-  transition: transform 0.2s;
-}
-
-.btn-submit:hover {
-  transform: scale(1.02);
-  filter: brightness(1.1);
-  box-shadow: 0 0 30px rgba(163, 255, 0, 0.4);
-}
 
 /* Efecto Láser de Escaneo dentro del Modal */
 .modal-laser-line {

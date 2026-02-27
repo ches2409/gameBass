@@ -52,6 +52,7 @@
 
                 {# CORRECCIÓN: Usamos solo la clase 'member-slot' para un tamaño consistente. #}
                 {% if miembro.foto_usuario and miembro.foto_usuario.startswith('http') %}
+{#                    <a href="{{ url_for(usuario.) }}"></a>#}
                     <img src="{{ miembro.foto_usuario }}" class="member-slot" alt="Miembro {{ miembro.alias_usuario }}">
                 {% elif miembro.foto_usuario %}
                     <img src="{{ url_for('static', filename='uploads/avatars/' ~ miembro.foto_usuario) }}" class="member-slot" alt="Miembro {{ miembro.alias_usuario }}">
@@ -60,20 +61,22 @@
                 {% endif %}
 
             {% endfor %}
-
-            {# Renderiza los slots vacíos para añadir nuevos miembros #}
-            {# Este botón ahora es un enlace que dirige a la página de gestión del equipo. #}
-            <a href="{{ url_for('equipo.manage_members', id_equipo=equipo.id_equipo) }}" class="add-member-btn" title="Gestionar Unidad">
-                <span class="material-symbols-outlined">group_add</span>
-            </a>
         </div>
     </div>
 
     <!-- Acciones -->
+
+    {# Solo mostramos las acciones destructivas/administrativas a usuarios de Alto Mando (Nivel >= 80) #}
     <div class="card-actions">
-        <button class="btn-recalibrate clip-btn" onclick="openUpdateModal(this)" data-id="{{ equipo.id_equipo }}" data-nombre="{{ equipo.nombre_equipo }}" data-lema="{{ equipo.lema_equipo }}" data-maximo_miembros="{{ equipo.maximo_miembros }}" data-color="{{ equipo.color_equipo }}" data-estado="{{ equipo.estado_equipo.name }}" data-comandante="{{ equipo.id_comandante }}">RECALIBRAR_UNIDAD</button>
-        <button class="btn-delete clip-btn" onclick="openDeleteModal('{{ url_for('equipo.delete', id_equipo=equipo.id_equipo) }}', '{{ equipo.nombre_equipo | upper }}')">
+        <a href="{{ url_for('equipo.manage_members', id_equipo=equipo.id_equipo) }}" class="action-btn edit-btn" title="Gestionar Unidad">
+            <span class="material-symbols-outlined">group_add</span>
+        </a>
+    {% if current_user.jerarquia.nivel_acceso >= access_value %}
+        <button class="action-btn btn-submit" onclick="openUpdateModal(this)" data-id="{{ equipo.id_equipo }}" data-nombre="{{ equipo.nombre_equipo }}" data-lema="{{ equipo.lema_equipo }}" data-maximo_miembros="{{ equipo.maximo_miembros }}" data-color="{{ equipo.color_equipo }}" data-estado="{{ equipo.estado_equipo.name }}" data-comandante="{{ equipo.id_comandante }}">RECALIBRAR_UNIDAD</button>
+        <button class="action-btn delete-btn" onclick="openDeleteModal('{{ url_for('equipo.delete', id_equipo=equipo.id_equipo) }}', '{{ equipo.nombre_equipo | upper }}')">
             <span class="material-symbols-outlined">delete</span>
         </button>
+    {% endif %}
     </div>
+
 </div>

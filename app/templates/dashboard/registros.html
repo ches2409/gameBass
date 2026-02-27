@@ -17,32 +17,7 @@
     <div class="nodo-grid">
         <!-- CONTENEDOR PRINCIPAL DE REGISTROS -->
         <div class="registros-view">
-{#
-
-        <!-- ENCABEZADO DE SECCIÓN -->
-        <div class="portal-header">
-            <div class="header-content">
-                <div class="header-icon">
-                    <span class="material-symbols-outlined">app_registration</span>
-                </div>
-                <div class="header-text">
-                    <h2>[PORTAL_DE_ENLACE_A_ARENA]</h2>
-                    <p>
-                        INICIA TU SECUENCIA DE REGISTRO NEURAL. ELIGE TU MODO DE COMBATE E INYÉCTATE EN LA SIMULACIÓN...
-                    </p>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="page-title-container">
-            <h2 class="glitch-title" data-text="REGISTROS">
-                REGISTROS
-            </h2>
-        </div>
-#}
         <!-- GRID DE INTERACCIÓN -->
-        <!-- FORMULARIO PURO HTML (Sin JS) -->
         <form action="{{ url_for('registro.create') }}" method="POST" class="registros-form" id="registrationForm">
 
             <!-- PANEL IZQUIERDO: SELECCIÓN DE PROTOCOLO -->
@@ -64,13 +39,13 @@
                                 <div class="btn-text">
                                     <p class="btn-title">INDIVIDUAL_UPLINK</p>
                                     <p class="btn-subtitle">Sincronía de ADN único</p>
+
                                 </div>
                             </label>
                         </div>
 
                         <!-- 2. Opción Equipo -->
                         <div class="option-wrapper">
-                            <!-- La clase 'peer/team' es clave para activar el dropdown de abajo -->
                             <input type="radio" name="modo_registro" id="mode_equipo" value="equipo" class="sr-only">
                             <label for="mode_equipo" class="protocol-btn">
                                 <span class="material-symbols-outlined">groups</span>
@@ -80,21 +55,27 @@
                                 </div>
                             </label>
 
-                            <!-- 3. Selector de Equipo (CSS Magic: Solo visible si el radio 'peer/team' está checked) -->
                             <div class="team-selector">
                                 <label class="selector-label">SELECCIONAR UNIDAD DE COMBATE</label>
                                 <select name="id_equipo" class="cyber-select">
                                     <option value="" disabled selected>-- SELECCIONAR EQUIPO --</option>
                                     {% if equipos %}
                                         {% for equipo in equipos %}
-                                            <option value="{{ equipo.id_equipo }}">{{ equipo.nombre_equipo }}</option>
+                                            {% if current_user.id_usuario in equipo.miembros|map(attribute= "id_usuario") %}
+                                                <option value="{{ equipo.id_equipo }}">{{ equipo.nombre_equipo }}</option>
+                                            {% endif %}
                                         {% endfor %}
                                     {% else %}
                                         <option value="" disabled>NO TIENES EQUIPOS ACTIVOS</option>
                                     {% endif %}
                                 </select>
-                                <p class="selector-hint">* Requerido para protocolo grupal</p>
+                                <p class="selector-hint">* Requerido para protocolo grupal {{ advertencia }}</p>
                             </div>
+
+{#                            Crear boton si no pertenece al equipo seleccionado#}
+                            <a href="{{ url_for('equipo.index') }}">unirse a equipo</a>
+
+
                         </div>
                     </div>
 
@@ -121,11 +102,9 @@
 
                 <div class="arenas-grid">
 
-                    <!-- Bucle Jinja2 para Torneos -->
                     {% if torneos %}
                         {% for torneo in torneos %}
 
-                            <!-- Tarjeta de Arena (Implementada como Radio Button + Label) -->
                             <div class="arena-card-wrapper">
                                 <input type="radio" name="id_torneo" id="torneo_{{ torneo.id_torneo }}"
                                        value="{{ torneo.id_torneo }}" class="sr-only" required>
@@ -139,12 +118,12 @@
 
                                         <div class="card-overlay"></div>
                                         <div class="card-badges">
-                               <span class="badge-game">
-                                  {{ torneo.juego.nombre_juego if torneo.juego else 'UNKNOWN' }}
-                               </span>
-                                            <span class="badge-count">
-                                  {{ torneo.registros|length }}/{{ torneo.max_competidores }}
-                               </span>
+                                           <span class="badge-game">
+                                              {{ torneo.juego.nombre_juego if torneo.juego else 'UNKNOWN' }}
+                                           </span>
+                                                        <span class="badge-count">
+                                              {{ torneo.registros|length }}/{{ torneo.max_competidores }}
+                                           </span>
                                         </div>
                                     </div>
 
@@ -153,7 +132,6 @@
                                         <p>PRIZE: <span>{{ torneo.recompensa_torneo }}</span></p>
                                     </div>
 
-                                    <!-- Indicador de selección (CSS puro: visible si el input hermano está checked) -->
                                     <div class="selection-indicator">
                                         <span class="material-symbols-outlined">check_circle</span>
                                     </div>
@@ -167,6 +145,9 @@
                     {% endif %}
                 </div>
 
+                {# --- SISTEMA DE NOTIFICACIONES FLASH --- #}
+                {% include 'components/flash_messages.html' %}
+
                 <!-- LOGS RECIENTES -->
                 <div class="system-logs">
                     <div class="logs-bg"></div>
@@ -174,17 +155,33 @@
                         ENLACES_RECIENTES_EN_LA_CADENA
                     </h4>
                     <div class="logs-list">
-                        <div class="log-item">
+                        <div class="conection-now log-item">
                             <div class="log-content">
-                                <span class="log-user">>> KaosMaster99</span>
-                                <span class="log-action">Enlazado_A</span>
-                                <span class="log-target">VOID STRIKE CHAMPIONSHIP</span>
+                                <span class="log-user">>> {{ current_user.alias_usuario }}</span>
+                                <span class="log-action">conectado</span>
+                                <span class="log-target">ACCES_LEVEL {{ current_user.jerarquia.nivel_acceso }}</span>
+
                             </div>
-                            <span class="log-time">21:06:36</span>
                         </div>
-                        <!-- ... más logs ... -->
+
+                        {# 2. Bucle de Logs Históricos (Desde la Base de Datos) #}
+                        {% for log in logs %}
+                            <div class="log-item">
+                                <div class="log-content">
+                                    <span class="log-user">>> {{ log.usuario.alias_usuario }}</span>
+                                    <span class="log-action">Enlazado_A</span>
+                                    <span class="log-target">{{ log.torneo.nombre_torneo | upper }}</span>
+                                </div>
+                                {% if log.equipo.id_equipo%}
+                                    <span class="log-action"><<< TEAM >>></span>
+                                    <span class="log-target">{{ log.equipo.nombre_equipo | upper }}</span>
+                                {% endif %}
+                                <span class="log-time">{{ log.fecha_registro | formato_hora_local }}</span>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
+
             </div>
         </form>
     </div>

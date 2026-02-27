@@ -26,9 +26,12 @@
 
                 <div class="command-suite__main">
 
-                    {% for title in menu_titles %}
-                        {% with name_section=title.name_section %}
-                            {%  include 'components/main_menu.html' %}
+                    {# Bucle simplificado: Itera sobre las secciones ya agrupadas desde el backend #}
+                    {# Si una sección no tiene ítems, simplemente no estará en 'menu_data' #}
+                    {% for section in menu_data %}
+                        {# Pasamos el título y los ítems de esta sección específica al componente #}
+                        {% with name_section=section.title, items_in_section=section.section_items %}
+                            {% include 'components/main_menu.html' %}
                         {% endwith %}
                     {% endfor %}
 
@@ -36,14 +39,14 @@
 
                 <div class="command-suite__footer">
                     <div class="command-suite__group clip-btn">
-                        <div class="button-abort ">
+                        <a href="{{ url_for('auth.logout') }}" class="button-abort" style="text-decoration: none; color: inherit; width: 100%;">
                             <div class="icon_abort">
 
                                 <span class="material-symbols-outlined card-bg-icon">logout</span>
 
                             </div>
                             <p class="text_abort">ABORT_SYSTEM</p>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
@@ -92,19 +95,41 @@
                         <!-- Divisor técnico vertical -->
                         <div class="vertical-divider"></div>
 
-                        <!-- Botón de Perfil Neural -->
-                        <button class="profile-trigger">
-                            <div class="trigger-overlay"></div>
-                            <span class="material-symbols-outlined user-icon">account_circle</span>
+                        <!-- Información del Operador (Solo si está logueado) -->
+                        {% if current_user.is_authenticated %}
+                            <div class="operator-info" style="text-align: right; margin-right: 15px;">
+                                <p class="text_code" style="margin:0; color: #A3FF00; font-weight: bold;">{{ current_user.alias_usuario }}</p>
+                                <p class="status-code" style="margin:0; font-size: 8px; opacity: 0.7;">{{ current_user.jerarquia.nombre_jerarquia | upper }}</p>
+                            </div>
 
-                            <!-- Elementos decorativos de esquina -->
-                            <div class="corner-accent"></div>
-                        </button>
+                            <!-- Botón de Perfil Neural (Ahora con Avatar y Logout) -->
+                            <a href="{{ url_for('auth.logout') }}" class="profile-trigger" title="CERRAR ENLACE NEURAL (LOGOUT)" style="text-decoration: none; padding: 0;">
+                                <div class="trigger-overlay"></div>
+                                
+                                {# Lógica de Avatar Inteligente #}
+                                {% if current_user.foto_usuario %}
+                                    {% if current_user.foto_usuario.startswith('http') %}
+                                        <img src="{{ current_user.foto_usuario }}" class="user-icon" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0;">
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename='uploads/avatars/' ~ current_user.foto_usuario) }}" class="user-icon" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0;">
+                                    {% endif %}
+                                {% else %}
+                                    <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed={{ current_user.alias_usuario }}" class="user-icon" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0;">
+                                {% endif %}
+
+                                <!-- Elementos decorativos de esquina -->
+                                <div class="corner-accent"></div>
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
 
             <div class="command-center__body">
+
+                {# --- INYECCIÓN DE MENSAJES FLASH --- #}
+                {% include 'components/flash_messages.html' %}
+
 
                 {% block dashboard_body %}
                 <div class="intro_card">
@@ -191,24 +216,5 @@
 
         </div>
 
-
-
-{#        <div class="prueba">#}
-
-{#        Alertas de ventana#}
-
-{#        {% block alertContainer %}#}
-{##}
-{#            <!-- Si existe una alerta específica para esta URL (alert_finish), la mostramos -->#}
-{#            {% if alert_finish %}#}
-{#                {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle %}#}
-{#                    {% include 'components/alert-container.html' %}#}
-{#                {% endwith %}#}
-{#            {% endif %}#}
-{##}
-{#        {% endblock %}#}
-
-
-{#        </div>#}
     </div>
 {% endblock %}

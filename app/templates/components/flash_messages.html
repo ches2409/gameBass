@@ -1,0 +1,32 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages-container" style="margin-bottom: 1.5rem;">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" role="alert" style="display: flex; justify-content: space-between; align-items: center;">
+
+          <div style="display: flex; align-items: center; gap: 10px;">
+            {% if category == 'danger' %}
+                <span class="material-symbols-outlined">error</span>
+            {% elif category == 'success' %}
+                <span class="material-symbols-outlined">check_circle</span>
+            {% elif category == 'warning' %}
+                <span class="material-symbols-outlined">warning</span>
+            {% else %}
+                <span class="material-symbols-outlined">info</span>
+            {% endif %}
+
+            <span>{{ message }}</span>
+          </div>
+
+          <span class="material-symbols-outlined"
+                style="cursor: pointer; opacity: 0.7;"
+                onclick="this.parentElement.style.display='none';"
+                title="Cerrar Notificación">
+            close
+          </span>
+
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}

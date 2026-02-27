@@ -189,24 +189,6 @@
     z-index: 10;
 }
 
-.add-member-btn {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    border: 2px dashed rgba(255, 255, 255, 0.1);
-    background-color: rgba(0, 0, 0, 0.2);
-    color: #4b5563;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.add-member-btn:hover {
-    border-color: white;
-    color: var(--primary);
-}
-
 /* --- BOTONES ACCIÓN --- */
 .card-actions {
     display: flex;
@@ -222,7 +204,7 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: white;
     font-family: var(--font-display);
-    font-weight: 900;
+    //font-weight: 400;
     font-size: 0.6rem;
     text-transform: uppercase;
     letter-spacing: 0.2em;
@@ -231,23 +213,6 @@
 }
 
 .btn-recalibrate:hover {
-    background-color: var(--blue-neon);
+    //background-color: var(--blue-neon);
     color: black;
-}
-
-.btn-delete {
-    width: 3.5rem;
-    height: 3.5rem;
-    background-color: rgba(127, 29, 29, 0.1);
-    border: 1px solid rgba(220, 38, 38, 0.3);
-    color: #ef4444;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.btn-delete:hover {
-    background-color: #dc2626;
-    color: white;
 }

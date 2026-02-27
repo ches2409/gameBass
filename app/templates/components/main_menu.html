@@ -8,22 +8,20 @@
     </div>
 
     <div class="command-suite__group fst-italic">
-        
-        {# Recorrer la lista completa de items #}
-        {% for item in menu_data %}
-            {# Solo mostrar el item si pertenece a esta sección #}
-            {% if item.title_section == name_section %}
-                <a href="{{ item.url }}" class="command-suite__item {{ 'active' if item.active else '' }}" style="text-decoration: none; color: inherit;">
 
-                    <div class="command-suite__item-icon icon-main">
-                        <span class="material-symbols-outlined ">{{ item.icon_main }}</span>
-                    </div>
+        {# Recorrer la lista de items pre-filtrada para esta sección #}
+        {% for item in items_in_section %}
+            <a href="{{ item.url }}" class="command-suite__item {{ 'active' if item.active else '' }}" style="text-decoration: none; color: inherit;">
 
-                    <div class="command-suite__item-label name-main">
-                        <p>{{ item.name_main }}</p>
-                    </div> 
-                </a>
-            {% endif %}
+                <div class="command-suite__item-icon icon-main">
+                    <span class="material-symbols-outlined ">{{ item.icon_main }}</span>
+                </div>
+
+                <div class="command-suite__item-label name-main">
+                    <p>{{ item.name_main }}</p>
+
+                </div> 
+            </a>
         {% endfor %}
         
     </div>

@@ -4,110 +4,203 @@
 
 {% block dashboard_body %}
 
-    {# Cabecera de la sección, mostrando el nombre del equipo que estamos gestionando #}
-    <div class="intro_card mb-4">
-        <div class="intro_main w-100">
-            <div class="command">
-                <div class="command__code intel-badge">
-                    <p class="text_code">SQUAD_MANAGEMENT_TERMINAL</p>
-                </div>
-            </div>
-            <h2 class="glitch-title" data-text="GESTIONAR: {{ equipo.nombre_equipo | upper }}">
-                GESTIONAR: {{ equipo.nombre_equipo | upper }}
-            </h2>
-        </div>
-    </div>
+    {% block alertContainerText %}
+        {% with icon="reduce_capacity", title="RECALIBRAR_UNIDAD_TÁCTICA", subtitle="ARQUITECTURA DE SINERGIA DE RED V2.9"%}
+            {% include 'components/alert_container_text.html' %}
+        {% endwith %}
+    {% endblock %}
 
-    <header class="modal-header">
-            <div class="header-title">
-            <h3>RECALIBRAR_UNIDAD_TÁCTICA</h3>
-            <span class="header-subtitle">ARQUITECTURA DE SINERGIA DE RED V2.9</span>
-        </div>
-        <div class="capacity-counter">
-            <span class="capacity-label">CAPACIDAD_RED_SQUAD</span>
-            <span class="capacity-value">{{ equipo.miembros|length }}/ {{ equipo.maximo_miembros }}</span>
-        </div>
-    </header>
+    <div class="page-grid">
 
-    <main class="modal-body">
-        <div class="column" style="background: rgba(96, 165, 250, 0.02);">
-            <div class="column-header">
-                <span class="header-subtitle" style="font-size: 8px;">RED_ENLAZADA</span>
-                <span class="header-subtitle" style="font-size: 7px; opacity: 0.6;">ACTIVE_SYNC</span>
-            </div>
+        <div class="page-container">
 
+                <header class="content-header">
 
-            {% for miembro in equipo.miembros %}
-            <div class="{% if miembro.id_usuario == equipo.id_comandante %} linked-node {% else %} recruit-item{% endif %}">
-                <div class="member-info">
-                {% if miembro.foto_usuario and miembro.foto_usuario.startswith('http') %}
-                    <img src="{{ miembro.foto_usuario }}" class="avatar-small">
-                {% elif miembro.foto_usuario %}
-                    <img src="{{ url_for('static', filename='uploads/avatars/' ~ miembro.foto_usuario) }}" class="avatar-small">
-                {% else %}
-                    <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed={{ miembro.alias_usuario }}" class="avatar-small">
-                {% endif %}
-                    <div class="member-names">
-                        <h5>{{ miembro.alias_usuario }}</h5>
-                        <p>{{ miembro.jerarquia.nombre_jerarquia | upper }}</p>
+                    <div class="header-title">
+                        <h3>Recalibrando: {{ equipo.nombre_equipo }}</h3>
                     </div>
+
+                    <div class="capacity-counter">
+                        <span class="capacity-label">CAPACIDAD_RED_SQUAD</span>
+                        <span class="capacity-value">{{ equipo.miembros|length }}/ {{ equipo.maximo_miembros }}</span>
+                    </div>
+
+                </header>
+
+                <main class="content-body">
+
+                    <div class="column" >
+
+                        <div class="column-header">
+                            <span class="header-subtitle">RED_ENLAZADA</span>
+                            <span class="header-subtitle">ACTIVE_SYNC</span>
+                        </div>
+
+
+                        {# 1. Extraemos al Comandante en una lista #}
+                        {% set commander = equipo.miembros | selectattr('id_usuario', 'equalto', equipo.id_comandante) | list %}
+                        {# 2. Extraemos al resto (manteniendo su orden original) #}
+                        {% set troops = equipo.miembros | rejectattr('id_usuario', 'equalto', equipo.id_comandante) | list %}
+
+                        {# 3. Unimos las listas (Comandante + Tropas) e iteramos #}
+                        {% for miembro in commander + troops %}
+                        <div class="{% if miembro.id_usuario == equipo.id_comandante %} linked-node {% else %} recruit-item{% endif %}">
+                            <div class="member-info">
+                            {% if miembro.foto_usuario and miembro.foto_usuario.startswith('http') %}
+                                <img src="{{ miembro.foto_usuario }}" class="avatar-small">
+                            {% elif miembro.foto_usuario %}
+                                <img src="{{ url_for('static', filename='uploads/avatars/' ~ miembro.foto_usuario) }}" class="avatar-small">
+                            {% else %}
+                                <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed={{ miembro.alias_usuario }}" class="avatar-small">
+                            {% endif %}
+                                <div class="member-names">
+                                    <h5>{{ miembro.alias_usuario }}</h5>
+                                    <p>{{ miembro.jerarquia.nombre_jerarquia | upper }}</p>
+                                </div>
+                            </div>
+                            {% if miembro.id_usuario == equipo.id_comandante %}
+                                <h6>Comandante</h6>
+                                <span class="badge-root">ROOT_NODE</span>
+                            {% else %}
+                                {% if current_user.id_usuario == miembro.id_usuario or current_user.jerarquia.nivel_acceso >= access_value %}
+                                    <a href="{{ url_for('equipo.remove_member', id_equipo=equipo.id_equipo, id_usuario=miembro.id_usuario) }}" class="remove-member-btn" title="Desvincular Nodo">
+                                        <span class="material-symbols-outlined">link_off</span>
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+
                 </div>
-                {% if miembro.id_usuario == equipo.id_comandante %}
-                    <h6>Comandante</h6>
-                    <span class="badge-root">ROOT_NODE</span>
-                {% else %}
-                    <a href="{{ url_for('equipo.remove_member', id_equipo=equipo.id_equipo, id_usuario=miembro.id_usuario) }}" class="remove-member-btn" title="Desvincular Nodo">
-                        <span class="material-symbols-outlined">link_off</span>
-                    </a>
-                {% endif %}
-            </div>
-            {% endfor %}
+
+                    <div class="column">
+                        <div class="search-container">
+                            <span class="material-symbols-outlined search-icon">search</span>
+                            <input type="text" class="cyber-input search-input" placeholder="       BUSCAR NUEVOS ACTIVOS">
+                        </div>
+
+                        <div class="user-container">
+                            {% if equipo.miembros|length < equipo.maximo_miembros %}
+                            <p class="field-label">ACTIVOS_MAINFRAME_DISPONIBLES</p>
+                            <!-- Recruits List -->
+                            {# Bucle 2: Itera sobre la lista paginada de candidatos #}
+                            {% for usuario in usuarios_disponibles %}
+                                <form action="{{ url_for('equipo.add_member', id_equipo=equipo.id_equipo) }}" method="POST">
+                                    <input type="hidden" name="id_usuario" value="{{ usuario.id_usuario }}">
+                                    <div class="recruit-item">
+                                        <div class="member-info">
+                                            {% if usuario.foto_usuario and usuario.foto_usuario.startswith('http') %}
+                                                <img src="{{ usuario.foto_usuario }}" class="avatar-small" alt="Usuario {{ usuario.alias_usuario }}">
+                                            {% elif usuario.foto_usuario %}
+                                                <img src="{{ url_for('static', filename='uploads/avatars/' ~ usuario.foto_usuario) }}" class="avatar-small" alt="Usuario {{ usuario.alias_usuario }}">
+                                            {% else %}
+                                                <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed={{ usuario.alias_usuario }}" class="avatar-small" alt="Usuario {{ usuario.alias_usuario }}">
+                                            {% endif %}
+                                            <div class="member-names">
+                                                <h5 class="text-xs">{{ usuario.alias_usuario }}</h5>
+                                                <p class="text-3xs" >{{ usuario.jerarquia.nombre_jerarquia | upper }}</p>
+                                            </div>
+                                        </div>
+                                    {% if current_user.id_usuario == usuario.id_usuario or current_user.jerarquia.nivel_acceso >= access_value %}
+                                        <button type="submit" class="add-icon-btn">
+                                            <span class="material-symbols-outlined add-icon">add_circle</span>
+                                        </button>
+                                    {% endif %}
+                                    </div>
+                                </form>
+                            {% else %}
+                                <p class="capacity-full-message">NO_HAY_ACTIVOS_DISPONIBLES_EN_LA_RED</p>
+                            {% endfor %}
+                        {% else %}
+                            <p class="capacity-full-message">CAPACIDAD_MÁXIMA_DE_RED_ALCANZADA</p>
+                        {% endif %}
+                        </div>
+
+                        <div class="user-pagination">
+                            <div class="pagination-text">
+                                <p>Mostrando {{ ((current_page - 1) * per_page) + usuarios_disponibles|length }} de {{ total_users }} activos</p>
+                            </div>
+                            <div class="pagination-values">
+                                {# Botón ANTERIOR #}
+                                {% if current_page > 1 %}
+                                    <a href="{{ url_for('equipo.manage_members', id_equipo=equipo.id_equipo, page=current_page-1) }}" class="add-icon-btn" title="Página Anterior">
+                                        <span class="material-symbols-outlined add-icon">chevron_left</span>
+                                    </a>
+                                {% else %}
+                                    <span class="material-symbols-outlined add-icon" style="opacity: 0.3; cursor: default;">chevron_left</span>
+                                {% endif %}
+
+                                {# NÚMEROS DE PÁGINA #}
+                                <div class="page-numbers">
+                                    {% if total_pages > 1 %}
+                                        {% if total_pages <= 7 %}
+                                            {# Si son pocas páginas, mostramos todas #}
+                                            {% for p in range(1, total_pages + 1) %}
+                                                {% if p == current_page %}
+                                                    <span class="page-number active">{{ p }}</span>
+                                                {% else %}
+                                                    <a href="{{ url_for('equipo.manage_members', id_equipo=equipo.id_equipo, page=p) }}" class="page-number">{{ p }}</a>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            {# Lógica para muchas páginas #}
+                                            {% if current_page <= 4 %}
+                                                {# Estamos al principio: 1 2 3 4 5 ... N #}
+                                                {% for p in range(1, 6) %}
+                                                    {% if p == current_page %}
+                                                        <span class="page-number active">{{ p }}</span>
+                                                    {% else %}
+                                                        <a href="{{ url_for('equipo.manage_members', id_equipo=equipo.id_equipo, page=p) }}" class="page-number">{{ p }}</a>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <span class="page-ellipsis">...</span>
+                                                <a href="{{ url_for('equipo.manage_members', id_equipo=equipo.id_equipo, page=total_pages) }}" class="page-number">{{ total_pages }}</a>
+                                            {% elif current_page >= total_pages - 3 %}
+                                                {# Estamos al final: 1 ... N-4 N-3 N-2 N-1 N #}
+                                                <a href="{{ url_for('equipo.manage_members', id_equipo=equipo.id_equipo, page=1) }}" class="page-number">1</a>
+                                                <span class="page-ellipsis">...</span>
+                                                {% for p in range(total_pages - 4, total_pages + 1) %}
+                                                    {% if p == current_page %}
+                                                        <span class="page-number active">{{ p }}</span>
+                                                    {% else %}
+                                                        <a href="{{ url_for('equipo.manage_members', id_equipo=equipo.id_equipo, page=p) }}" class="page-number">{{ p }}</a>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% else %}
+                                                {# Estamos en medio: 1 ... X-1 X X+1 ... N #}
+                                                <a href="{{ url_for('equipo.manage_members', id_equipo=equipo.id_equipo, page=1) }}" class="page-number">1</a>
+                                                <span class="page-ellipsis">...</span>
+                                                {% for p in range(current_page - 1, current_page + 2) %}
+                                                    {% if p == current_page %}
+                                                        <span class="page-number active">{{ p }}</span>
+                                                    {% else %}
+                                                        <a href="{{ url_for('equipo.manage_members', id_equipo=equipo.id_equipo, page=p) }}" class="page-number">{{ p }}</a>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <span class="page-ellipsis">...</span>
+                                                <a href="{{ url_for('equipo.manage_members', id_equipo=equipo.id_equipo, page=total_pages) }}" class="page-number">{{ total_pages }}</a>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+
+                                {# Botón SIGUIENTE #}
+                                {% if current_page < total_pages %}
+                                    <a href="{{ url_for('equipo.manage_members', id_equipo=equipo.id_equipo, page=current_page+1) }}" class="add-icon-btn" title="Página Siguiente">
+                                        <span class="material-symbols-outlined add-icon">chevron_right</span>
+                                    </a>
+                                {% else %}
+                                    <span class="material-symbols-outlined add-icon" style="opacity: 0.3; cursor: default;">chevron_right</span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+
+                </main>
 
         </div>
 
-
-        <!-- Col 3: Available Assets -->
-        <div class="column">
-                <div class="search-container">
-                    <span class="material-symbols-outlined search-icon">search</span>
-                    <input type="text" class="cyber-input search-input" placeholder="  BUSCAR NUEVOS ACTIVOS">
-                </div>
-
-                {% if equipo.miembros|length < equipo.maximo_miembros %}
-                    <p class="field-label" style="font-size: 8px; margin-bottom: 15px;">ACTIVOS_MAINFRAME_DISPONIBLES</p>
-                    <!-- Recruits List -->
-                    {# Bucle 2: Itera sobre la lista de usuarios que el backend ya ha filtrado #}
-                    {% for usuario in usuarios_disponibles %}
-                        <form action="{{ url_for('equipo.add_member', id_equipo=equipo.id_equipo) }}" method="POST">
-                            <input type="hidden" name="id_usuario" value="{{ usuario.id_usuario }}">
-                            <div class="recruit-item">
-                                <div class="member-info">
-                                    {% if usuario.foto_usuario and usuario.foto_usuario.startswith('http') %}
-                                        <img src="{{ usuario.foto_usuario }}" class="avatar-small" alt="Usuario {{ usuario.alias_usuario }}">
-                                    {% elif usuario.foto_usuario %}
-                                        <img src="{{ url_for('static', filename='uploads/avatars/' ~ usuario.foto_usuario) }}" class="avatar-small" alt="Usuario {{ usuario.alias_usuario }}">
-                                    {% else %}
-                                        <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed={{ usuario.alias_usuario }}" class="avatar-small" alt="Usuario {{ usuario.alias_usuario }}">
-                                    {% endif %}
-                                    <div class="member-names">
-                                        <h5 style="font-size: 10px;">{{ usuario.alias_usuario }}</h5>
-                                        <p style="font-size: 6px;">{{ usuario.jerarquia.nombre_jerarquia | upper }}</p>
-                                    </div>
-                                </div>
-                                <button type="submit" class="add-icon-btn">
-                                    <span class="material-symbols-outlined add-icon">add_circle</span>
-                                </button>
-                            </div>
-                        </form>
-                    {% else %}
-                        <p class="capacity-full-message">NO_HAY_ACTIVOS_DISPONIBLES_EN_LA_RED</p>
-                    {% endfor %}
-                {% else %}
-                    <p class="capacity-full-message">CAPACIDAD_MÁXIMA_DE_RED_ALCANZADA</p>
-                {% endif %}
-
-            </div>
-
-    </main>
+    </div>
 
 {% endblock %}

@@ -39,7 +39,7 @@
 
 /* EFECTO GLITCH*/
 .glitch-title {
-    @include mixins.glitch-title()
+    @include mixins.glitch-title($fontSize:2.5rem)
 }
 
 @keyframes pulse {

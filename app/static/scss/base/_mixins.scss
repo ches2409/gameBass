@@ -22,12 +22,12 @@
 }
 
 /* Efecto Glitch para los títulos */
-@mixin glitch-title($spacing: -0.05em, $data: attr(data-text)) {
+@mixin glitch-title($fontSize: 3.5rem, $spacing: -0.05em, $data: attr(data-text)) {
   position: relative;
   display: inline-block;
   font-family: 'Orbitron', sans-serif;
   font-weight: 900;
-  font-size: 3.5rem;
+  font-size: $fontSize;
   color: white;
   text-transform: uppercase;
   font-style: italic;
@@ -97,6 +97,88 @@
           drop-shadow(0 0 1px $color_h)
 }
 
+// Mixin para Base de botones de acción
+@mixin button-action{
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #666;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 75% 100%, 0 100%);
+  .material-symbols-outlined{
+    font-size: 18px;
+    color: inherit;
+  }
+  &:active{
+    transform: scale(0.9);
+  }
+}
+
+@mixin button-delete{
+  color: variables.$alert;
+  border: 1px solid rgba(variables.$alert, 0.5);
+  &:hover{
+    background: variables.$alert;
+    color: #fff;
+    border-color: variables.$alert;
+    box-shadow: 0 0 20px rgba(variables.$alert, 0.4);
+    transform: scale(1.1);
+  }
+}
+
+@mixin button-edit{
+  &:hover{
+    text-decoration: none;
+    color: variables.$accent-yellow;
+    border-color: variables.$accent-yellow;
+    background: rgba(163, 255, 0, 0.05);
+    box-shadow: 0 0 15px rgba(163, 255, 0, 0.3);
+    transform: scale(1.1);
+  }
+}
+
+@mixin button-submit{
+  background: variables.$accent-green;
+  border: none;
+  color: #000;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
+  transition: transform 0.2s;
+  &:hover{
+    transform: scale(1.02);
+    filter: brightness(1.1);
+    box-shadow: 0 0 30px rgba(163, 255, 0, 0.4);
+  }
+}
+@mixin button-cancel{
+  background: transparent;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  color: #ff3d00;
+  transition: all 0.3s;
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 90% 100%, 0 100%);
+  &:hover{
+    background: rgba(255, 0, 0, 0.1);
+    border-color: #ff3d00;
+  }
+}
+//valores complementarios de los botones de accion "submit" y "cancel"
+@mixin actions-values($flex:1){
+  flex: $flex;
+  font-family: variables.$font-display;
+  font-size: 10px;
+  font-weight: 900;
+  cursor: pointer;
+  padding: 15px;
+}
+
 @mixin button-clip($text-color, $text-color-hover, $hover-accent-color,$mode:izq) {
   @if $mode == izq {
     clip-path: polygon(45% 0, 100% 0, 100% 78%, 40% 100%, 0 100%, 0 28%);
@@ -106,6 +188,7 @@
   height: 50%;
   width: 80%;
   color: $text-color;
+  border: 1px solid $text-color;
   transition: all 0.1s ease; // Transición rápida para respuesta táctil
 
   &:hover{

@@ -2,21 +2,15 @@
 
     <div class="alert-container">
 
-{#      El laser#}
-
         <div class="laser-scanner">
             <div class="laser-tail"></div>
         </div>
 
-{#        contenido del banner#}
-
         <div class="content">
 
           <div class="icon-wrapper">
-            <!-- Icono que hace el efecto de onda expansiva (Ping) -->
             <span class="material-symbols-outlined icon-ping icon-color">{{ icon | default('monitoring') }}</span>
 
-            <!-- Icono principal que parpadea con brillo -->
             <span class="material-symbols-outlined icon-animated">{{ icon | default('monitoring') }}</span>
           </div>
 
@@ -28,18 +22,15 @@
 
         <div class="actions">
 
-        {% if current_user.jerarquia.nivel_acceso >= access_value %}
-
         <div class="button-ok btn-glow">
-            <a href="#" onclick="toggleModal('{{ modal_target }}')">
+            <a href="{{ url_for('equipo.index') }}">
                 <i></i><i></i>
-                <span>{{ btn_info | default('INYECCION') }}</span>
+                <span>Terminar</span>
             </a>
         </div>
-        {% endif %}
-
 
         </div>
+
 
     </div>
 
