@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager, current_user
 from datetime import datetime
 import pytz  # Librería para manejo de zonas horarias
+from app.utils.permissions import Permissions, Profiles
 
 # Añadir el directorio raíz del proyecto a la ruta de Python para que
 # encuentre el módulo 'config' sin importar cómo se ejecute la app.
@@ -62,6 +63,11 @@ def create_app(config_class=DevConfig):
         # 3. Convertir a la zona del usuario
         dt_local = dt.astimezone(zona_usuario)
         return dt_local.strftime(format)
+
+    # --- CONTEXT PROCESSORS ---
+    @app.context_processor
+    def inject_permissions():
+        return dict(Permissions=Permissions, Profiles=Profiles)
 
     # --- SEGURIDAD GLOBAL ---
     @app.before_request

@@ -4,7 +4,7 @@
 
 {% block dashboard_body %}
 
-    {% from 'macros/data_card_macro.html' import render_data_card %}
+    {% from 'macros/data_card_macro.html' import render_data_card with context %}
     {% from 'macros/torneo_form_macro.html' import render_torneo_modal %}
 
 
@@ -76,6 +76,7 @@
                     item_name=torneo.nombre_torneo,
                     neon_color=torneo.juego.color_juego,
                     title=torneo.nombre_torneo | upper,
+                    profile='ARENA',
                     subtitle='MAX_COMPETIDORES: ' ~ torneo.max_competidores,
                     edit_data_attributes={
                         'id': torneo.id_torneo,

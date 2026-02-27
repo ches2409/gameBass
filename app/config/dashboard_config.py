@@ -63,7 +63,7 @@ MENU_ITEMS = [
         "title_section": MENU_TITLES[0]["name_section"],
         "url": "/usuarios",
         "name_breadcrumbs": "FIRMAS_NEURALES",
-        "min_level": 50,
+        "min_level": 5,
     },
     {
         "icon_main": "shield_person",
@@ -97,7 +97,7 @@ MENU_ITEMS = [
         "title_section": MENU_TITLES[2]["name_section"],
         "url": "/jerarquias",
         "name_breadcrumbs": "Niveles_Acceso",
-        "min_level": 90,
+        "min_level": 80,
     },
     {
         "icon_main": "settings_input_component",
@@ -141,7 +141,7 @@ ALERTS_DATA = [
         "subtitle": "Indexando firmas neurales en la base de datos central... Acceso concedido.",
         "url_info": "/usuarios",
         "btn_info": "VINCULAR_SUJETO",
-        "access": ["ADMIN", "MOD_SISTEMA"],
+        "access": ["ADMIN", "MOD_SISTEMA", "MOD_TACTICO", "MOD_ARENA", "PARTICIPANTE"],
     },
     {
         "icon": "account_tree",

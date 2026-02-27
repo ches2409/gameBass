@@ -66,12 +66,12 @@
 
     <!-- Acciones -->
 
-    {# Solo mostramos las acciones destructivas/administrativas a usuarios de Alto Mando (Nivel >= 80) #}
+
     <div class="card-actions">
         <a href="{{ url_for('equipo.manage_members', id_equipo=equipo.id_equipo) }}" class="action-btn edit-btn" title="Gestionar Unidad">
             <span class="material-symbols-outlined">group_add</span>
         </a>
-    {% if current_user.jerarquia.nivel_acceso >= access_value %}
+    {% if user_perfil == 'MOD_ARENA'  or user_perfil == 'ADMIN'%}
         <button class="action-btn btn-submit" onclick="openUpdateModal(this)" data-id="{{ equipo.id_equipo }}" data-nombre="{{ equipo.nombre_equipo }}" data-lema="{{ equipo.lema_equipo }}" data-maximo_miembros="{{ equipo.maximo_miembros }}" data-color="{{ equipo.color_equipo }}" data-estado="{{ equipo.estado_equipo.name }}" data-comandante="{{ equipo.id_comandante }}">RECALIBRAR_UNIDAD</button>
         <button class="action-btn delete-btn" onclick="openDeleteModal('{{ url_for('equipo.delete', id_equipo=equipo.id_equipo) }}', '{{ equipo.nombre_equipo | upper }}')">
             <span class="material-symbols-outlined">delete</span>

@@ -3,7 +3,7 @@
 {% block title %}Jerarquías | Arkadex{% endblock %}
 
 {% block dashboard_body %}
-    {% from 'macros/data_card_macro.html' import render_data_card %}
+    {% from 'macros/data_card_macro.html' import render_data_card with context %}
     {% from 'macros/jerarquia_form_macro.html' import render_jerarquia_modal %}
 
     {% block alertContainer %}
@@ -40,6 +40,7 @@
                     neon_color=jerarquia.color_hex,
                     title=jerarquia.nombre_jerarquia,
                     subtitle=jerarquia.subtitulo_jerarquia,
+                    profile='SISTEMA',
                     edit_data_attributes={'id': jerarquia.id_jerarquia, 'nombre': jerarquia.nombre_jerarquia, 'subtitulo': jerarquia.subtitulo_jerarquia, 'nivelJerarquia': jerarquia.nivel_acceso, 'colorJerarquia': jerarquia.color_hex, 'descripcionJerarquia': jerarquia.descripcion_jerarquia, 'protocolos': jerarquia.protocolos|map(attribute='id_protocolo')|join(',')},
                     card_header_content=card_header_content,
                     card_body_content=card_body_content,

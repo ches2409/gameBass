@@ -41,7 +41,7 @@
        )
     }}
 #}
-{% macro render_data_card(item, card_type, edit_data_attributes, neon_color, item_id, item_name, title, subtitle=None, item_descripcion=None, card_header_content=None, card_info_section=None, card_body_content=None, card_footer_content=None) %}
+{% macro render_data_card(item, card_type, edit_data_attributes, neon_color, item_id, item_name, title, profile=None, subtitle=None, item_descripcion=None, card_header_content=None, card_info_section=None, card_body_content=None, card_footer_content=None) %}
 
 {% set url_kwargs = {('id_'~card_type):item_id}%}
 {% set delete_url = url_for(card_type ~ '.delete', **url_kwargs)%}
@@ -100,6 +100,9 @@
     <!-- =================================== -->
     <!--      GRUPO DE ACCIONES (BOTONES)    -->
     <!-- =================================== -->
+{# Verificamos si se definió un perfil y si el nivel numérico del usuario (access_value) está en la lista permitida de ese perfil #}
+{% if profile and access_value in (Profiles | attr(profile)) %}
+
     <div class="action-group">
         <button class="action-btn edit-btn" onclick="openUpdateModal(this)"
             {% for key, value in edit_data_attributes.items() %}
@@ -112,6 +115,7 @@
             <span class="material-symbols-outlined">delete</span>
         </button>
     </div>
+{% endif %}
 
 </div>
 {% endmacro %}

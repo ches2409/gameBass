@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 
 from app.services import jerarquias_services, protocolos_services, dashboard_service
+from app.utils.decorators import permission_required
+from app.utils.permissions import Profiles
 
 jerarquia_bp = Blueprint("jerarquia", __name__, url_prefix="/jerarquias")
 
@@ -29,6 +31,7 @@ def index():
 
 
 @jerarquia_bp.route("/create", methods=["POST"])
+@permission_required(*Profiles.ROOT)
 def create():
     # Obtenemos los datos simples del formulario
     nombre = request.form.get("nombre_de_jerarquia")
@@ -53,6 +56,7 @@ def create():
 @jerarquia_bp.route(
     "/update/<int:id_jerarquia>", methods=["POST"], strict_slashes=False
 )
+@permission_required(*Profiles.ROOT)
 def update(id_jerarquia):
     nombre = request.form.get("nombre_de_jerarquia")
     subtitulo = request.form.get("subtitulo_de_jerarquia")
@@ -75,6 +79,7 @@ def update(id_jerarquia):
 
 
 @jerarquia_bp.route("/delete/<int:id_jerarquia>", strict_slashes=False)
+@permission_required(*Profiles.ROOT)
 def delete(id_jerarquia):
     jerarquias_services.delete_jerarquia(id_jerarquia)
     return redirect(url_for("jerarquia.index"))

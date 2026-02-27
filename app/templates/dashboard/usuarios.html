@@ -4,7 +4,7 @@
 
 {% block dashboard_body %}
 
-    {% from 'macros/data_card_macro.html' import render_data_card %}
+    {% from 'macros/data_card_macro.html' import render_data_card with context %}
     {% from 'macros/usuario_form_macro.html' import render_usuario_modal %}
 
     {% block alertContainer %}
@@ -51,6 +51,7 @@
                     item_name=usuario.alias_usuario,
                     neon_color=usuario.jerarquia.color_hex,
                     title=usuario.alias_usuario | upper,
+                    profile='SISTEMA',
                     subtitle=usuario.email_usuario | upper,
                     edit_data_attributes={
                         'id': usuario.id_usuario,

@@ -62,7 +62,7 @@
                                 <h6>Comandante</h6>
                                 <span class="badge-root">ROOT_NODE</span>
                             {% else %}
-                                {% if current_user.id_usuario == miembro.id_usuario or current_user.jerarquia.nivel_acceso >= access_value %}
+                                {% if current_user.id_usuario == miembro.id_usuario or user_perfil == 'ADMIN' or user_perfil == 'MOD_TACTICO' %}
                                     <a href="{{ url_for('equipo.remove_member', id_equipo=equipo.id_equipo, id_usuario=miembro.id_usuario) }}" class="remove-member-btn" title="Desvincular Nodo">
                                         <span class="material-symbols-outlined">link_off</span>
                                     </a>
@@ -101,7 +101,7 @@
                                                 <p class="text-3xs" >{{ usuario.jerarquia.nombre_jerarquia | upper }}</p>
                                             </div>
                                         </div>
-                                    {% if current_user.id_usuario == usuario.id_usuario or current_user.jerarquia.nivel_acceso >= access_value %}
+                                    {% if current_user.id_usuario == usuario.id_usuario or user_perfil == 'ADMIN' or user_perfil == 'MOD_TACTICO'%}
                                         <button type="submit" class="add-icon-btn">
                                             <span class="material-symbols-outlined add-icon">add_circle</span>
                                         </button>

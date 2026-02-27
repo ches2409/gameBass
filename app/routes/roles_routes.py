@@ -13,7 +13,7 @@ from app.services import roles_services
 from app.enums.tipos import RolUsuario, EspecialidadRol
 from app.services import dashboard_service
 from app.utils.decorators import permission_required
-from app.utils.permissions import Permissions
+from app.utils.permissions import Permissions, Profiles
 
 rol_bp = Blueprint("rol", __name__, url_prefix="/roles")
 
@@ -44,7 +44,7 @@ def index() -> str:
 
 
 @rol_bp.route("/create", methods=["POST"], strict_slashes=False)
-@permission_required(Permissions.MOD_SISTEMA, Permissions.ADMIN)
+@permission_required(*Profiles.SISTEMA)
 def create() -> redirect:
     """Crear un nuevo rol.
 
@@ -107,7 +107,7 @@ def create() -> redirect:
 
 
 @rol_bp.route("/update/<int:id_rol>", methods=["POST"], strict_slashes=False)
-@permission_required(Permissions.MOD_SISTEMA, Permissions.ADMIN)
+@permission_required(*Profiles.SISTEMA)
 def update(id_rol: int) -> redirect:
     """Actualizar un rol existente.
 
@@ -149,9 +149,7 @@ def update(id_rol: int) -> redirect:
     )
 
     try:
-        roles_services.update_rol(
-            id_rol, nombre_rol, descripcion_rol, especialidad_rol
-        )
+        roles_services.update_rol(id_rol, nombre_rol, descripcion_rol, especialidad_rol)
         flash("Rol actualizado correctamente.", "success")
     except Exception:
         current_app.logger.exception("Error actualizando rol")
@@ -161,11 +159,11 @@ def update(id_rol: int) -> redirect:
 
 
 @rol_bp.route("/delete/<int:id_rol>", strict_slashes=False, methods=["POST"])
-@permission_required(Permissions.MOD_SISTEMA, Permissions.ADMIN)
+@permission_required(*Profiles.SISTEMA)
 def delete(id_rol: int) -> redirect:
     """Eliminar un rol del sistema.
 
-    Procesa la eliminación de un rol. Solo acepta POST para evitar 
+    Procesa la eliminación de un rol. Solo acepta POST para evitar
     eliminaciones accidentales por GET. Captura excepciones y proporciona
     feedback al usuario mediante flash messages.
 

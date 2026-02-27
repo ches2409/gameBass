@@ -4,7 +4,7 @@
 
 {% block dashboard_body %}
 
-    {% from 'macros/data_card_macro.html' import render_data_card %}
+    {% from 'macros/data_card_macro.html' import render_data_card with context %}
     {% from 'macros/juego_form_macro.html' import render_juego_modal %}
 
     {% block alertContainer %}
@@ -38,6 +38,7 @@
                     item_name=juego.nombre_juego,
                     neon_color=juego.color_juego,
                     title=juego.nombre_juego | upper,
+                    profile='ARENA',
                     subtitle=juego.genero_juego | upper,
                     edit_data_attributes={
                         'id': juego.id_juego,

@@ -4,7 +4,7 @@
 
 {% block dashboard_body %}
 
-    {% from 'macros/data_card_macro.html' import render_data_card %}
+    {% from 'macros/data_card_macro.html' import render_data_card with context %}
     {% from 'macros/rol_form_macro.html' import render_rol_modal %}
 
     {% block alertContainer %}
@@ -48,6 +48,7 @@
                         item_descripcion = rol.descripcion_rol,
                         neon_color = rol.especialidad_rol.color,
                         title = rol.nombre_rol | upper,
+                        profile='SISTEMA',
                         subtitle = rol.especialidad_rol.titulo | upper,
                         edit_data_attributes = {
                             'id': rol.id_rol,

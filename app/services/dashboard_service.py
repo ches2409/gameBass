@@ -143,6 +143,12 @@ def _get_active_alert(normalized_path: str) -> Optional[Dict[str, Any]]:
         return None
 
 
+def show_actions_crud(current_user):
+    user_level = _calculate_access_level(current_user)
+    perfil = Permissions.get_name(user_level)
+    return perfil
+
+
 def _calculate_access_level(user: Any) -> int:
     """Calcula el nivel de permiso discreto basado en la jerarquía del usuario.
 
@@ -286,6 +292,8 @@ def get_dashboard_data(current_path: str) -> Dict[str, Any]:
         grouped_menu_data, norm_path
     )
 
+    user_perfil = show_actions_crud(current_user)
+
     # 5. Construir y retornar contexto
     context = {
         "metric_cards": config.METRIC_CARDS,
@@ -296,6 +304,7 @@ def get_dashboard_data(current_path: str) -> Dict[str, Any]:
         "page_title": page_title,
         "access_value": access_value,
         "min_access_level": DEFAULT_MIN_ACCESS_LEVEL,
+        "user_perfil": user_perfil,
     }
 
     current_app.logger.debug(

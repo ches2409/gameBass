@@ -14,7 +14,7 @@ from flask_login import login_required
 from app.enums.tipos import EstadoEquipo
 from app.services import dashboard_service, equipos_services, usuarios_services
 from app.utils.decorators import permission_required
-from app.utils.permissions import Permissions
+from app.utils.permissions import Profiles
 
 equipos_bp = Blueprint("equipo", __name__, url_prefix="/equipos")
 
@@ -35,40 +35,28 @@ def index():
 
 
 @equipos_bp.route("/create", methods=["POST"])
+@permission_required(*Profiles.TACTICO)
 def create():
 
-    context = dashboard_service.get_dashboard_data(request.path)
-    access_value = context.get("access_value", 0)
-
     try:
-        if access_value == Permissions.MOD_TACTICO or access_value == Permissions.ADMIN:
+        nombre_equipo = request.form.get("nombre_equipo")
+        lema_equipo = request.form.get("lema_equipo")
+        maximo_miembros = request.form.get("maximo_miembros")
+        color_equipo = request.form.get("color_equipo")
+        estado_equipo = request.form.get("estado_equipo")
+        id_comandante = request.form.get("id_comandante")
 
-            nombre_equipo = request.form.get("nombre_equipo")
-            lema_equipo = request.form.get("lema_equipo")
-            maximo_miembros = request.form.get("maximo_miembros")
-            color_equipo = request.form.get("color_equipo")
-            estado_equipo = request.form.get("estado_equipo")
-            id_comandante = request.form.get("id_comandante")
+        equipos_services.create_equipo(
+            nombre_equipo,
+            lema_equipo,
+            maximo_miembros,
+            color_equipo,
+            estado_equipo,
+            id_comandante,
+        )
 
-            equipos_services.create_equipo(
-                nombre_equipo,
-                lema_equipo,
-                maximo_miembros,
-                color_equipo,
-                estado_equipo,
-                id_comandante,
-            )
-
-            # 1. MENSAJE DE ÉXITO
-            flash(
-                f"UNIDAD TÁCTICA '{nombre_equipo}' INYECTADA CORRECTAMENTE", "success"
-            )
-        else:
-            # 2. MENSAJE DE ERROR
-            flash(
-                f"Tu nivel de autorizacion no es suficiente. Consulta con el administrador.",
-                "danger",
-            )
+        # 1. MENSAJE DE ÉXITO
+        flash(f"UNIDAD TÁCTICA '{nombre_equipo}' INYECTADA CORRECTAMENTE", "success")
     except Exception as e:
         # 2. MENSAJE DE ERROR
         flash(f"ERROR EN LA INYECCIÓN: {str(e)}", "danger")
@@ -77,7 +65,7 @@ def create():
 
 
 @equipos_bp.route("/update/<int:id_equipo>", methods=["POST"])
-@permission_required(Permissions.MOD_TACTICO, Permissions.ADMIN)
+@permission_required(*Profiles.TACTICO)
 def update(id_equipo):
 
     equipo = equipos_services.get_equipos_by_id(id_equipo)
@@ -106,7 +94,7 @@ def update(id_equipo):
 
 
 @equipos_bp.route("/delete/<int:id_equipo>")
-@permission_required(Permissions.ADMIN)
+@permission_required(*Profiles.ROOT)
 def delete(id_equipo):
 
     equipos_services.delete_equipo(id_equipo)
