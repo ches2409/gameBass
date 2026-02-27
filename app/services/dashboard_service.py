@@ -13,6 +13,7 @@ from flask_login import current_user
 from itertools import groupby
 from operator import itemgetter
 
+from app.db import session
 from app.utils.permissions import Permissions
 from app.config import dashboard_config as config
 
@@ -41,7 +42,9 @@ def _normalize_path(path: str) -> str:
         '/'
     """
     if not isinstance(path, str):
-        current_app.logger.warning(f"_normalize_path recibió tipo inválido: {type(path)}")
+        current_app.logger.warning(
+            f"_normalize_path recibió tipo inválido: {type(path)}"
+        )
         return "/"
     return path.rstrip("/") if len(path) > 1 else path
 
@@ -68,7 +71,9 @@ def _get_filtered_menu(user_level: int) -> List[Dict[str, Any]]:
     ]
 
 
-def _group_menu_by_section(filtered_menu_items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+def _group_menu_by_section(
+    filtered_menu_items: List[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
     """Agrupa ítems del menú por su sección (title_section).
 
     Args:
@@ -107,11 +112,15 @@ def _get_active_alert(normalized_path: str) -> Optional[Dict[str, Any]]:
         Optional[Dict]: Diccionario de alerta si existe, None en caso contrario.
     """
     if not isinstance(normalized_path, str):
-        current_app.logger.warning(f"_get_active_alert recibió tipo inválido: {type(normalized_path)}")
+        current_app.logger.warning(
+            f"_get_active_alert recibió tipo inválido: {type(normalized_path)}"
+        )
         return None
 
+    user_level = _calculate_access_level(current_user)
+
     try:
-        return next(
+        found_alert = next(
             (
                 alert
                 for alert in config.ALERTS_DATA
@@ -119,6 +128,16 @@ def _get_active_alert(normalized_path: str) -> Optional[Dict[str, Any]]:
             ),
             None,
         )
+
+        if found_alert:
+            alert_copy = found_alert.copy()
+            allowed_levels = [
+                getattr(Permissions, role, -1) for role in found_alert.get("access", [])
+            ]
+            alert_copy["user_has_access"] = user_level in allowed_levels
+            return alert_copy
+
+        return None
     except (KeyError, TypeError) as e:
         current_app.logger.exception(f"Error obteniendo alerta activa: {e}")
         return None
@@ -259,10 +278,13 @@ def get_dashboard_data(current_path: str) -> Dict[str, Any]:
             grouped_menu_data = []
 
     # 3. Determinar alerta activa
+
     alert_finish = _get_active_alert(norm_path)
 
     # 4. Marcar items activos y obtener info de página
-    page_title, page_data = _mark_active_menu_and_get_page_info(grouped_menu_data, norm_path)
+    page_title, page_data = _mark_active_menu_and_get_page_info(
+        grouped_menu_data, norm_path
+    )
 
     # 5. Construir y retornar contexto
     context = {

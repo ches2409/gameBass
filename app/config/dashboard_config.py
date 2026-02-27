@@ -141,6 +141,7 @@ ALERTS_DATA = [
         "subtitle": "Indexando firmas neurales en la base de datos central... Acceso concedido.",
         "url_info": "/usuarios",
         "btn_info": "VINCULAR_SUJETO",
+        "access": ["ADMIN", "MOD_SISTEMA"],
     },
     {
         "icon": "account_tree",
@@ -148,6 +149,7 @@ ALERTS_DATA = [
         "subtitle": "Mapeo dinámico de capacidad neural y rangos de mando... Ajustando privilegios de acceso.",
         "url_info": "/jerarquias",
         "btn_info": "INYECTAR_NIVEL_ACCESO",
+        "access": ["ADMIN", "MOD_SISTEMA"],
     },
     {
         "icon": "psychology",
@@ -155,6 +157,7 @@ ALERTS_DATA = [
         "subtitle": "Especializaciones de combate codificadas. Cargando modelos de comportamiento de arquetipo.",
         "url_info": "/roles",
         "btn_info": "INYECTAR_PERFIL",
+        "access": ["ADMIN", "MOD_SISTEMA"],
     },
     {
         "icon": "terminal",
@@ -162,6 +165,7 @@ ALERTS_DATA = [
         "subtitle": "Definición de reglas críticas y comandos de acceso al Núcleo... Verificando sintaxis del sistema.",
         "url_info": "/protocolos",
         "btn_info": "INYECTAR_COMANDO",
+        "access": ["ADMIN"],
     },
     {
         "icon": "extension",
@@ -169,6 +173,7 @@ ALERTS_DATA = [
         "subtitle": "Instalando enclaves neurales de alta densidad. Motores de renderizado de Arena listos.",
         "url_info": "/juegos",
         "btn_info": "INYECTAR_MOTOR",
+        "access": ["ADMIN", "MOD_ARENA"],
     },
     {
         "icon": "military_tech",
@@ -176,6 +181,7 @@ ALERTS_DATA = [
         "subtitle": "Sincronizando simulaciones de combate global... Detectando brechas de competición activas.",
         "url_info": "/torneos",
         "btn_info": "ABRIR_OPERACIÓN",
+        "access": ["ADMIN", "MOD_ARENA"],
     },
     {
         "icon": "groups_3",
@@ -183,6 +189,7 @@ ALERTS_DATA = [
         "subtitle": "Unificación de nodos de combate. Analizando letalidad grupal y sinergia de red local.",
         "url_info": "/equipos",
         "btn_info": "FORJAR_CLUSTER",
+        "access": ["ADMIN", "MOD_TACTICO"],
     },
     {
         "icon": "History_Edu",
@@ -190,6 +197,7 @@ ALERTS_DATA = [
         "subtitle": "INICIA TU SECUENCIA DE REGISTRO NEURAL. ELIGE TU MODO DE COMBATE E INYÉCTATE EN LA SIMULACIÓN...",
         "url_info": "/registros",
         "btn_info": "TRAZAR_SESIÓN",
+        "access": ["ADMIN"],
     },
     {
         "icon": "monitoring",
@@ -197,5 +205,6 @@ ALERTS_DATA = [
         "subtitle": "Cuantificando rendimiento neural post-combate... Generando reportes de eficiencia técnica.",
         "url_info": "/resultados",
         "btn_info": "EXPORTAR_LOGS",
+        "access": ["ADMIN"],
     },
 ]
