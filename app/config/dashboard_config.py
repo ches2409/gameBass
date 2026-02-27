@@ -62,7 +62,7 @@ MENU_ITEMS = [
         "name_main": "SUBJECT_PROFILES",
         "title_section": MENU_TITLES[0]["name_section"],
         "url": "/usuarios",
-        "name_breadcrumbs": "DATABASE_SUBJECTS",
+        "name_breadcrumbs": "FIRMAS_NEURALES",
         "min_level": 50,
     },
     {
@@ -70,7 +70,7 @@ MENU_ITEMS = [
         "name_main": "TACTICAL_SQUADS",
         "title_section": MENU_TITLES[0]["name_section"],
         "url": "/equipos",
-        "name_breadcrumbs": "SQUAD_ROSTER",
+        "name_breadcrumbs": "ESCUADRONES",
         "min_level": 5,
     },
     # --- SECCIÓN: ARENA_INFRASTRUCTURE ---
@@ -79,7 +79,7 @@ MENU_ITEMS = [
         "name_main": "ARENA_OPS",
         "title_section": MENU_TITLES[1]["name_section"],
         "url": "/torneos",
-        "name_breadcrumbs": "ACTIVE_TOURNAMENTS",
+        "name_breadcrumbs": "INSTANCIAS",
         "min_level": 0,
     },
     {
@@ -87,7 +87,7 @@ MENU_ITEMS = [
         "name_main": "VIRTUAL_SOFTWARE",
         "title_section": MENU_TITLES[1]["name_section"],
         "url": "/juegos",
-        "name_breadcrumbs": "VIRTUAL_SOFTWARE_ENGINE",
+        "name_breadcrumbs": "SOFTWARE_VIRTUAL",
         "min_level": 80,
     },
     # --- SECCIÓN: SYSTEM_KERNEL ---
@@ -96,7 +96,7 @@ MENU_ITEMS = [
         "name_main": "CLEARANCE_LVLS",
         "title_section": MENU_TITLES[2]["name_section"],
         "url": "/jerarquias",
-        "name_breadcrumbs": "SECURITY_CLEARANCE_PROTOCOL",
+        "name_breadcrumbs": "Niveles_Acceso",
         "min_level": 90,
     },
     {
@@ -104,7 +104,7 @@ MENU_ITEMS = [
         "name_main": "CORE_PROTOCOLS",
         "title_section": MENU_TITLES[2]["name_section"],
         "url": "/protocolos",
-        "name_breadcrumbs": "SYSTEM_COMMAND_LOG",
+        "name_breadcrumbs": "REGLAS_BASE",
         "min_level": 80,
     },
     {
@@ -112,7 +112,7 @@ MENU_ITEMS = [
         "name_main": "NEURAL_ARCHETYPES",
         "title_section": MENU_TITLES[2]["name_section"],
         "url": "/roles",
-        "name_breadcrumbs": "ARCHETYPE_TEMPLATE_CATALOG",
+        "name_breadcrumbs": "Roles_Sistema",
         "min_level": 80,
     },
     # --- SECCIÓN: DATA_TELEMETRY ---
@@ -121,7 +121,7 @@ MENU_ITEMS = [
         "name_main": "REGISTER_ACTION",
         "title_section": "DATA_TELEMETRY",
         "url": "/registros",
-        "name_breadcrumbs": "SINCRO_HISTORY_LOG",
+        "name_breadcrumbs": "BITÁCORAS",
         "min_level": 0,
     },
     {
@@ -129,7 +129,7 @@ MENU_ITEMS = [
         "name_main": "PERFORMANCE_DATA",
         "title_section": "DATA_TELEMETRY",
         "url": "/resultados",
-        "name_breadcrumbs": "NEURAL_YIELD_ANALYSIS",
+        "name_breadcrumbs": "ANALYTICS",
         "min_level": 50,
     },
 ]
