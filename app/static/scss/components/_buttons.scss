@@ -147,6 +147,19 @@
   @include mixins.button-cancel();
   @include mixins.actions-values()
 }
+.btn-ghost{
+  background: transparent;
+  border: none;
+  color: variables.$text-gray;
+  font-family: variables.$font-display;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: color 0.3s;
+  &:hover { color: #fff; }
+  
+}
 
 .edit-btn{
   @include mixins.button-edit()
@@ -199,7 +212,7 @@
   @include mixins.button-hover(#ff4757, color.adjust(#ff4757, $lightness: 10%), white);
 }
 
-.btn--ghost {
+.btn--ghostGlow {
   background: variables.$accent-blue;
   color: variables.$text-main;
   border-color: variables.$accent-blue;

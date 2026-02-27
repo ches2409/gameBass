@@ -25,6 +25,7 @@
 @mixin glitch-title($fontSize: 3.5rem, $spacing: -0.05em, $data: attr(data-text)) {
   position: relative;
   display: inline-block;
+  z-index: 1;
   font-family: 'Orbitron', sans-serif;
   font-weight: 900;
   font-size: $fontSize;
@@ -53,15 +54,18 @@
     animation: glitch-anim 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
 
   }
-  /* Keyframes de la vibración */
-@keyframes glitch-anim {
-    0% { transform: translate(0); }
-    20% { transform: translate(-3px, 3px); }
-    40% { transform: translate(-3px, -3px); }
-    60% { transform: translate(3px, 3px); }
-    80% { transform: translate(3px, -3px); }
-    100% { transform: translate(0); }
 }
+
+/* Keyframes de la vibración - Movido fuera del mixin para ser válido en CSS */
+@mixin enable-glitch-animation {
+  @keyframes glitch-anim {
+      0% { transform: translate(0); }
+      20% { transform: translate(-3px, 3px); }
+      40% { transform: translate(-3px, -3px); }
+      60% { transform: translate(3px, 3px); }
+      80% { transform: translate(3px, -3px); }
+      100% { transform: translate(0); }
+  }
 }
 
 // Mixin para centrar elementos
