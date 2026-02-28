@@ -4,11 +4,12 @@
 
 {% block dashboard_body %}
 
-	{% block alertContainer %}
+    {% from 'macros/data_card_macro.html' import render_data_card with context %}
+    {% from 'macros/protocolo_form_macro.html' import render_protocolo_modal %}
 
-        <!-- Si existe una alerta específica para esta URL (alert_finish), la mostramos -->
+	{% block alertContainer %}
         {% if alert_finish %}
-            {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info, modal_target='createProtocolModal' %}
+            {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info, modal_target='createProtocoloModal' %}
                 {% include 'components/alert-container.html' %}
             {% endwith %}
         {% endif %}
@@ -25,22 +26,34 @@
 
     </div>
 
-    {% include 'dashboard/protocolos/create.html' %}
-    {% include 'dashboard/protocolos/update.html' %}
+    {# Aquí irán los modales para crear y actualizar torneos en el futuro #}
+    {{ render_protocolo_modal(
+            modal_id='createProtocoloModal',
+            form_action=url_for('protocolo.create'),
+            submit_text="CONFIRMAR_INYECCIÓN",
+            codigos_listado=codigos_listado,
+            categorias_listado=categorias_listado,
+            is_create=True
+    ) }}
+    {{ render_protocolo_modal(
+            modal_id='updateProtocoloModal',
+            form_action=url_for('protocolo.update', id_protocolo=0),
+            submit_text="ACTUALIZAR_PROTOCOLO",
+            codigos_listado=codigos_listado,
+            categorias_listado=categorias_listado
+    ) }}
+
     {% include 'components/delete-modal.html' %}
 
     <script>
         function toggleModal(modalID) {
             const modal = document.getElementById(modalID);
             if (modal) {
-                // Si usas display: none en CSS
                 if (modal.style.display === "none" || modal.style.display === "") {
                     modal.style.display = "flex";
                 } else {
                     modal.style.display = "none";
                 }
-                // O si usas una clase .active en tu CSS:
-                // modal.classList.toggle('active');
             }
         }
 
@@ -54,18 +67,19 @@
 
             // 2. Construir la URL de actualización dinámicamente
             // Usamos un ID '0' temporal para que Flask genere la base de la URL, y luego lo reemplazamos
-            const baseUrlProtocol = "{{ url_for('protocolo.update', id_protocolo=0) }}";
-            const updateUrlProtocol = baseUrlProtocol.replace('0', id);
+            const form = document.getElementById('form-updateProtocoloModal');
+            const baseUrl = "{{ url_for('protocolo.update', id_protocolo=0) }}";
+            const updateUrl = baseUrl.replace('/0', '/' + id);
 
             // 3. Asignar al formulario y a los inputs
-            document.getElementById('formUpdateProtocolo').action = updateUrlProtocol;
-            document.getElementById('inputNombreProtocolo').value = nombre;
-            document.getElementById('inputCodigoProtocolo').value = codigo;
-            document.getElementById('inputCategoriaProtocolo').value = categoria;
-            document.getElementById('inputDescripcionProtocolo').value = descripcion;
+            form.action = updateUrl;
+            document.getElementById('updateProtocoloModal-nombre').value = nombre;
+            document.getElementById('updateProtocoloModal-codigo').value = codigo;
+            document.getElementById('updateProtocoloModal-categoria').value = categoria;
+            document.getElementById('updateProtocoloModal-descripcion').value = descripcion;
 
             // 4. Abrir el modal
-            toggleModal('updateProtocolModal');
+            toggleModal('updateProtocoloModal');
         }
 
         function openDeleteModal(deleteUrl, itemName) {
