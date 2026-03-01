@@ -12,7 +12,7 @@
     <div class="squad-card-header">
         <div class="card-title-group">
             <div style="display: flex; align-items: center; gap: 0.75rem;">
-                <span class="material-symbols-outlined" style="color: var(--neon);">groups</span>
+                <span class="material-symbols-outlined text-2xs" style="color: var(--neon);">groups</span>
                 <h4>{{ equipo.nombre_equipo | upper }}</h4>
             </div>
             <p class="card-faction">{{ equipo.lema_equipo | default('NO_LEMA_DEFINED') }}</p>
@@ -68,10 +68,13 @@
 
 
     <div class="card-actions">
+    {% if access_value not in Profiles.VISITANTE %}
+
         <a href="{{ url_for('equipo.manage_members', id_equipo=equipo.id_equipo) }}" class="action-btn edit-btn" title="Gestionar Unidad">
             <span class="material-symbols-outlined">group_add</span>
         </a>
-    {% if user_perfil == 'MOD_ARENA'  or user_perfil == 'ADMIN'%}
+    {% endif %}
+    {% if access_value in Profiles.TACTICO %}
         <button class="action-btn btn-submit" onclick="openUpdateModal(this)" data-id="{{ equipo.id_equipo }}" data-nombre="{{ equipo.nombre_equipo }}" data-lema="{{ equipo.lema_equipo }}" data-maximo_miembros="{{ equipo.maximo_miembros }}" data-color="{{ equipo.color_equipo }}" data-estado="{{ equipo.estado_equipo.name }}" data-comandante="{{ equipo.id_comandante }}">RECALIBRAR_UNIDAD</button>
         <button class="action-btn delete-btn" onclick="openDeleteModal('{{ url_for('equipo.delete', id_equipo=equipo.id_equipo) }}', '{{ equipo.nombre_equipo | upper }}')">
             <span class="material-symbols-outlined">delete</span>

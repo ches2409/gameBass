@@ -31,10 +31,10 @@
                 <footer class="protocol-footer">
                     <div class="bit-stream">01011101 00101010 11010100</div>
 
-                    <div class="auth-key">KEY_0x_ID_{{ protocolo.codigo_protocolo.value[0] | upper }}</div>
+                    <div class="auth-key"> KEY_0x_ID_{{ protocolo.codigo_protocolo.value[0] | upper }}</div>
                 </footer>
 
-
+                {% if access_value in Profiles.ROOT %}
                 <div class="action-group">
                     <!-- Botón Editar -->
                     <button class="action-btn edit-btn"
@@ -56,6 +56,7 @@
                     </button>
 
                 </div>
+                {% endif %}
 
 
             </div>

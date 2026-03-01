@@ -88,7 +88,7 @@ MENU_ITEMS = [
         "title_section": MENU_TITLES[1]["name_section"],
         "url": "/juegos",
         "name_breadcrumbs": "SOFTWARE_VIRTUAL",
-        "min_level": 80,
+        "min_level": 0,
     },
     # --- SECCIÓN: SYSTEM_KERNEL ---
     {
@@ -112,7 +112,7 @@ MENU_ITEMS = [
         "name_main": "NEURAL_ARCHETYPES",
         "title_section": MENU_TITLES[2]["name_section"],
         "url": "/roles",
-        "name_breadcrumbs": "Roles_Sistema",
+        "name_breadcrumbs": "Roles_de_combate",
         "min_level": 80,
     },
     # --- SECCIÓN: DATA_TELEMETRY ---
@@ -122,7 +122,7 @@ MENU_ITEMS = [
         "title_section": "DATA_TELEMETRY",
         "url": "/registros",
         "name_breadcrumbs": "BITÁCORAS",
-        "min_level": 0,
+        "min_level": 20,
     },
     {
         "icon_main": "monitoring",

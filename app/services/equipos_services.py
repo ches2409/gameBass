@@ -362,6 +362,13 @@ def add_member_to_equipo(id_equipo: int, id_usuario: int) -> bool:
         >>> success
         True
     """
+
+    try:
+        id_equipo = int(id_equipo)
+        id_usuario = int(id_usuario)
+    except ValueError:
+        raise TypeError("id_equipo e id_usuario deben ser enteros")
+
     if not isinstance(id_equipo, int) or not isinstance(id_usuario, int):
         raise TypeError("id_equipo e id_usuario deben ser enteros")
 
@@ -444,7 +451,7 @@ def remove_member_from_equipo(id_equipo: int, id_usuario: int) -> bool:
 
         # Delegamos la remoción al modelo
         removido = equipo.remover_miembro(usuario)
-        
+
         if removido:
             session.commit()
             current_app.logger.info(

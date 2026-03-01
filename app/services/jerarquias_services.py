@@ -23,7 +23,9 @@ ERROR_NOMBRE_REQUIRED = "El nombre de la jerarquía es obligatorio"
 ERROR_NOMBRE_MIN_LENGTH = "El nombre debe tener al menos 3 caracteres"
 ERROR_INVALID_LEVEL = "El nivel de acceso debe estar entre 1 y 100"
 ERROR_INVALID_COLOR = "El color debe ser un código hexadecimal válido (#RRGGBB)"
-ERROR_REQUIRED_FIELDS = "Nombre, subtítulo, descripción, nivel y color son campos obligatorios"
+ERROR_REQUIRED_FIELDS = (
+    "Nombre, subtítulo, descripción, nivel y color son campos obligatorios"
+)
 ERROR_INVALID_INPUT = "Dato de entrada inválido"
 ERROR_DATABASE = "Error en la base de datos"
 
@@ -48,9 +50,9 @@ def get_all_jerarquias() -> List[Jerarquia]:
         ...     print(f"{jerarquia.nombre_jerarquia}: {len(jerarquia.protocolos)} protocolos")
     """
     try:
-        jerarquias = session.query(Jerarquia).options(
-            selectinload(Jerarquia.protocolos)
-        ).all()
+        jerarquias = (
+            session.query(Jerarquia).options(selectinload(Jerarquia.protocolos)).all()
+        )
         current_app.logger.debug(f"Se obtuvieron {len(jerarquias)} jerarquías")
         return jerarquias
     except SQLAlchemyError as e:
@@ -79,11 +81,12 @@ def get_jerarquia_by_id(id_jerarquia: int) -> Optional[Jerarquia]:
         ...     print(jerarquia.nombre_jerarquia)
     """
     try:
-        jerarquia = session.query(Jerarquia).filter_by(
-            id_jerarquia=id_jerarquia
-        ).options(
-            selectinload(Jerarquia.protocolos)
-        ).first()
+        jerarquia = (
+            session.query(Jerarquia)
+            .filter_by(id_jerarquia=id_jerarquia)
+            .options(selectinload(Jerarquia.protocolos))
+            .first()
+        )
         return jerarquia
     except SQLAlchemyError as e:
         current_app.logger.exception(f"Error obteniendo jerarquía {id_jerarquia}: {e}")
@@ -103,11 +106,12 @@ def get_jerarquia_by_nombre(nombre: str) -> Optional[Jerarquia]:
         SQLAlchemyError: Error al acceder a la base de datos.
     """
     try:
-        jerarquia = session.query(Jerarquia).filter_by(
-            nombre_jerarquia=nombre
-        ).options(
-            selectinload(Jerarquia.protocolos)
-        ).first()
+        jerarquia = (
+            session.query(Jerarquia)
+            .filter_by(nombre_jerarquia=nombre)
+            .options(selectinload(Jerarquia.protocolos))
+            .first()
+        )
         return jerarquia
     except SQLAlchemyError as e:
         current_app.logger.exception(f"Error obteniendo jerarquía '{nombre}': {e}")
@@ -123,7 +127,7 @@ def create_jerarquia(
     descripcion: str,
     nivel: int,
     color: str,
-    protocolos: Optional[List[Protocolo]] = None
+    protocolos: Optional[List[Protocolo]] = None,
 ) -> Jerarquia:
     """Crea una nueva jerarquía en el sistema.
 
@@ -155,6 +159,11 @@ def create_jerarquia(
         ...     color="#FF0000"
         ... )
     """
+    try:
+        nivel = int(nivel)
+    except (TypeError, ValueError) as e:
+        raise ValueError(f"{ERROR_INVALID_INPUT}: {e}")
+
     # 1. Validar campos requeridos
     if not all([nombre, subtitulo, descripcion, nivel is not None, color]):
         raise ValueError(ERROR_REQUIRED_FIELDS)
@@ -183,7 +192,7 @@ def create_jerarquia(
             descripcion_jerarquia=descripcion,
             nivel_acceso=nivel,
             color_hex=color,
-            protocolos=protocolos if protocolos else []
+            protocolos=protocolos if protocolos else [],
         )
 
         # 7. Persistir en BD
@@ -210,8 +219,8 @@ def update_jerarquia(
     subtitulo: Optional[str] = None,
     descripcion: Optional[str] = None,
     nivel: Optional[int] = None,
+    protocolos: Optional[List[Protocolo]] = None,
     color: Optional[str] = None,
-    protocolos: Optional[List[Protocolo]] = None
 ) -> Jerarquia:
     """Actualiza una jerarquía existente.
 
@@ -242,6 +251,11 @@ def update_jerarquia(
         ... )
     """
     try:
+        nivel = int(nivel)
+    except (TypeError, ValueError) as e:
+        raise ValueError(f"{ERROR_INVALID_INPUT}: {e}")
+
+    try:
         # 1. Obtener jerarquía existente
         jerarquia = get_jerarquia_by_id(id_jerarquia)
         if not jerarquia:
@@ -255,7 +269,9 @@ def update_jerarquia(
             # Verificar que el nuevo nombre sea único (si es diferente)
             if nombre != jerarquia.nombre_jerarquia:
                 if get_jerarquia_by_nombre(nombre):
-                    raise ValueError(f"Ya existe una jerarquía con el nombre '{nombre}'")
+                    raise ValueError(
+                        f"Ya existe una jerarquía con el nombre '{nombre}'"
+                    )
 
             jerarquia.nombre_jerarquia = nombre
 
@@ -288,7 +304,9 @@ def update_jerarquia(
 
     except SQLAlchemyError as e:
         session.rollback()
-        current_app.logger.exception(f"Error actualizando jerarquía {id_jerarquia}: {e}")
+        current_app.logger.exception(
+            f"Error actualizando jerarquía {id_jerarquia}: {e}"
+        )
         raise
 
 
@@ -365,9 +383,9 @@ def vincular_protocolo(id_jerarquia: int, id_protocolo: int) -> Jerarquia:
         if not jerarquia:
             raise ValueError(ERROR_JERARQUIA_NOT_FOUND)
 
-        protocolo = session.query(Protocolo).filter_by(
-            id_protocolo=id_protocolo
-        ).first()
+        protocolo = (
+            session.query(Protocolo).filter_by(id_protocolo=id_protocolo).first()
+        )
         if not protocolo:
             raise ValueError("Protocolo no encontrado")
 
@@ -408,9 +426,9 @@ def desvincular_protocolo(id_jerarquia: int, id_protocolo: int) -> Jerarquia:
         if not jerarquia:
             raise ValueError(ERROR_JERARQUIA_NOT_FOUND)
 
-        protocolo = session.query(Protocolo).filter_by(
-            id_protocolo=id_protocolo
-        ).first()
+        protocolo = (
+            session.query(Protocolo).filter_by(id_protocolo=id_protocolo).first()
+        )
         if not protocolo:
             raise ValueError("Protocolo no encontrado")
 
@@ -452,7 +470,7 @@ def _es_color_valido(color: str) -> bool:
     if not isinstance(color, str):
         return False
 
-    if not color.startswith('#'):
+    if not color.startswith("#"):
         return False
 
     if len(color) != 7:

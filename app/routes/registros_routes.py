@@ -44,7 +44,7 @@ def create():
     id_rol = 1  # Aquí deberías definir lógica para seleccionar el rol si aplica, o usar uno por defecto
 
     # Buscamos el torneo para saber el juego (necesario para el modelo Registro)
-    torneo = torneos_services.get_torneos_by_id(id_torneo)
+    torneo = torneos_services.get_torneo_by_id(id_torneo)
     id_juego = torneo.id_juego if torneo else None
 
     try:

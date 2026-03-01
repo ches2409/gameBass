@@ -1,10 +1,19 @@
-from flask import Blueprint, request, render_template, redirect, url_for, current_app
+from flask import (
+    Blueprint,
+    request,
+    render_template,
+    redirect,
+    url_for,
+    current_app,
+    flash,
+)
 from flask_login import login_required
 from werkzeug.utils import secure_filename
 import os
 import time
 from app.services import dashboard_service, usuarios_services, jerarquias_services
 from app.utils.decorators import permission_required
+from app.utils.permissions import Permissions
 
 usuarios_bp = Blueprint("usuario", __name__, url_prefix="/usuarios")
 
@@ -25,6 +34,7 @@ def index():
 
 
 @usuarios_bp.route("/create", methods=["POST"])
+@permission_required(Permissions.MOD_SISTEMA)
 def create():
 
     alias_usuario = request.form.get("alias_usuario")
@@ -58,6 +68,7 @@ def create():
 
 
 @usuarios_bp.route("/update/<int:id_usuario>", methods=["POST"])
+@permission_required(Permissions.MOD_SISTEMA)
 def update(id_usuario):
 
     usuario = usuarios_services.get_usuarios_by_id(id_usuario)
@@ -73,34 +84,40 @@ def update(id_usuario):
     avatar_file = request.files.get("avatar_file")
     foto_final = None  # Por defecto, no cambiamos la foto
 
-    # REGLA DE PRIORIDAD: El archivo subido tiene prioridad sobre la URL.
-    if avatar_file and avatar_file.filename != "":
-        filename = secure_filename(avatar_file.filename)
-        # Usamos el ID de usuario y el tiempo para garantizar un nombre de archivo único
-        unique_filename = f"avatar_{id_usuario}_{int(time.time())}_{filename}"
-        save_path = os.path.join(
-            current_app.static_folder, "uploads/avatars", unique_filename
-        )
-        avatar_file.save(save_path)
-        foto_final = unique_filename
-    elif "avatar_url" in request.form:
-        # Si el campo URL fue enviado (incluso vacío), respetamos ese valor para permitir borrar la foto.
-        foto_final = avatar_url
+    try:
+        # REGLA DE PRIORIDAD: El archivo subido tiene prioridad sobre la URL.
+        if avatar_file and avatar_file.filename != "":
+            filename = secure_filename(avatar_file.filename)
+            # Usamos el ID de usuario y el tiempo para garantizar un nombre de archivo único
+            unique_filename = f"avatar_{id_usuario}_{int(time.time())}_{filename}"
+            save_path = os.path.join(
+                current_app.static_folder, "uploads/avatars", unique_filename
+            )
+            avatar_file.save(save_path)
+            foto_final = unique_filename
+        elif "avatar_url" in request.form:
+            # Si el campo URL fue enviado (incluso vacío), respetamos ese valor para permitir borrar la foto.
+            foto_final = avatar_url
 
-    usuarios_services.update_usuario(
-        id_usuario,
-        alias_usuario,
-        email_usuario,
-        password_usuario,
-        foto_final,
-        id_jerarquia,
-    )
+        usuarios_services.update_usuario(
+            id_usuario,
+            alias_usuario,
+            email_usuario,
+            password_usuario,
+            foto_final,
+            id_jerarquia,
+        )
+        # 1. MENSAJE DE ÉXITO
+        flash(f"SUJETO '{alias_usuario}' RECALIBRADO CORRECTAMENTE", "success")
+    except Exception as e:
+        # 2. MENSAJE DE ERROR
+        flash(f"ERROR EN LA RECALIBRACIÓN: {str(e)}", "danger")
 
     return redirect(url_for("usuario.index"))
 
 
 @usuarios_bp.route("/delete/<int:id_usuario>")
-@permission_required(80)
+@permission_required(Permissions.MOD_SISTEMA)
 def delete(id_usuario):
 
     usuarios_services.delete_usuario(id_usuario)

@@ -158,14 +158,6 @@ class Usuario(Base, UserMixin):
         """Retorna ID como string para Flask-Login."""
         return str(self.id_usuario)
 
-    def es_admin(self) -> bool:
-        """¿Usuario tiene permisos ADMIN?"""
-        return self.jerarquia.es_admin()
-
-    def es_moderador_sistema(self) -> bool:
-        """¿Usuario puede moderar el sistema?"""
-        return self.jerarquia.es_moderador_sistema()
-
     def puede_comandar_equipo(self, equipo_id: int) -> bool:
         """¿Usuario comanda este equipo?
         
@@ -201,9 +193,3 @@ class Usuario(Base, UserMixin):
     def obtener_nivel_acceso(self) -> int:
         """Obtiene nivel numérico de acceso (0-100)."""
         return self.jerarquia.nivel_acceso if self.jerarquia else 0
-
-    def obtener_descripcion_jerarquia(self) -> str:
-        """Obtiene descripción textual de la jerarquía."""
-        if self.jerarquia:
-            return self.jerarquia.obtener_descripcion_nivel()
-        return "Sin Jerarquía"

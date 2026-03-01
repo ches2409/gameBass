@@ -20,8 +20,9 @@ def permission_required(*allowed_levels):
             user_level = current_user.jerarquia.nivel_acceso
 
             # 2. Verificación de Permisos (Lista Exacta + Admin Implícito)
-            # Si el usuario NO es Admin Y su nivel NO está en la lista permitida...
-            if user_level != Permissions.ADMIN and user_level not in allowed_levels:
+            # Si el usuario es MENOR a Admin (90) Y su nivel NO está en la lista permitida...
+            # Esto permite que niveles 90, 95, 100, etc. tengan acceso total.
+            if user_level < Permissions.ADMIN and user_level not in allowed_levels:
                 flash(
                     "ACCESO DENEGADO: Credenciales insuficientes para esta operación.",
                     "danger",

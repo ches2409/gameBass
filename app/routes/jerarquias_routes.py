@@ -31,7 +31,7 @@ def index():
 
 
 @jerarquia_bp.route("/create", methods=["POST"])
-@permission_required(*Profiles.ROOT)
+@permission_required(*Profiles.SISTEMA)
 def create():
     # Obtenemos los datos simples del formulario
     nombre = request.form.get("nombre_de_jerarquia")
@@ -56,7 +56,7 @@ def create():
 @jerarquia_bp.route(
     "/update/<int:id_jerarquia>", methods=["POST"], strict_slashes=False
 )
-@permission_required(*Profiles.ROOT)
+@permission_required(*Profiles.SISTEMA)
 def update(id_jerarquia):
     nombre = request.form.get("nombre_de_jerarquia")
     subtitulo = request.form.get("subtitulo_de_jerarquia")
@@ -79,7 +79,7 @@ def update(id_jerarquia):
 
 
 @jerarquia_bp.route("/delete/<int:id_jerarquia>", strict_slashes=False)
-@permission_required(*Profiles.ROOT)
+@permission_required(*Profiles.SISTEMA)
 def delete(id_jerarquia):
     jerarquias_services.delete_jerarquia(id_jerarquia)
     return redirect(url_for("jerarquia.index"))

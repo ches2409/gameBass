@@ -44,6 +44,11 @@
                             <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed={{ usuario.alias_usuario }}" class="user-avatar" alt="avatar por defecto">
                     {% endif %}
                     </div>
+                    <div class="user-level-container">
+
+                    <h5> <span class="text-2xs" >perfil de acceso</span> {{ Permissions.get_name(usuario.jerarquia.nivel_acceso) }}</h5>
+                    <p class="text-xs" >Nivel de autorizacion: {{ usuario.jerarquia.nivel_acceso }} </p>
+                    </div>
                 {% endmacro %}
 
                 {{ render_data_card(usuario, card_type='usuario',

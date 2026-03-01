@@ -163,13 +163,13 @@ def _calculate_access_level(user: Any) -> int:
     """
     # Si no está autenticado, retorna nivel básico
     if not user.is_authenticated:
-        return Permissions.PARTICIPANTE
+        return Permissions.VISITANTE
 
     try:
         level = user.jerarquia.nivel_acceso
     except (AttributeError, TypeError) as e:
         current_app.logger.exception(f"Error accediendo jerarquía de usuario: {e}")
-        return Permissions.PARTICIPANTE
+        return Permissions.VISITANTE
 
     # Evaluamos de mayor a menor para encontrar el permiso más alto aplicable
     if level >= Permissions.ADMIN:
@@ -180,8 +180,10 @@ def _calculate_access_level(user: Any) -> int:
         return Permissions.MOD_ARENA
     if level >= Permissions.MOD_TACTICO:
         return Permissions.MOD_TACTICO
+    if level >= Permissions.PARTICIPANTE:
+        return Permissions.PARTICIPANTE
 
-    return Permissions.PARTICIPANTE
+    return Permissions.VISITANTE
 
 
 def _mark_active_menu_and_get_page_info(
@@ -268,7 +270,7 @@ def get_dashboard_data(current_path: str) -> Dict[str, Any]:
 
     # 2. Obtener y filtrar menú según usuario
     grouped_menu_data: List[Dict[str, Any]] = []
-    access_value = Permissions.PARTICIPANTE
+    access_value = Permissions.VISITANTE
 
     if current_user.is_authenticated:
         try:
@@ -292,9 +294,10 @@ def get_dashboard_data(current_path: str) -> Dict[str, Any]:
         grouped_menu_data, norm_path
     )
 
+    # 5. Obtener perfil de usuario
     user_perfil = show_actions_crud(current_user)
 
-    # 5. Construir y retornar contexto
+    # 6. Construir y retornar contexto
     context = {
         "metric_cards": config.METRIC_CARDS,
         "menu_data": grouped_menu_data,
