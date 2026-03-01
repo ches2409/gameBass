@@ -1,0 +1,68 @@
+<div class="terminal-container">
+    <!-- Cabecera de la Terminal -->
+    <header class="terminal-header">
+        <div class="header-left">
+            <span class="status-dot"></span>
+            <h4 class="terminal-title">LIVE_FEED_TERMINAL</h4>
+        </div>
+        <div class="header-right">
+            <span class="meta-info">ENTRIES: 128</span>
+            <span class="meta-info">BUFFER: <span class="text-primary">STABLE</span></span>
+        </div>
+    </header>
+
+    <!-- Área de Logs (Scrollable) -->
+    <div class="logs-viewport">
+        <!-- Log Entry: Info -->
+        <div class="log-entry">
+            <span class="timestamp">[17:04:22]</span>
+            <span class="type type-auth">[AUTH]</span>
+            <span class="message">Sesión iniciada: <span class="user-tag">@KaosMaster99</span></span>
+            <span class="log-id">ID_L-82910</span>
+        </div>
+
+        <!-- Log Entry: Warning -->
+        <div class="log-entry">
+            <span class="timestamp">[17:05:01]</span>
+            <span class="type type-system type-warning">[SYSTEM]</span>
+            <span class="message">Latencia inestable detectada en Nodo_Sector_7 (Packet loss: 4.2%)</span>
+            <span class="log-id">ID_L-10221</span>
+        </div>
+
+        <!-- Log Entry: User Action -->
+        <div class="log-entry">
+            <span class="timestamp">[17:08:15]</span>
+            <span class="type type-action">[USER_ACTION]</span>
+            <span class="message">Nuevo registro de activo: <span class="user-tag">@CyberPunk_Zero</span></span>
+            <span class="log-id">ID_L-99214</span>
+        </div>
+
+        <!-- Log Entry: Critical -->
+        <div class="log-entry">
+            <span class="timestamp">[17:10:44]</span>
+            <span class="type type-security type-critical">[SECURITY]</span>
+            <span class="message">INTENTO DE INTRUSIÓN BLOQUEADO: Protocolo Alpha-9 activado.</span>
+            <span class="log-id">ID_L-44902</span>
+        </div>
+
+        <!-- Log Entry: Arena -->
+        <div class="log-entry">
+            <span class="timestamp">[17:12:00]</span>
+            <span class="type type-arena">[ARENA]</span>
+            <span class="message">Torneo 'Cyber Winter Cup' sincronizado con el Mainframe.</span>
+            <span class="log-id">ID_L-33128</span>
+        </div>
+
+        <!-- Simulación de más logs -->
+        <div class="log-entry"><span class="timestamp">[17:15:22]</span><span
+                class="type type-system">[SYSTEM]</span><span class="message">Kernel_Sync: OK</span></div>
+        <div class="log-entry"><span class="timestamp">[17:15:23]</span><span
+                class="type type-system">[SYSTEM]</span><span class="message">Memory_Buffer: 94% Free</span></div>
+    </div>
+
+    <!-- Pie de Terminal (Input) -->
+    <footer class="terminal-footer">
+        <span class="prompt">>_</span>
+        <input type="text" placeholder="SYSTEM_READY_FOR_INPUT..." readonly>
+    </footer>
+</div>

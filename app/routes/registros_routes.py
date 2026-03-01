@@ -4,6 +4,7 @@ from app.services import (
     registros_services,
     torneos_services,
     equipos_services,
+    roles_services,
 )
 from flask_login import current_user
 
@@ -16,6 +17,7 @@ def index():
 
     # 1. Obtener datos para el formulario
     torneos = torneos_services.get_all_torneos()
+    roles = roles_services.get_all_roles()
     equipos = (
         equipos_services.get_all_equipos()
     )  # O filtrar solo los del usuario si prefieres
@@ -26,6 +28,7 @@ def index():
     return render_template(
         "dashboard/registros.html",
         torneos=torneos,
+        roles=roles,
         equipos=equipos,
         logs=recent_logs,  # Pasamos los logs a la plantilla
         **context,
@@ -41,7 +44,7 @@ def create():
 
     # Datos automáticos del usuario actual
     id_usuario = current_user.id_usuario
-    id_rol = 1  # Aquí deberías definir lógica para seleccionar el rol si aplica, o usar uno por defecto
+    id_rol = request.form.get("id_rol")
 
     # Buscamos el torneo para saber el juego (necesario para el modelo Registro)
     torneo = torneos_services.get_torneo_by_id(id_torneo)

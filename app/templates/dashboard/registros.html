@@ -17,8 +17,8 @@
     <div class="nodo-grid">
         <!-- CONTENEDOR PRINCIPAL DE REGISTROS -->
         <div class="registros-view">
-        <!-- GRID DE INTERACCIÓN -->
-        <form action="{{ url_for('registro.create') }}" method="POST" class="registros-form" id="registrationForm">
+            <!-- GRID DE INTERACCIÓN -->
+            <form action="{{ url_for('registro.create') }}" method="POST" class="registros-form" id="registrationForm">
 
             <!-- PANEL IZQUIERDO: SELECCIÓN DE PROTOCOLO -->
             <div class="protocol-panel">
@@ -27,8 +27,12 @@
                         SELECCIÓN_DE_PROTOCOLO
                     </h4>
 
+
+
                     <!-- GRUPO DE RADIOS PARA MODO DE JUEGO -->
                     <div class="protocol-options">
+
+
 
                         <!-- 1. Opción Individual -->
                         <div class="option-wrapper">
@@ -72,11 +76,23 @@
                                 <p class="selector-hint">* Requerido para protocolo grupal {{ advertencia }}</p>
                             </div>
 
-{#                            Crear boton si no pertenece al equipo seleccionado#}
-                            <a href="{{ url_for('equipo.index') }}">unirse a equipo</a>
 
 
                         </div>
+
+                        <div class="option-wrapper">
+                            <label class="selector-label">SELECCIONAR ROL DE JUEGO</label>
+                            <select name="id_rol" class="cyber-select">
+                                <option value="" disabled selected>-- SELECCIONAR ROL --</option>
+                                {% for rol in roles %}
+                                    <option value="{{ rol.id_rol }}">{{ rol.nombre_rol }}</option>
+                                {% endfor %}
+                            </select>
+
+                        </div>
+
+                            <a class="btn-ghost" href="{{ url_for('equipo.index') }}">UNIRSE A UN EQUIPO</a>
+
                     </div>
 
                     <!-- Footer de Selección -->
@@ -105,9 +121,36 @@
                     {% if torneos %}
                         {% for torneo in torneos %}
 
+
+
                             <div class="arena-card-wrapper">
-                                <input type="radio" name="id_torneo" id="torneo_{{ torneo.id_torneo }}"
-                                       value="{{ torneo.id_torneo }}" class="sr-only" required>
+
+
+                                <input type="radio" name="id_torneo" id="torneo_{{ torneo.id_torneo }}" value="{{ torneo.id_torneo }}" class="sr-only" required>
+                                <label for="torneo_{{ torneo.id_torneo }}" class="arena-card">
+                                        <div class="card-header">
+                                            <span class="id-tag text-xl" style="color: {{ torneo.juego.color_juego }};">{{ torneo.juego.nombre_juego | upper }}</span>
+                                            <div class="card-badges">
+                                                <span class="badge-count">
+                                                  {{ torneo.registros|length }}/{{ torneo.max_competidores }}
+                                               </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-info">
+                                            <h3 class="rank-name">{{ torneo.nombre_torneo }}</h3>
+                                            <p class="rank-subtitle">Recompensa: {{ torneo.recompensa_torneo }}</p>
+                                        </div>
+
+                                        <div class="selection-indicator">
+                                            <span class="material-symbols-outlined">check_circle</span>
+                                        </div>
+
+                                </label>
+
+
+{#
+                                <input type="radio" name="id_torneo" id="torneo_{{ torneo.id_torneo }}" value="{{ torneo.id_torneo }}" class="sr-only" required>
 
                                 <label for="torneo_{{ torneo.id_torneo }}" class="arena-card">
 
@@ -136,6 +179,8 @@
                                         <span class="material-symbols-outlined">check_circle</span>
                                     </div>
                                 </label>
+                            #}
+
                             </div>
                         {% endfor %}
                     {% else %}
@@ -145,46 +190,11 @@
                     {% endif %}
                 </div>
 
-                {# --- SISTEMA DE NOTIFICACIONES FLASH --- #}
-                {% include 'components/flash_messages.html' %}
 
-                <!-- LOGS RECIENTES -->
-                <div class="system-logs">
-                    <div class="logs-bg"></div>
-                    <h4 class="logs-title">
-                        ENLACES_RECIENTES_EN_LA_CADENA
-                    </h4>
-                    <div class="logs-list">
-                        <div class="conection-now log-item">
-                            <div class="log-content">
-                                <span class="log-user">>> {{ current_user.alias_usuario }}</span>
-                                <span class="log-action">conectado</span>
-                                <span class="log-target">ACCES_LEVEL {{ current_user.jerarquia.nivel_acceso }}</span>
-
-                            </div>
-                        </div>
-
-                        {# 2. Bucle de Logs Históricos (Desde la Base de Datos) #}
-                        {% for log in logs %}
-                            <div class="log-item">
-                                <div class="log-content">
-                                    <span class="log-user">>> {{ log.usuario.alias_usuario }}</span>
-                                    <span class="log-action">Enlazado_A</span>
-                                    <span class="log-target">{{ log.torneo.nombre_torneo | upper }}</span>
-                                </div>
-                                {% if log.equipo.id_equipo%}
-                                    <span class="log-action"><<< TEAM >>></span>
-                                    <span class="log-target">{{ log.equipo.nombre_equipo | upper }}</span>
-                                {% endif %}
-                                <span class="log-time">{{ log.fecha_registro | formato_hora_local }}</span>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
 
             </div>
         </form>
-    </div>
+        </div>
 
     </div>
 
