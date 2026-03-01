@@ -1,0 +1,183 @@
+:root {
+    --bg-terminal: rgba(0, 0, 0, 0.85);
+    --primary: #A3FF00;
+    --secondary: #D500F9;
+    --blue: #00E5FF;
+    --yellow: #FFD600;
+    --red: #FF3D00;
+    --text-dim: #4b5563;
+    --border: rgba(255, 255, 255, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #020305;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* Contenedor de la Terminal */
+.terminal-container {
+    width: 100%;
+    max-width: 900px;
+    height: 500px;
+    background-color: var(--bg-terminal);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    /* Recorte en la esquina superior izquierda */
+    clip-path: polygon(30px 0, 100% 0, 100% 100%, 0 100%, 0 30px);
+    position: relative;
+}
+
+/* Cabecera */
+.terminal-header {
+    background-color: #0a0a0a;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--primary);
+    animation: pulse 1.5s infinite;
+}
+
+.terminal-title {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    color: var(--primary);
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.meta-info {
+    font-family: 'Fira Code', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    margin-left: 15px;
+    text-transform: uppercase;
+}
+
+.text-primary { color: var(--primary); }
+
+/* Área de Logs */
+.logs-viewport {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    font-family: 'Fira Code', monospace;
+    font-size: 11px;
+    line-height: 1.6;
+    background: linear-gradient(to bottom, transparent, rgba(163, 255, 0, 0.02));
+}
+
+/* Estilo de cada entrada */
+.log-entry {
+    display: flex;
+    gap: 12px;
+    padding: 4px 8px;
+    border-radius: 2px;
+    transition: background 0.2s;
+    cursor: default;
+}
+
+.log-entry:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.timestamp { color: var(--text-dim); flex-shrink: 0; }
+
+.type { font-weight: 700; flex-shrink: 0; }
+.type-auth { color: var(--blue); }
+.type-system { color: var(--blue); }
+.type-action { color: var(--primary); }
+.type-security { color: var(--red); }
+.type-arena { color: var(--secondary); }
+.type-warning { color: var(--yellow); }
+.type-critical { color: var(--red); text-decoration: underline; }
+
+.message { color: #e5e7eb; flex: 1; }
+
+.user-tag {
+    color: var(--primary);
+    opacity: 0.8;
+    font-style: italic;
+}
+
+.log-id {
+    color: var(--text-dim);
+    font-size: 9px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.log-entry:hover .log-id {
+    opacity: 1;
+}
+
+/* Footer / Input */
+.terminal-footer {
+    background-color: #0a0a0a;
+    padding: 10px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.prompt {
+    color: var(--primary);
+    font-family: 'Fira Code', monospace;
+    font-weight: 700;
+    animation: blink 1s infinite;
+}
+
+.terminal-footer input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-dim);
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    width: 100%;
+}
+
+/* Animaciones */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Scrollbar Personalizada */
+.logs-viewport::-webkit-scrollbar { width: 4px; }
+.logs-viewport::-webkit-scrollbar-track { background: transparent; }
+.logs-viewport::-webkit-scrollbar-thumb { background: var(--border); }
+.logs-viewport::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }

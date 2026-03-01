@@ -28,7 +28,7 @@
 
         <div class="actions">
 
-        {% if alert_finish.user_has_access %}
+        {% if alert_finish.user_has_access and alert_finish.url_info!="/registros"%}
             <div class="button-ok btn-glow">
                 <a href="#" onclick="toggleModal('{{ modal_target }}')">
                     <i></i><i></i>
