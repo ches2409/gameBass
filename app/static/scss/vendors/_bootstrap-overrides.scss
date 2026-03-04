@@ -1,0 +1,378 @@
+@use "sass:color";
+@use "../base/variables";
+
+// ==========================================================================
+// Vendors - Bootstrap Overrides
+// ==========================================================================
+
+// Bootstrap variable overrides
+// These should be defined before importing Bootstrap
+// Using SASS variables instead of CSS custom properties for compatibility
+
+// Colors (using SASS variables from base/variables)
+$primary: variables.$primary-blue;
+$secondary: variables.$secondary-bg;
+$success: variables.$accent-green;
+$info: variables.$accent-blue;
+$warning: variables.$accent-yellow;
+$danger: variables.$accent-pink;
+$light: variables.$light-bg;
+$dark: variables.$dark-bg;
+
+// Typography
+$font-family-base: variables.$font-body;
+$font-size-base: 1rem;
+$line-height-base: 1.6;
+
+// Spacing
+$spacer: 1rem;
+
+// Border radius
+variables.$border-radius: 0.375rem;
+$border-radius-sm: 0.25rem;
+$border-radius-lg: 0.5rem;
+
+// Shadows
+$box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+$box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+$box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+
+// Bootstrap component customizations
+// These override Bootstrap's default styles
+
+// Buttons
+.btn {
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
+  border: none;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  // Gaming theme button variants
+  &.btn-gaming {
+    background: linear-gradient(135deg, variables.$accent-blue, color.adjust(variables.$accent-blue, $lightness: 10%));
+    color: variables.$white;
+    
+    &:hover {
+      background: linear-gradient(135deg, color.adjust(variables.$accent-blue, $lightness: -5%), variables.$accent-blue);
+    }
+  }
+  
+  &.btn-neon {
+    background: transparent;
+    border: 2px solid variables.$accent-blue;
+    color: variables.$accent-blue;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: variables.$accent-blue;
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+    
+    &:hover {
+      color: variables.$white;
+      
+      &::before {
+        left: 0;
+      }
+    }
+  }
+}
+
+// Cards
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-header {
+    background: variables.$primary-blue;
+    color: variables.$white;
+    border-bottom: none;
+    font-weight: bold;
+    border-radius: 12px 12px 0 0 !important;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  // Gaming theme card variants
+  &.card-gaming {
+    background: linear-gradient(135deg, variables.$dark-bg, color.adjust(variables.$dark-bg, $lightness: 5%));
+    color: variables.$white;
+    border: 1px solid variables.$accent-blue;
+    
+    .card-title {
+      color: variables.$accent-blue;
+    }
+  }
+}
+
+// Forms
+.form-control {
+  border-radius: 8px;
+  border: 2px solid #dee2e6;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+  
+  &:focus {
+    border-color: variables.$primary-blue;
+    box-shadow: 0 0 0 0.2rem rgba(variables.$primary-blue, 0.25);
+  }
+  
+  // Gaming theme form controls
+  &.form-control-gaming {
+    background: variables.$dark-bg;
+    border-color: variables.$accent-blue;
+    color: variables.$white;
+    
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    &:focus {
+      background: variables.$dark-bg;
+      border-color: variables.$accent-blue;
+      color: variables.$white;
+      box-shadow: 0 0 0 0.2rem rgba(variables.$accent-blue, 0.25);
+    }
+  }
+}
+
+.form-label {
+  font-weight: 600;
+  color: variables.$text-main;
+  margin-bottom: 0.5rem;
+}
+
+// Navigation
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  .navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  
+  .navbar-nav {
+    .nav-link {
+      font-weight: 500;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      margin: 0 0.25rem;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: rgba(variables.$primary-blue, 0.1);
+        color: variables.$primary-blue;
+      }
+      
+      &.active {
+        background: variables.$primary-blue;
+        color: variables.$white !important;
+      }
+    }
+  }
+}
+
+// Tables
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+  thead {
+    th {
+      background: variables.$primary-blue;
+      color: variables.$white;
+      border: none;
+      font-weight: bold;
+      padding: 1rem;
+    }
+  }
+  
+  tbody {
+    tr {
+      transition: background-color 0.2s ease;
+      
+      &:hover {
+        background: variables.$light-bg;
+      }
+      
+      td {
+        padding: 1rem;
+        border-color: #dee2e6;
+      }
+    }
+  }
+  
+  // Gaming theme table
+  &.table-gaming {
+    background: variables.$dark-bg;
+    color: variables.$white;
+    
+    thead th {
+      background: variables.$accent-blue;
+    }
+    
+    tbody tr {
+      &:hover {
+        background: color.adjust(variables.$dark-bg, $lightness: 5%);
+      }
+      
+      td {
+        border-color: rgba(variables.$accent-blue, 0.3);
+      }
+    }
+  }
+}
+
+// Alerts
+.alert {
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid;
+  
+  &.alert-primary {
+    border-left-color: variables.$primary-blue;
+  }
+  
+  &.alert-success {
+    border-left-color: variables.$accent-green;
+  }
+  
+  &.alert-warning {
+    border-left-color: variables.$accent-yellow;
+  }
+  
+  &.alert-danger {
+    border-left-color: variables.$accent-pink;
+  }
+  
+  &.alert-info {
+    border-left-color: variables.$accent-blue;
+  }
+}
+
+// Modals
+.modal {
+  .modal-content {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .modal-header {
+    background: variables.$primary-blue;
+    color: variables.$white;
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+    
+    .modal-title {
+      font-weight: bold;
+    }
+    
+    .btn-close {
+      filter: invert(1);
+    }
+  }
+  
+  .modal-body {
+    padding: 2rem;
+  }
+  
+  .modal-footer {
+    border-top: 1px solid #dee2e6;
+    padding: 1rem 2rem;
+  }
+}
+
+// Pagination
+.pagination {
+  .page-link {
+    border: none;
+    color: variables.$text-main;
+    padding: 0.75rem 1rem;
+    margin: 0 0.25rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: variables.$primary-blue;
+      color: variables.$white;
+      transform: translateY(-2px);
+    }
+  }
+  
+  .page-item {
+    &.active .page-link {
+      background: variables.$primary-blue;
+      border-color: variables.$primary-blue;
+    }
+    
+    &.disabled .page-link {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Badges
+.badge {
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  
+  &.badge-gaming {
+    background: variables.$accent-blue;
+    color: variables.$white;
+  }
+}
+
+// Progress bars
+.progress {
+  height: 1rem;
+  border-radius: 8px;
+  background: variables.$light-bg;
+  
+  .progress-bar {
+    border-radius: 8px;
+    transition: width 0.6s ease;
+  }
+}
+
+// Tooltips
+.tooltip {
+  .tooltip-inner {
+    background: variables.$dark-bg;
+    color: variables.$white;
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+}

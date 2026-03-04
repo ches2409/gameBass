@@ -1,0 +1,118 @@
+{% extends 'layout.html' %}
+
+{% block title %}Acceso al Sistema | Arkadex{% endblock %}
+
+{% block content %}
+<div class="login-overlay">
+    <div class="login-container">
+
+        <!-- Decoración -->
+        <div class="scanlines"></div>
+
+        <!-- Brackets de las esquinas -->
+        <div class="corner top-left"></div>
+        <div class="corner top-right"></div>
+        <div class="corner bottom-left"></div>
+        <div class="corner bottom-right"></div>
+
+        <div class="login-content">
+
+            <!-- Sidebar Izquierdo -->
+            <aside class="sidebar">
+                <div class="brand">
+                    <div class="logo-box">
+                        <span>A</span>
+                    </div>
+                    <div class="brand-text">
+                        <h1>ARENA</h1>
+                        <h1 class="secondary-color">UPLOADER</h1>
+                    </div>
+                </div>
+
+                <p class="system-version">SYSTEM_VERSION_V4.2.0_STABLE</p>
+
+                <div class="quote-box">
+                    <span class="material-symbols-outlined quote-icon">block</span>
+                    <p>"Muchos intentan entrar, pero pocos soportan la presión del enlace. Tu código será puesto a prueba, tu voluntad será despojada de adornos."</p>
+                    <span class="quote-author">>> ARENA_ELDER_PROTOCOL</span>
+                </div>
+
+                <div class="connection-status">
+                    <div class="status-label">
+                        <span class="material-symbols-outlined">visibility</span>
+                        <span>LIVE_CONNECTION: ENCRYPTED</span>
+                    </div>
+                    <div class="pulse-bars">
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Área Principal Derecha -->
+            <main class="main-interface">
+                <header class="interface-header">
+                    <h3 class="glitch-text" data-text="AUTHORIZE_YOUR_CODE">AUTHORIZE_YOUR_CODE</h3>
+                    <p class="header-desc">NO HAY VUELTA ATRÁS. UNA VEZ QUE TU IDENTIDAD SE SINCRONICE CON EL NÚCLEO, TE CONVIERTES EN PROPIEDAD DE LA ARENA.</p>
+                </header>
+
+                <div class="form-section">
+
+                    <div class="input-grid">
+
+                        <form class="injection-form" method="POST" action="{{ url_for('auth.login') }}">
+
+                            <!-- Mensajes Flash (Errores) -->
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                                {% if messages %}
+                                    {% for category, message in messages %}
+                                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+
+                            <div class="input-group">
+                                <label>CORREO_ENCRIPTADO</label>
+                                <div class="input-wrapper">
+                                    <span class="label-icon">alternate_email</span>
+                                    <input type="email" name="email" placeholder="usuario@arkadex.net" required autofocus>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label>CLAVE_DE_ACCESO</label>
+                                <div class="input-wrapper">
+                                    <span class="label-icon">password</span>
+                                    <input type="password" name="password" placeholder="••••••••" required>
+                                </div>
+                            </div>
+
+                            <div class="actions">
+                                <button type="submit" class="btn-submit" style="width: 100%;">
+                                    <span class="btn-glow"></span>
+                                    INICIAR_ENLACE
+                                </button>
+                                <button class="btn-ghost">ABORT_AUTHORIZATION</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                <!-- Footer de la interfaz -->
+                <footer class="interface-footer">
+                    <div class="footer-item">
+                        <span class="dot-pulse"></span>
+                        <span>NEURAL_AUTH_PORT: <span class="text-white">8291_ESTABLISHED</span></span>
+                    </div>
+                    <div class="footer-item">
+                        <span>LATENCY: <span class="text-white">0.002MS</span></span>
+                        <span>SECURITY_LEVEL: <span class="text-white text-underline">ALPHA</span></span>
+                    </div>
+                </footer>
+            </main>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

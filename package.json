@@ -1,0 +1,31 @@
+{
+  "name": "gamebass",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install-sass": "npm install sass --save-dev",
+    "build-css": "sass app/static/scss/style.scss app/static/css/style.css --source-map",
+    "watch-css": "sass --watch app/static/scss/style.scss:app/static/css/style.css --source-map",
+    "build-css-prod": "sass app/static/scss/style.scss app/static/css/style.css --style compressed --no-source-map",
+    "check-sass": "sass --check app/static/scss/style.scss",
+    "clean": "rm -rf app/static/css/style.css app/static/css/style.css.map",
+    "dev": "npm run watch-css",
+    "build": "npm run build-css-prod",
+    "lint-scss": "sass-lint -v -q",
+    "format-scss": "prettier --write \"static/**/*.scss\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ches2409/gameBass.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ches2409/gameBass/issues"
+  },
+  "homepage": "https://github.com/ches2409/gameBass#readme"
+}

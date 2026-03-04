@@ -1,0 +1,112 @@
+# ============================================
+#  .gitignore para GameBass (Flask App)
+# ============================================
+
+# === ENTORNO VIRTUAL ===
+.venv/
+venv/
+env/
+ENV/
+.Python
+
+# === CACHÉ Y COMPILADOS DE PYTHON ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# === CONFIGURACIÓN SENSIBLE ===
+.env
+.env.local
+.env.*.local
+config.secret.py
+instance/
+config/local.py
+
+# === IDE Y EDITORES ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.AppleDouble
+.LSOverride
+*.sublime-project
+*.sublime-workspace
+.project
+.pydevproject
+.settings/
+
+# === LOGS ===
+*.log
+logs/
+log/
+
+# === BASE DE DATOS ===
+*.db
+*.sqlite
+*.sqlite3
+database/
+database.db
+instance/
+
+# === ARCHIVOS TEMPORALES ===
+tmp/
+temp/
+*.tmp
+.tmp/
+
+# === ARCHIVOS DEL SISTEMA ===
+.DS_Store
+Thumbs.db
+*.bak
+*.swp
+
+# === TESTING ===
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# === NODE MODULES (si hay webpack o build tools) ===
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# === MIGRATIONS (si es necesario, descomentar) ===
+migrations/versions/*.py
+
+# === ARCHIVOS ESPECÍFICOS DEL PROYECTO ===
+*.pem
+secrets.json
+config.json
+
+# === GUÍAS DE ESTUDIO Y DOCUMENTACIÓN PERSONAL ===
+guias_estudio/
+guias_pedagogica/
+guias_refactorizacion/
+documentos_personales/
+notas_desarrollo/
+*.md.bak
+.github/
