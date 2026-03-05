@@ -18,25 +18,25 @@
     {% include 'components/header-section.html' %}
 
     <!-- Contenedor para nuestras tarjetas, usando un grid para ordenarlas -->
-    <div class="nodo-grid">
+    <div class="data-grid">
         {% if juegos %}
             {% for juego in juegos %}
                 {# Definimos las macros de contenido DENTRO del bucle para que tengan acceso a la variable 'juego'. #}
                 {% macro card_header_content() %}
-                    <div class="engine-icon"><span class="material-symbols-outlined">sports_esports</span></div>
+                    <div class="data-card__icon"><span class="material-symbols-outlined">sports_esports</span></div>
                 {% endmacro %}
 
                 {% macro card_body_content() %}
-                    <div class="tech-specs">
-                        <div class="spec-row"><span class="label">ENGINE</span><span class="value">{{ juego.motor_juego | upper }}</span></div>
-                        <div class="spec-row"><span class="label">STATUS</span><span class="value status-{{ juego.estado_juego.name | lower }}">{{ juego.estado_juego.value | upper }}</span></div>
+                    <div class="data-card__metadata">
+                        <div class="data-card__metadata-row"><span class="data-card__metadata-label">ENGINE</span><span class="data-card__metadata-value">{{ juego.motor_juego | upper }}</span></div>
+                        <div class="data-card__metadata-row"><span class="data-card__metadata-label">STATUS</span><span class="data-card__metadata-value is-{{ juego.estado_juego.name | lower }}">{{ juego.estado_juego.value | upper }}</span></div>
                     </div>
                 {% endmacro %}
 
                 {{ render_data_card(juego, card_type='juego',
                     item_id=juego.id_juego,
                     item_name=juego.nombre_juego,
-                    neon_color=juego.color_juego,
+                    color=juego.color_juego,
                     title=juego.nombre_juego | upper,
                     profile='ARENA',
                     subtitle=juego.genero_juego | upper,

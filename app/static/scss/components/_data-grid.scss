@@ -1,0 +1,27 @@
+// ═══════════════════════════════════════════════════════════════════════════
+// DATA-GRID | Componente (BEM) - Data Grid
+// ═══════════════════════════════════════════════════════════════════════════
+// Block: data-grid
+// Descripción: Estilo del contenedor principal de las tarjetas 
+// ═══════════════════════════════════════════════════════════════════════════
+@use "../base/variables";
+@use "../base/functions";
+@use "../base/mixins";
+
+// Inicio del componente
+.data-grid {
+    //background-color: orangered;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(max(250px, 22%), 1fr));
+    gap: 20px;
+    margin: 0 auto;
+    justify-content: center;
+    // Modifier: medium - contenedor para tres elementos maximo
+    &--medium {
+        grid-template-columns: repeat(auto-fit, minmax(max(300px, 30%), 1fr));
+    }
+    // Modifier: small - contenedor para maximo 5 elementos
+    &--small {
+        grid-template-columns: repeat(auto-fit, minmax(max(200px, 16%), 1fr));
+    }
+}

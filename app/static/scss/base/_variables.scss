@@ -59,6 +59,20 @@ $colors: (
         'alert':$alert
 );
 
+// colores personalizados por proyecto
+$archetype-neon-colors:(
+    tank  : #A3FF00,
+    stealth     : #D500F9,
+    architect : #00E5FF,
+    berserk : #FF3D00,
+    oracle    : #FFD600,
+    disrupt : #2979FF,
+    medic: #00FFC8,
+    warp: #9D00FF,
+    stasis: #FF0055,
+    absorb: #FF9100,
+);
+
 // Tipografías
 $font-primary: 'Orbitron', 'Arial', monospace;
 $font-secondary: 'Rajdhani', sans-serif;

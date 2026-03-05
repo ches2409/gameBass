@@ -41,22 +41,32 @@
        )
     }}
 #}
-{% macro render_data_card(item, card_type, edit_data_attributes, neon_color, item_id, item_name, title, profile=None, subtitle=None, item_descripcion=None, card_header_content=None, card_info_section=None, card_body_content=None, card_footer_content=None) %}
+{% macro render_data_card(item, card_type, edit_data_attributes, color, item_id, item_name, title=None, profile=None, subtitle=None, item_descripcion=None, card_optional_content=None, card_header_content=None, card_info_section=None, card_body_content=None, card_footer_content=None) %}
 
 {% set url_kwargs = {('id_'~card_type):item_id}%}
 {% set delete_url = url_for(card_type ~ '.delete', **url_kwargs)%}
 
-<div class="nodo-card {{ neon_color if card_type == 'rol' else '' }}"
+<div class="data-card {{ 'data-card--'~color if card_type == 'rol' else '' }}"
     {% if card_type != 'rol' %}
-        style="--neon: {{ neon_color | default('#A3FF00') }};"
+        style="--neon: {{ color | default('#A3FF00') }};"
     {% endif %}>
+
+    <!-- =================================== -->
+    <!--         CARD-OPTIONAL-SECTION       -->
+    <!-- =================================== -->
+
+    {% if card_optional_content %}
+    <div class="data-card__optional">
+        {{ card_optional_content() }}
+    </div>
+    {% endif %}
 
     <!-- =================================== -->
     <!--          CARD-HEADER-SECTION        -->
     <!-- =================================== -->
     <!-- Slot para la cabecera -->
     {% if card_header_content %}
-    <div class="card-header">
+    <div class="data-card__header">
         {{ card_header_content() }}
     </div>
     {% endif %}
@@ -64,15 +74,29 @@
     <!-- =================================== -->
     <!--           CARD-INFO-SECTION         -->
     <!-- =================================== -->
-    <div class="card-info">
-        <h3 class="rank-name">{{ title | upper }}</h3>
+{#
+
+    <div class="data-card__info">
+        <h3 class="data-card__title">{{ title | upper }}</h3>
     {% if subtitle %}
-        <p class="rank-subtitle">{{ subtitle | upper }}</p>
+        <p class="data-card__subtitle">{{ subtitle | upper }}</p>
     {% endif %}
     {% if card_info_section %}
     	{{ card_info_section() }}
     {% endif %}
     </div>
+#}
+
+
+    {% if card_info_section %}
+    <div class="data-card__info">
+        {% if title or subtitle %}
+            <h3 class="data-card__title">{{ title | upper }}</h3>
+            <p class="data-card__subtitle">{{ subtitle | upper }}</p>
+        {% endif %}
+        {{ card_info_section() }}
+    </div>
+    {% endif %}
 
     <!-- =================================== -->
     <!--           CARD-BODY-SECTION         -->
@@ -80,7 +104,7 @@
 
     <!-- Cuerpo principal de la tarjeta -->
     {% if card_body_content %}
-    <div class="card-body">
+    <div class="data-card__body">
         <!-- Slot para el contenido del cuerpo -->
         {{ card_body_content() }}
     </div>
@@ -92,7 +116,7 @@
 
     <!-- Slot para el pie de la tarjeta (opcional) -->
     {% if card_footer_content %}
-    <div class="card-footer">
+    <div class="data-card__footer">
         {{ card_footer_content() }}
     </div>
     {% endif %}
@@ -103,15 +127,15 @@
 {# Verificamos si se definió un perfil y si el nivel numérico del usuario (access_value) está en la lista permitida de ese perfil #}
 {% if profile and access_value in (Profiles | attr(profile)) %}
 
-    <div class="action-group">
-        <button class="action-btn edit-btn" onclick="openUpdateModal(this)"
+    <div class="data-card__actions">
+        <button class="data-card__action-btn data-card__action-btn--edit" onclick="openUpdateModal(this)"
             {% for key, value in edit_data_attributes.items() %}
                 data-{{ key }}="{{ value }}"
             {% endfor %}
             title="EDIT_NODE">
             <span class="material-symbols-outlined">edit</span>
         </button>
-        <button class="action-btn delete-btn" title="PURGE_NODE" onclick="openDeleteModal('{{ delete_url }}', '{{ item_name | upper }}')">
+        <button class="data-card__action-btn data-card__action-btn--delete" title="PURGE_NODE" onclick="openDeleteModal('{{ delete_url }}', '{{ item_name | upper }}')">
             <span class="material-symbols-outlined">delete</span>
         </button>
     </div>

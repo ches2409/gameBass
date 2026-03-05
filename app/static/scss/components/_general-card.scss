@@ -1,7 +1,7 @@
 @use "../base/variables";
 @use "../base/mixins";
 @use "../base/functions";
-
+@use "sass:map";
 
 .nodo-grid {
   //background-color: orangered;
@@ -40,16 +40,11 @@
 }
 
 /* Colores por Arquetipo */
-.frontLineDefense  { --neon: #A3FF00; }
-.neuralStealth     { --neon: #D500F9; }
-.environmentMastery { --neon: #00E5FF; }
-.kineticOverload { --neon: #FF3D00; }
-.dataForesight    { --neon: #FFD600; }
-.systemDisruption { --neon: #2979FF; }
-.neuralRestoration{ --neon: #00FFC8; }
-.spatialDislocation{ --neon: #9D00FF; }
-.temporalLagInfliction{ --neon: #FF0055; }
-.kineticAbsorption{ --neon: #FF9100; }
+@each $name, $color in variables.$archetype-neon-colors{
+  .data-card--#{$name} {
+    --neon: #{$color};
+  }
+}
 
 
 /* Hover: Activación de Neón */
@@ -83,14 +78,7 @@
   box-shadow: 0 0 10px var(--neon);
 }
 
-/* Icono central */
-.icon-box {
-  //font-size: 40px;
-  //margin-bottom: 15px;
-  //filter: drop-shadow(0 0 10px var(--neon));
-  //opacity: 0.8;
-  //transition: opacity 0.3s;
-}
+
 
 .role-card:hover .icon-box {
   opacity: 1;
@@ -331,7 +319,7 @@
   }
   
 }
-.status-tournament{
+.status-tournament    {
   //background-color: orangered;
   width: 100%;
   @include mixins.center-flex($justify:flex-end);

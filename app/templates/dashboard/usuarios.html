@@ -18,10 +18,11 @@
     {% include 'components/header-section.html' %}
 
     <!-- Contenedor para nuestras tarjetas, usando un grid para ordenarlas -->
-    <div class="nodo-grid">
+    <div class="data-grid data-grid--medium">
         {% if usuarios %}
             {% for usuario in usuarios %}
                 {# Definimos las macros de contenido DENTRO del bucle para que tengan acceso a la variable 'usuario'. #}
+{#
 
                 {% macro card_header_content() %}
                     <div class="engine-info text-2xs text-soft">
@@ -29,35 +30,50 @@
                     </div>
 
                 {% endmacro %}
+#}
 
-                {% macro card_body_content() %}
-                    <div class="user-avatar-container">
+                {% macro card_optional_content() %}
+
+                    <div class="data-card__avatar">
                     {% if usuario.foto_usuario %}
                     	{# Si el campo 'foto_usuario' empieza con 'http' es una URL completa. #}
                         {% if usuario.foto_usuario.startswith('http') %}
-                            <img src="{{ usuario.foto_usuario }}" alt="avatar de {{ usuario.alias_usuario }}" class="user-avatar">
+                            <img src="{{ usuario.foto_usuario }}" alt="avatar de {{ usuario.alias_usuario }}" class="data-card__avatar-user">
                         {% else %}
-                            <img src="{{ url_for('static', filename='uploads/avatars/' ~ usuario.foto_usuario) }}" alt="avatar de {{ usuario.alias_usuario }}" class="user-avatar">
+                            <img src="{{ url_for('static', filename='uploads/avatars/' ~ usuario.foto_usuario) }}" alt="avatar de {{ usuario.alias_usuario }}" class="data-card__avatar-user">
                         {% endif %}
                         {% else %}
                             {# Si no hay foto, se muestra un avatar generico por defecto. #}
-                            <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed={{ usuario.alias_usuario }}" class="user-avatar" alt="avatar por defecto">
+                            <img src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed={{ usuario.alias_usuario }}" class="data-card__avatar-user" alt="avatar por defecto">
                     {% endif %}
-                    </div>
-                    <div class="user-level-container">
 
-                    <h5> <span class="text-2xs" >perfil de acceso</span> {{ Permissions.get_name(usuario.jerarquia.nivel_acceso) }}</h5>
-                    <p class="text-xs">Nivel de autorizacion: {{ usuario.jerarquia.nivel_acceso }} </p>
+                    </div>
+
+                    <div class="data-card__details">
+
+                        <div class="data-card__profile">
+                            <h5 class="data-card__profile-name">{{ usuario.alias_usuario | upper }}</h5>
+                            <span class="data-card__profile-email">{{ usuario.email_usuario }}</span>
+                        </div>
+
+                        <div class="data-card__access">
+                            <div class="data-card__access-section">
+                                <span class="data-card__access-title">perfil de acceso: </span>
+                                <span class="data-card__access-value">{{ Permissions.get_name(usuario.jerarquia.nivel_acceso) }}</span>
+                            </div>
+                            <p class="data-card__access-level">Nivel de autorizacion: {{ usuario.jerarquia.nivel_acceso }} </p>
+                        </div>
+
+
+
                     </div>
                 {% endmacro %}
 
                 {{ render_data_card(usuario, card_type='usuario',
                     item_id=usuario.id_usuario,
                     item_name=usuario.alias_usuario,
-                    neon_color=usuario.jerarquia.color_hex,
-                    title=usuario.alias_usuario | upper,
+                    color=usuario.jerarquia.color_hex,
                     profile='SISTEMA',
-                    subtitle=usuario.email_usuario | upper,
                     edit_data_attributes={
                         'id': usuario.id_usuario,
                         'nombre': usuario.alias_usuario,
@@ -65,8 +81,7 @@
                         'jerarquia': usuario.id_jerarquia,
                         'foto': usuario.foto_usuario,
                         },
-                    card_header_content=card_header_content,
-                    card_body_content=card_body_content
+                    card_optional_content=card_optional_content
                     )
                 }}
             {% endfor %}

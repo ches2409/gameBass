@@ -19,7 +19,7 @@
 
     <!-- Contenedor para tarjetas, usando un grid para ordenarlas -->
 
-    <div class="nodo-grid">
+    <div class="data-grid">
 
         {% if roles %}
         	{% for rol in roles %}
@@ -32,13 +32,12 @@
                 {% endmacro %}
 
                 {% macro card_info_section() %}
-                    <div class="stat-bar"><div class="fill" style="width: 100%;"></div></div>
-                    <p class="rank-description">{{ rol.descripcion_rol }}</p>
+                    <div class="data-card__stat-bar"><div class="data-card__stat-bar--fill" style="width: 100%;"></div></div>
+                    <p class="data-card__description">{{ rol.descripcion_rol }}</p>
                 {% endmacro %}
 
                 {% macro card_body_content() %}
 
-{#                    <p class="rank-description">{{ rol.descripcion_rol | truncate(120) }}</p>#}
 
                 {% endmacro %}
 
@@ -46,7 +45,7 @@
                         item_id = rol.id_rol,
                         item_name = rol.nombre_rol,
                         item_descripcion = rol.descripcion_rol,
-                        neon_color = rol.especialidad_rol.color,
+                        color = rol.especialidad_rol.color,
                         title = rol.nombre_rol | upper,
                         profile='SISTEMA',
                         subtitle = rol.especialidad_rol.titulo | upper,

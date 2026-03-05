@@ -17,7 +17,7 @@
     {% include 'components/header-section.html' %}
 
     <!-- Contenedor para nuestras tarjetas, usando un grid para ordenarlas -->
-    <div class="nodo-grid">
+    <div class="data-grid">
         {% if jerarquias %}
             {% for jerarquia in jerarquias %}
 
@@ -26,18 +26,18 @@
                 {% endmacro %}
 
                 {% macro card_body_content() %}
-                    <p class="rank-description">{{ jerarquia.descripcion_jerarquia | truncate(120) }}</p>
-                    <div class="item-tags">{% for protocolo in jerarquia.protocolos %}<span class="tag">{{ protocolo.codigo_protocolo.codigo }}</span>{% else %}<span class="tag tag-empty">SIN_PROTOCOLOS</span>{% endfor %}</div>
+                    <p class="data-card__description">{{ jerarquia.descripcion_jerarquia | truncate(120) }}</p>
+                    <div class="data-card__tags">{% for protocolo in jerarquia.protocolos %}<span class="data-card__item-tag">{{ protocolo.codigo_protocolo.codigo }}</span>{% else %}<span class="tag tag-empty">SIN_PROTOCOLOS</span>{% endfor %}</div>
                 {% endmacro %}
 
                 {% macro card_footer_content() %}
-                    <div class="stat-bar" style="--auth-weight: {{ jerarquia.nivel_acceso }}%;"><div class="fill"></div></div><span class="footer-label">AUTH_WEIGHT</span>
+                    <div class="data-card__stat-bar" style="--auth-weight: {{ jerarquia.nivel_acceso }}%;"><div class="data-card__stat-bar--fill"></div></div><span class="data-card__footer-label">AUTH_WEIGHT</span>
                 {% endmacro %}
 
                 {{ render_data_card(jerarquia, card_type='jerarquia',
                     item_id=jerarquia.id_jerarquia,
                     item_name=jerarquia.nombre_jerarquia,
-                    neon_color=jerarquia.color_hex,
+                    color=jerarquia.color_hex,
                     title=jerarquia.nombre_jerarquia,
                     subtitle=jerarquia.subtitulo_jerarquia,
                     profile='SISTEMA',
