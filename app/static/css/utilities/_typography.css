@@ -1,0 +1,399 @@
+/* ========================================================================== 
+   UTILITIES - Typography Helpers (MARCSS v4 - CSS Nativo)
+   ========================================================================== 
+   
+   Migrado desde: app/static/scss_v3_backup/utilities/_typography.scss
+   Fecha: 7 de marzo de 2026
+   
+   Cambios principales vs v3:
+   - ✅ Migración a CSS nativo con custom properties de tipografía
+   - ✅ Utilidades de truncado y line-clamp sin mixins Sass
+   - ✅ Se mantienen variantes responsive con prefijos md\:, lg\:, xl\:
+   
+   ========================================================================== */
+
+@layer utilities {
+
+  /* ====================================================================
+     FONT FAMILY
+     ==================================================================== */
+
+  .font-primary { font-family: var(--font-primary); }
+  .font-secondary { font-family: var(--font-secondary); }
+  .font-body { font-family: var(--font-body); }
+  .font-display { font-family: var(--font-display); }
+  .font-mono { font-family: "Courier New", Courier, monospace; }
+
+  /* ====================================================================
+     FONT SIZE
+     ==================================================================== */
+
+  .text-3xs { font-size: var(--font-size-3xs); }
+  .text-2xs { font-size: var(--font-size-2xs); }
+  .text-xs { font-size: var(--font-size-xs); }
+  .text-sm { font-size: var(--font-size-sm); }
+  .text-base { font-size: var(--font-size-base); }
+  .text-lg { font-size: var(--font-size-lg); }
+  .text-xl { font-size: var(--font-size-xl); }
+  .text-2xl { font-size: var(--font-size-2xl); }
+  .text-3xl { font-size: var(--font-size-3xl); }
+  .text-4xl { font-size: var(--font-size-4xl); }
+  .text-5xl { font-size: var(--font-size-5xl); }
+  .text-6xl { font-size: var(--font-size-6xl); }
+  .text-7xl { font-size: var(--font-size-7xl); }
+  .text-8xl { font-size: var(--font-size-8xl); }
+
+  /* ====================================================================
+     FONT WEIGHT AND STYLE
+     ==================================================================== */
+
+  .font-thin { font-weight: 100; }
+  .font-extralight { font-weight: 200; }
+  .font-light { font-weight: 300; }
+  .font-normal { font-weight: 400; }
+  .font-medium { font-weight: 500; }
+  .font-semibold { font-weight: 600; }
+  .font-bold { font-weight: 700; }
+  .font-extrabold { font-weight: 800; }
+  .font-black { font-weight: 900; }
+
+  .italic { font-style: italic; }
+  .not-italic { font-style: normal; }
+
+  /* ====================================================================
+     TEXT ALIGN / TRANSFORM / DECORATION
+     ==================================================================== */
+
+  .text-left { text-align: left; }
+  .text-center { text-align: center; }
+  .text-right { text-align: right; }
+  .text-justify { text-align: justify; }
+
+  .uppercase { text-transform: uppercase; }
+  .lowercase { text-transform: lowercase; }
+  .capitalize { text-transform: capitalize; }
+  .normal-case { text-transform: none; }
+
+  .underline { text-decoration: underline; }
+  .line-through { text-decoration: line-through; }
+  .no-underline { text-decoration: none; }
+
+  /* ====================================================================
+     LETTER, LINE AND WORD SPACING
+     ==================================================================== */
+
+  .tracking-tighter { letter-spacing: -0.05em; }
+  .tracking-tight { letter-spacing: -0.025em; }
+  .tracking-normal { letter-spacing: 0; }
+  .tracking-wide { letter-spacing: 0.025em; }
+  .tracking-wider { letter-spacing: 0.05em; }
+  .tracking-widest { letter-spacing: 0.1em; }
+
+  .line-none { line-height: 1; }
+  .line-tight { line-height: 1.25; }
+  .line-snug { line-height: 1.375; }
+  .line-normal { line-height: 1.5; }
+  .line-relaxed { line-height: 1.625; }
+  .line-loose { line-height: 2; }
+
+  .word-spacing-normal { word-spacing: normal; }
+  .word-spacing-wide { word-spacing: 0.2em; }
+  .word-spacing-wider { word-spacing: 0.4em; }
+
+  /* ====================================================================
+     TRUNCATE / CLAMP
+     ==================================================================== */
+
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .text-ellipsis { text-overflow: ellipsis; }
+  .text-clip { text-overflow: clip; }
+
+  .line-clamp-1 {
+    display: -webkit-box;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-4 {
+    display: -webkit-box;
+    line-clamp: 4;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-none {
+    display: block;
+    line-clamp: unset;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: horizontal;
+    overflow: visible;
+  }
+
+  /* ====================================================================
+     WHITE-SPACE / BREAK
+     ==================================================================== */
+
+  .whitespace-normal { white-space: normal; }
+  .whitespace-nowrap { white-space: nowrap; }
+  .whitespace-pre { white-space: pre; }
+  .whitespace-pre-line { white-space: pre-line; }
+  .whitespace-pre-wrap { white-space: pre-wrap; }
+
+  .break-normal {
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .break-words { overflow-wrap: break-word; }
+  .break-all { word-break: break-all; }
+
+  /* ====================================================================
+     TEXT SELECTION
+     ==================================================================== */
+
+  .select-none { user-select: none; }
+  .select-text { user-select: text; }
+  .select-all { user-select: all; }
+  .select-auto { user-select: auto; }
+
+  /* ====================================================================
+     GAMING TYPOGRAPHY HELPERS
+     ==================================================================== */
+
+  .text-gaming {
+    font-family: var(--font-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+
+  .text-neon {
+    color: var(--accent-blue);
+    text-shadow:
+      0 0 5px color-mix(in srgb, var(--accent-blue) 50%, transparent),
+      0 0 10px color-mix(in srgb, var(--accent-blue) 35%, transparent),
+      0 0 18px color-mix(in srgb, var(--accent-blue) 25%, transparent);
+  }
+
+  .text-glow {
+    text-shadow:
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor;
+  }
+
+  .text-shadow { text-shadow: 2px 2px 4px rgb(0 0 0 / 50%); }
+  .text-shadow-lg { text-shadow: 4px 4px 8px rgb(0 0 0 / 50%); }
+  .text-shadow-none { text-shadow: none; }
+
+  .title-gaming {
+    font-family: var(--font-primary);
+    font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-blue);
+    text-shadow:
+      0 0 5px color-mix(in srgb, var(--accent-blue) 50%, transparent),
+      0 0 10px color-mix(in srgb, var(--accent-blue) 35%, transparent);
+  }
+
+  .subtitle-gaming {
+    font-family: var(--font-body);
+    font-size: var(--font-size-lg);
+    color: var(--text-gray);
+    opacity: var(--opacity-75);
+  }
+
+  /* ====================================================================
+     WRITING MODE / ORIENTATION
+     ==================================================================== */
+
+  .writing-vertical-rl { writing-mode: vertical-rl; }
+  .writing-vertical-lr { writing-mode: vertical-lr; }
+  .writing-horizontal { writing-mode: horizontal-tb; }
+
+  .text-orientation-mixed { text-orientation: mixed; }
+  .text-orientation-upright { text-orientation: upright; }
+  .text-orientation-sideways { text-orientation: sideways; }
+
+  /* ====================================================================
+     LIST UTILITIES
+     ==================================================================== */
+
+  .list-none { list-style-type: none; }
+  .list-disc { list-style-type: disc; }
+  .list-decimal { list-style-type: decimal; }
+  .list-inside { list-style-position: inside; }
+  .list-outside { list-style-position: outside; }
+
+  /* ====================================================================
+     RESPONSIVE TYPOGRAPHY UTILITIES
+     ==================================================================== */
+
+  @media (min-width: 600px) {
+    .md\:text-sm { font-size: var(--font-size-sm); }
+    .md\:text-base { font-size: var(--font-size-base); }
+    .md\:text-lg { font-size: var(--font-size-lg); }
+    .md\:text-xl { font-size: var(--font-size-xl); }
+    .md\:text-2xl { font-size: var(--font-size-2xl); }
+    .md\:text-3xl { font-size: var(--font-size-3xl); }
+
+    .md\:text-left { text-align: left; }
+    .md\:text-center { text-align: center; }
+    .md\:text-right { text-align: right; }
+    .md\:text-justify { text-align: justify; }
+
+    .md\:truncate {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .md\:line-clamp-1 { display: -webkit-box; line-clamp: 1; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+    .md\:line-clamp-2 { display: -webkit-box; line-clamp: 2; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .md\:line-clamp-3 { display: -webkit-box; line-clamp: 3; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  }
+
+  @media (min-width: 920px) {
+    .lg\:text-sm { font-size: var(--font-size-sm); }
+    .lg\:text-base { font-size: var(--font-size-base); }
+    .lg\:text-lg { font-size: var(--font-size-lg); }
+    .lg\:text-xl { font-size: var(--font-size-xl); }
+    .lg\:text-2xl { font-size: var(--font-size-2xl); }
+    .lg\:text-3xl { font-size: var(--font-size-3xl); }
+
+    .lg\:text-left { text-align: left; }
+    .lg\:text-center { text-align: center; }
+    .lg\:text-right { text-align: right; }
+    .lg\:text-justify { text-align: justify; }
+
+    .lg\:truncate {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .lg\:line-clamp-1 { display: -webkit-box; line-clamp: 1; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+    .lg\:line-clamp-2 { display: -webkit-box; line-clamp: 2; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .lg\:line-clamp-3 { display: -webkit-box; line-clamp: 3; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  }
+
+  @media (min-width: 1366px) {
+    .xl\:text-base { font-size: var(--font-size-base); }
+    .xl\:text-lg { font-size: var(--font-size-lg); }
+    .xl\:text-xl { font-size: var(--font-size-xl); }
+    .xl\:text-2xl { font-size: var(--font-size-2xl); }
+    .xl\:text-3xl { font-size: var(--font-size-3xl); }
+    .xl\:text-4xl { font-size: var(--font-size-4xl); }
+
+    .xl\:text-left { text-align: left; }
+    .xl\:text-center { text-align: center; }
+    .xl\:text-right { text-align: right; }
+    .xl\:text-justify { text-align: justify; }
+    /* ====================================================================
+       CONTAINER QUERY UNITS - Typography
+       ==================================================================== 
+     
+       Font sizes utilizando unidades de container queries:
+       - cqi: Container query inline size (1% del width del container)
+       - cqb: Container query block size (1% del height del container)
+       - cqmin: Container query min (el menor entre inline/block)
+       - cqmax: Container query max (el mayor entre inline/block)
+     
+       Uso:
+       - Aplicar en elementos dentro de containers con `container-type`
+       - Permite tipografía completamente fluida basada en espacio disponible
+       ==================================================================== */
+
+    /* Font size con cqi (inline size - más común) */
+    .text-cqi-xs { font-size: clamp(0.75rem, 2cqi, 0.875rem); }
+    .text-cqi-sm { font-size: clamp(0.875rem, 2.5cqi, 1rem); }
+    .text-cqi-base { font-size: clamp(1rem, 3cqi, 1.125rem); }
+    .text-cqi-lg { font-size: clamp(1.125rem, 3.5cqi, 1.25rem); }
+    .text-cqi-xl { font-size: clamp(1.25rem, 4cqi, 1.5rem); }
+    .text-cqi-2xl { font-size: clamp(1.5rem, 5cqi, 2rem); }
+    .text-cqi-3xl { font-size: clamp(2rem, 6cqi, 2.5rem); }
+    .text-cqi-4xl { font-size: clamp(2.5rem, 8cqi, 3.5rem); }
+
+    /* Font size con cqb (block size - para layouts verticales) */
+    .text-cqb-sm { font-size: clamp(0.875rem, 3cqb, 1rem); }
+    .text-cqb-base { font-size: clamp(1rem, 4cqb, 1.125rem); }
+    .text-cqb-lg { font-size: clamp(1.125rem, 5cqb, 1.25rem); }
+    .text-cqb-xl { font-size: clamp(1.25rem, 6cqb, 1.5rem); }
+    .text-cqb-2xl { font-size: clamp(1.5rem, 8cqb, 2rem); }
+
+    /* Font size con cqmin (usa el tamaño menor - útil para cuadrados) */
+    .text-cqmin-sm { font-size: clamp(0.875rem, 3cqmin, 1rem); }
+    .text-cqmin-base { font-size: clamp(1rem, 4cqmin, 1.125rem); }
+    .text-cqmin-lg { font-size: clamp(1.125rem, 5cqmin, 1.25rem); }
+    .text-cqmin-xl { font-size: clamp(1.25rem, 6cqmin, 1.5rem); }
+
+    /* Font size con cqmax (usa el tamaño mayor - para títulos hero) */
+    .text-cqmax-lg { font-size: clamp(1.125rem, 4cqmax, 1.5rem); }
+    .text-cqmax-xl { font-size: clamp(1.25rem, 5cqmax, 2rem); }
+    .text-cqmax-2xl { font-size: clamp(1.5rem, 6cqmax, 2.5rem); }
+    .text-cqmax-3xl { font-size: clamp(2rem, 8cqmax, 3.5rem); }
+
+    /* Line height con container units */
+    .leading-cqi-tight { line-height: clamp(1.2, 4cqi, 1.4); }
+    .leading-cqi-normal { line-height: clamp(1.4, 5cqi, 1.6); }
+    .leading-cqi-relaxed { line-height: clamp(1.6, 6cqi, 1.8); }
+    .leading-cqi-loose { line-height: clamp(1.8, 7cqi, 2); }
+
+    /* Letter spacing con container units (útil para títulos fluidos) */
+    .tracking-cqi-tight { letter-spacing: clamp(-0.05em, -0.2cqi, -0.01em); }
+    .tracking-cqi-normal { letter-spacing: clamp(0em, 0.1cqi, 0.05em); }
+    .tracking-cqi-wide { letter-spacing: clamp(0.05em, 0.3cqi, 0.15em); }
+    .tracking-cqi-wider { letter-spacing: clamp(0.1em, 0.5cqi, 0.2em); }
+
+    /* ====================================================================
+       HELPER: Combinación fluida completa
+       ==================================================================== */
+
+    /* Título fluido con todas las propiedades responsivas */
+    .text-fluid-title {
+      font-size: clamp(1.5rem, 5cqi, 3rem);
+      line-height: clamp(1.2, 4cqi, 1.4);
+      letter-spacing: clamp(0em, 0.2cqi, 0.1em);
+    }
+
+    /* Body fluido para párrafos */
+    .text-fluid-body {
+      font-size: clamp(1rem, 3cqi, 1.125rem);
+      line-height: clamp(1.5, 5cqi, 1.7);
+    }
+
+    /* Caption/pequeño fluido */
+    .text-fluid-caption {
+      font-size: clamp(0.75rem, 2cqi, 0.875rem);
+      line-height: clamp(1.4, 4cqi, 1.6);
+    }
+
+  }
+
+} /* Fin @layer utilities */

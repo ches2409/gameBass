@@ -1,0 +1,140 @@
+@charset "UTF-8";
+/* -------------------------------------------------------------------------
+   EFECTOS DE PARPADEO Y PULSO
+   ------------------------------------------------------------------------- */
+@keyframes blink {
+  50% {
+    opacity: 0.4;
+  }
+}
+@keyframes pulse-live {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* -------------------------------------------------------------------------
+   EFECTO GLITCH (Vibración)
+   ------------------------------------------------------------------------- */
+@keyframes glitch-anim {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-3px, 3px);
+  }
+  40% {
+    transform: translate(-3px, -3px);
+  }
+  60% {
+    transform: translate(3px, 3px);
+  }
+  80% {
+    transform: translate(3px, -3px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+/* -------------------------------------------------------------------------
+   ENTRADA SUAVE HACIA ARRIBA
+   ------------------------------------------------------------------------- */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* -------------------------------------------------------------------------
+   PULSO CON ESCALA (General)
+   ------------------------------------------------------------------------- */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+/* -------------------------------------------------------------------------
+   ENTRADA DE MODAL (Slide + Scale)
+   ------------------------------------------------------------------------- */
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+/* -------------------------------------------------------------------------
+   ESCÁNER LÁSER (Movimiento diagonal/horizontal)
+   ------------------------------------------------------------------------- */
+@keyframes laserScan {
+  0% {
+    top: 0;
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+    top: 50%;
+  }
+  100% {
+    top: 100%;
+    left: -100%;
+  }
+}
+/* -------------------------------------------------------------------------
+   ESCÁNER LÁSER ( Definición del movimiento)
+   ------------------------------------------------------------------------- */
+@keyframes laser-sweep {
+  0% {
+    left: -5%;
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    left: 120%;
+    opacity: 0;
+  }
+}
+/* -------------------------------------------------------------------------
+   EFECTO PING (Onda expansiva)
+   ------------------------------------------------------------------------- */
+@keyframes ping-effect {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  75%, 100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+/* -------------------------------------------------------------------------
+   BLINK TECH (Parpadeo con brillo)
+   ------------------------------------------------------------------------- */
+@keyframes blink-tech {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1) drop-shadow(0 0 0px #A3FF00);
+  }
+  50% {
+    opacity: 0.4;
+    filter: brightness(1.8) drop-shadow(0 0 8px #A3FF00);
+  }
+}

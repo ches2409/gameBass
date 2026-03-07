@@ -1,0 +1,344 @@
+@charset "UTF-8";
+/* Efecto Glitch para los títulos */
+/* Keyframes de la vibración - Movido fuera del mixin para ser válido en CSS */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.login-overlay {
+  background-color: #020305;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Efecto de líneas de escaneo */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(12, 17, 29, 0.2) 50%);
+  background-size: 100% 4px;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* Contenedor Principal */
+.login-container {
+  position: relative;
+  width: 900px;
+  max-width: 70vw;
+  border: 1px solid rgba(214, 245, 233, 0.05);
+  box-shadow: 0 0 100px rgba(12, 17, 29, 0.9);
+  padding: 2px;
+}
+
+.login-content {
+  display: flex;
+  min-height: 600px;
+}
+
+/* Brackets de las esquinas */
+.corner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 2px solid rgba(163, 255, 0, 0.3);
+  z-index: 60;
+  pointer-events: none;
+}
+
+.top-left {
+  top: -20px;
+  left: -20px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.top-right {
+  top: -20px;
+  right: -20px;
+  border-left: 0;
+  border-bottom: 0;
+}
+
+.bottom-left {
+  bottom: -20px;
+  left: -20px;
+  border-right: 0;
+  border-top: 0;
+}
+
+.bottom-right {
+  bottom: -20px;
+  right: -20px;
+  border-left: 0;
+  border-top: 0;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 350px;
+  padding: 50px;
+  border-right: 1px solid rgba(214, 245, 233, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.logo-box {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #D500F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: skewX(-12deg);
+  box-shadow: 0 0 15px rgba(213, 0, 249, 0.3);
+}
+
+.logo-box span {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 900;
+  font-size: 20px;
+  color: #D500F9;
+  font-style: italic;
+}
+
+.brand-text h1 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 28px;
+  line-height: 0.9;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -2px;
+}
+
+.system-version {
+  font-family: "Fira Code", monospace;
+  font-size: 9px;
+  color: rgba(213, 0, 249, 0.7);
+  letter-spacing: 3px;
+  font-weight: 700;
+  margin-bottom: 60px;
+}
+
+.quote-box {
+  padding: 25px;
+  border: 1px solid rgba(213, 0, 249, 0.2);
+  background: rgba(213, 0, 249, 0.02);
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.quote-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 14px;
+  color: rgba(213, 0, 249, 0.4);
+}
+
+.quote-box p {
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.3;
+  color: #6b7280;
+  margin-bottom: 15px;
+}
+
+.quote-author {
+  font-family: "Fira Code", monospace;
+  font-size: 8px;
+  font-weight: 900;
+  color: #D500F9;
+  letter-spacing: 2px;
+}
+
+.connection-status {
+  margin-top: auto;
+}
+
+.status-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Fira Code", monospace;
+  font-size: 8px;
+  color: #6b7280;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.pulse-bars {
+  display: flex;
+  gap: 4px;
+}
+
+.bar {
+  width: 4px;
+  height: 12px;
+  background: rgba(163, 255, 0, 0.3);
+}
+
+/* Main Interface */
+.main-interface {
+  flex: 1;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.interface-header h2 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 55px;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -3px;
+  margin-bottom: 15px;
+}
+
+.header-desc {
+  font-family: "Fira Code", monospace;
+  font-size: 10px;
+  color: #6b7280;
+  letter-spacing: 2px;
+  max-width: 450px;
+  line-height: 1.6;
+}
+
+.form-section {
+  flex: 1;
+  margin-top: 50px;
+}
+
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.input-group label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Fira Code", monospace;
+  font-size: 9px;
+  font-weight: 900;
+  color: #6b7280;
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+}
+
+.input-group label::before {
+  content: "";
+  width: 4px;
+  height: 12px;
+  background: rgba(163, 255, 0, 0.3);
+}
+
+.input-wrapper {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-white);
+}
+
+.input-wrapper span {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #333;
+  font-size: 20px;
+}
+
+.input-wrapper input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 20px 20px 20px 50px;
+  color: white;
+  font-family: "Fira Code", monospace;
+  font-size: 14px;
+  outline: none;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Footer */
+.interface-footer {
+  padding-top: 20px;
+  border-top: 1px solid rgba(214, 245, 233, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-family: "Fira Code", monospace;
+  font-size: 8px;
+  color: #6b7280;
+  font-weight: 900;
+}
+
+.dot-pulse {
+  width: 8px;
+  height: 8px;
+  background: #A3FF00;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+/* Glitch Effect */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  color: white;
+  text-transform: uppercase;
+  font-style: italic;
+  letter-spacing: -0.05em;
+}
+.glitch-text::before, .glitch-text::after {
+  content: attr(data-text); /* Clona el texto del atributo HTML */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+.glitch-text::before {
+  color: #A3FF00;
+  z-index: -1;
+  animation: glitch-anim 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+.glitch-text::after {
+  color: #D500F9;
+  z-index: -2;
+  animation: glitch-anim 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+}

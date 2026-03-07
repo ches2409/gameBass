@@ -1,0 +1,433 @@
+/* ==========================================================================
+   UTILITIES - Color Helpers (MARCSS v4 - CSS Nativo)
+   ========================================================================== 
+   
+   Migrado desde: app/static/scss_v3_backup/utilities/_colors.scss
+   Fecha: 7 de marzo de 2026
+   
+   Cambios principales vs v3:
+   - ✅ Eliminados ~85 usos de !important (capa utilities gana automáticamente)
+   - ✅ Convertido de Sass a CSS nativo
+   - ✅ Simplificadas variantes de transparencia
+   - ⚠️ Colores RGB/HEX legacy (migrar a OKLCH en Fase 3)
+   
+   ========================================================================== */
+
+@layer utilities {
+  
+  /* ====================================================================
+     TEXT COLORS - Colores principales del proyecto
+     ==================================================================== */
+  
+  /* Colores base */
+  .text-primary { color: var(--primary-bg); }
+  .text-soft { color: var(--soft); }
+  .text-background-dark { color: var(--background-dark); }
+  .text-background-soft { color: var(--background-soft); }
+  
+  /* Colores de acento gaming */
+  .text-accent-green { color: var(--accent-green); }
+  .text-accent-pink { color: var(--accent-pink); }
+  .text-accent-blue { color: var(--accent-blue); }
+  .text-accent-blue-dark { color: var(--accent-blue-dark); }
+  .text-accent-yellow { color: var(--accent-yellow); }
+  
+  /* Colores de texto */
+  .text-main { color: var(--text-main); }
+  .text-gray { color: var(--text-gray); }
+  .text-dim { color: var(--text-dim); }
+  
+  /* Colores laterales */
+  .text-side-purple { color: var(--side-purple); }
+  .text-side-green { color: var(--side-green); }
+  .text-side-orange { color: var(--side-orange); }
+  .text-side-pink { color: var(--side-pink); }
+  .text-side-blue { color: var(--side-blue); }
+  
+  /* Alertas */
+  .text-alert { color: var(--alert); }
+  
+  /* Básicos */
+  .text-white { color: var(--white); }
+  .text-black { color: var(--black); }
+  .text-transparent { color: transparent; }
+  .text-current { color: currentColor; }
+  
+  /* ====================================================================
+     BACKGROUND COLORS - Fondos principales
+     ==================================================================== */
+  
+  /* Colores base */
+  .bg-primary { background-color: var(--primary-bg); }
+  .bg-soft { background-color: var(--soft); }
+  .bg-background-dark { background-color: var(--background-dark); }
+  .bg-background-soft { background-color: var(--background-soft); }
+  
+  /* Colores de acento gaming */
+  .bg-accent-green { background-color: var(--accent-green); }
+  .bg-accent-pink { background-color: var(--accent-pink); }
+  .bg-accent-blue { background-color: var(--accent-blue); }
+  .bg-accent-blue-dark { background-color: var(--accent-blue-dark); }
+  .bg-accent-yellow { background-color: var(--accent-yellow); }
+  
+  /* Colores de texto */
+  .bg-text-main { background-color: var(--text-main); }
+  .bg-text-gray { background-color: var(--text-gray); }
+  .bg-text-dim { background-color: var(--text-dim); }
+  
+  /* Colores laterales */
+  .bg-side-purple { background-color: var(--side-purple); }
+  .bg-side-green { background-color: var(--side-green); }
+  .bg-side-orange { background-color: var(--side-orange); }
+  .bg-side-pink { background-color: var(--side-pink); }
+  .bg-side-blue { background-color: var(--side-blue); }
+  
+  /* Alertas */
+  .bg-alert { background-color: var(--alert); }
+  
+  /* Básicos */
+  .bg-white { background-color: var(--white); }
+  .bg-black { background-color: var(--black); }
+  .bg-transparent { background-color: transparent; }
+  .bg-current { background-color: currentColor; }
+  
+  /* ====================================================================
+     BACKGROUND TRANSPARENCY - Fondos con opacidad
+     ==================================================================== */
+  
+  /* Acento verde */
+  .bg-accent-green-10 { background-color: oklch(from var(--accent-green) l c h / 0.1); }
+  .bg-accent-green-20 { background-color: oklch(from var(--accent-green) l c h / 0.2); }
+  .bg-accent-green-30 { background-color: oklch(from var(--accent-green) l c h / 0.3); }
+  .bg-accent-green-50 { background-color: oklch(from var(--accent-green) l c h / 0.5); }
+  .bg-accent-green-70 { background-color: oklch(from var(--accent-green) l c h / 0.7); }
+  .bg-accent-green-90 { background-color: oklch(from var(--accent-green) l c h / 0.9); }
+  
+  /* Acento pink */
+  .bg-accent-pink-10 { background-color: oklch(from var(--accent-pink) l c h / 0.1); }
+  .bg-accent-pink-20 { background-color: oklch(from var(--accent-pink) l c h / 0.2); }
+  .bg-accent-pink-30 { background-color: oklch(from var(--accent-pink) l c h / 0.3); }
+  .bg-accent-pink-50 { background-color: oklch(from var(--accent-pink) l c h / 0.5); }
+  .bg-accent-pink-70 { background-color: oklch(from var(--accent-pink) l c h / 0.7); }
+  .bg-accent-pink-90 { background-color: oklch(from var(--accent-pink) l c h / 0.9); }
+  
+  /* Acento blue */
+  .bg-accent-blue-10 { background-color: oklch(from var(--accent-blue) l c h / 0.1); }
+  .bg-accent-blue-20 { background-color: oklch(from var(--accent-blue) l c h / 0.2); }
+  .bg-accent-blue-30 { background-color: oklch(from var(--accent-blue) l c h / 0.3); }
+  .bg-accent-blue-50 { background-color: oklch(from var(--accent-blue) l c h / 0.5); }
+  .bg-accent-blue-70 { background-color: oklch(from var(--accent-blue) l c h / 0.7); }
+  .bg-accent-blue-90 { background-color: oklch(from var(--accent-blue) l c h / 0.9); }
+  
+  /* Acento yellow */
+  .bg-accent-yellow-10 { background-color: oklch(from var(--accent-yellow) l c h / 0.1); }
+  .bg-accent-yellow-20 { background-color: oklch(from var(--accent-yellow) l c h / 0.2); }
+  .bg-accent-yellow-30 { background-color: oklch(from var(--accent-yellow) l c h / 0.3); }
+  .bg-accent-yellow-50 { background-color: oklch(from var(--accent-yellow) l c h / 0.5); }
+  .bg-accent-yellow-70 { background-color: oklch(from var(--accent-yellow) l c h / 0.7); }
+  .bg-accent-yellow-90 { background-color: oklch(from var(--accent-yellow) l c h / 0.9); }
+  
+  /* Soft */
+  .bg-soft-10 { background-color: oklch(from var(--soft) l c h / 0.1); }
+  .bg-soft-20 { background-color: oklch(from var(--soft) l c h / 0.2); }
+  .bg-soft-30 { background-color: oklch(from var(--soft) l c h / 0.3); }
+  .bg-soft-50 { background-color: oklch(from var(--soft) l c h / 0.5); }
+  .bg-soft-70 { background-color: oklch(from var(--soft) l c h / 0.7); }
+  .bg-soft-90 { background-color: oklch(from var(--soft) l c h / 0.9); }
+  
+  /* ====================================================================
+     BORDER COLORS
+     ==================================================================== */
+  
+  /* Colores de acento */
+  .border-accent-green { border-color: var(--accent-green); }
+  .border-accent-pink { border-color: var(--accent-pink); }
+  .border-accent-blue { border-color: var(--accent-blue); }
+  .border-accent-yellow { border-color: var(--accent-yellow); }
+  
+  /* Colores laterales */
+  .border-side-purple { border-color: var(--side-purple); }
+  .border-side-green { border-color: var(--side-green); }
+  .border-side-orange { border-color: var(--side-orange); }
+  .border-side-pink { border-color: var(--side-pink); }
+  .border-side-blue { border-color: var(--side-blue); }
+  
+  /* Texto */
+  .border-text-gray { border-color: var(--text-gray); }
+  .border-text-dim { border-color: var(--text-dim); }
+  
+  /* Básicos */
+  .border-white { border-color: var(--white); }
+  .border-black { border-color: var(--black); }
+  .border-transparent { border-color: transparent; }
+  .border-current { border-color: currentColor; }
+  
+  /* ====================================================================
+     GAMING GRADIENTS
+     ==================================================================== */
+  
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+  }
+  
+  .bg-gradient-secondary {
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-yellow));
+  }
+  
+  .bg-gradient-gaming {
+    background: linear-gradient(45deg, var(--accent-blue), var(--accent-pink), var(--accent-green));
+  }
+  
+  .bg-gradient-neon {
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink), var(--accent-yellow), var(--accent-green));
+  }
+  
+  .bg-gradient-dark {
+    background: linear-gradient(135deg, var(--primary-bg), var(--background-dark));
+  }
+  
+  /* ====================================================================
+     TEXT NEON EFFECTS
+     ==================================================================== */
+  
+  .text-neon-blue {
+    color: var(--accent-blue);
+    text-shadow: 
+      0 0 10px oklch(from var(--accent-blue) l c h / 0.5),
+      0 0 20px oklch(from var(--accent-blue) l c h / 0.3),
+      0 0 30px oklch(from var(--accent-blue) l c h / 0.2);
+  }
+  
+  .text-neon-pink {
+    color: var(--accent-pink);
+    text-shadow: 
+      0 0 10px oklch(from var(--accent-pink) l c h / 0.5),
+      0 0 20px oklch(from var(--accent-pink) l c h / 0.3),
+      0 0 30px oklch(from var(--accent-pink) l c h / 0.2);
+  }
+  
+  .text-neon-green {
+    color: var(--accent-green);
+    text-shadow: 
+      0 0 10px oklch(from var(--accent-green) l c h / 0.5),
+      0 0 20px oklch(from var(--accent-green) l c h / 0.3),
+      0 0 30px oklch(from var(--accent-green) l c h / 0.2);
+  }
+  
+  .text-neon-yellow {
+    color: var(--accent-yellow);
+    text-shadow: 
+      0 0 10px oklch(from var(--accent-yellow) l c h / 0.5),
+      0 0 20px oklch(from var(--accent-yellow) l c h / 0.3),
+      0 0 30px oklch(from var(--accent-yellow) l c h / 0.2);
+  }
+  
+  .text-neon-light {
+    color: var(--accent-blue);
+    text-shadow: 
+      0 0 10px oklch(from var(--accent-blue) l c h / 0.3),
+      0 0 20px oklch(from var(--accent-blue) l c h / 0.2);
+  }
+  
+  .text-neon-strong {
+    color: var(--accent-blue);
+    text-shadow: 
+      0 0 10px oklch(from var(--accent-blue) l c h / 0.8),
+      0 0 20px oklch(from var(--accent-blue) l c h / 0.6),
+      0 0 30px oklch(from var(--accent-blue) l c h / 0.4),
+      0 0 40px oklch(from var(--accent-blue) l c h / 0.2);
+  }
+  
+  /* ====================================================================
+     STATUS COLORS (semantic)
+     ==================================================================== */
+  
+  .text-success { color: var(--accent-green); }
+  .text-warning { color: var(--accent-yellow); }
+  .text-danger { color: var(--accent-pink); }
+  .text-info { color: var(--accent-blue); }
+  
+  .bg-success { background-color: var(--accent-green); }
+  .bg-warning { background-color: var(--accent-yellow); }
+  .bg-danger { background-color: var(--accent-pink); }
+  .bg-info { background-color: var(--accent-blue); }
+  
+  .bg-success-10 { background-color: oklch(from var(--accent-green) l c h / 0.1); }
+  .bg-warning-10 { background-color: oklch(from var(--accent-yellow) l c h / 0.1); }
+  .bg-danger-10 { background-color: oklch(from var(--accent-pink) l c h / 0.1); }
+  .bg-info-10 { background-color: oklch(from var(--accent-blue) l c h / 0.1); }
+  
+  .border-success { border-color: var(--accent-green); }
+  .border-warning { border-color: var(--accent-yellow); }
+  .border-danger { border-color: var(--accent-pink); }
+  .border-info { border-color: var(--accent-blue); }
+  
+  /* ====================================================================
+     HOVER STATES
+     ==================================================================== */
+  
+  .hover\:text-accent-green:hover { color: var(--accent-green); }
+  .hover\:text-accent-pink:hover { color: var(--accent-pink); }
+  .hover\:text-accent-blue:hover { color: var(--accent-blue); }
+  .hover\:text-accent-yellow:hover { color: var(--accent-yellow); }
+  
+  .hover\:bg-accent-green:hover { background-color: var(--accent-green); }
+  .hover\:bg-accent-pink:hover { background-color: var(--accent-pink); }
+  .hover\:bg-accent-blue:hover { background-color: var(--accent-blue); }
+  .hover\:bg-accent-yellow:hover { background-color: var(--accent-yellow); }
+  
+  .hover\:bg-soft:hover { background-color: var(--soft); }
+  .hover\:bg-soft-50:hover { background-color: oklch(from var(--soft) l c h / 0.5); }
+  
+  .hover\:border-accent-green:hover { border-color: var(--accent-green); }
+  .hover\:border-accent-pink:hover { border-color: var(--accent-pink); }
+  .hover\:border-accent-blue:hover { border-color: var(--accent-blue); }
+  .hover\:border-accent-yellow:hover { border-color: var(--accent-yellow); }
+  
+  /* ====================================================================
+     FOCUS STATES
+     ==================================================================== */
+  
+  .focus\:text-accent-green:focus { color: var(--accent-green); }
+  .focus\:text-accent-blue:focus { color: var(--accent-blue); }
+  
+  .focus\:bg-soft:focus { background-color: var(--soft); }
+  
+  .focus\:border-accent-green:focus { border-color: var(--accent-green); }
+  .focus\:border-accent-blue:focus { border-color: var(--accent-blue); }
+  
+  /* ====================================================================
+     OPACITY UTILITIES
+     ==================================================================== */
+  
+  .opacity-0 { opacity: 0; }
+  .opacity-10 { opacity: 0.1; }
+  .opacity-20 { opacity: 0.2; }
+  .opacity-30 { opacity: 0.3; }
+  .opacity-40 { opacity: 0.4; }
+  .opacity-50 { opacity: 0.5; }
+  .opacity-60 { opacity: 0.6; }
+  .opacity-70 { opacity: 0.7; }
+  .opacity-80 { opacity: 0.8; }
+  .opacity-90 { opacity: 0.9; }
+  .opacity-100 { opacity: 1; }
+  
+  .hover\:opacity-0:hover { opacity: 0; }
+  .hover\:opacity-50:hover { opacity: 0.5; }
+  .hover\:opacity-100:hover { opacity: 1; }
+  
+  /* ====================================================================
+     BACKDROP FILTER UTILITIES
+     ==================================================================== */
+  
+  .backdrop-blur {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari */
+  }
+  
+  .backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  
+  .backdrop-blur-lg {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  
+  .backdrop-blur-none {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  
+  /* ====================================================================
+     RESPONSIVE UTILITIES (Mobile-first)
+     ==================================================================== */
+  
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
+    .md\:text-accent-green { color: var(--accent-green); }
+    .md\:bg-soft { background-color: var(--soft); }
+    .md\:border-accent-blue { border-color: var(--accent-blue); }
+  }
+  
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    .lg\:text-accent-blue { color: var(--accent-blue); }
+    .lg\:bg-background-dark { background-color: var(--background-dark); }
+    .lg\:border-accent-pink { border-color: var(--accent-pink); }
+  }
+  
+  /* Large Desktop (1280px+) */
+  @media (min-width: 1280px) {
+    .xl\:text-main { color: var(--text-main); }
+    .xl\:bg-primary { background-color: var(--primary-bg); }
+  }
+
+  /* ====================================================================
+     FASE 3 - OKLCH + COLORES RELATIVOS
+     ====================================================================
+     Utilidades progresivas para estados interactivos a partir de tokens base.
+     ==================================================================== */
+
+  /* Estados de texto (hover/active/disabled) */
+  .text-accent-green-hover { color: var(--accent-green-hover); }
+  .text-accent-green-active { color: var(--accent-green-active); }
+  .text-accent-green-disabled { color: var(--accent-green-disabled); }
+
+  .text-accent-blue-hover { color: var(--accent-blue-hover); }
+  .text-accent-blue-active { color: var(--accent-blue-active); }
+  .text-accent-blue-disabled { color: var(--accent-blue-disabled); }
+
+  .text-accent-pink-hover { color: var(--accent-pink-hover); }
+  .text-accent-pink-active { color: var(--accent-pink-active); }
+  .text-accent-pink-disabled { color: var(--accent-pink-disabled); }
+
+  .text-accent-yellow-hover { color: var(--accent-yellow-hover); }
+  .text-accent-yellow-active { color: var(--accent-yellow-active); }
+  .text-accent-yellow-disabled { color: var(--accent-yellow-disabled); }
+
+  .text-alert-hover { color: var(--alert-hover); }
+  .text-alert-active { color: var(--alert-active); }
+  .text-alert-disabled { color: var(--alert-disabled); }
+
+  /* Superficies suaves usando canales relativos y alpha */
+  .bg-accent-green-soft {
+    background-color: oklch(from var(--accent-green) l c h / 0.12);
+  }
+
+  .bg-accent-blue-soft {
+    background-color: oklch(from var(--accent-blue) l c h / 0.12);
+  }
+
+  .bg-accent-pink-soft {
+    background-color: oklch(from var(--accent-pink) l c h / 0.12);
+  }
+
+  .bg-accent-yellow-soft {
+    background-color: oklch(from var(--accent-yellow) l c h / 0.12);
+  }
+
+  .bg-alert-soft {
+    background-color: oklch(from var(--alert) l c h / 0.12);
+  }
+
+  /* Bordes relativos para estados de interacción */
+  .border-accent-green-hover { border-color: var(--accent-green-hover); }
+  .border-accent-blue-hover { border-color: var(--accent-blue-hover); }
+  .border-accent-pink-hover { border-color: var(--accent-pink-hover); }
+  .border-accent-yellow-hover { border-color: var(--accent-yellow-hover); }
+  .border-alert-hover { border-color: var(--alert-hover); }
+
+  /* Utilidades interactivas rápidas */
+  .hover\:bg-accent-green-soft:hover { background-color: oklch(from var(--accent-green) l c h / 0.16); }
+  .hover\:bg-accent-blue-soft:hover { background-color: oklch(from var(--accent-blue) l c h / 0.16); }
+  .hover\:bg-accent-pink-soft:hover { background-color: oklch(from var(--accent-pink) l c h / 0.16); }
+  .hover\:bg-alert-soft:hover { background-color: oklch(from var(--alert) l c h / 0.16); }
+
+  .hover\:text-accent-green-hover:hover { color: var(--accent-green-hover); }
+  .hover\:text-accent-blue-hover:hover { color: var(--accent-blue-hover); }
+  .hover\:text-accent-pink-hover:hover { color: var(--accent-pink-hover); }
+  .hover\:text-alert-hover:hover { color: var(--alert-hover); }
+  
+} /* Fin @layer utilities */

@@ -1,0 +1,388 @@
+@charset "UTF-8";
+/* Efecto Glitch para los títulos */
+/* Keyframes de la vibración - Movido fuera del mixin para ser válido en CSS */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.injection-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(250px, 22%), 1fr));
+  gap: 20px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.injection-card {
+  --neon: #ffffff;
+  display: flex;
+  flex-direction: column;
+  background: #0A0C10;
+  padding: 25px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+.injection-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border: 1px solid var(--neon);
+  clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
+  transition: clip-path 0.5s cubic-bezier(0.77, 0, 0.175, 1), border-color 0.5s ease;
+}
+.injection-card:hover::before {
+  border-color: var(--neon);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(var(--neon), 0.1);
+  clip-path: polygon(0 0, 50% 0, 100% 60%, 100% 100%, 60% 100%, 0 10%);
+}
+.injection-card:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(135deg, #0A0C10 0%, #050601 100%);
+}
+
+.injection-card--archetype-frontline {
+  --neon: #A3FF00;
+}
+
+.injection-card--archetype-stealth {
+  --neon: #D500F9;
+}
+
+.injection-card--archetype-environment {
+  --neon: #00E5FF;
+}
+
+.injection-card--archetype-kinetic {
+  --neon: #FF3D00;
+}
+
+.injection-card--archetype-data {
+  --neon: #FFD600;
+}
+
+.injection-card--archetype-system {
+  --neon: #2979FF;
+}
+
+.injection-card--archetype-restoration {
+  --neon: #00FFC8;
+}
+
+.injection-card--archetype-spatial {
+  --neon: #9D00FF;
+}
+
+.injection-card--archetype-temporal {
+  --neon: #FF0055;
+}
+
+.injection-card--archetype-absorption {
+  --neon: #FF9100;
+}
+
+.injection-card__optional {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 100%;
+}
+
+.injection-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.injection-card__id-tag {
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--neon);
+  font-family: "Fira Code", monospace;
+}
+
+.injection-card__status-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--neon);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--neon);
+}
+
+.injection-card__info {
+  margin-bottom: 20px;
+}
+
+.injection-card__title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin: 0 0 5px 0;
+  font-style: italic;
+}
+
+.injection-card__subtitle {
+  font-size: 0.625rem;
+  font-weight: 800;
+  color: var(--neon);
+  letter-spacing: 3px;
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
+}
+
+.injection-card__description {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: #888;
+  margin-top: 15px;
+  text-transform: uppercase;
+  font-family: "Rajdhani", sans-serif;
+}
+
+.injection-card__avatar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 1.5rem;
+}
+
+.injection-card__avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--neon);
+  background-color: var(--bg-dark);
+  box-shadow: 0 0 20px rgba(var(--neon), 0.4);
+}
+.injection-card__avatar--small {
+  width: 50px;
+  height: 50px;
+}
+
+.injection-card__body {
+  flex-grow: 1;
+}
+
+.injection-card__stats {
+  padding-top: 1rem;
+}
+
+.injection-card__stat-bar {
+  width: 100%;
+  height: 5px;
+  background: rgba(128, 128, 128, 0.2);
+  margin-top: 10px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.injection-card__stat-fill {
+  height: 100%;
+  background-color: var(--neon);
+  box-shadow: 0 0 10px var(--neon);
+  width: var(--progress-weight, 0%);
+  transition: width 0.5s ease-out;
+}
+
+.injection-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.injection-card__tag {
+  font-family: "Fira Code", monospace;
+  font-size: 0.5rem;
+  border: 1px solid var(--border-white);
+  padding: 0.25rem 0.5rem;
+  color: #6b7280;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
+.injection-card__specs {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-white);
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.injection-card__spec-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+.injection-card__spec-row:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.injection-card__spec-label {
+  font-family: "Fira Code", monospace;
+  font-size: 8px;
+  color: #4b5563;
+  font-weight: 700;
+}
+
+.injection-card__spec-value {
+  font-family: "Fira Code", monospace;
+  font-size: 9px;
+  color: white;
+  font-weight: bold;
+}
+
+.injection-card__spec-status--stable {
+  color: #A3FF00 !important;
+}
+
+.injection-card__spec-status--degraded {
+  color: #FF3E3E !important;
+  animation: blink 1.5s infinite;
+}
+
+.injection-card__engine-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--neon);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.injection-card__engine-icon-symbol {
+  color: var(--neon);
+  font-size: 1.25rem;
+}
+
+.injection-card__footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.injection-card__footer-label {
+  font-family: "Fira Code", monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 100%;
+  font-size: 8px;
+  color: #4b5563;
+  font-weight: 700;
+}
+
+.injection-card__actions {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
+}
+
+.injection-card:hover .injection-card__actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.injection-card__action-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--neon);
+  color: var(--neon);
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.injection-card__action-btn:hover {
+  background: rgba(var(--neon), 0.15);
+  box-shadow: 0 0 10px rgba(var(--neon), 0.3);
+}
+.injection-card__action-btn--delete {
+  border-color: #FF3E3E;
+  color: #FF3E3E;
+}
+.injection-card__action-btn--delete:hover {
+  background: rgba(255, 62, 62, 0.15);
+  box-shadow: 0 0 10px rgba(255, 62, 62, 0.3);
+}
+
+.injection-card__arena {
+  display: flex;
+  gap: 20px;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.injection-card__arena .injection-card__arena-stat {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.75rem;
+  border-left: 2px solid var(--primary);
+  transition: all 0.3s ease;
+}
+.injection-card__arena .injection-card__arena-stat--secondary {
+  border-left-color: var(--secondary);
+}
+.injection-card__arena .injection-card__arena-label {
+  font-family: var(--font-display);
+  font-size: 0.5rem;
+  color: #4b5563;
+  text-transform: uppercase;
+  font-weight: 900;
+  margin-bottom: 0.25rem;
+}
+.injection-card__arena .injection-card__arena-value {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: white;
+  font-style: italic;
+}
+
+.injection-card__tournament-status {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+}
+.injection-card__tournament-status--draft {
+  background-color: #4b7dd6;
+}
+.injection-card__tournament-status--live {
+  background-color: #d32f2f;
+  animation: pulse-live 1.5s infinite;
+}
+.injection-card__tournament-status--open {
+  background-color: #388e3c;
+}
+.injection-card__tournament-status--finished {
+  background-color: #0C111D;
+  color: #4b5563;
+}

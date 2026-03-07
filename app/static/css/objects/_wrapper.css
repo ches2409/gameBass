@@ -1,0 +1,77 @@
+/* ==========================================================================
+   OBJECTS - Wrapper (MARCSS v4 - CSS Nativo)
+   ==========================================================================
+
+   Migrado desde: app/static/scss_v3_backup/objects/_wrapper.scss
+   Fecha: 7 de marzo de 2026
+
+   Cambios principales vs v3:
+   - ✅ Eliminados mixins Sass y tokens convertidos a custom properties
+   - ✅ Objeto estructural puro sin decoración visual
+   - ✅ Mantiene semántica de tamaños sm/md/lg/xl
+
+   ========================================================================== */
+
+@layer objects {
+
+  /* ----------------------------------------------------------------------
+     BLOCK: o-wrapper
+     Contenedor estructural reutilizable
+     ---------------------------------------------------------------------- */
+
+  .o-wrapper {
+    inline-size: 100%;
+    margin-inline: auto;
+    padding-inline: var(--spacing-4);
+    container-type: inline-size;
+    container-name: wrapper;
+  }
+
+  /* ----------------------------------------------------------------------
+     MODIFIERS: tamaños semánticos
+     ---------------------------------------------------------------------- */
+
+  .o-wrapper--sm {
+    max-inline-size: var(--container-sm);
+  }
+
+  .o-wrapper--md {
+    max-inline-size: var(--container-md);
+  }
+
+  .o-wrapper--lg {
+    max-inline-size: var(--container-lg);
+  }
+
+  .o-wrapper--xl {
+    max-inline-size: var(--container-xl);
+  }
+
+  /* ----------------------------------------------------------------------
+     Responsive
+     ---------------------------------------------------------------------- */
+
+  @media (min-width: 600px) {
+    .o-wrapper {
+      padding-inline: var(--spacing-6);
+    }
+  }
+
+  /* ----------------------------------------------------------------------
+     Container Queries
+     Ajustes por ancho del contenedor en lugar de viewport
+     ---------------------------------------------------------------------- */
+
+  @container wrapper (width < 920px) {
+    .o-wrapper--xl {
+      max-inline-size: var(--container-lg);
+    }
+  }
+
+  @container wrapper (width < 600px) {
+    .o-wrapper {
+      padding-inline: var(--spacing-3);
+    }
+  }
+
+} /* Fin @layer objects */

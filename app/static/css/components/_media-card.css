@@ -1,0 +1,43 @@
+.c-media-card {
+  padding: 1rem;
+  border: 1px solid #2a3141;
+  border-radius: 0.5rem;
+  background-color: #0A0C10;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.c-media-card.o-media {
+  gap: 1.25rem;
+}
+
+.c-media-card .o-media__figure {
+  overflow: hidden;
+  border-radius: 0.5rem;
+  border: 1px solid #13547e;
+}
+
+.c-media-card .o-media__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.c-media-card__title {
+  margin: 0;
+  font-family: "Orbitron", "Arial", monospace;
+  font-size: 1.125rem;
+  color: #d6f5e9;
+}
+
+.c-media-card__description {
+  margin: 0;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.c-media-card--highlight {
+  border-color: #A3FF00;
+  box-shadow: 0 0 20px rgba(186, 255, 62, 0.5);
+}

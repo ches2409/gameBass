@@ -1,0 +1,229 @@
+/* ==========================================================================
+  MARCSS v4 - CSS NATIVO (Entrypoint)
+  ========================================================================== 
+   
+  Modular Architecture for Reusable Cascading Style Sheets v4.0
+  Fecha: 7 de marzo de 2026
+  Proyecto: GameBass Tournament Management System
+   
+  🎯 ARQUITECTURA BASADA EN CSS CASCADE LAYERS (@layer)
+   
+  Orden de precedencia de capas (de menor a mayor):
+  1. base       → Reset, variables, animaciones fundamentales
+  2. vendors    → Bootstrap overrides
+  3. layout     → Grid systems, contenedores
+  4. objects    → Patrones estructurales reutilizables
+  5. components → Botones, cards, forms, menús
+  6. themes     → Variaciones de tema (dark, light, gaming)
+  7. pages      → Estilos específicos de página
+  8. utilities  → Helpers (siempre ganan, eliminan !important)
+   
+  ⚠️  IMPORTANTE: Este archivo DEBE cargarse primero en el HTML
+   
+  📊 ESTADO DE MIGRACIÓN (Phase 1 - Sprint 3):
+   
+  ✅ COMPLETADO:
+  - layers.css (declaración de capas)
+  - vendors/_bootstrap-overrides.css
+  - utilities/_colors.css
+  - utilities/_layout.css
+   
+  🔄 PENDIENTE (Phases 1-4):
+  - base/* (variables, reset, animations)
+  - layout/* (grid)
+  - objects/*
+  - components/* (buttons, forms, cards, menu)
+  - themes/* (sin fuentes adicionales activas a `_dark`)
+  - pages/* (sin fuentes adicionales activas a `_command`)
+  - utilities/* (spacing, typography, borders)
+   
+  ========================================================================== */
+
+/* ====================================================================
+  PASO 1: DECLARACIÓN DE CAPAS (CRÍTICO - DEBE IR PRIMERO)
+  ==================================================================== */
+
+@import "layers.css";
+
+/* ====================================================================
+  PASO 2: BASE LAYER
+  ==================================================================== 
+   
+  Variables globales, reset CSS, animaciones fundamentales
+   
+  🔄 PENDIENTE DE MIGRACIÓN:
+  - base/_variables.scss → base/_variables.css (CSS custom properties)
+  - base/_reset.scss → base/_reset.css
+  - base/_animations.scss → base/_animations.css
+  - base/_functions.scss → ELIMINAR (reemplazado por calc() nativo)
+  - base/_mixins.scss → ELIMINAR (reemplazado por @layer + nesting)
+  ==================================================================== */
+
+@import "base/_variables.css";
+@import "base/_reset.css";
+@import "base/_animations.css";
+
+/* ====================================================================
+  PASO 3: VENDORS LAYER (Bootstrap Overrides)
+  ==================================================================== */
+
+@import "vendors/_bootstrap-overrides.css";
+
+/* ====================================================================
+  PASO 4: LAYOUT LAYER
+  ==================================================================== 
+   
+  ✅ COMPLETADO:
+  - layout/_grid.scss → layout/_grid.css
+  ==================================================================== */
+
+@import "layout/_grid.css";
+
+/* ====================================================================
+  PASO 5: OBJECTS LAYER
+  ==================================================================== 
+   
+  Patrones estructurales reutilizables (contenedores, wrappers, media objects)
+   
+  ✅ COMPLETADO (base de objetos):
+  - objects/_wrapper.css
+  - objects/_media.css
+  - objects/_stack.css (composición vertical fluida)
+  - objects/_cluster.css (composición horizontal con wrap)
+  - objects/_sidebar.css (layout sidebar + contenido)
+  ==================================================================== */
+
+@import "objects/_wrapper.css";
+@import "objects/_media.css";
+@import "objects/_stack.css";
+@import "objects/_cluster.css";
+@import "objects/_sidebar.css";
+
+/* ====================================================================
+  PASO 6: COMPONENTS LAYER
+  ==================================================================== 
+   
+  Componentes UI (botones, forms, cards, menús, modales)
+   
+  ✅ MIGRACIÓN SPRINT 2 P0 COMPLETADA:
+  - components/_buttons.css
+  - components/_main_menu.css
+  - components/_login_form.css
+  
+  ✅ MIGRACIÓN SPRINT 2 P1 COMPLETADA:
+  - components/_modal-form.css (formularios en modales CRUD)
+  - components/_registros.css (selección protocolo/arena, zero-JS)
+  - components/_general-card.css (tarjetas legacy con neon effects)
+  - components/_data-card.css (tarjetas BEM modernas)
+  
+  ✅ MIGRACIÓN SPRINT 2 P2 COMPLETADA:
+  - components/_data-grid.css (grid container con variants)
+  - components/_player-card.css (tarjeta de jugador cyberpunk)
+  - components/_modal-delete.css (confirmación destructiva tema rojo)
+  - components/_status-bar.css (barra inferior con ticker)
+  - components/_notification-banner.css (banner con laser scanner)
+  
+  🔄 PENDIENTE DE MIGRACIÓN (Phase 3 restantes):
+  - ... (ver FASE0_INVENTARIO.md para lista completa)
+  ==================================================================== */
+
+/* Sprint 2 P0 (Autenticación y Navegación) */
+@import "components/_buttons.css";
+@import "components/_main_menu.css";
+@import "components/_login_form.css";
+
+/* Sprint 2 P1 (Forms y Cards críticos) */
+@import "components/_modal-form.css";
+@import "components/_registros.css";
+@import "components/_general-card.css";
+@import "components/_data-card.css";
+
+/* Sprint 2 P2 (UI Components y Grids) */
+@import "components/_data-grid.css";
+@import "components/_player-card.css";
+@import "components/_modal-delete.css";
+@import "components/_status-bar.css";
+@import "components/_notification-banner.css";
+
+/* Sprint 2 P3 (Cards especializadas - Lote 1) */
+@import "components/_metric-card.css";
+@import "components/_tactical-card.css";
+@import "components/_protocols-card.css";
+
+/* Sprint 2 P3 (Cards especializadas - Lote 2 parcial) */
+@import "components/_subjects-card.css";
+@import "components/_level-card.css";
+
+/* Sprint 2 P3 (Cards especializadas - Lote 3) */
+@import "components/_injection-card.css";
+@import "components/_matriz-card.css";
+@import "components/_manage_equipo.css";
+@import "components/_sys-tags.css";
+@import "components/_title_menu.css";
+@import "components/_empty-modal.css";
+@import "components/_media-card.css";
+@import "components/_user_card.css";
+
+/* ====================================================================
+  PASO 7: THEMES LAYER
+  ==================================================================== 
+   
+  Variaciones de tema basadas en data-theme
+   
+  ✅ COMPLETADO PARCIAL:
+  - themes/_dark.scss → themes/_dark.css
+  
+  ℹ️ INVENTARIO REAL ACTUAL:
+  - Solo existe fuente activa para `themes/_dark.scss`
+  - No se localizaron `themes/_light.scss` ni `themes/_gaming.scss`
+  ==================================================================== */
+
+@import "themes/_dark.css";
+
+/* ====================================================================
+  PASO 8: PAGES LAYER
+  ==================================================================== 
+   
+  Estilos específicos de página
+   
+  ✅ COMPLETADO PARCIAL:
+  - pages/_command.scss → pages/_command.css
+  
+  ℹ️ INVENTARIO REAL ACTUAL:
+  - Solo existe fuente activa para `pages/_command.scss`
+  ==================================================================== */
+
+@import "pages/_command.css";
+
+/* ====================================================================
+  PASO 9: UTILITIES LAYER (SIEMPRE AL FINAL)
+  ==================================================================== 
+   
+  ✅ Helpers de máxima prioridad que siempre ganan (sin !important)
+  ==================================================================== */
+
+@import "utilities/_colors.css";
+@import "utilities/_layout.css";
+@import "utilities/_spacing.css";
+@import "utilities/_typography.css";
+
+/* 🔄 PENDIENTE DE MIGRACIÓN:
+  - Revisar inventario real de utilities pendientes (no se localizaron
+    `_borders.scss`, `_shadows.scss` ni `_z-index.scss` en `scss_v3_backup/utilities`)
+*/
+
+/* ====================================================================
+  FIN DEL ENTRYPOINT
+  ==================================================================== 
+   
+  📈 ESTADO ACTUAL (Phase 1 - Sprint 3):
+  - Entrypoint normalizado (sin bloque CSS compilado embebido)
+  - Imports activos: base, vendors, layout, components S2/S3 y utilities
+  - Utilities migradas activas: colors, layout, spacing, typography
+   
+  🎯 SIGUIENTE ACCIÓN:
+  1. QA visual rápida en vistas críticas (modales/cards/banner)
+  2. Continuar migración de themes/pages/objects
+  3. Mantener validación por sintaxis + HTTP 200 por archivo
+   
+  ==================================================================== */

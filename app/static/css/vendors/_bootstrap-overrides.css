@@ -1,0 +1,410 @@
+/* ==========================================================================
+   VENDORS - Bootstrap Overrides (MARCSS v4 - CSS Nativo)
+   ========================================================================== 
+   
+   Migrado desde: app/static/scss_v3_backup/vendors/_bootstrap-overrides.scss
+   Fecha: 7 de marzo de 2026
+   
+   Cambios principales vs v3:
+   - ✅ Eliminados 2 usos de !important (.card-header, .nav-link.active)
+   - ✅ Convertido nesting Sass a selectores CSS nativos
+   - ✅ Variables Sass → CSS custom properties (--*)
+   - ✅ Encapsulado en @layer vendors (menor precedencia que components)
+   
+   Nota: color.adjust() de Sass será reemplazado por oklch() en Phase 3.
+   Por ahora usa cálculos manuales/hardcoded.
+   
+   ========================================================================== */
+
+@layer vendors {
+  
+  /* ====================================================================
+     CSS CUSTOM PROPERTIES (reutilizan colores de base)
+     ==================================================================== */
+  
+  :root {
+    /* Estas se sobrescriben desde base/_variables.css */
+    --bs-primary: var(--primary-blue, #57ade4);
+    --bs-secondary: var(--secondary-bg, #1a1d23);
+    --bs-success: var(--accent-green, #a3ff00);
+    --bs-info: var(--accent-blue, #57ade4);
+    --bs-warning: var(--accent-yellow, #ddff00);
+    --bs-danger: var(--accent-pink, #d500f9);
+    --bs-light: var(--light-bg, #f8f9fa);
+    --bs-dark: var(--dark-bg, #020305);
+    --bs-white: var(--white, #ffffff);
+    
+    /* Typography */
+    --bs-font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+    --bs-font-size: 1rem;
+    --bs-line-height: 1.6;
+    
+    /* Spacing */
+    --bs-spacer: 1rem;
+    
+    /* Border radius */
+    --bs-border-radius: 0.375rem;
+    --bs-border-radius-sm: 0.25rem;
+    --bs-border-radius-lg: 0.5rem;
+    
+    /* Shadows */
+    --bs-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --bs-box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --bs-box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  }
+  
+  /* ====================================================================
+     BUTTONS
+     ==================================================================== */
+  
+  .btn {
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+    border: none;
+  }
+  
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn:active {
+    transform: translateY(0);
+  }
+  
+  /* Gaming theme button variants */
+  .btn.btn-gaming {
+    background: linear-gradient(135deg, var(--accent-blue, #57ade4), #6fb8e8);
+    color: var(--white, #ffffff);
+  }
+  
+  .btn.btn-gaming:hover {
+    background: linear-gradient(135deg, #4999d0, var(--accent-blue, #57ade4));
+  }
+  
+  .btn.btn-neon {
+    background: transparent;
+    border: 2px solid var(--accent-blue, #57ade4);
+    color: var(--accent-blue, #57ade4);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn.btn-neon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--accent-blue, #57ade4);
+    transition: left 0.3s ease;
+    z-index: -1;
+  }
+  
+  .btn.btn-neon:hover {
+    color: var(--white, #ffffff);
+  }
+  
+  .btn.btn-neon:hover::before {
+    left: 0;
+  }
+  
+  /* ====================================================================
+     CARDS
+     ==================================================================== */
+  
+  .card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card .card-header {
+    background: var(--primary-blue, #57ade4);
+    color: var(--white, #ffffff);
+    border-bottom: none;
+    font-weight: bold;
+    border-radius: 12px 12px 0 0; /* ✅ !important eliminado */
+  }
+  
+  .card .card-body {
+    padding: 1.5rem;
+  }
+  
+  /* Gaming theme card variants */
+  .card.card-gaming {
+    background: linear-gradient(135deg, var(--dark-bg, #020305), #0a0c0e);
+    color: var(--white, #ffffff);
+    border: 1px solid var(--accent-blue, #57ade4);
+  }
+  
+  .card.card-gaming .card-title {
+    color: var(--accent-blue, #57ade4);
+  }
+  
+  /* ====================================================================
+     FORMS
+     ==================================================================== */
+  
+  .form-control {
+    border-radius: 8px;
+    border: 2px solid #dee2e6;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-color: var(--primary-blue, #57ade4);
+    box-shadow: 0 0 0 0.2rem rgba(87, 173, 228, 0.25);
+  }
+  
+  /* Gaming theme form controls */
+  .form-control.form-control-gaming {
+    background: var(--dark-bg, #020305);
+    border-color: var(--accent-blue, #57ade4);
+    color: var(--white, #ffffff);
+  }
+  
+  .form-control.form-control-gaming::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  .form-control.form-control-gaming:focus {
+    background: var(--dark-bg, #020305);
+    border-color: var(--accent-blue, #57ade4);
+    color: var(--white, #ffffff);
+    box-shadow: 0 0 0 0.2rem rgba(87, 173, 228, 0.25);
+  }
+  
+  .form-label {
+    font-weight: 600;
+    color: var(--text-main, #333);
+    margin-bottom: 0.5rem;
+  }
+  
+  /* ====================================================================
+     NAVIGATION
+     ==================================================================== */
+  
+  .navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar .navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  
+  .navbar .navbar-nav .nav-link {
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 0 0.25rem;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar .navbar-nav .nav-link:hover {
+    background: rgba(87, 173, 228, 0.1);
+    color: var(--primary-blue, #57ade4);
+  }
+  
+  .navbar .navbar-nav .nav-link.active {
+    background: var(--primary-blue, #57ade4);
+    color: var(--white, #ffffff); /* ✅ !important eliminado */
+  }
+  
+  /* ====================================================================
+     TABLES
+     ==================================================================== */
+  
+  .table {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table thead th {
+    background: var(--primary-blue, #57ade4);
+    color: var(--white, #ffffff);
+    border: none;
+    font-weight: bold;
+    padding: 1rem;
+  }
+  
+  .table tbody tr {
+    transition: background-color 0.2s ease;
+  }
+  
+  .table tbody tr:hover {
+    background: var(--light-bg, #f8f9fa);
+  }
+  
+  .table tbody tr td {
+    padding: 1rem;
+    border-color: #dee2e6;
+  }
+  
+  /* Gaming theme table */
+  .table.table-gaming {
+    background: var(--dark-bg, #020305);
+    color: var(--white, #ffffff);
+  }
+  
+  .table.table-gaming thead th {
+    background: var(--accent-blue, #57ade4);
+  }
+  
+  .table.table-gaming tbody tr:hover {
+    background: #0a0c0e;
+  }
+  
+  .table.table-gaming tbody tr td {
+    border-color: rgba(87, 173, 228, 0.3);
+  }
+  
+  /* ====================================================================
+     ALERTS
+     ==================================================================== */
+  
+  .alert {
+    border: none;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    border-left: 4px solid;
+  }
+  
+  .alert.alert-primary {
+    border-left-color: var(--primary-blue, #57ade4);
+  }
+  
+  .alert.alert-success {
+    border-left-color: var(--accent-green, #a3ff00);
+  }
+  
+  .alert.alert-warning {
+    border-left-color: var(--accent-yellow, #ddff00);
+  }
+  
+  .alert.alert-danger {
+    border-left-color: var(--accent-pink, #d500f9);
+  }
+  
+  .alert.alert-info {
+    border-left-color: var(--accent-blue, #57ade4);
+  }
+  
+  /* ====================================================================
+     MODALS
+     ==================================================================== */
+  
+  .modal .modal-content {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .modal .modal-header {
+    background: var(--primary-blue, #57ade4);
+    color: var(--white, #ffffff);
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+  }
+  
+  .modal .modal-header .modal-title {
+    font-weight: bold;
+  }
+  
+  .modal .modal-header .btn-close {
+    filter: invert(1);
+  }
+  
+  .modal .modal-body {
+    padding: 2rem;
+  }
+  
+  .modal .modal-footer {
+    border-top: 1px solid #dee2e6;
+    padding: 1rem 2rem;
+  }
+  
+  /* ====================================================================
+     PAGINATION
+     ==================================================================== */
+  
+  .pagination .page-link {
+    border: none;
+    color: var(--text-main, #333);
+    padding: 0.75rem 1rem;
+    margin: 0 0.25rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
+  
+  .pagination .page-link:hover {
+    background: var(--primary-blue, #57ade4);
+    color: var(--white, #ffffff);
+    transform: translateY(-2px);
+  }
+  
+  .pagination .page-item.active .page-link {
+    background: var(--primary-blue, #57ade4);
+    border-color: var(--primary-blue, #57ade4);
+  }
+  
+  .pagination .page-item.disabled .page-link {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* ====================================================================
+     BADGES
+     ==================================================================== */
+  
+  .badge {
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+  }
+  
+  .badge.badge-gaming {
+    background: var(--accent-blue, #57ade4);
+    color: var(--white, #ffffff);
+  }
+  
+  /* ====================================================================
+     PROGRESS BARS
+     ==================================================================== */
+  
+  .progress {
+    height: 1rem;
+    border-radius: 8px;
+    background: var(--light-bg, #f8f9fa);
+  }
+  
+  .progress .progress-bar {
+    border-radius: 8px;
+    transition: width 0.6s ease;
+  }
+  
+  /* ====================================================================
+     TOOLTIPS
+     ==================================================================== */
+  
+  .tooltip .tooltip-inner {
+    background: var(--dark-bg, #020305);
+    color: var(--white, #ffffff);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+} /* Fin @layer vendors */
