@@ -2,12 +2,12 @@
 /* Contenedor Principal con Clip-Path */
 .player-card {
   background-color: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid oklch(100% 0 0 / 0.05);
   width: 100%;
   max-width: 650px;
   position: relative;
   padding: 2rem;
-  color: #e5e7eb;
+  color: var(--text-main);
   font-family: "Rajdhani", sans-serif;
   /* Forma de "Hacker" con esquinas cortadas */
   clip-path: polygon(5% 0, 100% 0, 100% 70%, 95% 100%, 0 100%, 0 20%);
@@ -15,8 +15,8 @@
 }
 
 .player-card:hover {
-  border-color: rgba(163, 255, 0, 0.3);
-  background-color: rgba(255, 255, 255, 0.02);
+  border-color: oklch(from var(--accent-green) l c h / 0.3);
+  background-color: oklch(100% 0 0 / 0.02);
 }
 
 /* Etiquetas de sistema (Esquina Superior Derecha) */
@@ -117,7 +117,7 @@
 
 .progress-bar {
   height: 4px;
-  background: rgba(255, 255, 255, 0.05);
+  background: oklch(100% 0 0 / 0.05);
   overflow: hidden;
 }
 
@@ -129,7 +129,7 @@
 
 .connection-pill {
   padding: 4px 12px;
-  border: 1px solid rgba(163, 255, 0, 0.2);
+  border: 1px solid oklch(from var(--accent-green) l c h / 0.2);
   font-size: 10px;
   font-weight: 800;
   color: var(--primary);
@@ -159,7 +159,7 @@
 
 .player-email {
   font-size: 10px;
-  color: #9ca3af;
+  color: var(--text-gray);
   margin-bottom: 0.5rem;
 }
 
@@ -172,9 +172,9 @@
 .stats-grid {
   display: grid;
   grid-template-cols: repeat(3, 1fr);
-  background: rgba(0, 0, 0, 0.3);
+  background: oklch(0% 0 0 / 0.3);
   padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid oklch(100% 0 0 / 0.05);
   margin: 1.5rem 0;
 }
 
@@ -227,13 +227,13 @@
 }
 
 .btn-outline {
-  background: rgba(255, 255, 255, 0.05);
+  background: oklch(100% 0 0 / 0.05);
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid oklch(100% 0 0 / 0.1);
 }
 
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: oklch(100% 0 0 / 0.1);
   color: var(--primary);
 }
 

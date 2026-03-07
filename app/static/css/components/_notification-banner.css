@@ -17,12 +17,12 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  border: 1px solid rgba(163, 255, 0, 0.8);
+  border: 1px solid oklch(from var(--accent-green) l c h / 0.8);
   clip-path: polygon(20% 0, 100% 0, 100% 50%, 70% 100%, 0 100%, 0% 50%);
   transition: clip-path 0.5s cubic-bezier(0.77, 0, 0.175, 1), border-color 0.5s ease;
 }
 .notification-banner:hover::before {
-  border-color: rgba(163, 255, 0, 0.8);
+  border-color: oklch(from var(--accent-green) l c h / 0.8);
   clip-path: polygon(0 0, 65% 0, 100% 90%, 100% 100%, 48% 99%, 0 10%);
 }
 .notification-banner:hover .notification-banner__laser-scanner {
@@ -47,10 +47,10 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background-color: #A3FF00;
+  background-color: var(--accent-green);
   z-index: 10;
   pointer-events: none;
-  box-shadow: 0 0 15px #A3FF00, 0 0 30px #A3FF00, 0 0 50px #A3FF00;
+  box-shadow: 0 0 15px var(--accent-green), 0 0 30px var(--accent-green), 0 0 50px var(--accent-green);
   opacity: 0;
 }
 .notification-banner__laser-tail {
@@ -60,7 +60,7 @@
   right: 0;
   width: 200px; /* Longitud de la estela */
   transform: translateX(-10%); /* Se posiciona detrás de la línea */
-  background: linear-gradient(to right, transparent, rgba(163, 255, 0, 0.15));
+  background: linear-gradient(to right, transparent, oklch(from var(--accent-green) l c h / 0.15));
 }
 .notification-banner__content {
   width: 80%;
@@ -83,12 +83,12 @@
   flex-direction: row;
   position: relative;
   background-color: var(--bg-alpha);
-  border: 2px solid #A3FF00;
-  box-shadow: 0 0 15px rgba(163, 255, 0, 0.2);
+  border: 2px solid var(--accent-green);
+  box-shadow: 0 0 15px oklch(from var(--accent-green) l c h / 0.2);
 }
 .notification-banner__icon-group .material-symbols-outlined {
   font-size: 24px;
-  color: #A3FF00;
+  color: var(--accent-green);
 }
 .notification-banner__icon--ping {
   position: absolute;
@@ -109,12 +109,12 @@
   font-weight: 900;
   font-size: 1.875rem;
   letter-spacing: -0.05em;
-  text-shadow: 0 0 10px rgba(163, 255, 0, 0.5);
+  text-shadow: 0 0 10px oklch(from var(--accent-green) l c h / 0.5);
   margin: 0;
   line-height: 1.2;
 }
 .notification-banner__subtitle {
-  color: #A3FF00;
+  color: var(--accent-green);
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.25rem;

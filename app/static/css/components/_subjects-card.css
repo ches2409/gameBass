@@ -8,7 +8,7 @@
   }
 }
 :root {
-  --danger: #ff0000;
+  --danger: var(--alert);
 }
 
 /* Contenedor principal*/
@@ -26,7 +26,7 @@
   animation: fadeInUp 0.6s ease-out 0s forwards;
 }
 .card-container:hover {
-  border: 1px solid #A3FF00;
+  border: 1px solid var(--accent-green);
 }
 
 .section-cards {
@@ -37,14 +37,14 @@
 .green {
   width: 6px;
   height: 24px;
-  background-color: #A3FF00;
-  box-shadow: 0 0 15px #A3FF00;
+  background-color: var(--accent-green);
+  box-shadow: 0 0 15px var(--accent-green);
 }
 
 /* Tarjeta Base */
 .hvt-card {
-  background-color: #020305;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: var(--primary-bg);
+  border: 1px solid oklch(100% 0 0 / 0.05);
   padding: 1.25rem;
   position: relative;
   overflow: hidden;
@@ -59,16 +59,16 @@
 }
 
 .hvt-card.optimun {
-  border: 2px solid rgba(87, 173, 228, 0.3);
+  border: 2px solid oklch(from var(--accent-blue) l c h / 0.3);
 }
 
 /* Variación para Sujetos Peligrosos (K/D alto) */
 .hvt-card.danger-alert {
-  border: 1px solid rgba(255, 0, 0, 0.3);
+  border: 1px solid oklch(from var(--alert) l c h / 0.3);
 }
 
 .hvt-card:hover {
-  border-color: #A3FF00;
+  border-color: var(--accent-green);
   transform: translateY(-2px);
 }
 
@@ -76,7 +76,7 @@
 .card-grid-overlay {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(163, 255, 0, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(163, 255, 0, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(oklch(from var(--accent-green) l c h / 0.03) 1px, transparent 1px), linear-gradient(90deg, oklch(from var(--accent-green) l c h / 0.03) 1px, transparent 1px);
   background-size: 20px 20px;
   pointer-events: none;
 }
@@ -139,8 +139,8 @@
 }
 
 .status-indicator.online {
-  background-color: #A3FF00;
-  box-shadow: 0 0 10px #A3FF00;
+  background-color: var(--accent-green);
+  box-shadow: 0 0 10px var(--accent-green);
   animation: online-pulse 2s infinite;
 }
 
