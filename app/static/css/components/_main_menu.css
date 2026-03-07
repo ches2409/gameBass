@@ -8,18 +8,18 @@
   }
 }
 .command-center__sidebar {
-  background-color: #0A0C10;
+  background-color: var(--background-soft);
   height: 100%;
 }
 .command-center__sidebar .command-suite {
-  border: 1px solid #1A1E26;
+  border: 1px solid var(--soft);
   display: grid;
   height: 100%;
   grid-template-rows: 10vh 1fr 10vh; /* Header, Main (flexible), Footer */
   width: 100%;
 }
 .command-center__sidebar .command-suite__header {
-  background-color: #020305;
+  background-color: var(--primary-bg);
   height: 10vh;
   width: 100%;
   padding: 5%;
@@ -33,9 +33,9 @@
 .command-center__sidebar .command-suite__logo {
   width: 42px;
   height: 42px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(163, 255, 0, 0.08);
-  box-shadow: inset 0 0 0 1px rgba(163, 255, 0, 0.25);
+  border: 1px solid oklch(100% 0 0 / 0.15);
+  background: oklch(from var(--accent-green) l c h / 0.08);
+  box-shadow: inset 0 0 0 1px oklch(from var(--accent-green) l c h / 0.25);
   flex: 0 0 auto;
 }
 .command-center__sidebar .command-suite__branding {
@@ -50,9 +50,8 @@
   margin: 0;
 }
 .command-center__sidebar .command-suite__tag {
-  color: #A3FF00;
-  color: #A3FF00;
-  text-shadow: 0 0 5px rgba(163, 255, 0, 0.5), 0 0 10px rgba(163, 255, 0, 0.4), 0 0 15px rgba(163, 255, 0, 0.3), 0 0 20px rgba(163, 255, 0, 0.2);
+  color: var(--accent-green);
+  text-shadow: 0 0 5px oklch(from var(--accent-green) l c h / 0.5), 0 0 10px oklch(from var(--accent-green) l c h / 0.4), 0 0 15px oklch(from var(--accent-green) l c h / 0.3), 0 0 20px oklch(from var(--accent-green) l c h / 0.2);
   font-size: 0.7rem;
 }
 .command-center__sidebar .command-suite__main {
@@ -74,7 +73,7 @@
   font-size: 0.65rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #6b7280;
+  color: var(--text-gray);
 }
 .command-center__sidebar .command-suite__main .command-suite__group {
   display: flex;
@@ -94,25 +93,25 @@
   align-items: center;
 }
 .command-center__sidebar .command-suite__item:hover {
-  background-color: rgba(255, 255, 255, 0.05); /* Sutil transparencia blanca */
-  color: #ffffff;
-  text-shadow: 0 0 1.5px #d6f5e9;
+  background-color: oklch(100% 0 0 / 0.05); /* Sutil transparencia blanca */
+  color: var(--white);
+  text-shadow: 0 0 1.5px var(--text-main);
 }
 .command-center__sidebar .command-suite__item:active {
-  background-color: rgba(163, 255, 0, 0.1); /* Fondo verde traslúcido */
-  color: #A3FF00;
-  border-right: 2px solid #A3FF00; /* Indicador de estado */
-  box-shadow: inset -10px 0 20px rgba(163, 255, 0, 0.05);
+  background-color: oklch(from var(--accent-green) l c h / 0.1); /* Fondo verde traslúcido */
+  color: var(--accent-green);
+  border-right: 2px solid var(--accent-green); /* Indicador de estado */
+  box-shadow: inset -10px 0 20px oklch(from var(--accent-green) l c h / 0.05);
 }
 .command-center__sidebar .command-suite__item.active {
-  background-color: rgba(163, 255, 0, 0.1);
-  color: #A3FF00;
-  border-right: 2px solid #A3FF00;
-  box-shadow: inset -10px 0 20px rgba(163, 255, 0, 0.05);
+  background-color: oklch(from var(--accent-green) l c h / 0.1);
+  color: var(--accent-green);
+  border-right: 2px solid var(--accent-green);
+  box-shadow: inset -10px 0 20px oklch(from var(--accent-green) l c h / 0.05);
 }
 .command-center__sidebar .command-suite__item.active .icon-main {
-  fill: #A3FF00;
-  color: #A3FF00;
+  fill: var(--accent-green);
+  color: var(--accent-green);
   transform: scale(1.1);
 }
 .command-center__sidebar .command-suite__item .icon-main {
@@ -123,9 +122,9 @@
   color: inherit;
 }
 .command-center__sidebar .command-suite__item:hover .icon-main {
-  fill: #A3FF00;
+  fill: var(--accent-green);
   transform: scale(1.1);
-  color: #A3FF00;
+  color: var(--accent-green);
   transition: all 0.3s ease;
 }
 .command-center__sidebar .command-suite__item .name-main {
@@ -136,7 +135,7 @@
   margin-bottom: 0;
 }
 .command-center__sidebar .command-suite__footer {
-  background-color: #020305;
+  background-color: var(--primary-bg);
   width: 100%;
   height: 10vh;
   display: flex;
@@ -150,7 +149,7 @@
   cursor: pointer;
 }
 .command-center__sidebar .command-suite__group .button-abort .icon_abort svg {
-  fill: #aaafab;
+  fill: var(--text-gray);
   transition: all 0.3s ease;
 }
 .command-center__sidebar .command-suite__group .button-abort:hover .icon_abort svg {
@@ -159,5 +158,5 @@
   transform: scale(1.5);
 }
 .command-center__sidebar:hover {
-  border-right: #A3FF00 solid 1px;
+  border-right: var(--accent-green) solid 1px;
 }

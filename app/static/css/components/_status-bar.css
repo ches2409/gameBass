@@ -1,10 +1,10 @@
 @charset "UTF-8";
 /* Variables de Arkadex */
 :root {
-  --primary: #A3FF00;
-  --secondary: #D500F9;
-  --bg-bar: rgba(2, 3, 5, 0.9);
-  --border: rgba(163, 255, 0, 0.2);
+  --primary: var(--accent-green);
+  --secondary: var(--accent-pink);
+  --bg-bar: oklch(from var(--primary-bg) l c h / 0.9);
+  --border: oklch(from var(--accent-green) l c h / 0.2);
 }
 
 /* Contenedor Principal */
@@ -32,7 +32,7 @@
 /* 1. Uplink Node */
 .uplink-node {
   padding-right: 20px;
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid oklch(100% 0 0 / 0.05);
   flex-shrink: 0;
 }
 
@@ -52,7 +52,7 @@
 .status-label {
   font-size: 9px;
   font-weight: 900;
-  color: #555;
+  color: var(--text-dim);
   letter-spacing: 2px;
   text-transform: uppercase;
 }
@@ -78,7 +78,7 @@
 
 .ticker-item {
   font-size: 8px;
-  color: #666;
+  color: var(--text-gray);
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -92,7 +92,7 @@
 /* 3. System Metrics */
 .system-metrics {
   padding-left: 20px;
-  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 1px solid oklch(100% 0 0 / 0.05);
   gap: 20px;
   flex-shrink: 0;
 }
@@ -110,12 +110,12 @@
 
 .metric-value {
   font-size: 10px;
-  color: #fff;
+  color: var(--white);
   font-weight: 700;
 }
 
 .clearance-badge {
-  background: rgba(163, 255, 0, 0.1);
+  background: oklch(from var(--accent-green) l c h / 0.1);
   border: 1px solid var(--border);
   padding: 2px 8px;
   font-family: "Orbitron", sans-serif;

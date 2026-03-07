@@ -1,9 +1,9 @@
 .c-media-card {
   padding: 1rem;
-  border: 1px solid #2a3141;
+  border: 1px solid var(--soft);
   border-radius: 0.5rem;
-  background-color: #0A0C10;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  background-color: var(--background-soft);
+  box-shadow: 0 1px 3px 0 oklch(0% 0 0 / 0.1);
   transition: all 0.3s ease;
 }
 
@@ -14,7 +14,7 @@
 .c-media-card .o-media__figure {
   overflow: hidden;
   border-radius: 0.5rem;
-  border: 1px solid #13547e;
+  border: 1px solid var(--accent-blue-dark);
 }
 
 .c-media-card .o-media__body {
@@ -27,17 +27,17 @@
   margin: 0;
   font-family: "Orbitron", "Arial", monospace;
   font-size: 1.125rem;
-  color: #d6f5e9;
+  color: var(--text-main);
 }
 
 .c-media-card__description {
   margin: 0;
   font-family: "Rajdhani", sans-serif;
   font-size: 0.875rem;
-  color: #6b7280;
+  color: var(--text-gray);
 }
 
 .c-media-card--highlight {
-  border-color: #A3FF00;
-  box-shadow: 0 0 20px rgba(186, 255, 62, 0.5);
+  border-color: var(--accent-green);
+  box-shadow: 0 0 20px oklch(from var(--accent-green) l c h / 0.5);
 }

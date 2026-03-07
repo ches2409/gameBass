@@ -17,8 +17,8 @@
 }
 
 .arkadex-card:hover {
-  background-color: rgba(255, 255, 255, 0.02);
-  border-color: rgba(255, 255, 255, 0.1);
+  background-color: oklch(100% 0 0 / 0.02);
+  border-color: oklch(100% 0 0 / 0.1);
   transform: translateX(8px);
 }
 
@@ -100,7 +100,7 @@
   font-family: "Orbitron", sans-serif;
   font-size: 12px;
   font-weight: 700;
-  color: #fff;
+  color: var(--white);
   letter-spacing: 2px;
   margin-top: 5px;
   opacity: 0.8;
@@ -112,7 +112,7 @@
   font-style: italic;
   line-height: 1.4;
   margin-bottom: 25px;
-  border-left: 2px solid rgba(255, 255, 255, 0.05);
+  border-left: 2px solid oklch(100% 0 0 / 0.05);
   padding-left: 15px;
 }
 
@@ -125,19 +125,19 @@
 }
 
 .perm-tag {
-  background: rgba(255, 255, 255, 0.03);
+  background: oklch(100% 0 0 / 0.03);
   border: 1px solid var(--border);
   padding: 5px 10px;
   font-family: "Fira Code", monospace;
   font-size: 9px;
-  color: #71717a;
+  color: var(--text-gray);
   font-weight: bold;
   letter-spacing: 1px;
 }
 
 .arkadex-card:hover .perm-tag {
-  border-color: rgba(255, 255, 255, 0.1);
-  color: #a1a1aa;
+  border-color: oklch(100% 0 0 / 0.1);
+  color: var(--text-main);
 }
 
 /* --- SECCIÓN DE ESTADÍSTICAS (DERECHA) --- */
@@ -154,7 +154,7 @@
   display: block;
   font-family: "Fira Code", monospace;
   font-size: 8px;
-  color: #4b5563;
+  color: var(--text-dim);
   text-transform: uppercase;
   margin-bottom: 8px;
   letter-spacing: 1px;
@@ -165,7 +165,7 @@
   font-size: 16px;
   font-weight: 900;
   font-style: italic;
-  color: #fff;
+  color: var(--white);
 }
 
 /* Medidor de Barras */
@@ -177,7 +177,7 @@
 .bar {
   width: 6px;
   height: 14px;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: oklch(100% 0 0 / 0.05);
 }
 
 .bar.active {
@@ -227,7 +227,7 @@
   font-family: "Orbitron", sans-serif;
   font-size: 100px;
   font-weight: 900;
-  color: rgba(255, 255, 255, 0.02);
+  color: oklch(100% 0 0 / 0.02);
   pointer-events: none;
   z-index: 0;
 }

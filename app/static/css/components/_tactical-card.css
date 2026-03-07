@@ -22,7 +22,7 @@
 }
 
 .tactical-container:hover {
-  border: 1px solid #A3FF00;
+  border: 1px solid var(--accent-green);
 }
 
 /* Estilos de Título */
@@ -64,7 +64,7 @@
 }
 
 .squad-row:hover {
-  border-color: rgba(213, 0, 249, 0.4);
+  border-color: oklch(from var(--accent-pink) l c h / 0.4);
   transform: translateX(5px);
 }
 
@@ -74,7 +74,7 @@
   font-size: 1.8rem;
   font-weight: 900;
   font-style: italic;
-  color: rgba(255, 255, 255, 0.1);
+  color: oklch(100% 0 0 / 0.1);
   transition: color 0.3s ease;
 }
 
@@ -111,7 +111,7 @@
 /* Barra de Progreso */
 .progress-track {
   height: 4px;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: oklch(100% 0 0 / 0.05);
   width: 100%;
 }
 
@@ -135,7 +135,7 @@
   display: block;
   font-family: "Fira Code", monospace;
   font-size: 8px;
-  color: #4b5563;
+  color: var(--text-dim);
   text-transform: uppercase;
 }
 

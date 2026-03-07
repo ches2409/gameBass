@@ -8,12 +8,12 @@
   }
 }
 .empty-modal {
-  --sys-red: #FF0000;
+  --sys-red: var(--alert);
   width: 100%;
   max-width: 60vw;
   height: 60vh;
-  background-color: #0A0C10;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: var(--background-soft);
+  border: 1px solid oklch(100% 0 0 / 0.05);
   position: relative;
   overflow: hidden;
   display: flex;
@@ -21,13 +21,13 @@
   align-items: center;
   flex-direction: column;
   clip-path: polygon(30px 0, 100% 0, 100% 100%, 0 100%, 0 30px);
-  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 50px 100px oklch(0% 0 0 / 0.8);
   padding: 1rem;
 }
 .empty-modal__grid {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(255, 0, 0, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 0, 0.07) 1px, transparent 1px);
+  background-image: linear-gradient(oklch(from var(--alert) l c h / 0.07) 1px, transparent 1px), linear-gradient(90deg, oklch(from var(--alert) l c h / 0.07) 1px, transparent 1px);
   background-size: 40px 40px;
   opacity: 0.5;
   pointer-events: none;
@@ -46,7 +46,7 @@
   position: absolute;
   font-family: "Fira Code", monospace;
   font-size: 8px;
-  color: #4b5563;
+  color: var(--text-dim);
   text-transform: uppercase;
   letter-spacing: 2px;
 }
@@ -61,11 +61,11 @@
 .empty-modal__icon {
   width: 120px;
   height: 120px;
-  border: 2px solid rgba(255, 0, 0, 0.3);
+  border: 2px solid oklch(from var(--alert) l c h / 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(255, 0, 0, 0.05);
+  background: oklch(from var(--alert) l c h / 0.05);
   clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
   margin-bottom: 50px;
   position: relative;
@@ -74,7 +74,7 @@
 .empty-modal__icon .material-symbols-outlined {
   font-size: 80px;
   color: var(--sys-red);
-  text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+  text-shadow: 0 0 20px oklch(from var(--alert) l c h / 0.8);
 }
 .empty-modal__title {
   position: relative;
@@ -98,12 +98,12 @@
   opacity: 0.8;
 }
 .empty-modal__title::before {
-  color: #A3FF00;
+  color: var(--accent-green);
   z-index: -1;
   animation: glitch-anim 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
 }
 .empty-modal__title::after {
-  color: #D500F9;
+  color: var(--accent-pink);
   z-index: -2;
   animation: glitch-anim 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
 }
@@ -112,8 +112,8 @@
 }
 .empty-modal__subtitle {
   display: inline-block;
-  background: rgba(255, 0, 0, 0.1);
-  border: 1px solid rgba(255, 0, 0, 0.4);
+  background: oklch(from var(--alert) l c h / 0.1);
+  border: 1px solid oklch(from var(--alert) l c h / 0.4);
   padding: 5px 15px;
   margin-top: 15px;
 }
@@ -128,7 +128,7 @@
 .empty-modal__description {
   font-family: "Fira Code", monospace;
   font-size: 0.75rem;
-  color: #6b7280;
+  color: var(--text-gray);
   max-width: 450px;
   line-height: 1.6;
   text-transform: uppercase;
@@ -139,7 +139,7 @@
 .empty-modal__action-btn {
   margin-top: 50px;
   background: transparent;
-  border: 1px solid rgba(255, 0, 0, 0.4);
+  border: 1px solid oklch(from var(--alert) l c h / 0.4);
   color: var(--sys-red);
   padding: 15px 40px;
   font-family: "Orbitron", sans-serif;
@@ -160,14 +160,14 @@
 }
 .empty-modal__action-btn:hover {
   background-color: var(--sys-red);
-  color: #d6f5e9;
-  box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+  color: var(--text-main);
+  box-shadow: 0 0 30px oklch(from var(--alert) l c h / 0.4);
   transform: scale(1.05);
 }
 .empty-modal__footer-text {
   font-family: "Fira Code", monospace;
   font-size: 0.5rem;
-  color: #333;
+  color: var(--text-dim);
   margin-top: 1.5rem;
   letter-spacing: 2px;
 }

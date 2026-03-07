@@ -66,9 +66,9 @@
 
 /* Efecto Hover */
 .hub-metric-card:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: oklch(100% 0 0 / 0.05);
   transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(163, 255, 0, 0.1);
+  box-shadow: 0 0 20px oklch(from var(--accent-green) l c h / 0.1);
 }
 
 /* Icono de fondo con opacidad baja */

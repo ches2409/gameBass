@@ -12,7 +12,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid oklch(100% 0 0 / 0.05);
   padding-bottom: 2rem;
   margin-bottom: 2rem;
   position: relative;
@@ -30,7 +30,7 @@
 .pulse-dot {
   width: 0.5rem;
   height: 0.5rem;
-  background-color: #A3FF00;
+  background-color: var(--accent-green);
   border-radius: 50%;
   animation: pulse 2s infinite;
 }
@@ -38,7 +38,7 @@
 .status-code {
   font-family: "Fira Code", monospace;
   font-size: 10px;
-  color: #A3FF00;
+  color: var(--accent-green);
   font-weight: 900;
   letter-spacing: 0.1em;
 }
@@ -51,7 +51,7 @@
   font-family: "Orbitron", sans-serif;
   font-weight: 900;
   font-size: 2.5rem;
-  color: white;
+  color: var(--white);
   text-transform: uppercase;
   font-style: italic;
   letter-spacing: -0.05em;
@@ -66,12 +66,12 @@
   opacity: 0.8;
 }
 .glitch-title::before {
-  color: #A3FF00;
+  color: var(--accent-green);
   z-index: -1;
   animation: glitch-anim 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
 }
 .glitch-title::after {
-  color: #D500F9;
+  color: var(--accent-pink);
   z-index: -2;
   animation: glitch-anim 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
 }
