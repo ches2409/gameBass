@@ -1,15 +1,30 @@
+// ═══════════════════════════════════════════════════════════════════════════
+// MODULO: Reset
+// ARCHIVO: _reset.scss
+// MARCSS - Base
+// ═══════════════════════════════════════════════════════════════════════════
+// Descripción:
+//   Este archivo contiene los estilos base y reset para normalizar el comportamiento entre los navegadores
+//
+// Responsabilidad:
+//   - Definir estructura y funcionalidad del módulo.
+//   - Mantener cohesión dentro de su categoría.
+//
+// Alcance:
+//   - Solo contenido relacionado a este módulo.
+//   - No incluye estilos de otras categorías.
+//
+// Dependencias:
+//   - Variables y mixins base (si aplica).
+//   - Consumido por componentes o paginas (según categoría).
+// ═══════════════════════════════════════════════════════════════════════════
+
 @use "sass:color";
 @use "sass:map";
 @use "sass:string";
 @use "variables";
 @use "mixins";
 
-
-// ==========================================================================
-// RESET/NORMALIZE - SMACSS Base
-// ==========================================================================
-// Este archivo contiene los estilos base y reset para normalizar
-// el comportamiento entre navegadores
 // Variables locales para el reset
 $base-font-family: variables.$font-body;
 $base-font-size: 16px;
@@ -147,9 +162,9 @@ li {
 }
 
 // Imágenes y media
-img, 
-video, 
-canvas, 
+img,
+video,
+canvas,
 svg {
   display: block;
   max-width: 100%;

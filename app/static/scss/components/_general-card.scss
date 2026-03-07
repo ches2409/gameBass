@@ -208,10 +208,6 @@
 .status-estable { color: #A3FF00 !important; }
 .status-degraded { color: #FF3E3E !important; animation: blink 1.5s infinite; }
 
-@keyframes blink {
-  50% { opacity: 0.4; }
-}
-
 
 /* Engine icon*/
 .engine-icon {
@@ -340,9 +336,4 @@
     color: variables.$text-dim;
   
   }
-  @keyframes pulse-live {
-    0% { opacity: 1; }
-    50% { opacity: 0.6; }
-    100% { opacity: 1; }
-}
 }

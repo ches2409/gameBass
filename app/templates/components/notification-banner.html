@@ -1,0 +1,75 @@
+{# 
+    ═══════════════════════════════════════════════════════════════════════════
+    COMPONENTE: notification-banner
+    ═══════════════════════════════════════════════════════════════════════════
+    
+    Propósito:
+        Componente de notificación global que aparece en todas las ventanas del sistema,
+        proporcionando feedback visual inmediato con efectos de escáner láser y acción interactiva para cerrar.
+    
+    Uso:
+        {% include 'components/notification-banner.html' %}
+    
+    Estructura BEM:
+        Block: .notification-banner (contenedor externo/wrapper)
+        Elements: __container, __lasser-scanner, __laser-tail, __content, __icon, 
+                  __icon-group, __title, __subtitle, __text, __actions, __action-btn
+        Modifiers: --ping, --animated
+    
+    ═══════════════════════════════════════════════════════════════════════════
+#}
+
+<div class="notification-banner"
+     role="alert"
+     aria-live="polite"
+     aria-label="Notificación de estado del sistema">
+    
+    <div class="notification-banner__container">
+
+        <!-- Efecto decorativo: Escáner láser -->
+        <div class="notification-banner__laser-scanner" aria-hidden="true">
+            <div class="notification-banner__laser-tail"></div>
+        </div>
+
+        <!-- Contenedor principal de contenido -->
+        <div class="notification-banner__content">
+
+            <!-- Grupo de iconos: ping + animación continua -->
+            <div class="notification-banner__icon-group">
+                <span
+                    class="material-symbols-outlined notification-banner__icon notification-banner__icon--ping"
+                    aria-hidden="true">
+                    {{ icon | default('monitoring') }}
+                </span>
+
+                <span
+                    class="material-symbols-outlined notification-banner__icon notification-banner__icon--animated"
+                    aria-hidden="true">
+                    {{ icon | default('monitoring') }}
+                </span>
+            </div>
+
+            <!-- Contenedor de texto: título + subtítulo -->
+            <div class="notification-banner__text">
+                <h3 class="notification-banner__title">{{ title | default('Metric_label') }}</h3>
+                <p class="notification-banner__subtitle">{{ subtitle | default('subtitulo de prueba') }}</p>
+            </div>
+        </div>
+
+        <!-- Contenedor de acciones: botón cerrar -->
+        <div class="notification-banner__actions">
+
+            {% if alert_finish.user_has_access and alert_finish.url_info!="/registros"%}
+                <div class="btn-glow">
+                    <a href="#" onclick="toggleModal('{{ modal_target }}')">
+                        <i aria-hidden="true"></i>
+                        <i aria-hidden="true"></i>
+                        <span>{{ btn_info | default('INYECCION') }}</span>
+                    </a>
+                </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+</div>

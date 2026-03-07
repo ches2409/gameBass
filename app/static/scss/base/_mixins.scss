@@ -1,23 +1,38 @@
+// ═══════════════════════════════════════════════════════════════════════════
+// MODULO: Mixins
+// ARCHIVO: _mixins.scss
+// MARCSS - Base
+// ═══════════════════════════════════════════════════════════════════════════
+// Descripción:
+//   Este archivo contiene mixins reutilizables para el proyecto, incluye responsive design, efectos, etc.
+//
+// Responsabilidad:
+//   - Definir estructura y funcionalidad del módulo.
+//   - Mantener cohesión dentro de su categoría.
+//
+// Alcance:
+//   - Solo contenido relacionado a este módulo.
+//   - No incluye estilos de otras categorías.
+//
+// Dependencias:
+//   - Variables y mixins base (si aplica).
+//   - Consumido por componentes o paginas (según categoría).
+// ═══════════════════════════════════════════════════════════════════════════
+
 @use "sass:color";
 @use "sass:map";
 @use "sass:string";
-@use "variables";
-@use "functions";
-
-// ==========================================================================
-// MIXINS - SMACSS Base
-// ==========================================================================
-// Este archivo contiene mixins reutilizables para el proyecto
-// Incluye responsive design, efectos, animaciones, etc.
+@use "variables" as vars;
+@use "functions" as fn;
 
 // Mixin para media queries responsive
 @mixin respond-to($breakpoint) {
-  @if map.has-key(variables.$breakpoints, $breakpoint) {
-    @media (min-width: map.get(variables.$breakpoints, $breakpoint)) {
+  @if map.has-key(vars.$breakpoints, $breakpoint) {
+    @media (min-width: map.get(vars.$breakpoints, $breakpoint)) {
       @content;
     }
   } @else {
-    @warn "Breakpoint '#{$breakpoint}' no existe en $breakpoints.";
+    @error "Breakpoint '#{$breakpoint}' no existe en $breakpoints.";
   }
 }
 
@@ -44,12 +59,12 @@
     opacity: 0.8;
   }
   &::before{
-    color: variables.$accent-green;
+    color: vars.$accent-green;
     z-index: -1;
     animation: glitch-anim 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
   }
   &::after {
-    color: variables.$accent-pink;
+    color: vars.$accent-pink;
     z-index: -2;
     animation: glitch-anim 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
 
@@ -87,7 +102,7 @@
 // Mixin para texto con efecto neón
 @mixin neon-text($color, $intensity: 0.5) {
   color: $color;
-  text-shadow: 
+  text-shadow:
     0 0 5px rgba($color, $intensity),
     0 0 10px rgba($color, $intensity * 0.8),
     0 0 15px rgba($color, $intensity * 0.6),
@@ -126,13 +141,13 @@
 }
 
 @mixin button-delete{
-  color: variables.$alert;
-  border: 1px solid rgba(variables.$alert, 0.5);
+  color: vars.$alert;
+  border: 1px solid rgba(vars.$alert, 0.5);
   &:hover{
-    background: variables.$alert;
+    background: vars.$alert;
     color: #fff;
-    border-color: variables.$alert;
-    box-shadow: 0 0 20px rgba(variables.$alert, 0.4);
+    border-color: vars.$alert;
+    box-shadow: 0 0 20px rgba(vars.$alert, 0.4);
     transform: scale(1.1);
   }
 }
@@ -140,8 +155,8 @@
 @mixin button-edit{
   &:hover{
     text-decoration: none;
-    color: variables.$accent-yellow;
-    border-color: variables.$accent-yellow;
+    color: vars.$accent-yellow;
+    border-color: vars.$accent-yellow;
     background: rgba(163, 255, 0, 0.05);
     box-shadow: 0 0 15px rgba(163, 255, 0, 0.3);
     transform: scale(1.1);
@@ -149,7 +164,7 @@
 }
 
 @mixin button-submit{
-  background: variables.$accent-green;
+  background: vars.$accent-green;
   border: none;
   color: #000;
   position: relative;
@@ -176,7 +191,7 @@
 //valores complementarios de los botones de accion "submit" y "cancel"
 @mixin actions-values($flex:1){
   flex: $flex;
-  font-family: variables.$font-display;
+  font-family: vars.$font-display;
   font-size: 10px;
   font-weight: 900;
   cursor: pointer;
@@ -218,7 +233,7 @@
   background-color: $bg-color;
   color: $text-color;
   border: 2px solid $border-color;
-  transition: variables.$transition-base;
+  transition: vars.$transition-base;
   cursor: pointer;
   
   &:hover {
@@ -226,7 +241,7 @@
     border-color: $hover-color;
     color: $bg-color;
     transform: translateY(-2px);
-    box-shadow: map.get(variables.$shadows, 'lg');
+    box-shadow: map.get(vars.$shadows, 'lg');
   }
   
   &:active {
@@ -235,14 +250,14 @@
 }
 
 // Mixin para cards con efecto gaming
-@mixin gaming-card($border-color: variables.$accent-blue) {
-  background: rgba(variables.$primary-bg, 0.9);
+@mixin gaming-card($border-color: vars.$accent-blue) {
+  background: rgba(vars.$primary-bg, 0.9);
   border: 2px solid $border-color;
   border-radius: 0.5rem;
   padding: 1.5rem;
   position: relative;
   overflow: hidden;
-  transition: variables.$transition-base;
+  transition: vars.$transition-base;
   
   &::before {
     content: '';
@@ -347,7 +362,7 @@
 }
 
 // Mixin para scrollbar personalizado
-@mixin custom-scrollbar($thumb-color: variables.$accent-blue, $track-color: rgba(variables.$primary-bg, 0.5)) {
+@mixin custom-scrollbar($thumb-color: vars.$accent-blue, $track-color: rgba(vars.$primary-bg, 0.5)) {
   // Propiedades estándar para Firefox
   scrollbar-width: thin;
   scrollbar-color: $thumb-color $track-color;
@@ -373,7 +388,7 @@
 }
 
 // Mixin para focus states accesibles
-@mixin focus-outline($color: variables.$accent-blue) {
+@mixin focus-outline($color: vars.$accent-blue) {
   &:focus {
     outline: 2px solid $color;
     outline-offset: 2px;

@@ -1,0 +1,170 @@
+// ═══════════════════════════════════════════════════════════════════════════
+// MODULO: Notification Banner
+// ARCHIVO: _notification-banner.scss
+// MARCSS - Components
+// ═══════════════════════════════════════════════════════════════════════════
+// Descripción:
+//   Define los estilos BEM para el banner global
+//
+// Responsabilidad:
+//   - Definir estilos del bloque ".notification-banner" y sus elementos.
+//   - Gestionar estados y variantes con BEM.
+//
+// Alcance:
+//   - Solo estilos del componente y keyframes asociados.
+//   - No incluye estilos globales ni layout de pagina.
+//
+// Dependencias:
+//   - @use "../base/variables"
+//   - @use "../base/functions"
+//   - @use "../base/mixins"
+// ═══════════════════════════════════════════════════════════════════════════
+
+@use '../base/variables' as vars;
+@use '../base/functions' as fn;
+@use '../base/mixins' as mix;
+
+// ---------------------------------------------------------------------------
+// BLOCK: notification-banner
+// ---------------------------------------------------------------------------
+.notification-banner {
+    //background-color: orange;
+    position: relative;
+    padding: 1px;
+    margin-bottom: .7rem;
+    &::before{
+        content: '';
+        position: absolute;
+        inset: 0; // Ocupa el mismo espacio que el padre
+        z-index: 0; // Se coloca detrás del contenido
+        border: 1px solid rgba(vars.$accent-green, 0.8);
+        clip-path: polygon(20% 0, 100% 0, 100% 50%, 70% 100%, 0 100%, 0% 50%);
+        transition: clip-path 0.5s cubic-bezier(0.77, 0, 0.175, 1), border-color 0.5s ease;
+    }
+    &:hover::before{
+        border-color: rgba(vars.$accent-green, 0.8);
+        clip-path: polygon(0 0, 65% 0, 100% 90%, 100% 100%, 48% 99%, 0 10%);
+    }
+    &:hover &__laser-scanner{
+        animation: laser-sweep fn.animation('scan') fn.timing('scan') infinite;
+    }
+    // ELEMENT: container 
+    // Panel visual interno
+    &__container {
+        @include mix.center-flex();
+        gap: fn.spacing('6');
+        padding: fn.spacing('6');
+        background-color: var(--bg-alpha);
+        font-family: vars.$font-secondary;
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        overflow: hidden;
+    }
+    // ELEMENT: laser-scanner 
+    // efecto decorativo linea laser
+    &__laser-scanner {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: vars.$accent-green;
+        z-index: 10;
+        pointer-events: none;
+        box-shadow:
+            0 0 15px vars.$accent-green,
+            0 0 30px vars.$accent-green,
+            0 0 50px vars.$accent-green;
+        opacity: 0;
+    }
+    // ELEMENT: laser-tail 
+    // Efecto decorativo de luz que sigue al laser
+    &__laser-tail {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 200px; /* Longitud de la estela */
+        transform: translateX(-10%); /* Se posiciona detrás de la línea */
+        background: linear-gradient(to right, transparent, rgba(vars.$accent-green, 0.15));
+    }
+    // ELEMENT: content 
+    // contenedor principal
+    &__content {
+        //background-color: purple;
+        width: 80%;
+        display: flex;
+        gap: 1rem;
+    }
+    // ELEMENT: actions 
+    // acciones de botón
+    &__actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20%;
+        z-index: 100;
+    }
+    // ELEMENT: icon-group 
+    // animaciones dual para el gripo de iconos
+    &__icon-group {
+        width: 56px;
+        height: 56px;
+        @include mix.center-flex($justify: center);
+        position: relative;
+        background-color: var(--bg-alpha);
+        border: 2px solid vars.$accent-green;
+        box-shadow: 0 0 15px rgba(vars.$accent-green, 0.2);
+        .material-symbols-outlined{
+            font-size: 24px;
+            color: vars.$accent-green;
+        
+        }
+    }
+    // ELEMENT: icon 
+    // iconos principales
+    &__icon {
+        // MODIFIER: ping
+        // Animación 1: ping (onda expansiva)
+        &--ping {
+            position: absolute;
+            animation: ping-effect fn.animation('scan') fn.timing('pulse') infinite;
+        }
+        // MODIFIER: animated
+        // Animación 2: Blink Tech (parpadeo con brillo)
+        &--animated {
+            z-index: 2;
+            animation: blink-tech fn.animation('extended') ease-in-out infinite;
+        
+        }
+    }
+    // ELEMENT: text 
+    // contenedor de texto
+    &__text {
+        @include mix.center-flex($direction: column, $align:left, $justify: center);
+    }
+    // ELEMENT: title 
+    // estilo del titulo
+    &__title {
+        color: white;
+        font-weight: 900;
+        font-size: fn.font-size('4xl');
+        letter-spacing: -0.05em;
+        text-shadow: 0 0 10px rgba(vars.$accent-green, 0.5);
+        margin: 0;
+        line-height: fn.line-height('light');
+    }
+    // ELEMENT: subtitle 
+    // estilo del subtitulo
+    &__subtitle {
+        color: vars.$accent-green;
+        font-size: fn.font-size('xs');
+        text-transform: uppercase;
+        letter-spacing: fn.spacing('1');
+        opacity: 0.8;
+        margin: 0;
+    }
+    &__title,&__subtitle{
+        font-family: vars.$font-secondary;
+    }
+}

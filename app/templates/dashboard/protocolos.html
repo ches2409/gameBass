@@ -7,10 +7,10 @@
     {% from 'macros/data_card_macro.html' import render_data_card with context %}
     {% from 'macros/protocolo_form_macro.html' import render_protocolo_modal %}
 
-	{% block alertContainer %}
+	{% block notificationBanner %}
         {% if alert_finish %}
             {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info, modal_target='createProtocoloModal' %}
-                {% include 'components/alert-container.html' %}
+                {% include 'components/notification-banner.html' %}
             {% endwith %}
         {% endif %}
 

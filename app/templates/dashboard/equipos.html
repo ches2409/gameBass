@@ -5,10 +5,10 @@
 {% block dashboard_body %}
     {% from 'macros/equipo_form_macro.html' import render_equipo_modal %}
 
-    {% block alertContainer %}
+    {% block notificationBanner %}
         {% if alert_finish %}
             {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info, modal_target='createEquipoModal' %}
-                {% include 'components/alert-container.html' %}
+                {% include 'components/notification-banner.html' %}
             {% endwith %}
         {% endif %}
     {% endblock %}
@@ -25,7 +25,7 @@
             <!-- Mensaje si no hay ninguna jerarquía creada todavía -->
 
             <div class="error-container">
-                {%  include 'components/error-datos.html'%}
+                {%  include 'components/empty-modal.html'%}
             </div>
 
         {% endif %}

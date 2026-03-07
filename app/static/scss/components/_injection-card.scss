@@ -279,11 +279,7 @@
 
 .injection-card__spec-status--degraded {
   color: #FF3E3E !important;
-  animation: degraded-pulse 1.5s infinite;
-}
-
-@keyframes degraded-pulse {
-  50% { opacity: 0.4; }
+  animation: blink 1.5s infinite;
 }
 
 // element: Engine Icon - Icono decorativo con borde neón
@@ -437,7 +433,7 @@
   // modifier: Live status
   &--live {
     background-color: #d32f2f;
-    animation: live-pulse 1.5s infinite;
+    animation: pulse-live 1.5s infinite;
   }
 
   // modifier: Open status
@@ -449,11 +445,5 @@
   &--finished {
     background-color: variables.$background-dark;
     color: variables.$text-dim;
-  }
-
-  @keyframes live-pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.6; }
-    100% { opacity: 1; }
   }
 }

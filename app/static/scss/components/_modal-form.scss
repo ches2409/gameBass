@@ -29,11 +29,6 @@
   max-height: 95vh;
 }
 
-@keyframes modalSlideIn {
-  from { opacity: 0; transform: scale(0.9) translateY(30px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
 /* Brackets de las esquinas */
 .corner-bracket {
   position: absolute;
@@ -211,15 +206,4 @@ select option {
   z-index: 5;
   opacity: 0.5;
   animation: laserScan 4s linear infinite;
-}
-
-@keyframes laserScan {
-  0% { top: 0; left: -100%; }
-  50% { left: 100%; top: 50%; }
-  100% { top: 100%; left: -100%; }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.2); }
 }

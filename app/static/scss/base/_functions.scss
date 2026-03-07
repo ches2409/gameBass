@@ -1,53 +1,87 @@
-@use "sass:map";
-@use "variables";
+// ═══════════════════════════════════════════════════════════════════════════
+// MODULO: Functions
+// ARCHIVO: _functions.scss
+// MARCSS - Base
+// ═══════════════════════════════════════════════════════════════════════════
+// Descripción:
+//   Funciones auxiliares para recuperar valores de los mapas de variables
+//
+// Responsabilidad:
+//   - Definir estructura y funcionalidad del módulo.
+//   - Mantener cohesión dentro de su categoría.
+//
+// Alcance:
+//   - Solo contenido relacionado a este módulo.
+//   - No incluye estilos de otras categorías.
+//
+// Dependencias:
+//   - Variables y mixins base (si aplica).
+//   - Consumido por componentes o paginas (según categoría).
+// ═══════════════════════════════════════════════════════════════════════════
 
-// ==========================================================================
-// FUNCTIONS - SMACSS Base
-// ==========================================================================
-// Funciones auxiliares para recuperar valores de los mapas de variables
+@use "sass:map";
+@use "variables" as vars;
+
+// Valida que una clave exista dentro de un mapa de tokens.
+@function _require-token($token-map, $token-key, $token-map-name) {
+  @if not map.has-key($token-map, $token-key) {
+    @error "La clave '#{$token-key}' no existe en #{$token-map-name}.";
+  }
+
+  @return map.get($token-map, $token-key);
+}
 
 // Función para obtener colores del mapa
 @function color($color-name) {
-  @if map.has-key(variables.$colors, $color-name) {
-    @return map.get(variables.$colors, $color-name);
-  } @else {
-    @warn "Color '#{$color-name}' no existe en el mapa $colors.";
-    @return null;
-  }
+  @return _require-token(vars.$colors, $color-name, "$colors");
+}
+
+// Función para obtener animation-duration
+@function animation($key){
+  @return _require-token(vars.$animation-duration, $key, "$animation-duration");
+}
+
+// Función para obtener animation-timing
+@function timing($key){
+  @return _require-token(vars.$animation-timing, $key, "$animation-timing");
 }
 
 // Función para obtener espaciados del mapa $spacing
 @function spacing($key) {
-  @if not map.has-key(variables.$spacing, $key) {
-    @warn "La clave '#{$key}' no existe en el mapa $spacing.";
-    @return null;
-  }
-  @return map.get(variables.$spacing, $key);
+  @return _require-token(vars.$spacing, $key, "$spacing");
 }
 
 // Función para obtener tamaños de fuente del mapa $font-sizes
 @function font-size($key) {
-  @if not map.has-key(variables.$font-sizes, $key) {
-    @warn "La clave '#{$key}' no existe en el mapa $font-sizes.";
-    @return null;
-  }
-  @return map.get(variables.$font-sizes, $key);
+  @return _require-token(vars.$font-sizes, $key, "$font-sizes");
+}
+
+// Funcion para obtener altura de lineas
+@function line-height($key){
+  @return _require-token(vars.$line-heights, $key, "$line-heights");
 }
 
 // Función para obtener sombras del mapa $shadows
 @function shadow($key) {
-  @if not map.has-key(variables.$shadows, $key) {
-    @warn "La clave '#{$key}' no existe en el mapa $shadows.";
-    @return null;
-  }
-  @return map.get(variables.$shadows, $key);
+  @return _require-token(vars.$shadows, $key, "$shadows");
 }
 
 // Función para obtener z-index del mapa $z-layers
 @function z($key) {
-  @if not map.has-key(variables.$z-layers, $key) {
-    @warn "La clave '#{$key}' no existe en el mapa $z-layers.";
-    @return null;
-  }
-  @return map.get(variables.$z-layers, $key);
+  @return _require-token(vars.$z-layers, $key, "$z-layers");
+}
+
+// Función para obtener anchuras de contenedor en Objects/Wrapper.
+@function container-width($key) {
+  @return _require-token(vars.$container-widths, $key, "$container-widths");
+}
+
+// Función para obtener tamaños de media-object__figure.
+@function media-figure-width($key) {
+  @return _require-token(vars.$object-media-figure-widths, $key, "$object-media-figure-widths");
+}
+
+// Función para obtener grosor de borde semántico.
+@function border-width($key) {
+  @return _require-token(vars.$border-widths, $key, "$border-widths");
 }

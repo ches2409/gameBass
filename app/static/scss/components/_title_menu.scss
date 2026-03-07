@@ -1,8 +1,6 @@
 @use "../base/mixins";
 @use "../base/variables";
 
-// Inyectamos los keyframes para que estén disponibles en el dashboard
-@include mixins.enable-glitch-animation;
 
 /* Contenedor del encabezado */
 .admin-header {
@@ -43,9 +41,4 @@
 /* EFECTO GLITCH*/
 .glitch-title {
     @include mixins.glitch-title($fontSize:2.5rem);
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(1.2); }
 }

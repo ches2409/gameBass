@@ -7,10 +7,10 @@
     {% from 'macros/data_card_macro.html' import render_data_card with context %}
     {% from 'macros/rol_form_macro.html' import render_rol_modal %}
 
-    {% block alertContainer %}
+    {% block notificationBanner %}
         {% if alert_finish %}
             {% with icon=alert_finish.icon, title=alert_finish.title, subtitle=alert_finish.subtitle, btn_info=alert_finish.btn_info, modal_target='createRoleModal' %}
-                {% include 'components/alert-container.html' %}
+                {% include 'components/notification-banner.html' %}
             {% endwith %}
         {% endif %}
     {% endblock %}
@@ -62,7 +62,7 @@
 
         {% else %}
         	<div class="error-container">
-                {%  include 'components/error-datos.html'%}
+                {%  include 'components/empty-modal.html'%}
             </div>
         {% endif %}
 
