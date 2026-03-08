@@ -271,8 +271,9 @@ hr {
   border: 0;
 }
 
+[hidden],
 .hidden {
-  display: none !important;
+  display: none;
 }
 
 .invisible {

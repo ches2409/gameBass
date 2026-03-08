@@ -59,15 +59,15 @@
   - base/_mixins.scss → ELIMINAR (reemplazado por @layer + nesting)
   ==================================================================== */
 
-@import "base/_variables.css";
-@import "base/_reset.css";
-@import "base/_animations.css";
+@import "base/_variables.css" layer(base);
+@import "base/_reset.css" layer(base);
+@import "base/_animations.css" layer(base);
 
 /* ====================================================================
   PASO 3: VENDORS LAYER (Bootstrap Overrides)
   ==================================================================== */
 
-@import "vendors/_bootstrap-overrides.css";
+@import "vendors/_bootstrap-overrides.css" layer(vendors);
 
 /* ====================================================================
   PASO 4: LAYOUT LAYER
@@ -77,7 +77,7 @@
   - layout/_grid.scss → layout/_grid.css
   ==================================================================== */
 
-@import "layout/_grid.css";
+@import "layout/_grid.css" layer(layout);
 
 /* ====================================================================
   PASO 5: OBJECTS LAYER
@@ -93,11 +93,11 @@
   - objects/_sidebar.css (layout sidebar + contenido)
   ==================================================================== */
 
-@import "objects/_wrapper.css";
-@import "objects/_media.css";
-@import "objects/_stack.css";
-@import "objects/_cluster.css";
-@import "objects/_sidebar.css";
+@import "objects/_wrapper.css" layer(objects);
+@import "objects/_media.css" layer(objects);
+@import "objects/_stack.css" layer(objects);
+@import "objects/_cluster.css" layer(objects);
+@import "objects/_sidebar.css" layer(objects);
 
 /* ====================================================================
   PASO 6: COMPONENTS LAYER
@@ -128,41 +128,41 @@
   ==================================================================== */
 
 /* Sprint 2 P0 (Autenticación y Navegación) */
-@import "components/_buttons.css";
-@import "components/_main_menu.css";
-@import "components/_login_form.css";
+@import "components/_buttons.css" layer(components);
+@import "components/_main_menu.css" layer(components);
+@import "components/_login_form.css" layer(components);
 
 /* Sprint 2 P1 (Forms y Cards críticos) */
-@import "components/_modal-form.css";
-@import "components/_registros.css";
-@import "components/_general-card.css";
-@import "components/_data-card.css";
+@import "components/_modal-form.css" layer(components);
+@import "components/_registros.css" layer(components);
+@import "components/_general-card.css" layer(components);
+@import "components/_data-card.css" layer(components);
 
 /* Sprint 2 P2 (UI Components y Grids) */
-@import "components/_data-grid.css";
-@import "components/_player-card.css";
-@import "components/_modal-delete.css";
-@import "components/_status-bar.css";
-@import "components/_notification-banner.css";
+@import "components/_data-grid.css" layer(components);
+@import "components/_player-card.css" layer(components);
+@import "components/_modal-delete.css" layer(components);
+@import "components/_status-bar.css" layer(components);
+@import "components/_notification-banner.css" layer(components);
 
 /* Sprint 2 P3 (Cards especializadas - Lote 1) */
-@import "components/_metric-card.css";
-@import "components/_tactical-card.css";
-@import "components/_protocols-card.css";
+@import "components/_metric-card.css" layer(components);
+@import "components/_tactical-card.css" layer(components);
+@import "components/_protocols-card.css" layer(components);
 
 /* Sprint 2 P3 (Cards especializadas - Lote 2 parcial) */
-@import "components/_subjects-card.css";
-@import "components/_level-card.css";
+@import "components/_subjects-card.css" layer(components);
+@import "components/_level-card.css" layer(components);
 
 /* Sprint 2 P3 (Cards especializadas - Lote 3) */
-@import "components/_injection-card.css";
-@import "components/_matriz-card.css";
-@import "components/_manage_equipo.css";
-@import "components/_sys-tags.css";
-@import "components/_title_menu.css";
-@import "components/_empty-modal.css";
-@import "components/_media-card.css";
-@import "components/_user_card.css";
+@import "components/_injection-card.css" layer(components);
+@import "components/_matriz-card.css" layer(components);
+@import "components/_manage_equipo.css" layer(components);
+@import "components/_sys-tags.css" layer(components);
+@import "components/_title_menu.css" layer(components);
+@import "components/_empty-modal.css" layer(components);
+@import "components/_media-card.css" layer(components);
+@import "components/_user_card.css" layer(components);
 
 /* ====================================================================
   PASO 7: THEMES LAYER
@@ -178,7 +178,7 @@
   - No se localizaron `themes/_light.scss` ni `themes/_gaming.scss`
   ==================================================================== */
 
-@import "themes/_dark.css";
+@import "themes/_dark.css" layer(themes);
 
 /* ====================================================================
   PASO 8: PAGES LAYER
@@ -193,7 +193,7 @@
   - Solo existe fuente activa para `pages/_command.scss`
   ==================================================================== */
 
-@import "pages/_command.css";
+@import "pages/_command.css" layer(pages);
 
 /* ====================================================================
   PASO 9: UTILITIES LAYER (SIEMPRE AL FINAL)
@@ -202,10 +202,10 @@
   ✅ Helpers de máxima prioridad que siempre ganan (sin !important)
   ==================================================================== */
 
-@import "utilities/_colors.css";
-@import "utilities/_layout.css";
-@import "utilities/_spacing.css";
-@import "utilities/_typography.css";
+@import "utilities/_colors.css" layer(utilities);
+@import "utilities/_layout.css" layer(utilities);
+@import "utilities/_spacing.css" layer(utilities);
+@import "utilities/_typography.css" layer(utilities);
 
 /* 🔄 PENDIENTE DE MIGRACIÓN:
   - Revisar inventario real de utilities pendientes (no se localizaron

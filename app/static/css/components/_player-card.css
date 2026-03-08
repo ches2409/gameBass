@@ -12,6 +12,8 @@
   /* Forma de "Hacker" con esquinas cortadas */
   clip-path: polygon(5% 0, 100% 0, 100% 70%, 95% 100%, 0 100%, 0 20%);
   transition: all 0.4s ease;
+  container-type: inline-size;
+  container-name: player-card;
 }
 
 .player-card:hover {
@@ -171,7 +173,7 @@
 /* Grid de Estadísticas */
 .stats-grid {
   display: grid;
-  grid-template-cols: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   background: oklch(0% 0 0 / 0.3);
   padding: 1rem;
   border: 1px solid oklch(100% 0 0 / 0.05);
@@ -272,4 +274,35 @@
 
 .secondary-bg {
   background-color: var(--secondary);
+}
+
+@container player-card (width < 560px) {
+  .card-layout {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .biometrics {
+    align-items: flex-start;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container player-card (width < 400px) {
+  .player-card {
+    padding: 1.25rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-footer {
+    flex-direction: column;
+  }
 }

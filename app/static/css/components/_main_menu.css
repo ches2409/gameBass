@@ -10,6 +10,8 @@
 .command-center__sidebar {
   background-color: var(--background-soft);
   height: 100%;
+  container-type: inline-size;
+  container-name: main-menu;
 }
 .command-center__sidebar .command-suite {
   border: 1px solid var(--medium);
@@ -159,4 +161,30 @@
 }
 .command-center__sidebar:hover {
   border-right: var(--accent-green) solid 1px;
+}
+
+@container main-menu (width < 340px) {
+  .command-center__sidebar .command-suite__wrapper {
+    gap: 0.5rem;
+  }
+
+  .command-center__sidebar .command-suite__title h1 {
+    font-size: 1.2rem;
+  }
+
+  .command-center__sidebar .command-suite__item {
+    gap: 0.6rem;
+    padding-left: 0.35rem;
+  }
+}
+
+@container main-menu (width < 260px) {
+  .command-center__sidebar .command-suite__logo {
+    width: 34px;
+    height: 34px;
+  }
+
+  .command-center__sidebar .command-suite__tag {
+    font-size: 0.6rem;
+  }
 }

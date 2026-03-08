@@ -238,11 +238,11 @@
 }
 
 .status-estable {
-  color: var(--accent-green) !important;
+  color: var(--accent-green);
 }
 
 .status-degraded {
-  color: var(--alert) !important;
+  color: var(--alert);
   animation: blink 1.5s infinite;
 }
 
