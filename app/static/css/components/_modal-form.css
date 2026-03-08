@@ -225,3 +225,41 @@ select option {
   opacity: 0.5;
   animation: laserScan 4s linear infinite;
 }
+
+/* Fase 3: alcance local para bloques esenciales del modal */
+@scope (.modal-overlay) {
+  :scope {
+    position: fixed;
+    inset: 0;
+    background: oklch(0% 0 0 / 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1.25rem;
+  }
+
+  :scope .modal-container {
+    width: 100%;
+    max-width: 600px;
+    background: var(--bg-modal);
+    border: 1px solid oklch(100% 0 0 / 0.1);
+    position: relative;
+    clip-path: polygon(0 20px, 20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+    height: auto;
+    max-height: 95vh;
+  }
+
+  :scope .injection-form {
+    padding: 2rem 2.5rem 2.5rem;
+    display: grid;
+    gap: 25px;
+  }
+
+  :scope .modal-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+  }
+}

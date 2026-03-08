@@ -404,3 +404,39 @@
     opacity: 1;
   }
 }
+
+/* Fase 3: encapsulacion progresiva de la vista de registros */
+@scope (.registros-view) {
+  :scope {
+    animation: fadeIn 0.7s ease-out;
+  }
+
+  :scope .registros-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  :scope .protocol-panel .panel-card {
+    padding: 2rem;
+    background-color: var(--background-soft);
+    border: 1px solid oklch(100% 0 0 / 0.1);
+    clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px);
+  }
+
+  :scope .arenas-panel .arenas-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  :scope .system-logs {
+    margin-top: 3rem;
+    padding: 2rem;
+    background-color: oklch(0% 0 0 / 0.4);
+    border: 1px solid oklch(100% 0 0 / 0.05);
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px);
+  }
+}
