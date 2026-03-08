@@ -77,6 +77,26 @@
     gap: 0.6rem;
   }
 }
+
+/* Fase 3: scoped CSS para encapsular estilos troncales del componente */
+@scope (.data-card) {
+  :scope {
+    background: var(--background-soft);
+  }
+
+  .data-card__title {
+    font-size: 1.5rem;
+    font-weight: 900;
+  }
+
+  .data-card__metadata-value.is-estable {
+    color: var(--accent-green);
+  }
+
+  .data-card__metadata-value.is-degraded {
+    color: var(--accent-pink);
+  }
+}
 .data-card::before {
   content: "";
   position: absolute;

@@ -188,3 +188,19 @@
     font-size: 0.6rem;
   }
 }
+
+/* Fase 3: reglas scoped progresivas para reducir dependencia de selectores largos */
+@scope (.command-center__sidebar) {
+  :scope {
+    background-color: var(--background-soft);
+  }
+
+  .command-suite {
+    border: 1px solid var(--medium);
+  }
+
+  .command-suite__item.active {
+    background-color: oklch(from var(--accent-green) l c h / 0.1);
+    color: var(--accent-green);
+  }
+}

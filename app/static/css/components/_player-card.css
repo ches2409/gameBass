@@ -306,3 +306,24 @@
     flex-direction: column;
   }
 }
+
+/* Fase 3: encapsulación progresiva con @scope */
+@scope (.player-card) {
+  :scope {
+    color: var(--text-main);
+  }
+
+  .card-layout {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .btn-outline:hover {
+    color: var(--primary);
+  }
+}
