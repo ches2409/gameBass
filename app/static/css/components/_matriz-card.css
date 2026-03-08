@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Fira+Code:wght@500&display=swap");
 :root {
-  --bg-card: #0a0c10;
-  --omega-color: #FF0000;
-  --delta-color: #D500F9;
-  --gamma-color: #FFD600;
-  --beta-color: #00E5FF;
-  --alpha-color: #A3FF00;
-  --void-color: #4A4A4A;
+  --bg-card: var(--background-soft);
+  --omega-color: var(--alert);
+  --delta-color: var(--accent-pink);
+  --gamma-color: var(--accent-yellow);
+  --beta-color: var(--side-blue);
+  --alpha-color: var(--accent-green);
+  --void-color: var(--text-dim);
 }
 
 .clearance-grid {
@@ -14,12 +14,12 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
   padding: 40px;
-  background: #020305;
+  background: var(--primary-bg);
 }
 
 /* Tarjeta Base */
 .clearance-card {
-  background: rgba(255, 255, 255, 0.03);
+  background: oklch(100% 0 0 / 0.03);
   padding: 1px; /* Para el borde fino */
   clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px);
   position: relative;
@@ -41,7 +41,7 @@
   right: 15px;
   font-family: "Fira Code", monospace;
   font-size: 7px;
-  color: rgba(255, 255, 255, 0.1);
+  color: oklch(100% 0 0 / 0.1);
   letter-spacing: 3px;
 }
 
@@ -56,7 +56,7 @@
 .level-name {
   font-family: "Orbitron", sans-serif;
   font-size: 32px;
-  color: #fff;
+  color: var(--white);
   line-height: 1;
   margin: 0;
   font-style: italic;
@@ -84,14 +84,14 @@
 .bar-label {
   font-family: "Fira Code", monospace;
   font-size: 8px;
-  color: rgba(255, 255, 255, 0.3);
+  color: oklch(100% 0 0 / 0.3);
   margin-bottom: 10px;
   letter-spacing: 1px;
 }
 
 .progress-container {
   height: 4px;
-  background: rgba(255, 255, 255, 0.05);
+  background: oklch(100% 0 0 / 0.05);
   border-radius: 2px;
   overflow: hidden;
 }
@@ -111,12 +111,12 @@
 }
 
 .protocol-tag {
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: oklch(0% 0 0 / 0.4);
+  border: 1px solid oklch(100% 0 0 / 0.05);
   padding: 6px 12px;
   font-family: "Fira Code", monospace;
   font-size: 8px;
-  color: #888;
+  color: var(--text-gray);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -137,7 +137,7 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid oklch(100% 0 0 / 0.05);
 }
 
 .status-dots {
@@ -148,20 +148,20 @@
 .dot {
   width: 12px;
   height: 3px;
-  background: rgba(255, 255, 255, 0.05);
+  background: oklch(100% 0 0 / 0.05);
 }
 
 .status-text {
   font-family: "Fira Code", monospace;
   font-size: 8px;
-  color: rgba(255, 255, 255, 0.2);
+  color: oklch(100% 0 0 / 0.2);
   letter-spacing: 1px;
 }
 
 /* --- VARIACIONES DE COLOR --- */
 .omega {
   color: var(--omega-color);
-  border: 1px solid rgba(255, 0, 0, 0.2);
+  border: 1px solid oklch(from var(--alert) l c h / 0.2);
 }
 
 .omega .progress-bar, .omega .status-dots .dot.active {
@@ -174,7 +174,7 @@
 
 .delta {
   color: var(--delta-color);
-  border: 1px solid rgba(213, 0, 249, 0.2);
+  border: 1px solid oklch(from var(--accent-pink) l c h / 0.2);
 }
 
 .delta .progress-bar, .delta .status-dots .dot.active {
@@ -187,7 +187,7 @@
 
 .alpha {
   color: var(--alpha-color);
-  border: 1px solid rgba(163, 255, 0, 0.2);
+  border: 1px solid oklch(from var(--accent-green) l c h / 0.2);
 }
 
 .alpha .progress-bar, .alpha .status-dots .dot.active {
@@ -202,5 +202,5 @@
 .clearance-card:hover {
   transform: translateY(-10px);
   filter: brightness(1.2);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 40px oklch(0% 0 0 / 0.5);
 }

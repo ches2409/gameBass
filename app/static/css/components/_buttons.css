@@ -17,7 +17,7 @@
   font-weight: 400;
   text-align: center;
   text-decoration: none;
-  border: 2px solid white;
+  border: 2px solid var(--white);
   border-radius: 0.25rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -37,7 +37,7 @@
   left: 50%;
   width: 0;
   height: 0;
-  background: rgba(255, 255, 255, 0.3);
+  background: oklch(100% 0 0 / 0.3);
   transform: translate(-50%, -50%);
   transition: width 0.3s ease, height 0.3s ease;
 }
@@ -51,12 +51,12 @@
   La estructura de html para este botón debe ser la siguiente:
   a>i*2+span
   */
-  --glow: #DDFF00;
-  --glow2: #57ADE4;
-  --glow-bg: #0C111D;
+  --glow: var(--accent-yellow);
+  --glow2: var(--accent-blue);
+  --glow-bg: var(--background-dark);
 }
 .btn-glow a {
-  background-color: white;
+  background-color: var(--white);
   position: relative;
   width: 180px;
   height: 55px;
@@ -99,12 +99,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--white);
   text-transform: uppercase;
   letter-spacing: 2px;
-  border: 1px solid #040a29;
+  border: 1px solid var(--primary-bg);
   border-radius: 3px;
-  background: rgba(10, 12, 16, 0.65);
+  background: oklch(from var(--background-soft) l c h / 0.65);
   overflow: hidden;
   font-size: 0.625rem;
 }
@@ -115,7 +115,7 @@
   left: -50px;
   width: 100%;
   height: 100%;
-  background: rgba(161, 161, 189, 0.03);
+  background: oklch(100% 0 0 / 0.03);
   transform: skew(25deg);
 }
 
@@ -126,9 +126,9 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #666;
+  background: oklch(100% 0 0 / 0.03);
+  border: 1px solid oklch(100% 0 0 / 0.1);
+  color: var(--text-gray);
   cursor: pointer;
   outline: none;
   transition: all 0.2s ease;
@@ -143,9 +143,9 @@
 }
 
 .btn-submit {
-  background: #A3FF00;
+  background: var(--accent-green);
   border: none;
-  color: #000;
+  color: var(--black);
   position: relative;
   overflow: hidden;
   clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
@@ -154,7 +154,7 @@
 .btn-submit:hover {
   transform: scale(1.02);
   filter: brightness(1.1);
-  box-shadow: 0 0 30px rgba(163, 255, 0, 0.4);
+  box-shadow: 0 0 30px oklch(from var(--accent-green) l c h / 0.4);
 }
 .btn-submit {
   flex: 2;
@@ -167,14 +167,14 @@
 
 .btn-cancel {
   background: transparent;
-  border: 1px solid rgba(255, 0, 0, 0.3);
-  color: #ff3d00;
+  border: 1px solid oklch(from var(--alert) l c h / 0.3);
+  color: var(--archetype-berserk);
   transition: all 0.3s;
   clip-path: polygon(0 0, 100% 0, 100% 70%, 90% 100%, 0 100%);
 }
 .btn-cancel:hover {
-  background: rgba(255, 0, 0, 0.1);
-  border-color: #ff3d00;
+  background: oklch(from var(--alert) l c h / 0.1);
+  border-color: var(--archetype-berserk);
 }
 .btn-cancel {
   flex: 1;
@@ -188,7 +188,7 @@
 .btn-ghost {
   background: transparent;
   border: none;
-  color: #6b7280;
+  color: var(--text-gray);
   font-family: "Fira Code", monospace;
   font-size: 9px;
   font-weight: 700;
@@ -197,28 +197,28 @@
   transition: color 0.3s;
 }
 .btn-ghost:hover {
-  color: #fff;
+  color: var(--white);
   text-decoration: none;
 }
 
 .edit-btn:hover {
   text-decoration: none;
-  color: #DDFF00;
-  border-color: #DDFF00;
-  background: rgba(163, 255, 0, 0.05);
-  box-shadow: 0 0 15px rgba(163, 255, 0, 0.3);
+  color: var(--accent-yellow);
+  border-color: var(--accent-yellow);
+  background: oklch(from var(--accent-green) l c h / 0.05);
+  box-shadow: 0 0 15px oklch(from var(--accent-green) l c h / 0.3);
   transform: scale(1.1);
 }
 
 .delete-btn {
-  color: #ff0059;
-  border: 1px solid rgba(255, 0, 89, 0.5);
+  color: var(--alert);
+  border: 1px solid oklch(from var(--alert) l c h / 0.5);
 }
 .delete-btn:hover {
-  background: #ff0059;
-  color: #fff;
-  border-color: #ff0059;
-  box-shadow: 0 0 20px rgba(255, 0, 89, 0.4);
+  background: var(--alert);
+  color: var(--white);
+  border-color: var(--alert);
+  box-shadow: 0 0 20px oklch(from var(--alert) l c h / 0.4);
   transform: scale(1.1);
 }
 
@@ -226,173 +226,173 @@
   clip-path: polygon(0 0, 80% 0, 100% 40%, 100% 100%, 30% 100%, 0 50%);
   height: 50%;
   width: 80%;
-  color: #777977;
-  border: 1px solid #777977;
+  color: var(--text-gray);
+  border: 1px solid var(--text-gray);
   transition: all 0.1s ease;
 }
 .clip-btn:hover {
   border: red solid 1px;
-  color: #d6f5e9;
+  color: var(--text-main);
   box-shadow: inset 0 0 0.7px red; /* Brillo interior */
   filter: drop-shadow(0 0 5px red); /* Brillo exterior que respeta el clip-path */
-  text-shadow: 0 0 5px #d6f5e9; /* Resplandor del texto */
+  text-shadow: 0 0 5px var(--text-main); /* Resplandor del texto */
   cursor: pointer;
 }
 .clip-btn:active {
   transform: scale(0.95);
   box-shadow: inset 0 0 1px red;
   filter: drop-shadow(0 0 2px red);
-  border-color: #ff6666;
+  border-color: var(--alert);
 }
 
 .clip-btn-yellow {
   clip-path: polygon(0 0, 80% 0, 100% 40%, 100% 100%, 30% 100%, 0 50%);
   height: 50%;
   width: 80%;
-  color: #2a3141;
-  border: 1px solid #2a3141;
+  color: var(--soft);
+  border: 1px solid var(--soft);
   transition: all 0.1s ease;
 }
 .clip-btn-yellow:hover {
-  border: #DDFF00 solid 1px;
-  color: #d6f5e9;
-  box-shadow: inset 0 0 0.7px #DDFF00; /* Brillo interior */
-  filter: drop-shadow(0 0 5px #DDFF00); /* Brillo exterior que respeta el clip-path */
-  text-shadow: 0 0 5px #d6f5e9; /* Resplandor del texto */
+  border: var(--accent-yellow) solid 1px;
+  color: var(--text-main);
+  box-shadow: inset 0 0 0.7px var(--accent-yellow); /* Brillo interior */
+  filter: drop-shadow(0 0 5px var(--accent-yellow)); /* Brillo exterior que respeta el clip-path */
+  text-shadow: 0 0 5px var(--text-main); /* Resplandor del texto */
   cursor: pointer;
 }
 .clip-btn-yellow:active {
   transform: scale(0.95);
-  box-shadow: inset 0 0 1px #DDFF00;
-  filter: drop-shadow(0 0 2px #DDFF00);
-  border-color: rgb(234.6, 255, 102);
+  box-shadow: inset 0 0 1px var(--accent-yellow);
+  filter: drop-shadow(0 0 2px var(--accent-yellow));
+  border-color: var(--accent-blue);
 }
 
 .btn--primary {
-  background-color: #57ADE4;
-  color: white;
-  border: 2px solid rgb(130.9384615385, 194.4461538462, 235.0615384615);
+  background-color: var(--accent-blue);
+  color: var(--white);
+  border: 2px solid var(--accent-blue);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 .btn--primary:hover {
-  background-color: rgb(130.9384615385, 194.4461538462, 235.0615384615);
-  border-color: rgb(130.9384615385, 194.4461538462, 235.0615384615);
-  color: #57ADE4;
+  background-color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px -3px oklch(0% 0 0 / 0.1);
 }
 .btn--primary:active {
   transform: translateY(0);
 }
 .btn--primary {
-  color: white;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(255, 255, 255, 0.24), 0 0 15px rgba(255, 255, 255, 0.18), 0 0 20px rgba(255, 255, 255, 0.12);
+  color: var(--white);
+  text-shadow: 0 0 5px oklch(100% 0 0 / 0.3), 0 0 10px oklch(100% 0 0 / 0.24), 0 0 15px oklch(100% 0 0 / 0.18), 0 0 20px oklch(100% 0 0 / 0.12);
 }
 .btn--primary:hover {
-  box-shadow: 0 0 20px rgba(126, 219, 252, 0.5);
+  box-shadow: 0 0 20px oklch(from var(--accent-blue) l c h / 0.5);
 }
 
 .btn--secondary {
-  background-color: #A3FF00;
-  color: #020305;
-  border: 2px solid rgb(218.2, 255, 153);
+  background-color: var(--accent-green);
+  color: var(--primary-bg);
+  border: 2px solid var(--accent-blue);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 .btn--secondary:hover {
-  background-color: rgb(218.2, 255, 153);
-  border-color: rgb(218.2, 255, 153);
-  color: #A3FF00;
+  background-color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: var(--accent-green);
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px -3px oklch(0% 0 0 / 0.1);
 }
 .btn--secondary:active {
   transform: translateY(0);
 }
 .btn--secondary:hover {
-  box-shadow: 0 0 20px rgba(186, 255, 62, 0.5);
+  box-shadow: 0 0 20px oklch(from var(--accent-green) l c h / 0.5);
 }
 
 .btn--accent {
-  background-color: #D500F9;
+  background-color: var(--accent-pink);
   color: red;
-  border: 2px solid #D500F9;
+  border: 2px solid var(--accent-pink);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 .btn--accent:hover {
-  background-color: rgb(232.0120481928, 96, 255);
-  border-color: rgb(232.0120481928, 96, 255);
-  color: #D500F9;
+  background-color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: var(--accent-pink);
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px -3px oklch(0% 0 0 / 0.1);
 }
 .btn--accent:active {
   transform: translateY(0);
 }
 .btn--accent {
-  color: white;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(255, 255, 255, 0.24), 0 0 15px rgba(255, 255, 255, 0.18), 0 0 20px rgba(255, 255, 255, 0.12);
+  color: var(--white);
+  text-shadow: 0 0 5px oklch(100% 0 0 / 0.3), 0 0 10px oklch(100% 0 0 / 0.24), 0 0 15px oklch(100% 0 0 / 0.18), 0 0 20px oklch(100% 0 0 / 0.12);
   clip-path: polygon(0 0, 92% 0, 100% 40%, 100% 100%, 8% 100%, 0% 60%);
-  ransition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 .btn--accent:hover {
-  box-shadow: 0 0 20px rgba(255, 0, 195, 0.5);
+  box-shadow: 0 0 20px oklch(from var(--accent-pink) l c h / 0.5);
 }
 
 .btn--warning {
-  background-color: #DDFF00;
-  color: #020305;
-  border: 2px solid rgb(227.8, 255, 51);
+  background-color: var(--accent-yellow);
+  color: var(--primary-bg);
+  border: 2px solid var(--accent-blue);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 .btn--warning:hover {
-  background-color: rgb(227.8, 255, 51);
-  border-color: rgb(227.8, 255, 51);
-  color: #DDFF00;
+  background-color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: var(--accent-yellow);
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px -3px oklch(0% 0 0 / 0.1);
 }
 .btn--warning:active {
   transform: translateY(0);
 }
 
 .btn--danger {
-  background-color: #ff4757;
-  color: white;
-  border: 2px solid rgb(255, 122, 133.5652173913);
+  background-color: var(--alert);
+  color: var(--white);
+  border: 2px solid var(--accent-blue);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 .btn--danger:hover {
-  background-color: rgb(255, 122, 133.5652173913);
-  border-color: rgb(255, 122, 133.5652173913);
-  color: #ff4757;
+  background-color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: var(--alert);
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px -3px oklch(0% 0 0 / 0.1);
 }
 .btn--danger:active {
   transform: translateY(0);
 }
 
 .btn--ghostGlow {
-  background: #57ADE4;
-  color: #d6f5e9;
-  border-color: #57ADE4;
+  background: var(--accent-blue);
+  color: var(--text-main);
+  border-color: var(--accent-blue);
 }
 .btn--ghostGlow:hover {
-  background: #57ADE4;
-  color: white;
+  background: var(--accent-blue);
+  color: var(--white);
   transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(126, 219, 252, 0.5);
+  box-shadow: 0 0 20px oklch(from var(--accent-blue) l c h / 0.5);
 }
 
 .btn--inyect {
-  background: #D500F9;
-  color: #d6f5e9;
-  border-color: #D500F9;
+  background: var(--accent-pink);
+  color: var(--text-main);
+  border-color: var(--accent-pink);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -411,13 +411,13 @@
 
 .btn--outline {
   background: transparent;
-  color: #d6f5e9;
-  border-color: rgba(214, 245, 233, 0.5);
+  color: var(--text-main);
+  border-color: oklch(from var(--text-main) l c h / 0.5);
 }
 .btn--outline:hover {
-  background: #d6f5e9;
-  color: #020305;
-  border-color: #d6f5e9;
+  background: var(--text-main);
+  color: var(--primary-bg);
+  border-color: var(--text-main);
 }
 
 .btn--small {
@@ -466,10 +466,10 @@
 }
 @keyframes pulse-ulij0mx {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(87, 173, 228, 0.7);
+    box-shadow: 0 0 0 0 oklch(from var(--accent-blue) l c h / 0.7);
   }
   50% {
-    box-shadow: 0 0 0 10px rgba(87, 173, 228, 0);
+    box-shadow: 0 0 0 10px oklch(from var(--accent-blue) l c h / 0);
   }
 }
 
@@ -529,17 +529,17 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px -3px oklch(0% 0 0 / 0.1);
   z-index: 1030;
 }
 .btn--fab:hover {
   transform: scale(1.1);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 25px -5px oklch(0% 0 0 / 0.1);
 }
 
 .btn--gaming {
-  background: linear-gradient(45deg, #57ADE4, #D500F9);
-  color: white;
+  background: linear-gradient(45deg, var(--accent-blue), var(--accent-pink));
+  color: var(--white);
   border: none;
   position: relative;
   overflow: hidden;
@@ -551,7 +551,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, oklch(100% 0 0 / 0.2), transparent);
   transition: left 0.5s ease;
 }
 .btn--gaming:hover::before {
@@ -559,7 +559,7 @@
 }
 .btn--gaming:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(87, 173, 228, 0.3), 0 0 30px rgba(213, 0, 249, 0.2);
+  box-shadow: 0 10px 30px oklch(from var(--accent-blue) l c h / 0.3), 0 0 30px oklch(from var(--accent-pink) l c h / 0.2);
 }
 
 @media (min-width: 414px) {

@@ -18,18 +18,18 @@
 }
 .registros-view .protocol-panel .panel-card {
   padding: 2rem;
-  background-color: #0A0C10;
-  border: 1px solid var(--border-white);
+  background-color: var(--background-soft);
+  border: 1px solid oklch(100% 0 0 / 0.1);
   clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px);
 }
 .registros-view .protocol-panel .panel-title {
   font-family: "Rajdhani", sans-serif;
   font-weight: 900;
   font-size: 0.875rem;
-  color: #A3FF00;
+  color: var(--accent-green);
   text-transform: uppercase;
   letter-spacing: 0.3em;
-  border-bottom: 1px solid rgba(163, 255, 0, 0.2);
+  border-bottom: 1px solid oklch(from var(--accent-green) l c h / 0.2);
   padding-bottom: 1rem;
   margin-bottom: 2rem;
   font-style: italic;
@@ -56,17 +56,17 @@
   cursor: pointer;
   width: 100%;
   padding: 1rem;
-  border: 1px solid var(--border-white);
+  border: 1px solid oklch(100% 0 0 / 0.1);
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  background-color: rgba(0, 0, 0, 0.4);
-  color: #6b7280;
+  background-color: oklch(0% 0 0 / 0.4);
+  color: var(--text-gray);
   transition: all 0.3s ease;
   clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px);
 }
 .registros-view .protocol-panel .option-wrapper .protocol-btn:hover {
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: oklch(100% 0 0 / 0.3);
 }
 .registros-view .protocol-panel .option-wrapper .protocol-btn .material-symbols-outlined {
   font-size: 1.875rem;
@@ -89,15 +89,15 @@
   letter-spacing: 0.1em;
 }
 .registros-view .protocol-panel .option-wrapper input:checked + .protocol-btn {
-  background-color: #A3FF00;
-  border-color: #A3FF00;
-  color: #000;
-  box-shadow: 0 0 20px rgba(163, 255, 0, 0.3);
+  background-color: var(--accent-green);
+  border-color: var(--accent-green);
+  color: var(--black);
+  box-shadow: 0 0 20px oklch(from var(--accent-green) l c h / 0.3);
 }
 .registros-view .protocol-panel .option-wrapper .team-selector {
   display: none;
   margin-top: 1.5rem;
-  border-left: 2px solid #A3FF00;
+  border-left: 2px solid var(--accent-green);
   padding-left: 1rem;
   margin-left: 1rem;
   animation: slideDown 0.3s ease-out;
@@ -105,16 +105,16 @@
 .registros-view .protocol-panel .option-wrapper .team-selector .selector-label {
   font-family: "Fira Code", monospace;
   font-size: 9px;
-  color: #a3ff00;
+  color: var(--accent-green);
   text-transform: uppercase;
   margin-bottom: 0.5rem;
   display: block;
 }
 .registros-view .protocol-panel .option-wrapper .team-selector .cyber-select {
   width: 100%;
-  background-color: #000;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
+  background-color: var(--black);
+  border: 1px solid oklch(100% 0 0 / 0.2);
+  color: var(--white);
   font-family: "Fira Code", monospace;
   font-size: 0.75rem;
   padding: 0.75rem;
@@ -124,20 +124,20 @@
   transition: border-color 0.2s;
 }
 .registros-view .protocol-panel .option-wrapper .team-selector .cyber-select:focus {
-  border-color: #a3ff00;
+  border-color: var(--accent-green);
 }
 .registros-view .protocol-panel .option-wrapper .team-selector .selector-hint {
   margin-top: 0.5rem;
   font-family: "Fira Code", monospace;
   font-size: 8px;
-  color: #6b7280;
+  color: var(--text-gray);
 }
 .registros-view .protocol-panel .option-wrapper input#mode_equipo:checked ~ .team-selector {
   display: block;
 }
 .registros-view .protocol-panel .panel-footer {
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid oklch(100% 0 0 / 0.05);
   margin-top: 2rem;
 }
 .registros-view .protocol-panel .panel-footer .status-row {
@@ -148,13 +148,13 @@
 }
 .registros-view .protocol-panel .panel-footer .status-row .status-label {
   font-size: 9px;
-  color: #666;
+  color: var(--text-gray);
   font-weight: 900;
   font-family: "Fira Code", monospace;
 }
 .registros-view .protocol-panel .panel-footer .status-row .status-value {
   font-size: 10px;
-  color: #a3ff00;
+  color: var(--accent-green);
   font-style: italic;
   font-weight: 900;
   font-family: "Rajdhani", sans-serif;
@@ -163,7 +163,7 @@
 .registros-view .protocol-panel .panel-footer .cyber-button-submit {
   width: 100%;
   padding: 1.5rem 0;
-  background-color: #a3ff00;
+  background-color: var(--accent-green);
   color: black;
   font-family: "Orbitron", sans-serif;
   font-weight: 900;
@@ -177,7 +177,7 @@
   clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px);
 }
 .registros-view .protocol-panel .panel-footer .cyber-button-submit:hover {
-  box-shadow: 0 0 30px rgba(163, 255, 0, 0.5);
+  box-shadow: 0 0 30px oklch(from var(--accent-green) l c h / 0.5);
 }
 @media (min-width: 1024px) {
   .registros-view .arenas-panel {
@@ -194,13 +194,13 @@
   font-family: "Fira Code", monospace;
   font-weight: 900;
   font-size: 1.25rem;
-  color: white;
+  color: var(--white);
   font-style: italic;
 }
 .registros-view .arenas-panel .arenas-header p {
   font-family: "Rajdhani", sans-serif;
   font-size: 9px;
-  color: #666;
+  color: var(--text-gray);
   text-transform: uppercase;
   letter-spacing: 0.3em;
 }
@@ -226,14 +226,14 @@
   height: 100%;
   position: relative;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid oklch(100% 0 0 / 0.1);
+  background-color: oklch(0% 0 0 / 0.4);
   transition: all 0.5s;
   padding: 1rem;
   clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px);
 }
 .registros-view .arenas-panel .arena-card-wrapper .arena-card:hover {
-  border-color: rgba(163, 255, 0, 0.5);
+  border-color: oklch(from var(--accent-green) l c h / 0.5);
 }
 .registros-view .arenas-panel .arena-card-wrapper .arena-card .card-badges {
   position: absolute;
@@ -251,14 +251,14 @@
   border: 1px solid;
 }
 .registros-view .arenas-panel .arena-card-wrapper .arena-card .card-badges .badge-game {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
+  border-color: oklch(100% 0 0 / 0.2);
+  background: oklch(0% 0 0 / 0.6);
+  color: var(--white);
 }
 .registros-view .arenas-panel .arena-card-wrapper .arena-card .card-badges .badge-count {
-  border-color: rgba(163, 255, 0, 0.4);
-  background: rgba(163, 255, 0, 0.1);
-  color: #a3ff00;
+  border-color: oklch(from var(--accent-green) l c h / 0.4);
+  background: oklch(from var(--accent-green) l c h / 0.1);
+  color: var(--accent-green);
 }
 .registros-view .arenas-panel .arena-card-wrapper .arena-card .card-image-container {
   height: 8rem;
@@ -275,7 +275,7 @@
 .registros-view .arenas-panel .arena-card-wrapper .arena-card .card-image-container .card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, #050601, transparent);
+  background: linear-gradient(to top, var(--primary-bg), transparent);
 }
 .registros-view .arenas-panel .arena-card-wrapper .arena-card .card-image-container .card-badges {
   position: absolute;
@@ -293,14 +293,14 @@
   border: 1px solid;
 }
 .registros-view .arenas-panel .arena-card-wrapper .arena-card .card-image-container .card-badges .badge-game {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
+  border-color: oklch(100% 0 0 / 0.2);
+  background: oklch(0% 0 0 / 0.6);
+  color: var(--white);
 }
 .registros-view .arenas-panel .arena-card-wrapper .arena-card .card-image-container .card-badges .badge-count {
-  border-color: rgba(163, 255, 0, 0.4);
-  background: rgba(163, 255, 0, 0.1);
-  color: #a3ff00;
+  border-color: oklch(from var(--accent-green) l c h / 0.4);
+  background: oklch(from var(--accent-green) l c h / 0.1);
+  color: var(--accent-green);
 }
 .registros-view .arenas-panel .arena-card-wrapper .arena-card .card-content {
   padding: 1.5rem;
@@ -309,31 +309,31 @@
   font-family: "Display";
   font-weight: 900;
   font-size: 1.125rem;
-  color: white;
+  color: var(--white);
   font-style: italic;
   margin-bottom: 0.25rem;
 }
 .registros-view .arenas-panel .arena-card-wrapper .arena-card .card-content p {
   font-family: "Mono";
   font-size: 9px;
-  color: #666;
+  color: var(--text-gray);
 }
 .registros-view .arenas-panel .arena-card-wrapper .arena-card .card-content p span {
-  color: #a3ff00;
+  color: var(--accent-green);
   font-weight: bold;
 }
 .registros-view .arenas-panel .arena-card-wrapper .arena-card .selection-indicator {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  color: #a3ff00;
+  color: var(--accent-green);
   opacity: 0;
   transition: opacity 0.3s;
 }
 .registros-view .arenas-panel .arena-card-wrapper input:checked + .arena-card {
-  border-color: #a3ff00;
-  background-color: rgba(0, 0, 0, 0.6);
-  box-shadow: 0 0 30px rgba(163, 255, 0, 0.2);
+  border-color: var(--accent-green);
+  background-color: oklch(0% 0 0 / 0.6);
+  box-shadow: 0 0 30px oklch(from var(--accent-green) l c h / 0.2);
 }
 .registros-view .arenas-panel .arena-card-wrapper input:checked + .arena-card .card-img {
   filter: grayscale(0);
@@ -344,8 +344,8 @@
 .registros-view .system-logs {
   margin-top: 3rem;
   padding: 2rem;
-  background-color: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: oklch(0% 0 0 / 0.4);
+  border: 1px solid oklch(100% 0 0 / 0.05);
   position: relative;
   overflow: hidden;
   clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px);
@@ -353,7 +353,7 @@
 .registros-view .system-logs .logs-title {
   font-family: "Mono";
   font-size: 10px;
-  color: #666;
+  color: var(--text-gray);
   font-weight: 900;
   letter-spacing: 0.4em;
   margin-bottom: 1.5rem;
@@ -365,25 +365,25 @@
   justify-content: space-between;
   font-family: "Mono";
   font-size: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid oklch(100% 0 0 / 0.05);
   padding-bottom: 0.5rem;
 }
 .registros-view .system-logs .log-item .log-user {
-  color: #a3ff00;
+  color: var(--accent-green);
   font-weight: 900;
   margin-right: 1rem;
 }
 .registros-view .system-logs .log-item .log-action {
-  color: #666;
+  color: var(--text-gray);
   text-transform: uppercase;
   margin-right: 1rem;
 }
 .registros-view .system-logs .log-item .log-target {
-  color: white;
+  color: var(--white);
   font-style: italic;
 }
 .registros-view .system-logs .log-item .log-time {
-  color: #444;
+  color: var(--text-dim);
 }
 
 @keyframes slideDown {

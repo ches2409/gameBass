@@ -16,10 +16,10 @@
 }
 
 .injection-card {
-  --neon: #ffffff;
+  --neon: var(--white);
   display: flex;
   flex-direction: column;
-  background: #0A0C10;
+  background: var(--background-soft);
   padding: 25px;
   position: relative;
   overflow: hidden;
@@ -36,52 +36,52 @@
 }
 .injection-card:hover::before {
   border-color: var(--neon);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(var(--neon), 0.1);
+  box-shadow: 0 0 20px oklch(0% 0 0 / 0.5), inset 0 0 15px rgba(var(--neon), 0.1);
   clip-path: polygon(0 0, 50% 0, 100% 60%, 100% 100%, 60% 100%, 0 10%);
 }
 .injection-card:hover {
   transform: translateY(-5px);
-  background: linear-gradient(135deg, #0A0C10 0%, #050601 100%);
+  background: linear-gradient(135deg, var(--background-soft) 0%, var(--primary-bg) 100%);
 }
 
 .injection-card--archetype-frontline {
-  --neon: #A3FF00;
+  --neon: var(--accent-green);
 }
 
 .injection-card--archetype-stealth {
-  --neon: #D500F9;
+  --neon: var(--accent-pink);
 }
 
 .injection-card--archetype-environment {
-  --neon: #00E5FF;
+  --neon: var(--side-blue);
 }
 
 .injection-card--archetype-kinetic {
-  --neon: #FF3D00;
+  --neon: var(--archetype-berserk);
 }
 
 .injection-card--archetype-data {
-  --neon: #FFD600;
+  --neon: var(--accent-yellow);
 }
 
 .injection-card--archetype-system {
-  --neon: #2979FF;
+  --neon: var(--archetype-disrupt);
 }
 
 .injection-card--archetype-restoration {
-  --neon: #00FFC8;
+  --neon: var(--archetype-medic);
 }
 
 .injection-card--archetype-spatial {
-  --neon: #9D00FF;
+  --neon: var(--archetype-warp);
 }
 
 .injection-card--archetype-temporal {
-  --neon: #FF0055;
+  --neon: var(--archetype-stasis);
 }
 
 .injection-card--archetype-absorption {
-  --neon: #FF9100;
+  --neon: var(--archetype-absorb);
 }
 
 .injection-card__optional {
@@ -139,7 +139,7 @@
 .injection-card__description {
   font-size: 0.75rem;
   line-height: 1.5;
-  color: #888;
+  color: var(--text-gray);
   margin-top: 15px;
   text-transform: uppercase;
   font-family: "Rajdhani", sans-serif;
@@ -178,7 +178,7 @@
 .injection-card__stat-bar {
   width: 100%;
   height: 5px;
-  background: rgba(128, 128, 128, 0.2);
+  background: oklch(100% 0 0 / 0.2);
   margin-top: 10px;
   border-radius: 2px;
   overflow: hidden;
@@ -202,17 +202,17 @@
 .injection-card__tag {
   font-family: "Fira Code", monospace;
   font-size: 0.5rem;
-  border: 1px solid var(--border-white);
+  border: 1px solid oklch(100% 0 0 / 0.1);
   padding: 0.25rem 0.5rem;
-  color: #6b7280;
-  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-gray);
+  background: oklch(100% 0 0 / 0.03);
   border-radius: 2px;
   transition: all 0.2s ease;
 }
 
 .injection-card__specs {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--border-white);
+  background: oklch(0% 0 0 / 0.2);
+  border: 1px solid oklch(100% 0 0 / 0.1);
   padding: 10px;
   margin: 10px 0;
 }
@@ -223,29 +223,29 @@
   padding: 5px 0;
 }
 .injection-card__spec-row:not(:last-child) {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid oklch(100% 0 0 / 0.03);
 }
 
 .injection-card__spec-label {
   font-family: "Fira Code", monospace;
   font-size: 8px;
-  color: #4b5563;
+  color: var(--text-dim);
   font-weight: 700;
 }
 
 .injection-card__spec-value {
   font-family: "Fira Code", monospace;
   font-size: 9px;
-  color: white;
+  color: var(--white);
   font-weight: bold;
 }
 
 .injection-card__spec-status--stable {
-  color: #A3FF00 !important;
+  color: var(--accent-green) !important;
 }
 
 .injection-card__spec-status--degraded {
-  color: #FF3E3E !important;
+  color: var(--alert) !important;
   animation: blink 1.5s infinite;
 }
 
@@ -257,7 +257,7 @@
   width: 40px;
   height: 40px;
   border: 2px solid var(--neon);
-  background: rgba(0, 0, 0, 0.3);
+  background: oklch(0% 0 0 / 0.3);
 }
 
 .injection-card__engine-icon-symbol {
@@ -268,7 +268,7 @@
 .injection-card__footer {
   margin-top: auto;
   padding-top: 1rem;
-  border-top: 1px solid var(--border-white);
+  border-top: 1px solid oklch(100% 0 0 / 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -284,7 +284,7 @@
   flex-direction: row;
   height: 100%;
   font-size: 8px;
-  color: #4b5563;
+  color: var(--text-dim);
   font-weight: 700;
 }
 
@@ -306,7 +306,7 @@
 }
 
 .injection-card__action-btn {
-  background: rgba(255, 255, 255, 0.1);
+  background: oklch(100% 0 0 / 0.1);
   border: 1px solid var(--neon);
   color: var(--neon);
   padding: 8px 12px;
@@ -322,12 +322,12 @@
   box-shadow: 0 0 10px rgba(var(--neon), 0.3);
 }
 .injection-card__action-btn--delete {
-  border-color: #FF3E3E;
-  color: #FF3E3E;
+  border-color: var(--alert);
+  color: var(--alert);
 }
 .injection-card__action-btn--delete:hover {
-  background: rgba(255, 62, 62, 0.15);
-  box-shadow: 0 0 10px rgba(255, 62, 62, 0.3);
+  background: oklch(from var(--alert) l c h / 0.15);
+  box-shadow: 0 0 10px oklch(from var(--alert) l c h / 0.3);
 }
 
 .injection-card__arena {
@@ -340,7 +340,7 @@
   flex-direction: row;
 }
 .injection-card__arena .injection-card__arena-stat {
-  background: rgba(0, 0, 0, 0.3);
+  background: oklch(0% 0 0 / 0.3);
   padding: 0.75rem;
   border-left: 2px solid var(--primary);
   transition: all 0.3s ease;
@@ -351,7 +351,7 @@
 .injection-card__arena .injection-card__arena-label {
   font-family: var(--font-display);
   font-size: 0.5rem;
-  color: #4b5563;
+  color: var(--text-dim);
   text-transform: uppercase;
   font-weight: 900;
   margin-bottom: 0.25rem;
@@ -360,7 +360,7 @@
   font-family: var(--font-display);
   font-weight: 900;
   font-size: 1.2rem;
-  color: white;
+  color: var(--white);
   font-style: italic;
 }
 
@@ -373,16 +373,16 @@
   gap: 10px;
 }
 .injection-card__tournament-status--draft {
-  background-color: #4b7dd6;
+  background-color: var(--accent-blue);
 }
 .injection-card__tournament-status--live {
-  background-color: #d32f2f;
+  background-color: var(--alert);
   animation: pulse-live 1.5s infinite;
 }
 .injection-card__tournament-status--open {
-  background-color: #388e3c;
+  background-color: var(--accent-green);
 }
 .injection-card__tournament-status--finished {
-  background-color: #0C111D;
-  color: #4b5563;
+  background-color: var(--background-dark);
+  color: var(--text-dim);
 }

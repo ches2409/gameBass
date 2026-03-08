@@ -24,10 +24,10 @@
   }
 }
 .data-card {
-  --neon:white;
+  --neon:var(--white);
   display: flex;
   flex-direction: column;
-  background: #0A0C10;
+  background: var(--background-soft);
   padding: 25px;
   position: relative;
   overflow: hidden;
@@ -47,42 +47,42 @@
 }
 .data-card:hover::before {
   border-color: var(--neon);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(var(--neon), 0.1);
+  box-shadow: 0 0 20px oklch(0% 0 0 / 0.5), inset 0 0 15px rgba(var(--neon), 0.1);
   clip-path: polygon(0 0, 50% 0, 100% 60%, 100% 100%, 60% 100%, 0 10%);
 }
 .data-card--tank {
-  --neon: #A3FF00;
+  --neon: var(--accent-green);
 }
 .data-card--stealth {
-  --neon: #D500F9;
+  --neon: var(--accent-pink);
 }
 .data-card--architect {
-  --neon: #00E5FF;
+  --neon: var(--side-blue);
 }
 .data-card--berserk {
-  --neon: #FF3D00;
+  --neon: var(--archetype-berserk);
 }
 .data-card--oracle {
-  --neon: #FFD600;
+  --neon: var(--accent-yellow);
 }
 .data-card--disrupt {
-  --neon: #2979FF;
+  --neon: var(--archetype-disrupt);
 }
 .data-card--medic {
-  --neon: #00FFC8;
+  --neon: var(--archetype-medic);
 }
 .data-card--warp {
-  --neon: #9D00FF;
+  --neon: var(--archetype-warp);
 }
 .data-card--stasis {
-  --neon: #FF0055;
+  --neon: var(--archetype-stasis);
 }
 .data-card--absorb {
-  --neon: #FF9100;
+  --neon: var(--archetype-absorb);
 }
 .data-card:hover {
   transform: translateY(-5px);
-  background: linear-gradient(135deg, #0A0C10 0%, #050601 100%);
+  background: linear-gradient(135deg, var(--background-soft) 0%, var(--primary-bg) 100%);
 }
 .data-card:hover .data-card__actions {
   opacity: 1;
@@ -101,7 +101,7 @@
 .data-card__footer {
   margin-top: auto;
   padding-top: 1rem;
-  border-top: 1px solid var(--border-white);
+  border-top: 1px solid oklch(100% 0 0 / 0.1);
   gap: 10px;
   display: flex;
   justify-content: space-between;
@@ -116,7 +116,7 @@
   flex-direction: row;
   height: 100%;
   font-size: 0.5rem;
-  color: #4b5563;
+  color: var(--text-dim);
 }
 .data-card__optional {
   display: flex;
@@ -147,11 +147,11 @@
   color: var(--neon);
 }
 .data-card__profile-email {
-  color: #6b7280;
+  color: var(--text-gray);
   font-size: 0.75rem;
 }
 .data-card__access-title {
-  color: #6b7280;
+  color: var(--text-gray);
   font-size: 0.75rem;
 }
 .data-card__access-value {
@@ -159,7 +159,7 @@
   font-size: 0.875rem;
 }
 .data-card__access-level {
-  color: #d6f5e9;
+  color: var(--text-main);
   font-size: 1rem;
 }
 .data-card__icon {
@@ -170,7 +170,7 @@
   width: 40px;
   height: 40px;
   border: 2px solid var(--neon);
-  background: rgba(0, 0, 0, 0.3);
+  background: oklch(0% 0 0 / 0.3);
 }
 .data-card__icon span {
   color: var(--neon);
@@ -205,7 +205,7 @@
 .data-card__description {
   font-size: 0.75rem;
   line-height: 1.5;
-  color: #888;
+  color: var(--text-gray);
   margin-top: 0.75rem;
   text-transform: uppercase;
   font-family: "Rajdhani", sans-serif;
@@ -213,7 +213,7 @@
 .data-card__stat-bar {
   width: 100%;
   height: 5px;
-  background: rgba(128, 128, 128, 0.2);
+  background: oklch(100% 0 0 / 0.2);
   margin-top: 10px;
   transition: width 0.5s ease-out;
 }
@@ -233,14 +233,14 @@
 .data-card__item-tag {
   font-family: "Fira Code", monospace;
   font-size: 0.5rem;
-  border: 1px solid var(--border-white);
+  border: 1px solid oklch(100% 0 0 / 0.1);
   padding: 0.25rem 0.5rem;
-  color: #6b7280;
-  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-gray);
+  background: oklch(100% 0 0 / 0.03);
 }
 .data-card__metadata {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--border-white);
+  background: oklch(0% 0 0 / 0.2);
+  border: 1px solid oklch(100% 0 0 / 0.1);
   padding: 10px;
 }
 .data-card__metadata-row {
@@ -249,24 +249,24 @@
   padding: 5px 0;
 }
 .data-card__metadata-row:not(:last-child) {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid oklch(100% 0 0 / 0.03);
 }
 .data-card__metadata-label {
   font-family: "Fira Code", monospace;
   font-size: 0.5rem;
-  color: #4b5563;
+  color: var(--text-dim);
 }
 .data-card__metadata-value {
   font-family: "Fira Code", monospace;
   font-size: 0.5rem;
-  color: white;
+  color: var(--white);
   font-weight: bold;
 }
 .data-card__metadata-value.is-estable {
-  color: #A3FF00;
+  color: var(--accent-green);
 }
 .data-card__metadata-value.is-degraded {
-  color: #D500F9;
+  color: var(--accent-pink);
   animation: blink 1.5s infinite;
 }
 .data-card__stats {
@@ -279,7 +279,7 @@
   flex-direction: row;
 }
 .data-card__stat {
-  background: rgba(0, 0, 0, 0.3);
+  background: oklch(0% 0 0 / 0.3);
   padding: 0.75rem;
   border-left: 2px solid var(--primary);
 }
@@ -292,13 +292,13 @@
 }
 .data-card__stat-label {
   font-size: 0.5rem;
-  color: #4b5563;
+  color: var(--text-dim);
   text-transform: uppercase;
   margin-bottom: 0.25rem;
 }
 .data-card__stat-value {
   font-size: 1.25rem;
-  color: white;
+  color: var(--white);
   font-style: italic;
 }
 .data-card__tournament {
@@ -323,11 +323,11 @@
   background-color: green;
 }
 .data-card__tournament-value.is-finished {
-  background-color: #0C111D;
-  color: #4b5563;
+  background-color: var(--background-dark);
+  color: var(--text-dim);
 }
 .data-card__tournament-value--secondary {
-  color: #d6f5e9;
+  color: var(--text-main);
   font-size: 0.75rem;
 }
 .data-card .id-tag {
@@ -348,7 +348,7 @@
   padding-top: 1rem;
 }
 .data-card .tech-specs {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--border-white);
+  background: oklch(0% 0 0 / 0.2);
+  border: 1px solid oklch(100% 0 0 / 0.1);
   padding: 10px;
 }
