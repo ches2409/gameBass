@@ -258,6 +258,44 @@
   background: oklch(0% 0 0 / 0.3);
 }
 
+/* Fase 3: encapsulacion progresiva de tarjeta general */
+@scope (.nodo-card) {
+  :scope {
+    --neon: var(--white);
+    display: flex;
+    flex-direction: column;
+    background: var(--background-soft);
+    padding: 25px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+
+  :scope::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border: 1px solid var(--neon);
+    clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
+    transition: clip-path 0.5s cubic-bezier(0.77, 0, 0.175, 1), border-color 0.5s ease;
+  }
+
+  :scope .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  :scope .rank-description {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--text-gray);
+    text-transform: uppercase;
+  }
+}
+
 .engine-icon span {
   color: var(--neon);
   font-size: 1.25rem;
