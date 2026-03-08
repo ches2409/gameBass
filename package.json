@@ -10,7 +10,7 @@
     "watch-css": "sass --watch app/static/scss/style.scss:app/static/css/style.css --source-map",
     "build-css-prod": "sass app/static/scss/style.scss app/static/css/style.css --style compressed --no-source-map",
     "check-sass": "sass --check app/static/scss/style.scss",
-    "clean": "rm -rf app/static/css/style.css app/static/css/style.css.map",
+    "clean": "rimraf app/static/css/style.css app/static/css/style.css.map",
     "dev": "npm run watch-css",
     "build": "npm run build-css-prod",
     "lint-scss": "sass-lint -v -q",
@@ -27,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/ches2409/gameBass/issues"
   },
-  "homepage": "https://github.com/ches2409/gameBass#readme"
+  "homepage": "https://github.com/ches2409/gameBass#readme",
+  "devDependencies": {
+    "rimraf": "^6.1.3"
+  }
 }

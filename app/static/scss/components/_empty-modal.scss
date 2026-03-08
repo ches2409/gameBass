@@ -19,14 +19,14 @@
 // Dependencias:
 //   - @use "../base/variables"
 //   - @use "../base/functions"
-//   - @use "../base/mixins"
+//   - @use "../base/mx"
 //
 // Convenciones:
 //   - BEM estricto: .empty-modal__element y .empty-modal__element--modifier.
 // ============================================================================
-@use "../base/variables";
-@use "../base/functions";
-@use "../base/mixins";
+@use "../base/variables" as vars;
+@use "../base/functions" as fn;
+@use "../base/mixins" as mx;
 
 // ---------------------------------------------------------------------------
 // BLOCK: empty-modal
@@ -37,14 +37,14 @@
     width            : 100%;
     max-width        : 60vw;
     height           : 60vh;
-    background-color : variables.$background-soft;
+    background-color : vars.$background-soft;
     border           : 1px solid rgba(255, 255, 255, 0.05);
     position         : relative;
     overflow         : hidden;
-    @include mixins.center-flex($justify : center, $direction : column);
+    @include mx.center-flex($justify : center, $direction : column);
     clip-path        : polygon(30px 0, 100% 0, 100% 100%, 0 100%, 0 30px);
     box-shadow       : 0 50px 100px rgba(0, 0, 0, 0.8);
-    padding          : functions.spacing("4");
+    padding          : fn.spacing("4");
     // ELEMENT: grid
     // Capa de cuadricula decorativa de fondo.
     &__grid {
@@ -72,9 +72,9 @@
     // Etiquetas decorativas de esquina para reforzar estado.
     &__corner-label {
         position: absolute;
-        font-family: variables.$font-display;
+        font-family: vars.$font-display;
         font-size: 8px;
-        color: variables.$text-dim;
+        color: vars.$text-dim;
         text-transform: uppercase;
         letter-spacing: 2px;
         // MODIFIER: top-left
@@ -101,7 +101,7 @@
         clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
         margin-bottom: 50px;
         position: relative;
-        animation: pulse 2s infinite ease-in-out;
+        animation: pulse-modal 2s infinite ease-in-out;
         .material-symbols-outlined{
             font-size: 80px;
             color: var(--sys-red);
@@ -111,7 +111,7 @@
     // ELEMENT: title
     // Titulo principal con efecto glitch.
     &__title {
-        @include mixins.glitch-title($spacing: 4px, $fontSize: 2.5rem, $data:"NULL_UPLINK_DETECTED");
+        @include mx.glitch-title($spacing: 4px, $fontSize: 2.5rem, $data:"NULL_UPLINK_DETECTED");
         margin: 0;
     }
     // ELEMENT: subtitle
@@ -123,20 +123,20 @@
         padding: 5px 15px;
         margin-top: 15px;
         &-text {
-            font-family: variables.$font-display;
-            font-size: functions.font-size('2xs');
+            font-family: vars.$font-display;
+            font-size: fn.font-size('2xs');
             color: var(--sys-red);
             text-transform: uppercase;
             font-weight: 900;
-            letter-spacing: functions.spacing('1');
+            letter-spacing: fn.spacing('1');
         }
     }
     // ELEMENT: description
     // Texto descriptivo del estado del modal.
     &__description {
         font-family: 'Fira Code', monospace;
-        font-size: functions.font-size('xs');
-        color: variables.$text-gray;
+        font-size: fn.font-size('xs');
+        color: vars.$text-gray;
         max-width: 450px;
         line-height: 1.6;
         text-transform: uppercase;
@@ -152,21 +152,21 @@
         border: 1px solid rgba(255, 0, 0, 0.4);
         color: var(--sys-red);
         padding: 15px 40px;
-        font-family: variables.$font-body;
+        font-family: vars.$font-body;
         font-weight: 900;
-        font-size: functions.font-size('2xs');
+        font-size: fn.font-size('2xs');
         letter-spacing: 5px;
         cursor: pointer;
-        transition: variables.$transition-base;
+        transition: vars.$transition-base;
         clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
-        @include mixins.center-flex($justify:center);
+        @include mx.center-flex($justify:center);
         gap: 10px;
         .material-symbols-outlined{
             color: inherit;
         }
         &:hover{
             background-color: var(--sys-red);
-            color: variables.$text-main;
+            color: vars.$text-main;
             box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
             transform: scale(1.05);
         }
@@ -174,23 +174,10 @@
     // ELEMENT: footer-text
     // Mensaje auxiliar en el pie del modal.
     &__footer-text {
-        font-family: variables.$font-display;
-        font-size: functions.font-size('3xs');
+        font-family: vars.$font-display;
+        font-size: fn.font-size('3xs');
         color: #333;
-        margin-top: functions.spacing('6');
+        margin-top: fn.spacing('6');
         letter-spacing: 2px;
     }
-}
-// ---------------------------------------------------------------------------
-// KEYFRAMES: empty-modal
-// ---------------------------------------------------------------------------
-@keyframes laser-move {
-    0% { left: -5%; opacity: 0; }
-    20% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { left: 105%; opacity: 0; }
-}
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.05); opacity: 0.8; }
 }

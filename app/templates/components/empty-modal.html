@@ -1,0 +1,67 @@
+{# 
+    ═══════════════════════════════════════════════════════════════════════════
+    COMPONENTE: empty-modal
+    ═══════════════════════════════════════════════════════════════════════════
+    
+    Propósito:
+        Muestra estado vacío o error critico cuando no hay datos disponibles.
+        Comunicación visual temática con acción de reintentar
+    
+    Uso:
+        {% include 'components/empty-modal.html' %}
+    
+    Estructura BEM:
+        Block: .empty-modal
+        Elements: __grid, __scan, __corner-label, __icon, __title, 
+                  __subtitle, __description, __action-btn, __footer-text
+    
+    ═══════════════════════════════════════════════════════════════════════════
+#}
+
+<div class="empty-modal" role="alert" aria-live="polite" aria-label="Sin datos disponibles">
+
+    <!-- Efectos visuales de fondo -->
+    <div class="empty-modal__grid"></div>
+    <div class="empty-modal__scan"></div>
+
+    <!-- Etiquetas de contexto -->
+    <div class="empty-modal__corner-label empty-modal__corner-label--top-left">
+        ERROR_LOG: STATUS_NULL
+    </div>
+    <div class="empty-modal__corner-label empty-modal__corner-label--bottom-right">
+        ARKADEX_OOB_RECOVERY_v4.2
+    </div>
+
+    <!-- Ícono de error -->
+    <div class="empty-modal__icon">
+        <span class="material-symbols-outlined" aria-hidden="true">error</span>
+        <span class="visually-hidden">Error: Sin datos</span>
+    </div>
+
+    <!-- Título principal -->
+    <h2 class="empty-modal__title">NULL_UPLINK_DETECTED</h2>
+
+    <!-- Subtítulo con código de error -->
+    <div class="empty-modal__subtitle">
+        <span class="empty-modal__subtitle-text">ERROR_CRÍTICO_0x404: SIN_DATOS_EN_NODO</span>
+    </div>
+
+    <!-- Descripción del error -->
+    <p class="empty-modal__description">
+        La conexión con el mainframe ha sido interrumpida o el sector solicitado
+        no contiene registros válidos. Reinicie el enlace neural o inyecte registros
+        en el núcleo.
+    </p>
+
+    <!-- Botón de acción -->
+    <button class="empty-modal__action-btn" type="button" onclick="location.reload()"
+            aria-label="Reintentar conexión">
+        <span class="material-symbols-outlined" aria-hidden="true">restart_alt</span>
+        REINTENTAR_UPLINK
+    </button>
+
+    <!-- Pie de página -->
+    <p class="empty-modal__footer-text">
+        >> ESPERANDO_RECONEXIÓN_MANUAL...
+    </p>
+</div>

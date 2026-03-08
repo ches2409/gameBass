@@ -52,7 +52,7 @@
 // ==========================================================================
 // Objetos reutilizables sin decoracion de marca
 
-@use 'objects';
+//@use 'objects';
 
 // ==========================================================================
 // 5. COMPONENTS - Componentes reutilizables
@@ -81,14 +81,14 @@
 @use "components/empty-modal";
 @use "components/registros";
 @use "components/login_form";
-@use 'components/media-card';
+//@use 'components/media-card';
 
 // ==========================================================================
 // 6. THEMES - Variaciones visuales por marca o esquema
 // ==========================================================================
 // Personalizacion visual desacoplada de estructura y componentes.
 
-@use 'themes';
+//@use 'themes';
 
 // ==========================================================================
 // 7. PAGES - Estilos específicos por página
